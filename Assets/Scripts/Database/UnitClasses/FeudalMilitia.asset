@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 128f5ecb16f29494b9c85af7ae946e8e, type: 3}
+  m_Name: FeudalMilitia
+  m_EditorClassIdentifier: 
+  className: Feudal Militia
+  possibleNames: {fileID: 11400000, guid: 9ae9b91e44de8d347b6ffd6ced068d7c, type: 2}
+  wealth: 700
+  weaponSkill: 20
+  unitSize: 80
+  health: 70
+  speed: 40
+  morale: 60
+  defaultIcon: {fileID: 21300000, guid: 011f58115c4897d44ae260e03972e06a, type: 3}
+  unitPreview: {fileID: 21300000, guid: 1df257564fe405a4da9b4d3a6846b8d5, type: 3}

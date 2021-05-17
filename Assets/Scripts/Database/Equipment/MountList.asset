@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fcb46dee2deb1e41a4cbdcf42036743, type: 3}
+  m_Name: MountList
+  m_EditorClassIdentifier: 
+  equipmentList:
+  - {fileID: 11400000, guid: 270a156b27e97784588c1f856abfaa5f, type: 2}
+  - {fileID: 11400000, guid: 3f20ea68e267cbd4989fa63f1186739f, type: 2}
+  - {fileID: 11400000, guid: fdb7ee7cc74c82f49848b4a3cf4749dc, type: 2}
+  - {fileID: 11400000, guid: 3a7c388efe334324e9e74ecb925b6bf3, type: 2}

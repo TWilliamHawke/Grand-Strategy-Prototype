@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1116ae658f7f58469aec540b21b91a1, type: 3}
+  m_Name: LeatherArmor
+  m_EditorClassIdentifier: 
+  Name: Leather armor
+  unitNames: {fileID: 11400000, guid: 8b7174adab93fa64e8431f61b73852a6, type: 2}
+  sprite: {fileID: 21300000, guid: 293f986baa4534441a1a159c25d75cc2, type: 3}
+  goldCost: 200
+  defence: 3
+  speedMult: 1

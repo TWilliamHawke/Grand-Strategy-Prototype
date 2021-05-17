@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fcb46dee2deb1e41a4cbdcf42036743, type: 3}
+  m_Name: ShieldsList
+  m_EditorClassIdentifier: 
+  equipmentList:
+  - {fileID: 11400000, guid: 12137db14f622424d806ca6c02ffa707, type: 2}
+  - {fileID: 11400000, guid: 41e07b7bef8660b4cb9e448b5a8de5d7, type: 2}
+  - {fileID: 11400000, guid: 2441ab32927d5c04996863dd1f63dd54, type: 2}
+  - {fileID: 11400000, guid: d2a494a2317a66d40bf1895681701875, type: 2}

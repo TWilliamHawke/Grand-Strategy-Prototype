@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ba31ce6a783dea45a9cf5134f2881a6, type: 3}
+  m_Name: StateConfig
+  m_EditorClassIdentifier: 
+  defaultStateIcon: {fileID: 21300000, guid: 50e94ef207407ec4eaaf2642c8ed3d4b, type: 3}
+  movementStateIcon: {fileID: 21300000, guid: 9f75fbfb41e112d46833a78f101c829c, type: 3}
+  rotationStateIcon: {fileID: 21300000, guid: 73ae88b531688fe48b207ecf17aff7e8, type: 3}
+  readyStateIcon: {fileID: 21300000, guid: 79a18f11c630e4a4db4ff77c76a8d11f, type: 3}
+  chargeStateIcon: {fileID: 21300000, guid: 2d37679f37d801a459ad4dc94aa0bb46, type: 3}
+  fightStateIcon: {fileID: 21300000, guid: 44b813364ab0c304b858dee9e1d9511d, type: 3}

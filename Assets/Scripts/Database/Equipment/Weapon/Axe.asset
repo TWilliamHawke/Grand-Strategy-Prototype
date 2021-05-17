@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8d52db76a9dc244ea7649ea33174be0, type: 3}
+  m_Name: Axe
+  m_EditorClassIdentifier: 
+  Name: Axe
+  unitNames: {fileID: 11400000, guid: 1edf34c324d64b44c98d28bfd0285be3, type: 2}
+  sprite: {fileID: 21300000, guid: 0d5d517a0818d8f42a8ed2e37b8f43d0, type: 3}
+  goldCost: 100
+  requiredSkill: 20
+  damage: 25
+  armorPiercing: 2
+  twoHanded: 0
+  charge: 15
