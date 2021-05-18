@@ -1,6 +1,9 @@
 using UnityEngine;
 
-public abstract class Effect : ScriptableObject
+namespace Effects
 {
-    public abstract string GetText();
+    public abstract class Effect : ScriptableObject
+    {
+        public abstract string GetText();
+    }
 }

@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d213887e4a8466849815dcc9415dc296, type: 3}
-  m_Name: ThreeFields
+  m_Script: {fileID: 11500000, guid: a706d93d01035004a8ca50fc9d1db954, type: 3}
+  m_Name: OurFaction
   m_EditorClassIdentifier: 
-  localizedName: Three-field system
-  effects:
-  - {fileID: 11400000, guid: b5dad282d72c613439592460ffc0038a, type: 2}
+  _factionName: Our Faction
+  _factionColor: {r: 0, g: 0.6102462, b: 1, a: 1}
+  _isPlayerFaction: 1

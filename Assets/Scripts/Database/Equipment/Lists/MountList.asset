@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fcb46dee2deb1e41a4cbdcf42036743, type: 3}
   m_Name: MountList
   m_EditorClassIdentifier: 
+  listName: Mounts
   equipmentList:
   - {fileID: 11400000, guid: 270a156b27e97784588c1f856abfaa5f, type: 2}
   - {fileID: 11400000, guid: 3f20ea68e267cbd4989fa63f1186739f, type: 2}

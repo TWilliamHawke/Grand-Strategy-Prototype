@@ -14,6 +14,11 @@ public abstract class UIPanelWithGrid<T> : MonoBehaviour
     abstract protected void FillGridElementsList();
     abstract protected void PlusButtonListener();
 
+    void OnEnable()
+    {
+        UpdateGrid();
+    }
+
     protected void UpdateGrid()
     {
         foreach (Transform children in _grid.transform)
@@ -28,7 +33,7 @@ public abstract class UIPanelWithGrid<T> : MonoBehaviour
             unitCard.UpdateData(template);
         }
 
-        if(_plusButtonPrefab == null) return;
+        if (_plusButtonPrefab == null) return;
 
         var plusButton = Instantiate(_plusButtonPrefab);
         plusButton.transform.SetParent(_grid.transform);

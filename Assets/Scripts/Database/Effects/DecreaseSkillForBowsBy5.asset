@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d213887e4a8466849815dcc9415dc296, type: 3}
-  m_Name: ThreeFields
+  m_Script: {fileID: 11500000, guid: e1f14e111e3c4774faeb1be820134134, type: 3}
+  m_Name: DecreaseSkillForBowsBy5
   m_EditorClassIdentifier: 
-  localizedName: Three-field system
-  effects:
-  - {fileID: 11400000, guid: b5dad282d72c613439592460ffc0038a, type: 2}
+  _equipmentList: {fileID: 11400000, guid: 0b1f95fc8e04d5942a1bc22c886896df, type: 2}
+  _requiredSkillDecrease: 5

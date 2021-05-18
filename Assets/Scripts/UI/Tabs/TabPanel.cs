@@ -4,17 +4,17 @@ using UnityEngine;
 
 namespace MainUI.Tabs
 {
-public class TabPanel : MonoBehaviour
-{
-    public void Show()
+    public class TabPanel : MonoBehaviour
     {
-        gameObject.SetActive(true);
-    }
+        public void Show()
+        {
+            gameObject.SetActive(true);
+        }
 
-    public void Hide()
-    {
-        gameObject.SetActive(false);
+        public void Hide()
+        {
+            gameObject.SetActive(false);
+        }
     }
-}
 
 }

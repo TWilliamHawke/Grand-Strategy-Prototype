@@ -42,7 +42,7 @@ namespace UnitEditor
             }
         }
 
-        private void AddTemplateAsNew(UnitTemplate template)
+        void AddTemplateAsNew(UnitTemplate template)
         {
             template.canNotEdit = false;
             _gridElementsData.Add(template);

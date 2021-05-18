@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d213887e4a8466849815dcc9415dc296, type: 3}
-  m_Name: ThreeFields
+  m_Script: {fileID: 11500000, guid: 702614a06cd598b45b09accc55c83281, type: 3}
+  m_Name: TechController
   m_EditorClassIdentifier: 
-  localizedName: Three-field system
-  effects:
-  - {fileID: 11400000, guid: b5dad282d72c613439592460ffc0038a, type: 2}
+  _allTechnologies:
+  - {fileID: 11400000, guid: 28758b041e6822542b9b2dd76bba502c, type: 2}

@@ -5,22 +5,22 @@ using UnityEngine.EventSystems;
 
 namespace MainUI.Tabs
 {
-public class TabButton : MonoBehaviour, IPointerClickHandler
-{
-    [SerializeField] TabsController _tabsController;
-    [SerializeField] TabPanel _tabPanel;
-
-
-    public void OnPointerClick(PointerEventData eventData)
+    public class TabButton : MonoBehaviour, IPointerClickHandler
     {
-        _tabsController.ShowPanel(this);
-    }
+        [SerializeField] TabsController _tabsController;
+        [SerializeField] TabPanel _tabPanel;
 
-    public void Awake()
-    {
-        _tabsController.AddPair(this, _tabPanel);
-    }
 
-}
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            _tabsController.ShowPanel(this);
+        }
+
+        public void Awake()
+        {
+            _tabsController.AddPair(this, _tabPanel);
+        }
+
+    }
 
 }

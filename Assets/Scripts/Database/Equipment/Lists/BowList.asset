@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8fcb46dee2deb1e41a4cbdcf42036743, type: 3}
-  m_Name: ShieldsList
+  m_Name: BowList
   m_EditorClassIdentifier: 
+  listName: Bows
   equipmentList:
-  - {fileID: 11400000, guid: 12137db14f622424d806ca6c02ffa707, type: 2}
-  - {fileID: 11400000, guid: 41e07b7bef8660b4cb9e448b5a8de5d7, type: 2}
-  - {fileID: 11400000, guid: 2441ab32927d5c04996863dd1f63dd54, type: 2}
-  - {fileID: 11400000, guid: d2a494a2317a66d40bf1895681701875, type: 2}
+  - {fileID: 11400000, guid: 6a3dd680364c2d24189ff0ce2d0da48f, type: 2}
+  - {fileID: 11400000, guid: 4411f85c6b58c3847b1343937ed152a6, type: 2}

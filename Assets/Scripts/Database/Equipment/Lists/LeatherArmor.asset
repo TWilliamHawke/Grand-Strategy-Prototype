@@ -10,11 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8fcb46dee2deb1e41a4cbdcf42036743, type: 3}
-  m_Name: ArmorList
+  m_Name: LeatherArmor
   m_EditorClassIdentifier: 
+  listName: 
   equipmentList:
-  - {fileID: 11400000, guid: f25ece36098559f42aa485822bcb04d2, type: 2}
   - {fileID: 11400000, guid: 4c62289ab53b4b84996c16088bf61191, type: 2}
-  - {fileID: 11400000, guid: 99c95bdd95a816a41b51825d2c4694b6, type: 2}
-  - {fileID: 11400000, guid: bc5223d5e2ef29c4587d0da1debc1036, type: 2}
-  - {fileID: 11400000, guid: e475dc0be857fe54b81ee64e8237480e, type: 2}

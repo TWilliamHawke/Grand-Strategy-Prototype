@@ -9,10 +9,18 @@ public class TooltipCanvas : MonoBehaviour
     [SerializeField] Text _tooltipText;
     [SerializeField] TooltipController _tooltipController;
 
-    bool _isTooltipActive = false;
+    VerticalLayoutGroup _tooltipLayout;
+
+    bool _tooltipIsActive = false;
     Coroutine _delayCoroutine;
 
-    private void OnEnable() {
+    void Awake()
+    {
+        _tooltipLayout = _tooltip.GetComponent<VerticalLayoutGroup>();
+    }
+
+    private void OnEnable()
+    {
         _tooltipController.OnShowTooltip += ShowTooltip;
         _tooltipController.OnHideTooltip += HideTooltip;
     }
@@ -26,28 +34,31 @@ public class TooltipCanvas : MonoBehaviour
     void ShowTooltip(string text)
     {
         _tooltipText.text = text;
+        _tooltipLayout.enabled = false;
         _delayCoroutine = StartCoroutine(ShowAfterDelay());
     }
 
     IEnumerator ShowAfterDelay()
     {
         yield return new WaitForSeconds(_tooltipController.delayTimeout);
-        _isTooltipActive = true;
-        LayoutRebuilder.ForceRebuildLayoutImmediate(_tooltip);
+        _tooltipIsActive = true;
         SetTooltipPosition();
         _tooltip.gameObject.SetActive(true);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(_tooltip);
+        _tooltipLayout.enabled = true;
     }
 
     void HideTooltip()
     {
         StopCoroutine(_delayCoroutine);
-        _isTooltipActive = false;
+        _tooltipIsActive = false;
         _tooltip.gameObject.SetActive(false);
     }
 
-    private void Update() {
+    private void Update()
+    {
         //TODO fix tooltip position near screen borders
-        if(_isTooltipActive)
+        if (_tooltipIsActive)
         {
             SetTooltipPosition();
         }

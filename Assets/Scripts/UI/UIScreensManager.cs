@@ -25,12 +25,13 @@ public class UIScreensManager : ScriptableObject
         }
     }
 
-    void CloseActiveScreen()
+    public void CloseActiveScreen()
     {
         if(_activeScreen != null)
         {
             _activeScreen.Close();
             OnScreenClose?.Invoke(_activeScreen);
+            _activeScreen = null;
         }
     }
 

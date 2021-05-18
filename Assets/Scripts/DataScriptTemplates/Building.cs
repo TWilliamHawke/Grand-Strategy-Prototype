@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Effects;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "BuildingNAme", menuName = "Other/Building")]
+[CreateAssetMenu(fileName = "BuildingNAme", menuName = "Core Game/Building")]
 public class Building : ScriptableObject
 {
     public string localizedName;
