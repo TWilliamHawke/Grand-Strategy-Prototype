@@ -8,6 +8,7 @@ public class TechnologyList : UIPanelWithGrid<Technology>
 
     private void Awake() {
         FillLayoutElementsList();
+        UpdateGrid();
     }
 
     protected override void FillLayoutElementsList()

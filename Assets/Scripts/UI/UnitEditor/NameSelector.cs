@@ -34,7 +34,6 @@ namespace UnitEditor
             var prefix = _prefixSelector.GetText();
             var main = _mainSelector.GetText();
             var suffix = _sufffixSelector.GetText();
-            Debug.Log("save");
 
             if(main.Length < 3)
             {

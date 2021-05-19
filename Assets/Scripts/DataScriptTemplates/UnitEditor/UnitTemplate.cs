@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using UnitEditor;
+using Effects;
 
 [CreateAssetMenu(fileName = "UnitTemplate", menuName = "Unit Editor/Unit Template", order = 3)]
 public class UnitTemplate : ScriptableObject
@@ -69,6 +71,17 @@ public class UnitTemplate : ScriptableObject
         }
 
         return names;
+    }
+
+    public List<Effect> FindBuildingsEffects()
+    {
+        var effects = new List<Effect>();
+        foreach(var bulding in requiredBuildings)
+        {
+            effects.AddRange(bulding.effects);
+        }
+
+        return effects;
     }
     
 }

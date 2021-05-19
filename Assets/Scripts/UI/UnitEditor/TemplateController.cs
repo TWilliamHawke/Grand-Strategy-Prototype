@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Effects;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Linq;
 
 namespace UnitEditor
 {
@@ -13,8 +15,11 @@ namespace UnitEditor
         public event UnityAction OnBuildingAdded;
 
         [SerializeField] UnitTemplate _emptyTemplate;
+        [SerializeField] TechnologiesController _techController;
+
         public UnitTemplate defaultTemplate { get; private set; }
         public UnitTemplate currentTemplate { get; private set; }
+        public int equipmentCost => currentTemplate.GetEquipmentTotalCost();
 
         public List<UnitTemplate> defaultTemplates;
 
@@ -51,6 +56,18 @@ namespace UnitEditor
         {
             currentTemplate.requiredBuildings.Add(building);
             OnBuildingAdded?.Invoke();
+        }
+
+        public List<T> FindAllEffects<T>()
+        {
+            var effects = currentTemplate.FindBuildingsEffects();
+
+            foreach (var tech in _techController.researchedTechnologies)
+            {
+                effects.AddRange(tech.effects);
+            }
+
+            return effects.OfType<T>().ToList<T>();
         }
 
         public void AddPrimaryWeapon(Equipment equipment)

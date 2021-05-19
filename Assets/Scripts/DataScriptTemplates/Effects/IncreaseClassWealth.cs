@@ -9,9 +9,10 @@ namespace Effects
     public class IncreaseClassWealth : Effect, IEffectChangeUnitClass
     {
         [SerializeField] UnitClass _unitClass;
-        [SerializeField] int addWealth;
+        [SerializeField] int _addWealth;
 
         public UnitClass unitClass => _unitClass;
+        public int addWealth => _addWealth;
 
         public override string GetText()
         {
