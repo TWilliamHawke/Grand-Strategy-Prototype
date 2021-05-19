@@ -4,13 +4,17 @@ using Effects;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "BuildingNAme", menuName = "Core Game/Building")]
-public class Building : ScriptableObject
+public class Building : EffectsContainer
 {
     public string localizedName;
     public int goldCost;
+    public Sprite icon;
     public BuildingSlots BuildingSlot;
 
-    public List<Effect> effects = new List<Effect>();
+    [Space(5)]
+    [SerializeField] List<Effect> _effects; //for properly order in inspector
+
+    public override List<Effect> effects => _effects;
 }
 
 public enum BuildingSlots

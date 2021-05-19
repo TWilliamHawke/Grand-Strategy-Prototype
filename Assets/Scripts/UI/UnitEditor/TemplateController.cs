@@ -10,6 +10,7 @@ namespace UnitEditor
     {
         public event UnityAction<UnitTemplate> OnTemplateChange;
         public event UnityAction<UnitTemplate> OnTemplateSave;
+        public event UnityAction OnBuildingAdded;
 
         [SerializeField] UnitTemplate _emptyTemplate;
         public UnitTemplate defaultTemplate { get; private set; }
@@ -44,6 +45,12 @@ namespace UnitEditor
         public void UpdateTemplate()
         {
             OnTemplateChange?.Invoke(currentTemplate);
+        }
+
+        public void AddBuilding(Building building)
+        {
+            currentTemplate.requiredBuildings.Add(building);
+            OnBuildingAdded?.Invoke();
         }
 
         public void AddPrimaryWeapon(Equipment equipment)

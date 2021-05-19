@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fcb46dee2deb1e41a4cbdcf42036743, type: 3}
   m_Name: LeatherArmor
   m_EditorClassIdentifier: 
-  listName: 
+  listName: Leather armor
   equipmentList:
   - {fileID: 11400000, guid: 4c62289ab53b4b84996c16088bf61191, type: 2}

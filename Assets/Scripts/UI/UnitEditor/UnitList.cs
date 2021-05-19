@@ -9,18 +9,12 @@ namespace UnitEditor
 {
     public class UnitList : UIPanelWithGrid<UnitTemplate>
     {
-        [SerializeField] TemplateController _templateController;
         [SerializeField] Image _classSelector;
+        [SerializeField] UnitsListController _unitsListController;
 
         void Awake()
         {
-            _templateController.OnTemplateSave += SaveTemplate;
-            FillGridElementsList();
-        }
-
-        void OnDestroy()
-        {
-            _templateController.OnTemplateSave -= SaveTemplate;
+            FillLayoutElementsList();
         }
 
         void OnEnable()
@@ -28,41 +22,9 @@ namespace UnitEditor
             UpdateGrid();
         }
 
-        void SaveTemplate(UnitTemplate savedTemplate)
+        protected override void FillLayoutElementsList()
         {
-            var template = Instantiate(savedTemplate);
-
-            if (template.canNotEdit)
-            {
-                AddTemplateAsNew(template);
-            }
-            else
-            {
-                ReplaceTemplate(template);
-            }
-        }
-
-        void AddTemplateAsNew(UnitTemplate template)
-        {
-            template.canNotEdit = false;
-            _gridElementsData.Add(template);
-        }
-
-        void ReplaceTemplate(UnitTemplate template)
-        {
-            for (int i = 0; i < _gridElementsData.Count; i++)
-            {
-                if (_gridElementsData[i] == _templateController.defaultTemplate)
-                {
-                    _gridElementsData[i] = template;
-                }
-            }
-            UpdateGrid();
-        }
-
-        protected override void FillGridElementsList()
-        {
-            _gridElementsData.AddRange(_templateController.defaultTemplates);
+            _layoutElementsData = _unitsListController.currentTemplates;
         }
 
         protected override void PlusButtonListener()

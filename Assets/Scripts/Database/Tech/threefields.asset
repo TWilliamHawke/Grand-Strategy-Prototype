@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: ThreeFields
   m_EditorClassIdentifier: 
   localizedName: Three-field system
-  effects:
+  _effects:
   - {fileID: 11400000, guid: b5dad282d72c613439592460ffc0038a, type: 2}

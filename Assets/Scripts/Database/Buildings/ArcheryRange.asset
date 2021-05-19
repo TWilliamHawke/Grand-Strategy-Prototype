@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localizedName: Archery Range
   goldCost: 500
+  icon: {fileID: 21300000, guid: 847be5e6a67dfd04b8a8b241d7b8f85d, type: 3}
   BuildingSlot: 2
-  effects: []
+  _effects:
+  - {fileID: 11400000, guid: b3eb845131ea79140b639958f78b6b77, type: 2}

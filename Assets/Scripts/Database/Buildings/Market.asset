@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localizedName: Market
   goldCost: 250
+  icon: {fileID: 21300000, guid: 4534f84d3420af146aa04c73734b67a5, type: 3}
   BuildingSlot: 2
-  effects:
+  _effects:
   - {fileID: 11400000, guid: b5dad282d72c613439592460ffc0038a, type: 2}

@@ -16,6 +16,7 @@ public class UnitClass : ScriptableObject
     public int morale;
     public Sprite defaultIcon;
     public Sprite unitPreview;
+    public List<Building> requiredBuildings;
 
     private void OnEnable() {
         if(possibleNames == null)

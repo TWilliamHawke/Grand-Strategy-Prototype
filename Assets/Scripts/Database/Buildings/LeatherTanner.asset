@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   localizedName: Leather Tanner
   goldCost: 500
+  icon: {fileID: 21300000, guid: 1e9da4751a7e0a74da69e9c29ea1266f, type: 3}
   BuildingSlot: 2
-  effects: []
+  _effects:
+  - {fileID: 11400000, guid: dac0247cfced39b408b5b597346da741, type: 2}

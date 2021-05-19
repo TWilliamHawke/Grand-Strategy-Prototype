@@ -5,38 +5,38 @@ using UnityEngine.UI;
 
 public abstract class UIPanelWithGrid<T> : MonoBehaviour
 {
-    [SerializeField] UIDataElement<T> _gridElementPrefab;
+    [SerializeField] UIDataElement<T> _layoutElementPrefab;
     [SerializeField] Button _plusButtonPrefab;
-    [SerializeField] GridLayoutGroup _grid;
+    [SerializeField] LayoutGroup _layout;
 
-    protected List<T> _gridElementsData = new List<T>();
+    protected List<T> _layoutElementsData = new List<T>();
 
-    abstract protected void FillGridElementsList();
+    abstract protected void FillLayoutElementsList();
     abstract protected void PlusButtonListener();
 
-    void OnEnable()
+    void Awake()
     {
         UpdateGrid();
     }
 
     protected void UpdateGrid()
     {
-        foreach (Transform children in _grid.transform)
+        foreach (Transform children in _layout.transform)
         {
             Destroy(children.gameObject);
         }
 
-        foreach (var template in _gridElementsData)
+        foreach (var template in _layoutElementsData)
         {
-            var unitCard = Instantiate(_gridElementPrefab);
-            unitCard.transform.SetParent(_grid.transform);
+            var unitCard = Instantiate(_layoutElementPrefab);
+            unitCard.transform.SetParent(_layout.transform);
             unitCard.UpdateData(template);
         }
 
         if (_plusButtonPrefab == null) return;
 
         var plusButton = Instantiate(_plusButtonPrefab);
-        plusButton.transform.SetParent(_grid.transform);
+        plusButton.transform.SetParent(_layout.transform);
         plusButton.onClick.AddListener(PlusButtonListener);
     }
 

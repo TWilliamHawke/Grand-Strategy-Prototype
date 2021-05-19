@@ -23,10 +23,20 @@ public class UnitTemplate : ScriptableObject
     public int attack => unitClass.weaponSkill;
     public bool isRange => primaryWeapon is RangeWeapon || secondaryWeapon is RangeWeapon;
     public int charge => (primaryWeapon as MeleeWeapon)?.charge ?? 0;
+    public List<Building> requiredBuildings { get; set; } = new List<Building>();
+
+    private void OnEnable() {
+        requiredBuildings.Clear();
+        requiredBuildings.AddRange(unitClass.requiredBuildings);
+    }
 
     public int GetEquipmentTotalCost()
     {
-        var totalcost = primaryWeapon.goldCost + secondaryWeapon.goldCost + armour.goldCost + shield.goldCost + mount.goldCost;
+        var totalcost = primaryWeapon.goldCost
+                        + secondaryWeapon.goldCost
+                        + armour.goldCost
+                        + shield.goldCost
+                        + mount.goldCost;
         return totalcost;
     }
 
