@@ -41,6 +41,7 @@
      <Compile Include="Assets\Scripts\Battlefield\EnemyDetector.cs" />
      <Compile Include="Assets\Scripts\Battlefield\Troop.cs" />
      <Compile Include="Assets\Scripts\UI\Tabs\TabPanel.cs" />
+     <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\PrimaryWeaponSlot.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\UnitNamePart.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\Weapon.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\RequiredBuildingsPanel.cs" />
@@ -52,6 +53,7 @@
      <Compile Include="Assets\Scripts\UI\UnitEditor\ItemList.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\MeleeWeapon.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitList.cs" />
+     <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\MountSlot.cs" />
      <Compile Include="Assets\Scripts\UI\TechnologyScreen\TechnologyButton.cs" />
      <Compile Include="Assets\Scripts\Battlefield\Square.cs" />
      <Compile Include="Assets\Scripts\UI\TechnologyScreen\TechnologyScreen.cs" />
@@ -66,10 +68,12 @@
      <Compile Include="Assets\Scripts\UI\Tooltip\IHaveTooltip.cs" />
      <Compile Include="Assets\Scripts\Army.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\AbstractState.cs" />
+     <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\AbstractItemSlot.cs" />
      <Compile Include="Assets\Scripts\Battlefield\Timer.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\StateConfig.cs" />
-     <Compile Include="Assets\Scripts\UI\UnitEditor\Item.cs" />
+     <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSelectionButton.cs" />
      <Compile Include="Assets\Scripts\UI\BattleField\TimerPanel.cs" />
+     <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\ArmorSlot.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\TemplateController.cs" />
      <Compile Include="Assets\Scripts\UI\UnitTemplateViewer.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\Equipment.cs" />
@@ -78,6 +82,7 @@
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitClassInfo.cs" />
      <Compile Include="Assets\Scripts\UnitsListController.cs" />
      <Compile Include="Assets\Scripts\Battlefield\UnitsController.cs" />
+     <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\ShieldSlot.cs" />
      <Compile Include="Assets\Scripts\UI\TechnologyScreen\TechnologyList.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\RequireSkillEquipment.cs" />
      <Compile Include="Assets\Scripts\UI\Lib\UIPanelWithGrid.cs" />
@@ -88,13 +93,12 @@
      <Compile Include="Assets\Scripts\UI\SettlementView\SettlementView.cs" />
      <Compile Include="Assets\Scripts\Battlefield\SquareDirection.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitPreview.cs" />
-     <Compile Include="Assets\Scripts\UI\UnitEditor\Inventory.cs" />
      <Compile Include="Assets\Scripts\Battlefield\Node.cs" />
      <Compile Include="Assets\Scripts\UI\BuildingsView\BuildingsListController.cs" />
      <Compile Include="Assets\Scripts\UI\IhaveLabel.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\NameSelector.cs" />
      <Compile Include="Assets\Scripts\UI\MainScreen.cs" />
-     <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\ItemSlots.cs" />
+     <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\SecondaryWeaponSlot.cs" />
      <Compile Include="Assets\Scripts\Raycasts.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Charge.cs" />
      <Compile Include="Assets\Scripts\UI\Label.cs" />
@@ -134,7 +138,6 @@
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\Mount.cs" />
      <Compile Include="Assets\Scripts\UI\Tabs\TabButton.cs" />
      <Compile Include="Assets\Scripts\UI\Tooltip\TooltipController.cs" />
-     <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\ItemSlot.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\NameSelectorPart.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitName.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\IncreaseClassWealth.cs" />
@@ -154,12 +157,6 @@
      <Compile Include="Assets\Scripts\Unit.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TimeManager.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\EditButton.cs" />
-     <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\PrimaryWeaponSlot.cs" />
-     <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\SecondaryWeaponSlot.cs" />
-     <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\ShieldSlot.cs" />
-     <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\ArmorSlot.cs" />
-     <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\MountSlot.cs" />
-     <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\AbstractItemSlot.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Programs/unity/2020.3.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnitEditor;
+using Effects;
 
     public abstract class Equipment : ScriptableObject
     {
@@ -23,7 +24,19 @@ using UnitEditor;
 
         public int CalculateCurrentCost(TemplateController templateController)
         {
-            return goldCost;
+            var effects = templateController.FindAllEffects<ChangeCostForEquipment>();
+            var realCost = goldCost;
+
+            foreach(var effect in effects)
+            {
+                if(effect.equipmentList.equipmentList.Contains(this))
+                {
+                    realCost *= effect.costDecresePct;
+                    realCost /= 100;
+                }
+            }
+
+            return realCost;
         }
 
         public bool ConvertTo<T>(out T item) where T : Equipment

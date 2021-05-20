@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 2911970277280578645}
   - component: {fileID: 2911970277280578987}
   - component: {fileID: 2911970277280578986}
+  - component: {fileID: 972747807}
   m_Layer: 5
   m_Name: RequireBuilding
   m_TagString: Untagged
@@ -158,6 +159,23 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &972747807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2911970277280578644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 467d7066ab1e7af4294578180d71af5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _layoutElementPrefab: {fileID: 7183838653022380660, guid: dde76eb0703501b4c9ad822e78034b0e, type: 3}
+  _plusButtonPrefab: {fileID: 5235530193604169716, guid: b921cbffa0aba634289b6e952a37258c, type: 3}
+  _layout: {fileID: 8005981187316340817}
+  _templateController: {fileID: 11400000, guid: 1d3e4825f51cfb24aa948edcef859202, type: 2}
+  _buildingSelector: {fileID: 0}
 --- !u!1 &7644751495978756280
 GameObject:
   m_ObjectHideFlags: 0

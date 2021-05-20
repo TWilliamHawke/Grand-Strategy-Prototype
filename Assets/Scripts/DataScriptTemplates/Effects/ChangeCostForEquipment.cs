@@ -11,6 +11,7 @@ namespace Effects
         [SerializeField] int _costDecresePct;
 
         public EquipmentList equipmentList => _equipmentList;
+        public int costDecresePct => _costDecresePct;
 
         public override string GetText()
         {

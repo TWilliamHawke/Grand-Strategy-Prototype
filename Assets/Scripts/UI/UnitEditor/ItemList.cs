@@ -7,50 +7,36 @@ using UnityEngine.Events;
 namespace UnitEditor
 {
 
-    public class ItemList : MonoBehaviour
-{
-    [SerializeField] ItemSlotController _itemSlotController;
-    [SerializeField] LayoutGroup _content;
-    [SerializeField] Item _itemPrefab;
-
-    private void Awake() {
-        _itemSlotController.OnItemSlotSelection += UpdateItemList;
-    }
-
-    private void OnDisable() {
-        _itemSlotController.OnItemSlotSelection -= UpdateItemList;
-    }
-
-    void UpdateItemList(List<Equipment> equipmentList)
+    public class ItemList : UIPanelWithGrid<Equipment>
     {
-        //TODO replace with pooling system
-        foreach(Transform child in _content.transform)
+        [SerializeField] ItemSlotController _itemSlotController;
+        [SerializeField] TemplateController _templateController;
+
+        private void Awake()
         {
-            Destroy(child.gameObject);
+            _itemSlotController.OnItemSlotSelection += UpdateItemList;
+            _templateController.OnBuildingAdded += UpdateGrid;
         }
 
-        //cache for _itemSlotController.freeGold
-        int freeGold = Mathf.Max(_itemSlotController.freeGold, 0);
-        
-        foreach(var item in equipmentList)
+        private void OnDisable()
         {
-            var itemRow = Instantiate(_itemPrefab);
-            itemRow.transform.SetParent(_content.transform);
-            itemRow.SetItemData(item);
-            
-            if (freeGold < item.goldCost)
-            {
-                itemRow.SetInactiveDueGold();
-            }
-
-            int itemSkill = (item as RequireSkillEquipment)?.requiredSkill ?? 0;
-
-            if(itemSkill > _itemSlotController.classSkill )
-            {
-                itemRow.SetInactiveDueSkill();
-            }
+            _itemSlotController.OnItemSlotSelection -= UpdateItemList;
+            _templateController.OnBuildingAdded -= UpdateGrid;
         }
+
+        void UpdateItemList(List<Equipment> equipmentList)
+        {
+            _layoutElementsData = equipmentList;
+            UpdateGrid();
+        }
+
+        protected override void FillLayoutElementsList()
+        {
+        }
+
+        protected override void PlusButtonListener()
+        {
+        }
+
     }
-
-}
 }

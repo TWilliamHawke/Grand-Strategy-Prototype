@@ -18,25 +18,34 @@ namespace UnitEditor
         protected ItemSlotController itemSlotController => _itemSlotController;
         protected TemplateController templateController => _templateController;
 
-        public int itemCost { get; private set; }
+        int _itemCost = 0;
+
+        public int itemCost
+        {
+            get => _itemCost;
+            private set => SetItemCost(value);
+        }
 
         Equipment _itemInSlot;
 
         public virtual List<Equipment> itemsForSlot => _itemSlotController.weapon;
 
-        public abstract void AddItemToTemplate(Equipment item);
+        protected abstract void AddItemToTemplate(Equipment item);
         protected abstract Equipment SelectItemFromTemplate(UnitTemplate template);
 
         void OnEnable()
         {
             _itemSlotController.AddItemSlot(this);
-            UpdateItemInSlot(_templateController.currentTemplate);
-            _templateController.OnTemplateChange += UpdateItemInSlot;
+            UpdateSlotUI(_templateController.currentTemplate);
+            _templateController.OnTemplateChange += UpdateSlotUI;
+            _templateController.OnBuildingAdded += UpdateItemCost;
         }
 
         void OnDisable()
         {
-            _templateController.OnTemplateChange -= UpdateItemInSlot;
+            _templateController.OnTemplateChange -= UpdateSlotUI;
+            _templateController.OnBuildingAdded -= UpdateItemCost;
+
         }
 
         public override string GetTooltipText()
@@ -58,15 +67,28 @@ namespace UnitEditor
             }
         }
 
-        void UpdateItemInSlot(UnitTemplate template)
+        public void ChangeItemInSlot(Equipment item)
+        {
+            itemCost = item.CalculateCurrentCost(_templateController);
+            AddItemToTemplate(item);
+        }
+
+        void UpdateItemCost()
+        {
+            itemCost = _itemInSlot.CalculateCurrentCost(_templateController);
+        }
+
+        void SetItemCost(int value)
+        {
+            _itemCost = value;
+            _itemSlotController.UpdateEquipmentCost();
+        }
+
+        void UpdateSlotUI(UnitTemplate template)
         {
             var item = SelectItemFromTemplate(template);
             itemCost = item.CalculateCurrentCost(_templateController);
-            UpdateItemInSlot(item);
-        }
 
-        void UpdateItemInSlot(Equipment item)
-        {
             _itemInSlot = item;
             _itemName.text = item.Name;
             _itemIcon.sprite = item.sprite;

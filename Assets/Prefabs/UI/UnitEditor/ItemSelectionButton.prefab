@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 872826098356734491}
   - component: {fileID: 1700179683328004440}
   m_Layer: 5
-  m_Name: Item
+  m_Name: ItemSelectionButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -274,6 +274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tooltipController: {fileID: 11400000, guid: c29eeb31eaa786747816d0e7ef376b1d, type: 2}
   _itemSlotController: {fileID: 11400000, guid: 57aecc2247440ae4b91fca008085453a, type: 2}
+  _templateController: {fileID: 11400000, guid: 1d3e4825f51cfb24aa948edcef859202, type: 2}
   _itemIcon: {fileID: 872826098282234858}
   _itemName: {fileID: 872826097714146373}
   _itemCost: {fileID: 872826098388811870}

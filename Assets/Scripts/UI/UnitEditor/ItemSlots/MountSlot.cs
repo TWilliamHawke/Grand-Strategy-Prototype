@@ -9,7 +9,7 @@ namespace UnitEditor
         public override List<Equipment> itemsForSlot => itemSlotController.mounts;
 
 
-        public override void AddItemToTemplate(Equipment item)
+        protected override void AddItemToTemplate(Equipment item)
         {
             templateController.AddMount(item);
         }

@@ -11,6 +11,7 @@ namespace Effects
         [SerializeField] int _requiredSkillDecrease;
 
         public EquipmentList equipmentList => _equipmentList;
+        public int requiredSkillDecrease => _requiredSkillDecrease;
 
         public override string GetText()
         {

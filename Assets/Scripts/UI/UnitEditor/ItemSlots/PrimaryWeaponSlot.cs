@@ -8,7 +8,7 @@ namespace UnitEditor
     {
         public override List<Equipment> itemsForSlot => itemSlotController.weapon;
 
-        public override void AddItemToTemplate(Equipment item)
+        protected override void AddItemToTemplate(Equipment item)
         {
             templateController.AddPrimaryWeapon(item);
         }

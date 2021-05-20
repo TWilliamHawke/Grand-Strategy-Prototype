@@ -22,15 +22,22 @@ namespace UnitEditor
         public List<Equipment> mounts => _mounts;
 
         public event UnityAction<List<Equipment>> OnItemSlotSelection;
+        public event UnityAction<int> OnEquipmentCostChange;
 
-        public int freeGold => CalculateFreeGold();
         public int classSkill => _templateController.currentTemplate.unitClass.weaponSkill;
 
-        List<AbstractItemSlot> _itemSlots;
+        List<AbstractItemSlot> _itemSlots = new List<AbstractItemSlot>();
         AbstractItemSlot _selectedSlot;
 
-        private void OnDisable() {
+        private void OnDisable()
+        {
             _itemSlots.Clear();
+        }
+
+        public void UpdateEquipmentCost()
+        {
+            int cost = CalculateEquipmentCost();
+            OnEquipmentCostChange?.Invoke(cost);
         }
 
         public void AddItemSlot(AbstractItemSlot slot)
@@ -46,15 +53,15 @@ namespace UnitEditor
 
         public void ChangeItemInSelectedSlot(Equipment item)
         {
-            _selectedSlot.AddItemToTemplate(item);
+            _selectedSlot.ChangeItemInSlot(item);
         }
 
-        int CalculateFreeGold()
+        public int CalculateFreeGold()
         {
             var gold = _templateController.realwealth;
-            foreach(var itemSlot in _itemSlots)
+            foreach (var itemSlot in _itemSlots)
             {
-                if(itemSlot == _selectedSlot) continue;
+                if (itemSlot == _selectedSlot) continue;
 
                 gold -= itemSlot.itemCost;
             }
@@ -62,11 +69,11 @@ namespace UnitEditor
             return gold;
         }
 
-        public int CalculateEquipmentCost()
+        int CalculateEquipmentCost()
         {
             int gold = 0;
 
-            foreach(var itemSlot in _itemSlots)
+            foreach (var itemSlot in _itemSlots)
             {
                 gold += itemSlot.itemCost;
             }

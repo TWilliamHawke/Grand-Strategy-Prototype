@@ -6,6 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "RangeWeapon", menuName = "Unit Editor/Range Weapon", order = 52)]
 public class RangeWeapon : Weapon
 {
+    [Header("Range Stats")]
     public int range;
     public int ammo;
     public int accuracy;

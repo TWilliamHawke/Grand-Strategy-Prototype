@@ -15,42 +15,53 @@ namespace UnitEditor
         [SerializeField] Text _wealthText;
 
         UnitClass _unitClass;
+        int _equipmentCost;
+        int _classWealth;
 
         private void OnEnable()
         {
-            _templateController.OnTemplateChange += UpdateInfo;
-            _templateController.OnBuildingAdded += UpdateWealth;
-            UpdateInfo(_templateController.currentTemplate);
+            _templateController.OnTemplateChange += UpdateClassInfo;
+            _templateController.OnBuildingAdded += SetWealth;
+            _itemSlotController.OnEquipmentCostChange += SetEquipmentCost;
+            UpdateClassInfo(_templateController.currentTemplate);
         }
 
         private void OnDisable()
         {
-            _templateController.OnTemplateChange -= UpdateInfo;
-            _templateController.OnBuildingAdded -= UpdateWealth;
+            _templateController.OnTemplateChange -= UpdateClassInfo;
+            _templateController.OnBuildingAdded -= SetWealth;
+            _itemSlotController.OnEquipmentCostChange -= SetEquipmentCost;
         }
 
-        public void UpdateInfo(UnitTemplate template)
+        public void UpdateClassInfo(UnitTemplate template)
         {
             _unitClass = template.unitClass;
 
             var weaponSkill = template.unitClass.weaponSkill;
             _weaponSkillText.text = weaponSkill.ToString();
 
-            UpdateWealth();
+            SetWealth();
 
             string unitClass = template.unitClass.className;
             _classNameText.text = $"Class:{unitClass}";
         }
 
-        private void UpdateWealth()
+        void SetWealth()
         {
-
-            int equipmentCost = _itemSlotController.CalculateEquipmentCost();
-            int wealth = _templateController.realwealth;
-
-            _wealthText.text = $"{equipmentCost}/{wealth}";
+            _classWealth = _templateController.realwealth;
+            UpdateText();
         }
 
+        void SetEquipmentCost(int cost)
+        {
+            _equipmentCost = cost;
+            UpdateText();
+        }
+
+        private void UpdateText()
+        {
+            _wealthText.text = $"{_equipmentCost}/{_classWealth}";
+        }
     }
 
 }

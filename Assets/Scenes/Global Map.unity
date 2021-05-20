@@ -5461,7 +5461,6 @@ GameObject:
   - component: {fileID: 943744907}
   - component: {fileID: 943744906}
   - component: {fileID: 943744905}
-  - component: {fileID: 943744908}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -5558,24 +5557,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 943744903}
   m_CullTransparentMesh: 1
---- !u!114 &943744908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 943744903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e0eda66f0963a94eb33ffa09a7a00e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _templateController: {fileID: 11400000, guid: 1d3e4825f51cfb24aa948edcef859202, type: 2}
-  _primaryWeaponSlot: {fileID: 0}
-  _secondaryWeaponSlot: {fileID: 0}
-  _shieldSlot: {fileID: 0}
-  _armorSlot: {fileID: 0}
-  _mountSlot: {fileID: 0}
 --- !u!1 &953355723
 GameObject:
   m_ObjectHideFlags: 0
@@ -16147,6 +16128,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1497235052}
     m_Modifications:
+    - target: {fileID: 83914889630277645, guid: 89093d6c16b6c5148b46f34bea2ee644, type: 3}
+      propertyPath: _itemSlotController
+      value: 
+      objectReference: {fileID: 11400000, guid: 57aecc2247440ae4b91fca008085453a, type: 2}
     - target: {fileID: 3737567484491311638, guid: 89093d6c16b6c5148b46f34bea2ee644, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

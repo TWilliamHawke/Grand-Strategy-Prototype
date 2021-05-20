@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Weapon : RequireSkillEquipment
 {
+    [Header("Weapon Stats")]
     public int damage;
     public int armorPiercing;
     public bool twoHanded;
