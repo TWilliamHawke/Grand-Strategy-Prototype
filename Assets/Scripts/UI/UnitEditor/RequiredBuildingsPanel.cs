@@ -16,12 +16,20 @@ namespace UnitEditor
 
         void Awake()
         {
-            _templateController.OnBuildingAdded += UpdateGrid;
+            _templateController.OnBuildingAdded += FillAndUpdate;
+            _templateController.OnTemplateSelection += FillAndUpdate;
         }
 
         void OnDestroy()
         {
-            _templateController.OnBuildingAdded -= UpdateGrid;
+            _templateController.OnBuildingAdded -= FillAndUpdate;
+            _templateController.OnTemplateSelection -= FillAndUpdate;
+        }
+
+        void FillAndUpdate()
+        {
+            FillLayoutElementsList();
+            UpdateGrid();
         }
 
         protected override void FillLayoutElementsList()

@@ -15,7 +15,7 @@ MonoBehaviour:
   Name: Short Bow
   unitNames: {fileID: 11400000, guid: 7685272c227720b4f9f0ef44b795f854, type: 2}
   sprite: {fileID: 21300000, guid: a6b1f12071e5e664c97e53c4b041e466, type: 3}
-  goldCost: 50
+  goldCost: 100
   requiredSkill: 10
   damage: 5
   armorPiercing: 0

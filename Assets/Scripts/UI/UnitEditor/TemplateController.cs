@@ -12,6 +12,7 @@ namespace UnitEditor
     {
         public event UnityAction<UnitTemplate> OnTemplateChange;
         public event UnityAction<UnitTemplate> OnTemplateSave;
+        public event UnityAction OnTemplateSelection;
         public event UnityAction OnBuildingAdded;
 
         [SerializeField] UnitTemplate _emptyTemplate;
@@ -19,10 +20,7 @@ namespace UnitEditor
 
         public UnitTemplate defaultTemplate { get; private set; }
         public UnitTemplate currentTemplate { get; private set; }
-        public int equipmentCost => currentTemplate.GetEquipmentTotalCost();
         public int realwealth => currentTemplate.unitClass.CalculateRealWealth(this);
-
-        public List<UnitTemplate> defaultTemplates;
 
         void OnEnable()
         {
@@ -39,6 +37,7 @@ namespace UnitEditor
         {
             defaultTemplate = template;
             currentTemplate = Instantiate(defaultTemplate);
+            OnTemplateSelection?.Invoke();
             UpdateTemplate();
         }
 
@@ -55,7 +54,7 @@ namespace UnitEditor
 
         public void AddBuilding(Building building)
         {
-            currentTemplate.requiredBuildings.Add(building);
+            currentTemplate.AddRequiredBuildings(building);
             OnBuildingAdded?.Invoke();
         }
 

@@ -17,9 +17,10 @@ namespace UnitEditor
         [SerializeField] NameSelectorPart _mainSelector;
         [SerializeField] NameSelectorPart _sufffixSelector;
         [SerializeField] Image _warningMessage;
-        [SerializeField] UnitEditorScreen _unitEditor;
+
         [Header("Scriptable Objects")]
         [SerializeField] TemplateController _templateController;
+        [SerializeField] UIScreensManager _uiScreenManager;
 
         List<UnitNamePart> _typeNames;
         List<UnitNamePart> _equipmentNames;
@@ -41,15 +42,18 @@ namespace UnitEditor
                 return;
             }
 
-            var name = $"{prefix} {main} {suffix}";
+            var name = $"{prefix} {main} {suffix}".Trim();
             var capitalizedName = name.First().ToString().ToUpper() + name.Substring(1);
 
             var regex = new Regex(@" -");
 
             _templateController.currentTemplate.templateName = regex.Replace(capitalizedName, "-");
             _templateController.SaveTemplate();
+
             gameObject.SetActive(false);
-            _unitEditor.gameObject.SetActive(false);
+
+            var templateViewer = FindObjectOfType<UnitTemplateViewer>(true);
+            _uiScreenManager.OpenScreen(templateViewer);
         }
 
         public void ShowWarningMessage()

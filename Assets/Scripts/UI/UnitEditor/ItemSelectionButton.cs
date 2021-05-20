@@ -77,20 +77,23 @@ namespace UnitEditor
         {
             if (_itemData is RequireSkillEquipment)
             {
-                int realSkill = (_itemData
-                    as RequireSkillEquipment)?.CalculateRealSkill(_templateController) ?? 0;
-                    
-                _weaponSkillText.text = realSkill.ToString();
-
-                if (realSkill > _itemSlotController.classSkill)
-                {
-                    SetInactiveDueSkill();
-                }
-
+                CheckWeaponSkill();
             }
             else
             {
                 _weaponSkill.gameObject.SetActive(false);
+            }
+        }
+
+        void CheckWeaponSkill()
+        {
+            int realSkill = (_itemData as RequireSkillEquipment)?.CalculateRealSkill(_templateController) ?? 0;
+
+            _weaponSkillText.text = realSkill.ToString();
+
+            if (realSkill > _itemSlotController.classSkill)
+            {
+                SetInactiveDueSkill();
             }
         }
 

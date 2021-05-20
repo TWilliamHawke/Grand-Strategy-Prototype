@@ -24,3 +24,4 @@ MonoBehaviour:
   unitPreview: {fileID: 21300000, guid: 1df257564fe405a4da9b4d3a6846b8d5, type: 3}
   requiredBuildings:
   - {fileID: 11400000, guid: 0721c0275d743c940aed774910d67f60, type: 2}
+  - {fileID: 11400000, guid: a38c5502f75667a4387be3fe1f405ade, type: 2}

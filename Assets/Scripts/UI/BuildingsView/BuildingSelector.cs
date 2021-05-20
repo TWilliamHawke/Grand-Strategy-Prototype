@@ -36,6 +36,11 @@ public class BuildingSelector : UIPanelWithGrid<Building>
         gameObject.SetActive(true);
     }
 
+    public void Close()
+    {
+        gameObject.SetActive(false);
+    }
+
 
     protected override void FillLayoutElementsList()
     {

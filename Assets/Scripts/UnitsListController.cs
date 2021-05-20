@@ -16,15 +16,16 @@ public class UnitsListController : ScriptableObject
     public List<UnitTemplate> mecrcenaryUnits => _mecrcenaryUnits;
     public List<UnitTemplate> currentTemplates => _currentTemplates;
 
-    void Awake()
-    {
-        _templateController.OnTemplateSave += SaveTemplate;
-    }
-
     void OnEnable()
     {
+        _templateController.OnTemplateSave += SaveTemplate;
         _currentTemplates.Clear();
         _currentTemplates.AddRange(_defaultUnits);
+    }
+
+    void OnDisable()
+    {
+        _templateController.OnTemplateSave += SaveTemplate;
     }
 
     void SaveTemplate(UnitTemplate savedTemplate)

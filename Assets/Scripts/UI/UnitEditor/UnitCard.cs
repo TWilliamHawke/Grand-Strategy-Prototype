@@ -7,11 +7,12 @@ namespace UnitEditor
     [RequireComponent(typeof(Button))]
     public class UnitCard : UIDataElement<UnitTemplate>
     {
-        [SerializeField] Image _imageForIcon;
-        [SerializeField] Text _templateName;
         [SerializeField] TemplateController _templateController;
         [SerializeField] UnitTemplate _unitTemplate;
         [SerializeField] UIScreensManager _screenManager;
+        [Header("UI Elements")]
+        [SerializeField] Image _imageForIcon;
+        [SerializeField] Text _templateName;
         [SerializeField] bool isDefaultType;
 
         UnitEditorScreen _unitEditor;
