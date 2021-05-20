@@ -9,6 +9,7 @@ namespace UnitEditor
     public class UnitClassInfo : MonoBehaviour
     {
         [SerializeField] TemplateController _templateController;
+        [SerializeField] ItemSlotController _itemSlotController;
         [SerializeField] Text _classNameText;
         [SerializeField] Text _weaponSkillText;
         [SerializeField] Text _wealthText;
@@ -43,16 +44,10 @@ namespace UnitEditor
 
         private void UpdateWealth()
         {
-            int wealth = _unitClass.wealth;
 
-            var effects = _templateController.FindAllEffects<IncreaseClassWealth>();
+            int equipmentCost = _itemSlotController.CalculateEquipmentCost();
+            int wealth = _templateController.realwealth;
 
-            foreach (var effect in effects)
-            {
-                wealth += effect.addWealth;
-            }
-
-            int equipmentCost = _templateController.equipmentCost;
             _wealthText.text = $"{equipmentCost}/{wealth}";
         }
 

@@ -273,6 +273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tooltipController: {fileID: 11400000, guid: c29eeb31eaa786747816d0e7ef376b1d, type: 2}
+  _itemSlotController: {fileID: 11400000, guid: 57aecc2247440ae4b91fca008085453a, type: 2}
   _itemIcon: {fileID: 872826098282234858}
   _itemName: {fileID: 872826097714146373}
   _itemCost: {fileID: 872826098388811870}

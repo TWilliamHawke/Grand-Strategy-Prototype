@@ -8,24 +8,28 @@ using System;
 
 namespace UnitEditor
 {
-public class Item : UIElementWithTooltip, IPointerClickHandler
+    public class Item : UIElementWithTooltip, IPointerClickHandler
 {
+    [SerializeField] ItemSlotController _itemSlotController;
+    [Header("UI Elements")]
     [SerializeField] Image _itemIcon;
     [SerializeField] Text _itemName;
     [SerializeField] Text _itemCost;
     [SerializeField] Text _weaponSkillText;
     [SerializeField] RectTransform _weaponSkill;
 
-    UnityEvent<Equipment> OnItemClick;
     Equipment _itemData;
     string _tooltipText;
     bool _isInactive = false;
+
+    public Equipment itemData => _itemData;
 
     public void OnPointerClick(PointerEventData eventData)
     {
         if(_itemData == null || _isInactive) return;
 
-        OnItemClick?.Invoke(_itemData);
+        _itemSlotController?.ChangeItemInSelectedSlot(_itemData);
+
     }
 
     public void SetItemData(Equipment item)
@@ -48,11 +52,6 @@ public class Item : UIElementWithTooltip, IPointerClickHandler
         {
             _weaponSkill.gameObject.SetActive(false);
         }
-    }
-
-    public void AddCallback(UnityEvent<Equipment> callback)
-    {
-        OnItemClick = callback;
     }
 
     public override string GetTooltipText()

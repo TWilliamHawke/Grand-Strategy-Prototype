@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 179193338cdfe624ebe7afaa8a88f42c, type: 3}
+  m_Name: ItemSlotController
+  m_EditorClassIdentifier: 
+  _templateController: {fileID: 11400000, guid: 1d3e4825f51cfb24aa948edcef859202, type: 2}
+  _weapon:
+  - {fileID: 11400000, guid: 098530b35241a8a48bca35bcc5c739d1, type: 2}
+  - {fileID: 11400000, guid: ee4111bb6b09feb4e969734874638327, type: 2}
+  - {fileID: 11400000, guid: 1c1b609bec31b3e4a8fe4ee1d0b0baff, type: 2}
+  - {fileID: 11400000, guid: c90203e137988c1429f05608c83e21ee, type: 2}
+  - {fileID: 11400000, guid: 1b3745359d2652548bbe060e01aa3f42, type: 2}
+  - {fileID: 11400000, guid: f3bea56c5b27f4b46927057d0fed34aa, type: 2}
+  - {fileID: 11400000, guid: 6a3dd680364c2d24189ff0ce2d0da48f, type: 2}
+  - {fileID: 11400000, guid: 4411f85c6b58c3847b1343937ed152a6, type: 2}
+  - {fileID: 11400000, guid: 0194ea39561969549af0a3e86e45c62d, type: 2}
+  - {fileID: 11400000, guid: 5419b9c139e4134419b4cf6af3a41bf7, type: 2}
+  - {fileID: 11400000, guid: 4557c909bd941ed4f92b264dc021d9a8, type: 2}
+  - {fileID: 11400000, guid: 9b3952f3cc3d5b84f81e81abec6d11e8, type: 2}
+  _shields:
+  - {fileID: 11400000, guid: 12137db14f622424d806ca6c02ffa707, type: 2}
+  - {fileID: 11400000, guid: 41e07b7bef8660b4cb9e448b5a8de5d7, type: 2}
+  - {fileID: 11400000, guid: d2a494a2317a66d40bf1895681701875, type: 2}
+  - {fileID: 11400000, guid: 2441ab32927d5c04996863dd1f63dd54, type: 2}
+  _armor:
+  - {fileID: 11400000, guid: e475dc0be857fe54b81ee64e8237480e, type: 2}
+  - {fileID: 11400000, guid: 99c95bdd95a816a41b51825d2c4694b6, type: 2}
+  - {fileID: 11400000, guid: f25ece36098559f42aa485822bcb04d2, type: 2}
+  - {fileID: 11400000, guid: bc5223d5e2ef29c4587d0da1debc1036, type: 2}
+  - {fileID: 11400000, guid: 4c62289ab53b4b84996c16088bf61191, type: 2}
+  _mounts:
+  - {fileID: 11400000, guid: 270a156b27e97784588c1f856abfaa5f, type: 2}
+  - {fileID: 11400000, guid: 3f20ea68e267cbd4989fa63f1186739f, type: 2}
+  - {fileID: 11400000, guid: 3a7c388efe334324e9e74ecb925b6bf3, type: 2}
+  - {fileID: 11400000, guid: fdb7ee7cc74c82f49848b4a3cf4749dc, type: 2}

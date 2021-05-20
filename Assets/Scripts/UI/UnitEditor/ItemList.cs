@@ -4,11 +4,10 @@ using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.Events;
 
-
 namespace UnitEditor
 {
 
-public class ItemList : MonoBehaviour
+    public class ItemList : MonoBehaviour
 {
     [SerializeField] ItemSlotController _itemSlotController;
     [SerializeField] LayoutGroup _content;
@@ -22,7 +21,7 @@ public class ItemList : MonoBehaviour
         _itemSlotController.OnItemSlotSelection -= UpdateItemList;
     }
 
-    void UpdateItemList(UnityEvent<Equipment> callback, List<Equipment> equipmentList)
+    void UpdateItemList(List<Equipment> equipmentList)
     {
         //TODO replace with pooling system
         foreach(Transform child in _content.transform)
@@ -30,14 +29,13 @@ public class ItemList : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        //cache
+        //cache for _itemSlotController.freeGold
         int freeGold = Mathf.Max(_itemSlotController.freeGold, 0);
         
         foreach(var item in equipmentList)
         {
             var itemRow = Instantiate(_itemPrefab);
             itemRow.transform.SetParent(_content.transform);
-            itemRow.AddCallback(callback);
             itemRow.SetItemData(item);
             
             if (freeGold < item.goldCost)

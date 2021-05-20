@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Effects;
+using UnitEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,11 +20,28 @@ public class UnitClass : ScriptableObject
     public Sprite unitPreview;
     public List<Building> requiredBuildings;
 
-    private void OnEnable() {
-        if(possibleNames == null)
+    private void OnEnable()
+    {
+        if (possibleNames == null)
         {
             Debug.LogError($"Unit class {name} doesn't have any unit names!", this);
         }
 
+    }
+
+    public int CalculateRealWealth(TemplateController templateController)
+    {
+        int realwealth = wealth;
+
+        var effects = templateController.FindAllEffects<IncreaseClassWealth>();
+
+        foreach (var effect in effects)
+        {
+            if(effect.unitClass != this) continue;
+
+            realwealth += effect.addWealth;
+        }
+
+        return realwealth;
     }
 }

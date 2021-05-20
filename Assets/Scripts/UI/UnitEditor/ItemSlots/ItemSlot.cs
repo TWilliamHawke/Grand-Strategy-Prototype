@@ -33,8 +33,7 @@ namespace UnitEditor
     public void OnPointerClick(PointerEventData eventData)
     {
         if((int)eventData.button == 0) {
-            _itemSlotController.itemInSelectedSlot = _itemInSlot;
-            _itemSlotController.SelectItemSlot(itemCallback, _equipmentList.equipmentList);
+            //_itemSlotController.SelectItemSlot(itemCallback, _equipmentList.equipmentList);
         }
         if((int)eventData.button == 1) {
             itemCallback.Invoke(_defaultItem);

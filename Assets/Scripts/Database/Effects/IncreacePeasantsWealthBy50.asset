@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: IncreacePeasantsWealthBy50
   m_EditorClassIdentifier: 
   _unitClass: {fileID: 11400000, guid: bddffe17f4066d547bf0056af4d3d880, type: 2}
-  addWealth: 50
+  _addWealth: 50

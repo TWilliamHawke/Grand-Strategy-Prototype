@@ -20,6 +20,7 @@ namespace UnitEditor
         public UnitTemplate defaultTemplate { get; private set; }
         public UnitTemplate currentTemplate { get; private set; }
         public int equipmentCost => currentTemplate.GetEquipmentTotalCost();
+        public int realwealth => currentTemplate.unitClass.CalculateRealWealth(this);
 
         public List<UnitTemplate> defaultTemplates;
 

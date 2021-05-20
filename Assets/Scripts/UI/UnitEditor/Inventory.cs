@@ -27,11 +27,11 @@ public class Inventory : MonoBehaviour
 
     void UpdateSlots(UnitTemplate template)
     {
-        _primaryWeaponSlot.UpdateItemInSlot(template.primaryWeapon);
-        _secondaryWeaponSlot.UpdateItemInSlot(template.secondaryWeapon);
-        _shieldSlot.UpdateItemInSlot(template.shield);
-        _armorSlot.UpdateItemInSlot(template.armour);
-        _mountSlot.UpdateItemInSlot(template.mount);
+        // _primaryWeaponSlot.UpdateItemInSlot(template.primaryWeapon);
+        // _secondaryWeaponSlot.UpdateItemInSlot(template.secondaryWeapon);
+        // _shieldSlot.UpdateItemInSlot(template.shield);
+        // _armorSlot.UpdateItemInSlot(template.armour);
+        // _mountSlot.UpdateItemInSlot(template.mount);
     }
 }
 
