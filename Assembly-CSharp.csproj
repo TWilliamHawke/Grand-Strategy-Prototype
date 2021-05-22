@@ -157,6 +157,8 @@
      <Compile Include="Assets\Scripts\Unit.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TimeManager.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\EditButton.cs" />
+     <Compile Include="Assets\Scripts\UI\Lib\UIPanelWithGridPlus.cs" />
+     <Compile Include="Assets\Scripts\UI\UnitEditor\RequiredBuildingsPanelPlus.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Programs/unity/2020.3.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

@@ -8,6 +8,10 @@ public class BuildingSelector : UIPanelWithGrid<Building>
     [SerializeField] BuildingsListController _buildingsListController;
     [SerializeField] TemplateController _templateController;
 
+    protected override List<Building> _layoutElementsData => buildingsList;
+
+    List<Building> buildingsList = new List<Building>();
+
     void Awake()
     {
         Show();
@@ -42,7 +46,7 @@ public class BuildingSelector : UIPanelWithGrid<Building>
     }
 
 
-    protected override void FillLayoutElementsList()
+    protected void FillLayoutElementsList()
     {
         _layoutElementsData.Clear();
         var wasteBuildings = _templateController.currentTemplate.requiredBuildings;
@@ -62,7 +66,4 @@ public class BuildingSelector : UIPanelWithGrid<Building>
         }
     }
 
-    protected override void PlusButtonListener()
-    {
-    }
 }

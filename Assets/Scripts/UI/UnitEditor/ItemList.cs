@@ -12,6 +12,10 @@ namespace UnitEditor
         [SerializeField] ItemSlotController _itemSlotController;
         [SerializeField] TemplateController _templateController;
 
+        protected override List<Equipment> _layoutElementsData => _itemList;
+
+        List<Equipment> _itemList = new List<Equipment>();
+
         private void Awake()
         {
             _itemSlotController.OnItemSlotSelection += UpdateItemList;
@@ -26,16 +30,8 @@ namespace UnitEditor
 
         void UpdateItemList(List<Equipment> equipmentList)
         {
-            _layoutElementsData = equipmentList;
+            _itemList = equipmentList;
             UpdateGrid();
-        }
-
-        protected override void FillLayoutElementsList()
-        {
-        }
-
-        protected override void PlusButtonListener()
-        {
         }
 
     }

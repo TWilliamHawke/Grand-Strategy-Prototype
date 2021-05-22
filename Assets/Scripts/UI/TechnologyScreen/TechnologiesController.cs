@@ -30,8 +30,6 @@ public class TechnologiesController : ScriptableObject
         _researchedTechnologies.Add(_selectedTechnologyButton.technologyData);
         _selectedTechnologyButton.MarkAsResearched();
         _selectedTechnologyButton = null;
-
-        Debug.Log(_researchedTechnologies.Count);
     }
 
     public List<Effect> GetAllEffects()

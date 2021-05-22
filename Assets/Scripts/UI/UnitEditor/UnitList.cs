@@ -7,29 +7,26 @@ using UnityEngine.UI;
 
 namespace UnitEditor
 {
-    public class UnitList : UIPanelWithGrid<UnitTemplate>
+    public class UnitList : UIPanelWithGridPlus<UnitTemplate>
     {
         [SerializeField] Image _classSelector;
         [SerializeField] UnitsListController _unitsListController;
 
-        void Awake()
-        {
-            FillLayoutElementsList();
-        }
+        protected override List<UnitTemplate> _layoutElementsData => _unitsListController.currentTemplates;
 
         void OnEnable()
         {
             UpdateGrid();
         }
 
-        protected override void FillLayoutElementsList()
-        {
-            _layoutElementsData = _unitsListController.currentTemplates;
-        }
-
         protected override void PlusButtonListener()
         {
             _classSelector.gameObject.SetActive(true);
+        }
+
+        protected override bool ShouldHidePlusButton()
+        {
+            return false;
         }
     }
 

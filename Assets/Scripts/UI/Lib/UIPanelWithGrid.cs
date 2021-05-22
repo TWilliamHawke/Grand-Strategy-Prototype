@@ -6,20 +6,17 @@ using UnityEngine.UI;
 public abstract class UIPanelWithGrid<T> : MonoBehaviour
 {
     [SerializeField] UIDataElement<T> _layoutElementPrefab;
-    [SerializeField] Button _plusButtonPrefab;
     [SerializeField] LayoutGroup _layout;
 
-    protected List<T> _layoutElementsData = new List<T>();
-
-    abstract protected void FillLayoutElementsList();
-    abstract protected void PlusButtonListener();
+    protected abstract List<T> _layoutElementsData { get; }
+    protected LayoutGroup layout => _layout;
 
     void Awake()
     {
         UpdateGrid();
     }
 
-    protected void UpdateGrid()
+    protected virtual void UpdateGrid()
     {
         foreach (Transform children in _layout.transform)
         {
@@ -33,11 +30,6 @@ public abstract class UIPanelWithGrid<T> : MonoBehaviour
             unitCard.UpdateData(template);
         }
 
-        if (_plusButtonPrefab == null) return;
-
-        var plusButton = Instantiate(_plusButtonPrefab);
-        plusButton.transform.SetParent(_layout.transform);
-        plusButton.onClick.AddListener(PlusButtonListener);
     }
 
 

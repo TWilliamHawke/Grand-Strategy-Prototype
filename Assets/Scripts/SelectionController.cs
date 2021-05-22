@@ -3,50 +3,53 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SelectionController : MonoBehaviour
+namespace GlobalMap
 {
-    public static event System.Action<ISelectable> OnSelect;
-    public static event System.Action OnSelectionCancel;
-
-    static ISelectable _currentTarget;
-    static public ISelectable currentTarget => _currentTarget;
-
-    public static void SetTarget(ISelectable nextTarget)
+    public class SelectionController : MonoBehaviour
     {
-        _currentTarget?.Deselect();
-        _currentTarget = nextTarget;
-        nextTarget.Select();
-        OnSelect?.Invoke(_currentTarget);
-    }
+        public static event System.Action<ISelectable> OnSelect;
+        public static event System.Action OnSelectionCancel;
 
-    void Update()
-    {
-        SelectObjectByClick();
-    }
+        static ISelectable _currentTarget;
+        static public ISelectable currentTarget => _currentTarget;
 
-    private void SelectObjectByClick()
-    {
-        if (!Input.GetMouseButtonDown(0)) return;
-        if (EventSystem.current.IsPointerOverGameObject()) return;
-        
-
-        var ray = CameraController.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out var hitInfo))
+        public static void SetTarget(ISelectable nextTarget)
         {
-            if (hitInfo.collider.TryGetComponent<ISelectable>(out var nextTarget))
-            {
-                _currentTarget?.Deselect();
-                _currentTarget = nextTarget;
-                nextTarget.Select();
-                OnSelect?.Invoke(nextTarget);
-            }
-            else
-            {
-                if (_currentTarget == null) return;
+            _currentTarget?.Deselect();
+            _currentTarget = nextTarget;
+            nextTarget.Select();
+            OnSelect?.Invoke(_currentTarget);
+        }
 
-                _currentTarget.Deselect();
-                _currentTarget = null;
-                OnSelectionCancel?.Invoke();
+        void Update()
+        {
+            SelectObjectByClick();
+        }
+
+        private void SelectObjectByClick()
+        {
+            if (!Input.GetMouseButtonDown(0)) return;
+            if (EventSystem.current.IsPointerOverGameObject()) return;
+
+
+            var ray = CameraController.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out var hitInfo))
+            {
+                if (hitInfo.collider.TryGetComponent<ISelectable>(out var nextTarget))
+                {
+                    _currentTarget?.Deselect();
+                    _currentTarget = nextTarget;
+                    nextTarget.Select();
+                    OnSelect?.Invoke(nextTarget);
+                }
+                else
+                {
+                    if (_currentTarget == null) return;
+
+                    _currentTarget.Deselect();
+                    _currentTarget = null;
+                    OnSelectionCancel?.Invoke();
+                }
             }
         }
     }

@@ -7,39 +7,31 @@ namespace UnitEditor
     public class RequiredBuildingsPanel : UIPanelWithGrid<Building>
     {
         [SerializeField] TemplateController _templateController;
-        [SerializeField] BuildingSelector _buildingSelector;
 
-        private void OnEnable() {
-            FillLayoutElementsList();
-            UpdateGrid();
+        List<Building> _requiredBuildings = new List<Building>();
+
+        protected override List<Building> _layoutElementsData => _requiredBuildings;
+
+        private void OnEnable()
+        {
+            FillAndUpdate();
         }
 
         void Awake()
         {
-            _templateController.OnBuildingAdded += FillAndUpdate;
             _templateController.OnTemplateSelection += FillAndUpdate;
         }
 
         void OnDestroy()
         {
-            _templateController.OnBuildingAdded -= FillAndUpdate;
             _templateController.OnTemplateSelection -= FillAndUpdate;
         }
 
         void FillAndUpdate()
         {
-            FillLayoutElementsList();
+            _requiredBuildings = _templateController.currentTemplate.requiredBuildings;
             UpdateGrid();
         }
 
-        protected override void FillLayoutElementsList()
-        {
-            _layoutElementsData = _templateController.currentTemplate.requiredBuildings;
-        }
-
-        protected override void PlusButtonListener()
-        {
-            _buildingSelector.Show();
-        }
     }
 }

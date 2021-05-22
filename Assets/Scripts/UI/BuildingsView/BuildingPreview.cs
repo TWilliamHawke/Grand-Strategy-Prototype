@@ -11,7 +11,7 @@ public class BuildingPreview : UIDataElement<Building>
         var name = _buildingData.localizedName;
         var effect = _buildingData.GetEffectsDescription();
 
-        return $"{name}\n{effect}";
+        return $"<b>{name}</b>\n{effect}";
     }
 
     public override void UpdateData(Building data)

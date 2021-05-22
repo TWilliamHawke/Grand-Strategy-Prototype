@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.AI;
+using GlobalMap;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class Army : MonoBehaviour, ISelectable, IHaveUnits

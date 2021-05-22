@@ -6,18 +6,13 @@ public class TechnologyList : UIPanelWithGrid<Technology>
 {
     [SerializeField] TechnologiesController _controller;
 
-    private void Awake() {
-        FillLayoutElementsList();
+    protected override List<Technology> _layoutElementsData => _technologyList;
+    List<Technology> _technologyList = new List<Technology>();
+
+    private void Awake()
+    {
+        _technologyList.AddRange(_controller.allTechnologies);
         UpdateGrid();
-    }
-
-    protected override void FillLayoutElementsList()
-    {
-        _layoutElementsData.AddRange(_controller.allTechnologies);
-    }
-
-    protected override void PlusButtonListener()
-    {
     }
 
 }
