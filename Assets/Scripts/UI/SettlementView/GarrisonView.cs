@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GarrisonView : UnitsView
 {
-    public Vector3 settlementPosition => _unitsOwner.transform.position;
+    public Vector3 settlementPosition => _unitsOwner.position;
 
     public List<Unit> GetSelectedUnits()
     {

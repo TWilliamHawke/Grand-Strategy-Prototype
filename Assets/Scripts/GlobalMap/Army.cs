@@ -18,6 +18,8 @@ public class Army : MonoBehaviour, ISelectable, IHaveUnits
 
     public List<Unit> unitList { get; set; } = new List<Unit>();
 
+    public Vector3 position => transform.position;
+
     public void Deselect()
     {
         _selector.gameObject.SetActive(false);

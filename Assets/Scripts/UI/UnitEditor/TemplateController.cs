@@ -7,8 +7,9 @@ using System.Linq;
 
 namespace UnitEditor
 {
+
     [CreateAssetMenu(fileName = "TemplateController", menuName = "Unit Editor/TemplateController", order = 100)]
-    public class TemplateController : ScriptableObject
+    public class TemplateController : ScriptableObject, IBuildController
     {
         public event UnityAction<UnitTemplate> OnTemplateChange;
         public event UnityAction<UnitTemplate> OnTemplateSave;

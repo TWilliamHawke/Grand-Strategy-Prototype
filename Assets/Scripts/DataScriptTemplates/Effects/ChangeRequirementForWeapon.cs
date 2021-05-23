@@ -16,7 +16,7 @@ namespace Effects
         public override string GetText()
         {
             var weaponGroup = _equipmentList.listName.ToLower();
-            return $"Decrease skill for {weaponGroup} by {_requiredSkillDecrease}";
+            return $"Decrease required skill for {weaponGroup} by {_requiredSkillDecrease}";
         }
     }
 }

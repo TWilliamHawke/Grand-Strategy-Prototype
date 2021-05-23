@@ -8,6 +8,7 @@ public class SettlementView : UIScreen
 {
     [SerializeField] Text _settlementName;
     [SerializeField] GarrisonView _garrisonView;
+    [SerializeField] BuildingsView _buildingsView;
 
     private void Awake()
     {
@@ -24,11 +25,12 @@ public class SettlementView : UIScreen
         SelectionController.OnSelect -= CheckSelectedTarget;
     }
 
-    void UpdateSettlementInfo(Settlement settlement)
+    void UpdateSettlementInfo(SettlementData settlementData)
     {
+        _settlementName.text = settlementData.localizedName;
+        _garrisonView.UpdateUnitsCards(settlementData);
+        _buildingsView.UpdateConstructedBuildings(settlementData);
         Show();
-        _settlementName.text = settlement.GetName();
-        _garrisonView.UpdateUnitsCards(settlement);
     }
 
     void CheckSelectedTarget(ISelectable target)

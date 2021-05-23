@@ -1,10 +1,13 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BuildingPreview : UIDataElement<Building>
+public class BuildingCard : UIDataElement<Building>
 {
+    [SerializeField] Image _buldingIcon;
+
     Building _buildingData;
-    [SerializeField] Image _buildingIcon;
 
     public override string GetTooltipText()
     {
@@ -13,7 +16,6 @@ public class BuildingPreview : UIDataElement<Building>
 
     public override void UpdateData(Building data)
     {
-        _buildingData = data;
-        _buildingIcon.sprite = data.icon;
+        throw new System.NotImplementedException();
     }
 }

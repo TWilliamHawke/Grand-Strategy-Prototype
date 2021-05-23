@@ -3,7 +3,7 @@ using UnityEngine;
 
 public interface IHaveUnits
 {
-    List<Unit> unitList { get; set; }
+    List<Unit> unitList { get; }
     void RemoveUnit(Unit unit);
-    Transform transform { get; }
+    Vector3 position { get; }
 }

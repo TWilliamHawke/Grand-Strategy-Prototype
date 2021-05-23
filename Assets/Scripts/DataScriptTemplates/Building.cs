@@ -15,6 +15,14 @@ public class Building : EffectsContainer
     [SerializeField] List<Effect> _effects; //for properly order in inspector
 
     public override List<Effect> effects => _effects;
+
+    public string GetFullDescription()
+    {
+        var effect = GetEffectsDescription();
+
+        return $"<b>{localizedName}</b>\n{effect}";
+
+    }
 }
 
 public enum BuildingSlots

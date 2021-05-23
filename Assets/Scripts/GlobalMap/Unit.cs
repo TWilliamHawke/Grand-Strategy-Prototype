@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Unit
 {
-    public Unit(UnitTemplate template, Settlement settlement)
+    public Unit(UnitTemplate template, SettlementData settlement)
     {
         unitTemplate = template;
         nativeSettlement = settlement;
@@ -13,6 +13,6 @@ public class Unit
     public UnitTemplate unitTemplate;
     public int currentSize;
     int maxSize => unitTemplate.unitClass.unitSize;
-    Settlement nativeSettlement;
+    SettlementData nativeSettlement;
 
 }

@@ -1,35 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnitEditor;
 using UnityEngine;
 
-public class BuildingSelector : UIPanelWithGrid<Building>
+public abstract class BuildingSelector : UIPanelWithGrid<Building>
 {
     [SerializeField] BuildingsListController _buildingsListController;
-    [SerializeField] TemplateController _templateController;
 
     protected override List<Building> _layoutElementsData => buildingsList;
 
     List<Building> buildingsList = new List<Building>();
 
-    void Awake()
-    {
-        Show();
-        _templateController.OnBuildingAdded += UpdateSelector;
-    }
-
-    void OnDestroy()
-    {
-        _templateController.OnBuildingAdded -= UpdateSelector;
-    }
-
-    void UpdateSelector()
-    {
-        FillLayoutElementsList();
-        if (_layoutElementsData.Count == 0) return;
-        UpdateGrid();
-        Canvas.ForceUpdateCanvases();
-    }
+    abstract protected List<Building> GetWasteBuildings();
 
     public void Show()
     {
@@ -45,11 +26,20 @@ public class BuildingSelector : UIPanelWithGrid<Building>
         gameObject.SetActive(false);
     }
 
+    protected void UpdateSelector()
+    {
+        FillLayoutElementsList();
+        if (_layoutElementsData.Count == 0) return;
+        UpdateGrid();
+        Canvas.ForceUpdateCanvases();
+    }
+
+
 
     protected void FillLayoutElementsList()
     {
         _layoutElementsData.Clear();
-        var wasteBuildings = _templateController.currentTemplate.requiredBuildings;
+        var wasteBuildings = GetWasteBuildings();
 
         var possibleBuildings = _buildingsListController.FilterBuildings(BuildingSlots.castleAny);
 

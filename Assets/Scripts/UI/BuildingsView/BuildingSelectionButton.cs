@@ -1,20 +1,17 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnitEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class BuildingSelectionButton : UIDataElement<Building>, IPointerClickHandler
+public abstract class BuildingSelectionButton : UIDataElement<Building>, IPointerClickHandler
 {
 
     [SerializeField] Text _buildingName;
     [SerializeField] Image _buildingIcon;
-    [SerializeField] TemplateController _templateController;
 
     Building _buildingData;
 
-
+    protected abstract IBuildController _buildController { get; }
 
     public override string GetTooltipText()
     {
@@ -24,7 +21,7 @@ public class BuildingSelectionButton : UIDataElement<Building>, IPointerClickHan
     public void OnPointerClick(PointerEventData eventData)
     {
         HideTooltip();
-        _templateController.AddBuilding(_buildingData);
+        _buildController?.AddBuilding(_buildingData);
     }
 
     public override void UpdateData(Building data)

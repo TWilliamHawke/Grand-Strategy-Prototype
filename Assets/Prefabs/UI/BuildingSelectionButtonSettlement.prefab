@@ -167,9 +167,9 @@ GameObject:
   - component: {fileID: 3600457258931845627}
   - component: {fileID: 9021235022634614199}
   - component: {fileID: 2809784207172761451}
-  - component: {fileID: 2447725718875507927}
+  - component: {fileID: -8980602111115807945}
   m_Layer: 5
-  m_Name: BuildingSelectionButton
+  m_Name: BuildingSelectionButtonSettlement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -304,7 +304,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2447725718875507927
+--- !u!114 &-8980602111115807945
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -313,10 +313,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1565729985737474821}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f21de7e45fd3684eb427a06d240168e, type: 3}
+  m_Script: {fileID: 11500000, guid: fadcf3c704ef79548b75a51bc380de10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _tooltipController: {fileID: 11400000, guid: c29eeb31eaa786747816d0e7ef376b1d, type: 2}
   _buildingName: {fileID: 1421025952828523803}
   _buildingIcon: {fileID: 6631991472058373878}
-  _templateController: {fileID: 11400000, guid: 1d3e4825f51cfb24aa948edcef859202, type: 2}

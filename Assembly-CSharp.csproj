@@ -36,7 +36,7 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Settlement.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Settlement.cs" />
      <Compile Include="Assets\Scripts\Battlefield\BattleRules.cs" />
      <Compile Include="Assets\Scripts\Battlefield\EnemyDetector.cs" />
      <Compile Include="Assets\Scripts\Battlefield\Troop.cs" />
@@ -45,8 +45,9 @@
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\UnitNamePart.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\Weapon.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\RequiredBuildingsPanel.cs" />
-     <Compile Include="Assets\Scripts\Castle.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Castle.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\ChangeCostForEquipment.cs" />
+     <Compile Include="Assets\Scripts\DataScriptTemplates\SettlementData.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\ArmourInfo.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\UnlockClass.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitStat.cs" />
@@ -60,13 +61,15 @@
      <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\EmptyEffect.cs" />
      <Compile Include="Assets\Scripts\UI\BuildingsView\BuildingSelector.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Defeat.cs" />
+     <Compile Include="Assets\Scripts\UI\BuildingsView\BuildingSelectorSettlement.cs" />
      <Compile Include="Assets\Scripts\UI\SettlementView\ArmyCreator.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\UI\Tooltip\UIDataElement.cs" />
      <Compile Include="Assets\Scripts\UI\BuildingsView\BuildingSelectionButton.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\RotationToThread.cs" />
+     <Compile Include="Assets\Scripts\UI\UnitEditor\RequiredBuildingsPanelPlus.cs" />
      <Compile Include="Assets\Scripts\UI\Tooltip\IHaveTooltip.cs" />
-     <Compile Include="Assets\Scripts\Army.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Army.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\AbstractState.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\AbstractItemSlot.cs" />
      <Compile Include="Assets\Scripts\Battlefield\Timer.cs" />
@@ -80,7 +83,7 @@
      <Compile Include="Assets\Scripts\UI\IHaveUnits.cs" />
      <Compile Include="Assets\Scripts\Battlefield\Directions.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitClassInfo.cs" />
-     <Compile Include="Assets\Scripts\UnitsListController.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\UnitsListController.cs" />
      <Compile Include="Assets\Scripts\Battlefield\UnitsController.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\ShieldSlot.cs" />
      <Compile Include="Assets\Scripts\UI\TechnologyScreen\TechnologyList.cs" />
@@ -103,6 +106,7 @@
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Charge.cs" />
      <Compile Include="Assets\Scripts\UI\Label.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\TroopStates.cs" />
+     <Compile Include="Assets\Scripts\UI\SettlementView\BuildingCard.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\EquipmentList.cs" />
      <Compile Include="Assets\Scripts\UI\SettlementView\UnitCard.cs" />
      <Compile Include="Assets\Scripts\UI\Lib\UIScreen.cs" />
@@ -113,14 +117,17 @@
      <Compile Include="Assets\Scripts\UI\Tooltip\TooltipCanvas.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\Interfaces\IEffectChangeBuilding.cs" />
      <Compile Include="Assets\Scripts\UI\UIScreensManager.cs" />
+     <Compile Include="Assets\Scripts\UI\SettlementView\BuildingsView.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\UnitClass.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Dead.cs" />
      <Compile Include="Assets\Scripts\UI\Tooltip\UIElementWithTooltip.cs" />
-     <Compile Include="Assets\Scripts\SelectionController.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\SelectionController.cs" />
      <Compile Include="Assets\Scripts\Singleton.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\Shield.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Ready.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\Faction.cs" />
+     <Compile Include="Assets\Scripts\UI\Lib\UIPanelWithGridPlus.cs" />
+     <Compile Include="Assets\Scripts\UI\BuildingsView\BuildingSelectorEditor.cs" />
      <Compile Include="Assets\Scripts\Battlefield\SelectionController.cs" />
      <Compile Include="Assets\Scripts\MousePounterController.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\Building.cs" />
@@ -154,11 +161,12 @@
      <Compile Include="Assets\Scripts\UI\TechnologyScreen\TechnologiesController.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\NameSelectorButton.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\EffectsContainer.cs" />
-     <Compile Include="Assets\Scripts\Unit.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Unit.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TimeManager.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\EditButton.cs" />
-     <Compile Include="Assets\Scripts\UI\Lib\UIPanelWithGridPlus.cs" />
-     <Compile Include="Assets\Scripts\UI\UnitEditor\RequiredBuildingsPanelPlus.cs" />
+     <Compile Include="Assets\Scripts\UI\BuildingsView\BuildingSelectionButtonEditor.cs" />
+     <Compile Include="Assets\Scripts\UI\BuildingsView\BuildingSelectionButtonSettlement.cs" />
+     <Compile Include="Assets\Scripts\UI\BuildingsView\IBuildController.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Programs/unity/2020.3.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
