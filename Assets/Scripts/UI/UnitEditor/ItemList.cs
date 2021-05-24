@@ -16,7 +16,7 @@ namespace UnitEditor
 
         List<Equipment> _itemList = new List<Equipment>();
 
-        private void Awake()
+        private void OnEnable()
         {
             _itemSlotController.OnItemSlotSelection += UpdateItemList;
             _templateController.OnBuildingAdded += UpdateGrid;

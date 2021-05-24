@@ -19,6 +19,11 @@ namespace UnitEditor
             FillAndUpdate();
         }
 
+        void OnDisable()
+        {
+            _buildingSelector.Close();
+        }
+
         void Awake()
         {
             _templateController.OnBuildingAdded += FillAndUpdate;

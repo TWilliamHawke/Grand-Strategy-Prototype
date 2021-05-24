@@ -25,7 +25,7 @@ namespace UnitEditor
 
         void OnEnable()
         {
-            currentTemplate = Instantiate(_emptyTemplate);
+            currentTemplate = _emptyTemplate.Clone();
             UpdateTemplate();
         }
 
@@ -37,14 +37,14 @@ namespace UnitEditor
         public void SelectTemplate(UnitTemplate template)
         {
             defaultTemplate = template;
-            currentTemplate = Instantiate(defaultTemplate);
+            currentTemplate = defaultTemplate.Clone();
             OnTemplateSelection?.Invoke();
             UpdateTemplate();
         }
 
         public void ResetTemplate()
         {
-            currentTemplate = Instantiate(defaultTemplate);
+            currentTemplate = defaultTemplate.Clone();
             UpdateTemplate();
         }
 

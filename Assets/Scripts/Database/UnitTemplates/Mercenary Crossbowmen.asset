@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e57ce8b9bde88474789fdd5489b1e30f, type: 3}
   m_Name: Mercenary Crossbowmen
   m_EditorClassIdentifier: 
-  templateName: Mercenary Crossbowmen
+  namePrefix: Mercenary
+  nameCore: Crossbowmen
+  nameSuffix: 
   unitClass: {fileID: 11400000, guid: 26bee94de4d2f964f8bcaeeaee8b7c65, type: 2}
   primaryWeapon: {fileID: 11400000, guid: 1b3745359d2652548bbe060e01aa3f42, type: 2}
   secondaryWeapon: {fileID: 11400000, guid: 0194ea39561969549af0a3e86e45c62d, type: 2}

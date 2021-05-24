@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e57ce8b9bde88474789fdd5489b1e30f, type: 3}
   m_Name: DefaultPeasant
   m_EditorClassIdentifier: 
-  templateName: Peasants
+  namePrefix: 
+  nameCore: Peasants
+  nameSuffix: 
   unitClass: {fileID: 11400000, guid: bddffe17f4066d547bf0056af4d3d880, type: 2}
   primaryWeapon: {fileID: 11400000, guid: ee4111bb6b09feb4e969734874638327, type: 2}
   secondaryWeapon: {fileID: 11400000, guid: 098530b35241a8a48bca35bcc5c739d1, type: 2}

@@ -68,8 +68,8 @@ namespace UnitEditor
         void GetNames()
         {
             //TODO replace this shit
-            _typeNames = _templateController.currentTemplate.GetPossibleNamesFromType();
-            _equipmentNames = _templateController.currentTemplate.GetPossibleNamesFromEquipment();
+            _typeNames = _templateController.currentTemplate.GetPossibleNamesByType();
+            _equipmentNames = _templateController.currentTemplate.GetPossibleNamesByEquipment();
 
             _prefixSelector.SetNames(GetPrefixes(_typeNames), GetPrefixes(_equipmentNames));
             _mainSelector.SetNames(GetMain(_typeNames), GetMain(_equipmentNames));

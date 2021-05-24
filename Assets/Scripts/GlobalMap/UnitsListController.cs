@@ -30,7 +30,7 @@ public class UnitsListController : ScriptableObject
 
     void SaveTemplate(UnitTemplate savedTemplate)
     {
-        var template = Instantiate(savedTemplate);
+        var template = savedTemplate.Clone();
 
         if (template.canNotEdit)
         {

@@ -136,6 +136,7 @@
      <Compile Include="Assets\Scripts\DataScriptTemplates\Building.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Victory.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\RangeWeapon.cs" />
+     <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\IncreaseCapForUnitClass.cs" />
      <Compile Include="Assets\Scripts\Battlefield\BattlefieldData.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\NewBehaviourScript.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitCard.cs" />
@@ -167,7 +168,7 @@
      <Compile Include="Assets\Scripts\GlobalMap\Unit.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TimeManager.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\EditButton.cs" />
-     <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\IncreaseCapForUnitClass.cs" />
+     <Compile Include="Assets\Scripts\UI\UnitEditor\UnitClassSelectionButton.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Programs/unity/2020.3.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

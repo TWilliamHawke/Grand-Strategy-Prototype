@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e57ce8b9bde88474789fdd5489b1e30f, type: 3}
   m_Name: Spearmen
   m_EditorClassIdentifier: 
-  templateName: Spearmen
+  namePrefix: 
+  nameCore: Spearmen
+  nameSuffix: 
   unitClass: {fileID: 11400000, guid: 26bee94de4d2f964f8bcaeeaee8b7c65, type: 2}
   primaryWeapon: {fileID: 11400000, guid: f3bea56c5b27f4b46927057d0fed34aa, type: 2}
   secondaryWeapon: {fileID: 11400000, guid: 098530b35241a8a48bca35bcc5c739d1, type: 2}

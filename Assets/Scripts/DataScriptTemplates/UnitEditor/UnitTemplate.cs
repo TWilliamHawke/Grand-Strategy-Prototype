@@ -37,7 +37,7 @@ public class UnitTemplate : ScriptableObject
     public List<Building> requiredBuildings => GetRequiredBuildings();
     List<Building> _requiredBuildings = new List<Building>();
 
-    public List<UnitNamePart> GetPossibleNamesFromType()
+    public List<UnitNamePart> GetPossibleNamesByType()
     {
         var names = new List<UnitNamePart>();
         names.Add(unitClass.possibleNames);
@@ -46,7 +46,7 @@ public class UnitTemplate : ScriptableObject
         return names;
     }
 
-    public List<UnitNamePart> GetPossibleNamesFromEquipment()
+    public List<UnitNamePart> GetPossibleNamesByEquipment()
     {
         var names = new List<UnitNamePart>();
         names.Add(armour.unitNames);
@@ -60,6 +60,25 @@ public class UnitTemplate : ScriptableObject
         return names;
     }
 
+    public UnitTemplate Clone()
+    {
+        var instance = Instantiate(this);
+        //after Instantiation object loses all required buldings
+        //so they should be copy from current object
+        instance.ReplaceReqRequiredBuildings(_requiredBuildings);
+
+        return instance;
+    }
+
+    public void ReplaceReqRequiredBuildings(List<Building> buildings)
+    {
+        _requiredBuildings.Clear();
+        foreach(var building in buildings)
+        {
+            _requiredBuildings.Add(building);
+        }
+    }
+
     public void AddRequiredBuildings(Building building)
     {
         _requiredBuildings.Add(building);
@@ -67,13 +86,7 @@ public class UnitTemplate : ScriptableObject
 
     public List<Effect> FindBuildingsEffects()
     {
-        var effects = new List<Effect>();
-        foreach (var bulding in requiredBuildings)
-        {
-            effects.AddRange(bulding.effects);
-        }
-
-        return effects;
+        return requiredBuildings.SelectMany(t => t.effects).ToList();;
     }
 
     List<Building> GetRequiredBuildings()

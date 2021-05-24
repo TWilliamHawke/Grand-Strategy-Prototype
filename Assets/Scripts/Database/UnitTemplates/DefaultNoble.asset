@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e57ce8b9bde88474789fdd5489b1e30f, type: 3}
   m_Name: DefaultNoble
   m_EditorClassIdentifier: 
-  templateName: Knights
+  namePrefix: 
+  nameCore: Knights
+  nameSuffix: 
   unitClass: {fileID: 11400000, guid: 04fb349651a584445a59bc642f0a2253, type: 2}
   primaryWeapon: {fileID: 11400000, guid: 4557c909bd941ed4f92b264dc021d9a8, type: 2}
   secondaryWeapon: {fileID: 11400000, guid: 0194ea39561969549af0a3e86e45c62d, type: 2}

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Effects;
 using UnityEngine;
+using System.Linq;
 
 [CreateAssetMenu(fileName = "TechController", menuName = "Core Game/Tech Controller")]
 public class TechnologiesController : ScriptableObject
@@ -34,13 +35,6 @@ public class TechnologiesController : ScriptableObject
 
     public List<Effect> GetAllEffects()
     {
-        var effectList = new List<Effect>();
-
-        foreach(var tech in _researchedTechnologies)
-        {
-            effectList.AddRange(tech.effects);
-        }
-
-        return effectList;
+        return _researchedTechnologies.SelectMany(t => t.effects).ToList();
     }
 }
