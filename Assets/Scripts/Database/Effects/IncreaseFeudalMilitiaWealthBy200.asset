@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 702614a06cd598b45b09accc55c83281, type: 3}
-  m_Name: TechController
+  m_Script: {fileID: 11500000, guid: 35af64963890de34cb2ff85659cee6ff, type: 3}
+  m_Name: IncreaseFeudalMilitiaWealthBy200
   m_EditorClassIdentifier: 
-  _allTechnologies:
-  - {fileID: 11400000, guid: 28758b041e6822542b9b2dd76bba502c, type: 2}
-  - {fileID: 11400000, guid: 1977d5bed6eff5a46bd514db498cf7f3, type: 2}
+  _unitClass: {fileID: 11400000, guid: 26bee94de4d2f964f8bcaeeaee8b7c65, type: 2}
+  _addWealth: 200

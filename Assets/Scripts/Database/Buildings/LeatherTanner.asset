@@ -18,3 +18,4 @@ MonoBehaviour:
   BuildingSlot: 2
   _effects:
   - {fileID: 11400000, guid: dac0247cfced39b408b5b597346da741, type: 2}
+  - {fileID: 11400000, guid: 5d0b9e7946dc414478921767f03ec936, type: 2}

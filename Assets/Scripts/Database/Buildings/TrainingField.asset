@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c3e8679979208ea4eb59aae7bcf67926, type: 3}
-  m_Name: Castle
+  m_Name: TrainingField
   m_EditorClassIdentifier: 
-  localizedName: Castle
-  goldCost: 1000
-  icon: {fileID: 21300000, guid: 17842600f2dce994a80ae73c7eea0d84, type: 3}
-  BuildingSlot: 0
+  localizedName: Training Field
+  goldCost: 0
+  icon: {fileID: 21300000, guid: 9e777e9e09589c2458d0dda244be31b1, type: 3}
+  BuildingSlot: 2
   _effects:
-  - {fileID: 11400000, guid: aae3dd88c86c4de47b1538563b9d8c77, type: 2}
-  - {fileID: 11400000, guid: 5d49f6ee4b0b5034c99331c0651cecca, type: 2}
-  - {fileID: 11400000, guid: 8e84edf0ea578d94caf2a2294008807b, type: 2}
+  - {fileID: 11400000, guid: 4cd13a30c5269df4ba4b09f56efb3019, type: 2}
+  - {fileID: 11400000, guid: d62d7ffc9acad3445abfa8d499311cf6, type: 2}
