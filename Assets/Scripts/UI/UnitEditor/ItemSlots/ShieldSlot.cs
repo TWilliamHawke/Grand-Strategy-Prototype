@@ -10,7 +10,10 @@ namespace UnitEditor
 
         protected override void AddItemToTemplate(Equipment item)
         {
-            templateController.AddShield(item);
+            if (itemSlotController.ConvertEquipment<Shield>(item, out var shield))
+            {
+                templateController.currentTemplate.shield = shield;
+            }
         }
 
         protected override Equipment SelectItemFromTemplate(UnitTemplate template)

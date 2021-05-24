@@ -7,6 +7,7 @@ using System.Linq;
 
 namespace UnitEditor
 {
+    //TODO make this class abstract and create 3 new for prefix, suffix and main
     public class NameSelectorPart : MonoBehaviour
     {
 
@@ -16,10 +17,11 @@ namespace UnitEditor
 
         string _defaultName;
 
-        public void SetDefaultName()
+        public void SetDefaultName(string name)
         {
+            _defaultName = name;
             SetInputText(_defaultName);
-            _typeButton.SetNameIndex(1);
+            //_typeButton.SetNameIndex(1);
         }
 
         public void ClearInput()
@@ -27,26 +29,26 @@ namespace UnitEditor
             _input.text = "";
         }
 
-
         public void SetNames(List<string> typeNames, List<string> equipmentNames)
         {
-            _defaultName = typeNames.FirstOrDefault();
             _typeButton.SetNames(typeNames);
             _equipmentButton.SetNames(equipmentNames);
         }
 
+        public string GetText()
+        {
+            //TODO: make toLower depends on language;
+            return _input.text.Trim().ToLower();
+        }
+
         public void SetInputText(string text)
         {
+
             var regex = new Regex(@"\$");
             var replaced = regex.Replace(text, "-");
             _input.text = replaced;
         }
 
-        public string GetText()
-        {
-            //TODO: make toLower depends from language;
-            return _input.text.Trim().ToLower();
-        }
     }
 
 }

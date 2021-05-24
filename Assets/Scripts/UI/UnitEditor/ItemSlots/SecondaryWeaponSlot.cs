@@ -10,7 +10,10 @@ namespace UnitEditor
 
         protected override void AddItemToTemplate(Equipment item)
         {
-            templateController.AddSecondaryWeapon(item);
+            if (itemSlotController.ConvertEquipment<Weapon>(item, out var weapon))
+            {
+                templateController.currentTemplate.secondaryWeapon = weapon;
+            }
         }
 
         protected override Equipment SelectItemFromTemplate(UnitTemplate template)

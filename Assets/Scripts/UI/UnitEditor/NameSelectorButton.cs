@@ -62,6 +62,7 @@ public class NameSelectorButton : MonoBehaviour
             nameIndex = 0;
         }
 
+        //this is unity event from inspector
         setInputText.Invoke(_names[nameIndex]);
         nameIndex++;
         UpdateText();

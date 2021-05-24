@@ -81,6 +81,27 @@ namespace UnitEditor
             return gold;
         }
 
+        public bool ConvertEquipment<T>(Equipment equipment, out T item) where T : Equipment
+        {
+            if (equipment is T)
+            {
+                item = (T)equipment;
+                return true;
+            }
+            else
+            {
+                ReportWrongItem(equipment);
+                item = null;
+                return false;
+            }
+        }
+
+        void ReportWrongItem(Equipment equipment)
+        {
+            throw new System.Exception("Wrong item in list: " + equipment.Name);
+        }
+
+
     }
 
 

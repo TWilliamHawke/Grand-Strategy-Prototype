@@ -64,6 +64,7 @@ namespace UnitEditor
                 HideTooltip();
                 itemCost = 0;
                 AddItemToTemplate(itemsForSlot[0]);
+                _templateController.UpdateTemplate();
             }
         }
 
@@ -71,6 +72,7 @@ namespace UnitEditor
         {
             itemCost = item.CalculateCurrentCost(_templateController);
             AddItemToTemplate(item);
+            _templateController.UpdateTemplate();
         }
 
         void UpdateItemCost()

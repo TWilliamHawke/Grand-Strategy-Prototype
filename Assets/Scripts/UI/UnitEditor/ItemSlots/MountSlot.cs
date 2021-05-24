@@ -11,7 +11,10 @@ namespace UnitEditor
 
         protected override void AddItemToTemplate(Equipment item)
         {
-            templateController.AddMount(item);
+            if (itemSlotController.ConvertEquipment<Mount>(item, out var mount))
+            {
+                templateController.currentTemplate.mount = mount;
+            }
         }
 
         protected override Equipment SelectItemFromTemplate(UnitTemplate template)

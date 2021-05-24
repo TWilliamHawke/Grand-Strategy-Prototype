@@ -19,6 +19,8 @@ public class UnitEditorScreen : UIScreen
 
     public void ShowNameSelector()
     {
+        if(_nameSelector.gameObject.activeSelf) return;
+    
         _nameSelector.gameObject.SetActive(true);
     }
 

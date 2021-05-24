@@ -42,12 +42,10 @@ namespace UnitEditor
                 return;
             }
 
-            var name = $"{prefix} {main} {suffix}".Trim();
-            var capitalizedName = name.First().ToString().ToUpper() + name.Substring(1);
+            _templateController.currentTemplate.namePrefix = prefix;
+            _templateController.currentTemplate.nameCore = main;
+            _templateController.currentTemplate.nameSuffix = suffix;
 
-            var regex = new Regex(@" -");
-
-            _templateController.currentTemplate.templateName = regex.Replace(capitalizedName, "-");
             _templateController.SaveTemplate();
 
             gameObject.SetActive(false);
@@ -69,13 +67,16 @@ namespace UnitEditor
 
         void GetNames()
         {
-            _typeNames = _templateController.currentTemplate.GetTypeNames();
-            _equipmentNames = _templateController.currentTemplate.GetEquipmentNames();
+            //TODO replace this shit
+            _typeNames = _templateController.currentTemplate.GetPossibleNamesFromType();
+            _equipmentNames = _templateController.currentTemplate.GetPossibleNamesFromEquipment();
 
             _prefixSelector.SetNames(GetPrefixes(_typeNames), GetPrefixes(_equipmentNames));
             _mainSelector.SetNames(GetMain(_typeNames), GetMain(_equipmentNames));
             _sufffixSelector.SetNames(GetSuffixes(_typeNames), GetSuffixes(_equipmentNames));
-            _mainSelector.SetDefaultName();
+            _prefixSelector.SetDefaultName(_templateController.currentTemplate.namePrefix);
+            _mainSelector.SetDefaultName(_templateController.currentTemplate.nameCore);
+            _sufffixSelector.SetDefaultName(_templateController.currentTemplate.nameSuffix);
         }
 
         List<string> GetPrefixes(List<UnitNamePart> namePartlist)

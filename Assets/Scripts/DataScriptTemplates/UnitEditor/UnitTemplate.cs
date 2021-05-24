@@ -4,12 +4,21 @@ using UnityEngine;
 using System.Linq;
 using UnitEditor;
 using Effects;
+using System;
+using System.Text.RegularExpressions;
 
 [CreateAssetMenu(fileName = "UnitTemplate", menuName = "Unit Editor/Unit Template", order = 3)]
 public class UnitTemplate : ScriptableObject
 {
-    public string templateName;
+    public string templateName => GetFullName();
+
+    [Header("Name Parts")]
+    public string namePrefix;
+    public string nameCore;
+    public string nameSuffix;
+    [Space(10)]
     public UnitClass unitClass;
+    [Header("Equipment")]
     public Weapon primaryWeapon;
     public Weapon secondaryWeapon;
     public ArmourInfo armour;
@@ -26,9 +35,9 @@ public class UnitTemplate : ScriptableObject
     public int charge => (primaryWeapon as MeleeWeapon)?.charge ?? 0;
 
     public List<Building> requiredBuildings => GetRequiredBuildings();
-    public List<Building> _requiredBuildings = new List<Building>();
+    List<Building> _requiredBuildings = new List<Building>();
 
-    public List<UnitNamePart> GetTypeNames()
+    public List<UnitNamePart> GetPossibleNamesFromType()
     {
         var names = new List<UnitNamePart>();
         names.Add(unitClass.possibleNames);
@@ -37,7 +46,7 @@ public class UnitTemplate : ScriptableObject
         return names;
     }
 
-    public List<UnitNamePart> GetEquipmentNames()
+    public List<UnitNamePart> GetPossibleNamesFromEquipment()
     {
         var names = new List<UnitNamePart>();
         names.Add(armour.unitNames);
@@ -84,5 +93,13 @@ public class UnitTemplate : ScriptableObject
         return Mathf.CeilToInt(dismountedSpeed);
     }
 
+    string GetFullName()
+    {
+        var name = $"{namePrefix} {nameCore} {nameSuffix}".Trim();
+        var capitalizedName = name.First().ToString().ToUpper() + name.Substring(1);
 
+        var regex = new Regex(@" -");
+
+        return regex.Replace(capitalizedName, "-");
+    }
 }
