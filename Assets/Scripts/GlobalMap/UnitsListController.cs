@@ -9,6 +9,7 @@ public class UnitsListController : ScriptableObject
     [SerializeField] List<UnitTemplate> _defaultUnits;
     [SerializeField] List<UnitTemplate> _mecrcenaryUnits;
     [SerializeField] TemplateController _templateController;
+    [SerializeField] int _maxUnitsPerArmy = 7;
 
     List<UnitTemplate> _currentTemplates = new List<UnitTemplate>();
 
@@ -26,6 +27,11 @@ public class UnitsListController : ScriptableObject
     void OnDisable()
     {
         _templateController.OnTemplateSave += SaveTemplate;
+    }
+
+    public bool ForceIsFull(IHaveUnits unitsOwner)
+    {
+        return unitsOwner.unitList.Count >= _maxUnitsPerArmy;
     }
 
     void SaveTemplate(UnitTemplate savedTemplate)

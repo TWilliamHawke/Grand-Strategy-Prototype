@@ -23,4 +23,9 @@ public abstract class UIElementWithTooltip : MonoBehaviour, IHaveTooltip
     {
         _tooltipController.HideTooltip();
     }
+
+    protected void ShowTooltip()
+    {
+        _tooltipController.ShowTooltip(this);
+    }
 }

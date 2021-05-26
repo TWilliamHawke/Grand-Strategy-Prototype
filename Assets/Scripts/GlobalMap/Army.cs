@@ -10,9 +10,11 @@ public class Army : MonoBehaviour, ISelectable, IHaveUnits
 {
     public static event UnityAction<Army> OnArmySelected;
     public static event UnityAction OnArmyDeselected;
+    public event UnityAction OnUnitAdd;
 
     [SerializeField] MeshRenderer _selector;
     [SerializeField] Animator _animator;
+    [SerializeField] UnitsListController _unitListController;
 
     NavMeshAgent _navmeshAgent;
 
@@ -80,5 +82,12 @@ public class Army : MonoBehaviour, ISelectable, IHaveUnits
     public void RemoveUnit(Unit unit)
     {
         unitList.Remove(unit);
+    }
+
+    public void AddUnit(UnitTemplate template)
+    {
+        var unit = new Unit(template, this);
+        unitList.Add(unit);
+        OnUnitAdd?.Invoke();
     }
 }

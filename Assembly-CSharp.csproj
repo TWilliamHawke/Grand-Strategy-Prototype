@@ -148,6 +148,7 @@
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Fight.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\Mount.cs" />
      <Compile Include="Assets\Scripts\UI\Tabs\TabButton.cs" />
+     <Compile Include="Assets\Scripts\UI\UnitEditor\UnitClassSelectionButton.cs" />
      <Compile Include="Assets\Scripts\UI\Tooltip\TooltipController.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\NameSelectorPart.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitName.cs" />
@@ -168,7 +169,8 @@
      <Compile Include="Assets\Scripts\GlobalMap\Unit.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TimeManager.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\EditButton.cs" />
-     <Compile Include="Assets\Scripts\UI\UnitEditor\UnitClassSelectionButton.cs" />
+     <Compile Include="Assets\Scripts\UI\SettlementView\UnitSelector.cs" />
+     <Compile Include="Assets\Scripts\UI\SettlementView\UnitSelectionButton.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Programs/unity/2020.3.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

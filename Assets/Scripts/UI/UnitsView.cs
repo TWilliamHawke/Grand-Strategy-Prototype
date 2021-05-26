@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class UnitsView : MonoBehaviour
 {
     [SerializeField] List<UnitCard> _unitCards;
+    
     static public event UnityAction OnUnitCardSelection;
 
     protected List<UnitCard> selectedCards = new List<UnitCard>();
@@ -14,16 +15,21 @@ public class UnitsView : MonoBehaviour
 
     public void UpdateUnitsCards(IHaveUnits owner)
     {
-        selectedCards.Clear();
         _unitsOwner = owner;
+        UpdateUnitsCards();
+    }
+
+    protected virtual void UpdateUnitsCards()
+    {
+        selectedCards.Clear();
         for (int i = 0; i < _unitCards.Count; i++)
         {
             var card = _unitCards[i];
             card.Deselect();
-            if (i < owner.unitList.Count)
+            if (i < _unitsOwner.unitList.Count)
             {
                 card.gameObject.SetActive(true);
-                card.SetUnitData(owner.unitList[i]);
+                card.SetUnitData(_unitsOwner.unitList[i]);
             }
             else
             {

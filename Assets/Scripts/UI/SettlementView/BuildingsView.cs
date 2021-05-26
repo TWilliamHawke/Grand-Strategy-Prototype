@@ -20,6 +20,7 @@ public class BuildingsView : UIPanelWithGridPlus<Building>
     private void OnDisable()
     {
         SettlementData.OnBuildingConstructed -= UpdateGrid;
+        _buildingSelector.Close();
     }
 
     protected override void PlusButtonListener()
