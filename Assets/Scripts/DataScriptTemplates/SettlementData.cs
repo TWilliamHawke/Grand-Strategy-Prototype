@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "settlement", menuName = "Core Game/Settlement data")]
-public class SettlementData : ScriptableObject, IHaveUnits, IBuildController
+public class SettlementData : ScriptableObject, IHaveUnits, IBuilder
 {
     [SerializeField] string _name = "test";
     [SerializeField] Faction _owner;

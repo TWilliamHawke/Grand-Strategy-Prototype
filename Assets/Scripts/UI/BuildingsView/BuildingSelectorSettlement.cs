@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildingSelectorSettlement : BuildingSelector
+public class BuildingSelectorSettlement : BuildingSelectionPanel
 {
     SettlementData _settlementData;
 

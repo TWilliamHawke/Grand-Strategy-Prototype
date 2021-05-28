@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BuildingSelector : UIPanelWithGrid<Building>
+public abstract class BuildingSelectionPanel : UIPanelWithGrid<Building>
 {
     [SerializeField] BuildingsListController _buildingsListController;
 

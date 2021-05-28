@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GarrisonView : UnitsView
+public class GarrisonView : UnitListPanel
 {
     public Vector3 settlementPosition => _unitsOwner.position;
     public bool AnyCardSelected() => selectedCards.Count != 0;
 
     [SerializeField] Button _addUnitButton;
-    [SerializeField] UnitSelector _unitSelector;
+    [SerializeField] RecruitmentPanel _unitSelector;
     [SerializeField] UnitsListController _unitListController;
 
     void Start()
@@ -59,7 +59,5 @@ public class GarrisonView : UnitsView
             _addUnitButton.gameObject.SetActive(true);
         }
     }
-
-
 
 }

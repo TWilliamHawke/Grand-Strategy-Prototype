@@ -8,7 +8,7 @@ namespace UnitEditor
     {
         [SerializeField] TemplateController _templateController;
         [SerializeField] BuildingsListController _buildingsListController;
-        [SerializeField] BuildingSelector _buildingSelector;
+        [SerializeField] BuildingSelectionPanel _buildingSelector;
 
         List<Building> _requiredBuildings = new List<Building>();
 

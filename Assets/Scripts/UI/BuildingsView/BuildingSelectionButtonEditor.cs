@@ -5,5 +5,5 @@ public class BuildingSelectionButtonEditor : BuildingSelectionButton
 {
     [SerializeField] TemplateController _templateController;
 
-    protected override IBuildController _buildController => _templateController;
+    protected override IBuilder _buildController => _templateController;
 }

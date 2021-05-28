@@ -4,25 +4,24 @@ using GlobalMap;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettlementView : UIScreen
+public class SettlementView : UIScreen, INeedInit
 {
     [SerializeField] Text _settlementName;
     [SerializeField] GarrisonView _garrisonView;
     [SerializeField] BuildingsView _buildingsView;
 
-    private void Awake()
-    {
-        Settlement.OnSettlementSelect += UpdateSettlementInfo;
-        SelectionController.OnSelectionCancel += Close;
-        SelectionController.OnSelect += CheckSelectedTarget;
-        Close();
-    }
-
-    private void OnDestroy()
+    void OnDestroy()
     {
         Settlement.OnSettlementSelect -= UpdateSettlementInfo;
         SelectionController.OnSelectionCancel -= Close;
         SelectionController.OnSelect -= CheckSelectedTarget;
+    }
+
+    public void Init()
+    {
+        Settlement.OnSettlementSelect += UpdateSettlementInfo;
+        SelectionController.OnSelectionCancel += Close;
+        SelectionController.OnSelect += CheckSelectedTarget;
     }
 
     void UpdateSettlementInfo(SettlementData settlementData)
@@ -40,4 +39,5 @@ public class SettlementView : UIScreen
 
         Close();
     }
+
 }

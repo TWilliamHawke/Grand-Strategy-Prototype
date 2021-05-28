@@ -13,13 +13,13 @@ namespace Battlefield
 
         Dictionary<Directions, Vector2> neightbors = new Dictionary<Directions, Vector2>()
         {
-            { Directions.north, Vector2.up },
+            { Directions.north,     Vector2.up },
             { Directions.northEast, Vector2.up + Vector2.right },
-            { Directions.east, Vector2.right },
+            { Directions.east,      Vector2.right },
             { Directions.southEast, Vector2.right + Vector2.down },
-            { Directions.south, Vector2.down },
+            { Directions.south,     Vector2.down },
             { Directions.southWest, Vector2.down + Vector2.left },
-            { Directions.west, Vector2.left },
+            { Directions.west,      Vector2.left },
             { Directions.northWest, Vector2.up + Vector2.left },
         };
 

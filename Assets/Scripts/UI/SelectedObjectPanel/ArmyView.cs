@@ -2,21 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArmyView : UIScreen
+public class ArmyView : UIScreen, INeedInit
 {
-    [SerializeField] UnitsView _unitsView;
-
-    void Awake()
-    {
-        Army.OnArmySelected += UpdateArmyInfo;
-        Army.OnArmyDeselected += Close;
-        Close();
-    }
+    [SerializeField] UnitListPanel _unitsView;
 
     void OnDestroy()
     {
         Army.OnArmySelected -= UpdateArmyInfo;
         Army.OnArmyDeselected -= Close;
+    }
+
+    public void Init()
+    {
+        Army.OnArmySelected += UpdateArmyInfo;
+        Army.OnArmyDeselected += Close;
     }
 
     void UpdateArmyInfo(Army army)

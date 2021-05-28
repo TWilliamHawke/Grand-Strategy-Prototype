@@ -13,20 +13,20 @@ public class MousePounterController : MonoBehaviour
     [SerializeField] float offsetX = 8;
     [SerializeField] float offsetY = 10;
 
-    CursorIconType currentIcon = CursorIconType.noAction;
-    CursorState cursorState = CursorState.selection;
+    CursorIconType _currentIcon = CursorIconType.noAction;
+    CursorState _cursorState = CursorState.selection;
 
     void Awake()
     {
         SelectionController.OnSelectionCancel += GotoSelectionState;
-        UnitsView.OnUnitCardSelection += GotoMovementState;
+        UnitListPanel.OnUnitCardSelection += GotoMovementState;
         Army.OnArmySelected += GotoMovementState;
     }
 
-    private void OnDestroy()
+    void OnDestroy()
     {
         SelectionController.OnSelectionCancel -= GotoSelectionState;
-        UnitsView.OnUnitCardSelection -= GotoMovementState;
+        UnitListPanel.OnUnitCardSelection -= GotoMovementState;
         Army.OnArmySelected -= GotoMovementState;
     }
 
@@ -38,7 +38,7 @@ public class MousePounterController : MonoBehaviour
     void Update()
     {
 
-        if (cursorState == CursorState.selection) return;
+        if (_cursorState == CursorState.selection) return;
         if (EventSystem.current.IsPointerOverGameObject())
         {
             SetDefaultCursor();
@@ -63,56 +63,55 @@ public class MousePounterController : MonoBehaviour
 
     void SetDefaultCursor()
     {
-        if (currentIcon == CursorIconType.standart) return;
+        if (_currentIcon == CursorIconType.standart) return;
 
         Cursor.SetCursor(_defaultCursor, new Vector2(offsetX, offsetY), CursorMode.Auto);
-        currentIcon = CursorIconType.standart;
+        _currentIcon = CursorIconType.standart;
     }
 
     void SetMoveCursor()
     {
-        if (currentIcon == CursorIconType.move) return;
+        if (_currentIcon == CursorIconType.move) return;
 
         Cursor.SetCursor(_moveCursor, new Vector2(offsetX, offsetY), CursorMode.Auto);
-        currentIcon = CursorIconType.move;
+        _currentIcon = CursorIconType.move;
     }
 
     void SetUnwalkableCursor()
     {
-        if (currentIcon == CursorIconType.noAction) return;
+        if (_currentIcon == CursorIconType.noAction) return;
 
         Cursor.SetCursor(_unwalkableCursor, new Vector2(offsetX, offsetY), CursorMode.Auto);
-        currentIcon = CursorIconType.noAction;
+        _currentIcon = CursorIconType.noAction;
     }
 
     void GotoSelectionState()
     {
         SetDefaultCursor();
-        cursorState = CursorState.selection;
+        _cursorState = CursorState.selection;
     }
 
     void GotoMovementState()
     {
-        cursorState = CursorState.movement;
+        _cursorState = CursorState.movement;
     }
 
-    void GotoMovementState(Army army)
+    void GotoMovementState(Army _)
     {
         GotoMovementState();
     }
 
-}
+    enum CursorIconType
+    {
+        standart,
+        move,
+        attack,
+        noAction,
+    }
 
-enum CursorIconType
-{
-    standart,
-    move,
-    attack,
-    noAction,
-}
-
-enum CursorState
-{
-    selection,
-    movement
+    enum CursorState
+    {
+        selection,
+        movement
+    }
 }

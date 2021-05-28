@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class UnitsView : MonoBehaviour
+public class UnitListPanel : MonoBehaviour
 {
     [SerializeField] List<UnitCard> _unitCards;
     
@@ -22,6 +22,7 @@ public class UnitsView : MonoBehaviour
     protected virtual void UpdateUnitsCards()
     {
         selectedCards.Clear();
+
         for (int i = 0; i < _unitCards.Count; i++)
         {
             var card = _unitCards[i];
@@ -29,7 +30,7 @@ public class UnitsView : MonoBehaviour
             if (i < _unitsOwner.unitList.Count)
             {
                 card.gameObject.SetActive(true);
-                card.SetUnitData(_unitsOwner.unitList[i]);
+                card.UpdateData(_unitsOwner.unitList[i]);
             }
             else
             {

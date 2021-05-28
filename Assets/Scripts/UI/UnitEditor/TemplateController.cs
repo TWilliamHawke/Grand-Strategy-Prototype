@@ -9,7 +9,7 @@ namespace UnitEditor
 {
 
     [CreateAssetMenu(fileName = "TemplateController", menuName = "Unit Editor/TemplateController", order = 100)]
-    public class TemplateController : ScriptableObject, IBuildController
+    public class TemplateController : ScriptableObject, IBuilder
     {
         public event UnityAction<UnitTemplate> OnTemplateChange;
         public event UnityAction<UnitTemplate> OnTemplateSave;

@@ -11,7 +11,7 @@ public abstract class BuildingSelectionButton : UIDataElement<Building>, IPointe
 
     Building _buildingData;
 
-    protected abstract IBuildController _buildController { get; }
+    protected abstract IBuilder _buildController { get; }
 
     public override string GetTooltipText()
     {

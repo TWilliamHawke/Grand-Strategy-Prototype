@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Battlefield
@@ -10,7 +8,7 @@ namespace Battlefield
         protected UnitsController _unitsController;
         override public Sprite stateIcon => stateConfig.movementStateIcon;
 
-        float _progressPerTick = 0.1f;
+        protected virtual float _progressPerTick => 0.1f;
 
         public Movement(Troop troopInfo, UnitsController unitsController)
         {

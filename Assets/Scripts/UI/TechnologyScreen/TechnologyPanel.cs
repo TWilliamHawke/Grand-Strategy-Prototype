@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TechnologyList : UIPanelWithGrid<Technology>
+public class TechnologyPanel : UIPanelWithGrid<Technology>
 {
     [SerializeField] TechnologiesController _controller;
 

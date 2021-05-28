@@ -1,18 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class Dead : AbstractState
+namespace Battlefield
 {
-    public override void OnEnter()
-    {
-    }
 
-    public override void OnExit()
+    public class Dead : AbstractState
     {
-    }
+        public override void OnEnter()
+        {
+        }
 
-    public override void Tick()
-    {
+        public override void OnExit()
+        {
+        }
+
+        public override void Tick()
+        {
+        }
     }
 }

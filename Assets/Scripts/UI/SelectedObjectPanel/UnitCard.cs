@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class UnitCard : UIElementWithTooltip, IPointerClickHandler
+public class UnitCard : UIDataElement<Unit>, IPointerClickHandler
 {
     public static event UnityAction<UnitCard> OnSelect;
     public static event UnityAction<UnitCard> OnDeSelect;
@@ -18,7 +18,7 @@ public class UnitCard : UIElementWithTooltip, IPointerClickHandler
 
     public bool isSelected { get; private set; } = false;
 
-    public void SetUnitData(Unit unit)
+    public override void UpdateData(Unit unit)
     {
         this.unit = unit;
         _unittemplate = unit.unitTemplate;

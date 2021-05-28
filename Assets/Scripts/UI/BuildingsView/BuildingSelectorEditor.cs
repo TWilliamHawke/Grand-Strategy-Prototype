@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnitEditor;
 using UnityEngine;
 
-public class BuildingSelectorEditor : BuildingSelector
+public class BuildingSelectorEditor : BuildingSelectionPanel
 {
     [SerializeField] TemplateController _templateController;
 

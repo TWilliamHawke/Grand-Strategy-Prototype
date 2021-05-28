@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UnitSelector : UIPanelWithGrid<UnitTemplate>
+//
+public class RecruitmentPanel : UIPanelWithGrid<UnitTemplate>
 {
     [SerializeField] UnitsListController _unitListController;
 
@@ -23,9 +24,5 @@ public class UnitSelector : UIPanelWithGrid<UnitTemplate>
     {
         gameObject.SetActive(true);
     }
-
-
-
-
 
 }

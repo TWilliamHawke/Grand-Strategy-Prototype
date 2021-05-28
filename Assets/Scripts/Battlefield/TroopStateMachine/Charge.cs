@@ -4,13 +4,12 @@ namespace Battlefield
 {
     public class Charge : Movement
     {
-        //float _progressPerTick = 0.2f;
+        protected override float _progressPerTick => 0.2f;
+        public override Sprite stateIcon => stateConfig.chargeStateIcon;
 
         public Charge(Troop troopInfo, UnitsController unitsController) : base(troopInfo, unitsController)
         {
         }
-
-        override public Sprite stateIcon => stateConfig.chargeStateIcon;
 
         public override void OnEnter()
         {
