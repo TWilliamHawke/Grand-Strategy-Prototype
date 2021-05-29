@@ -9,6 +9,7 @@ public class MousePounterController : MonoBehaviour
     [SerializeField] Texture2D _defaultCursor;
     [SerializeField] Texture2D _moveCursor;
     [SerializeField] Texture2D _unwalkableCursor;
+    [SerializeField] Texture2D _attackCursor;
 
     [SerializeField] float offsetX = 8;
     [SerializeField] float offsetY = 10;
@@ -45,7 +46,13 @@ public class MousePounterController : MonoBehaviour
             return;
         }
 
-        if(TerrainIsWalkable())
+        if(CursorHoverEnemy())
+        {
+            SetAttackCursor();
+            return;
+        }
+        
+        if (TerrainIsWalkable())
         {
             SetMoveCursor();
         }
@@ -56,33 +63,46 @@ public class MousePounterController : MonoBehaviour
 
     }
 
-    private bool TerrainIsWalkable()
+    bool TerrainIsWalkable()
     {
         return Raycasts.SelectedTargetCanReachPoint(out var _);
     }
 
+    bool CursorHoverEnemy()
+    {
+        if(Raycasts.HitTarget<Settlement>(out var target))
+        {
+            return !target.isPlayerSettlement;
+        }
+        return false;
+    }
+
     void SetDefaultCursor()
     {
-        if (_currentIcon == CursorIconType.standart) return;
+        ChangeCursor(CursorIconType.standart, _defaultCursor);
+    }
 
-        Cursor.SetCursor(_defaultCursor, new Vector2(offsetX, offsetY), CursorMode.Auto);
-        _currentIcon = CursorIconType.standart;
+    void SetAttackCursor()
+    {
+        ChangeCursor(CursorIconType.attack, _attackCursor);
     }
 
     void SetMoveCursor()
     {
-        if (_currentIcon == CursorIconType.move) return;
-
-        Cursor.SetCursor(_moveCursor, new Vector2(offsetX, offsetY), CursorMode.Auto);
-        _currentIcon = CursorIconType.move;
+        ChangeCursor(CursorIconType.move, _moveCursor);
     }
 
     void SetUnwalkableCursor()
     {
-        if (_currentIcon == CursorIconType.noAction) return;
+        ChangeCursor(CursorIconType.noAction, _unwalkableCursor);
+    }
 
-        Cursor.SetCursor(_unwalkableCursor, new Vector2(offsetX, offsetY), CursorMode.Auto);
-        _currentIcon = CursorIconType.noAction;
+    void ChangeCursor(CursorIconType type, Texture2D icon)
+    {
+        if (_currentIcon == type) return;
+
+        Cursor.SetCursor(icon, new Vector2(offsetX, offsetY), CursorMode.Auto);
+        _currentIcon = type;
     }
 
     void GotoSelectionState()

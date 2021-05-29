@@ -27,7 +27,6 @@ public class SettlementView : UIScreen, INeedInit
     void UpdateSettlementInfo(SettlementData settlementData)
     {
         _settlementName.text = settlementData.localizedName;
-        UnitSelectionButton.selectedSettlement = settlementData;
         _garrisonView.UpdateUnitsCards(settlementData);
         _buildingsView.UpdateConstructedBuildings(settlementData);
         Show();

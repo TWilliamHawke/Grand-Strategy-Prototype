@@ -8,8 +8,6 @@ using Effects;
 
 public class UnitSelectionButton : UIDataElement<UnitTemplate>, IPointerClickHandler
 {
-    static public SettlementData selectedSettlement { private get; set; }
-
     [Header("UI Elements")]
     [SerializeField] Image _unitIcon;
     [SerializeField] Text _unitName;
@@ -44,7 +42,7 @@ public class UnitSelectionButton : UIDataElement<UnitTemplate>, IPointerClickHan
 
     public override void UpdateData(UnitTemplate data)
     {
-        if (selectedSettlement == null) return;
+        if (SettlementData.selectedSettlement == null) return;
 
         _currentTemplate = data;
         _unitIcon.sprite = data.unitClass.defaultIcon;
@@ -58,13 +56,13 @@ public class UnitSelectionButton : UIDataElement<UnitTemplate>, IPointerClickHan
     {
         if (_isDisable) return;
         HideTooltip();
-        selectedSettlement.AddUnit(_currentTemplate);
+        SettlementData.selectedSettlement.AddUnit(_currentTemplate);
     }
 
     void CheckRequirementBuildings()
     {
         var missingBuildings = _currentTemplate.requiredBuildings
-            .Except(selectedSettlement.constructedBuildings);
+            .Except(SettlementData.selectedSettlement.constructedBuildings);
 
         if (missingBuildings.Count() > 0)
         {
@@ -95,7 +93,7 @@ public class UnitSelectionButton : UIDataElement<UnitTemplate>, IPointerClickHan
 
     void CheckUnitCap()
     {
-        var maxCount = selectedSettlement.constructedBuildings
+        var maxCount = SettlementData.selectedSettlement.constructedBuildings
             .SelectMany(b => b.effects)
             .OfType<IncreaseCapForUnitClass>()
             .Where(e => e.unitClass == _currentTemplate.unitClass)
@@ -107,7 +105,7 @@ public class UnitSelectionButton : UIDataElement<UnitTemplate>, IPointerClickHan
             return;
         }
 
-        int count = selectedSettlement.unitsFromThisSettelment
+        int count = SettlementData.selectedSettlement.unitsFromThisSettelment
             .Where(u => u.unitTemplate.unitClass == _currentTemplate.unitClass)
             .Count();
 

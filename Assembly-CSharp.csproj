@@ -107,7 +107,6 @@
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Charge.cs" />
      <Compile Include="Assets\Scripts\UI\Label.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\TroopStates.cs" />
-     <Compile Include="Assets\Scripts\UI\SelectedObjectPanel\BuildingCard.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\EquipmentList.cs" />
      <Compile Include="Assets\Scripts\UI\SelectedObjectPanel\UnitCard.cs" />
      <Compile Include="Assets\Scripts\UI\Lib\UIScreen.cs" />
@@ -171,6 +170,10 @@
      <Compile Include="Assets\Scripts\GlobalMap\Unit.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TimeManager.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\EditButton.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\SkirmishController.cs" />
+     <Compile Include="Assets\Scripts\UI\PrebatleScreen\PreBattleScreen.cs" />
+     <Compile Include="Assets\Scripts\UI\PrebatleScreen\PrebattleUnitList.cs" />
+     <Compile Include="Assets\Scripts\UI\PrebatleScreen\PrebattleUnitCard.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Programs/unity/2020.3.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

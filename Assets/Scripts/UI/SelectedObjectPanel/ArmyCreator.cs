@@ -10,31 +10,33 @@ public class ArmyCreator : MonoBehaviour
 
     GarrisonView _garrisonView;
 
-    private void Awake() {
+    void Awake() {
         _garrisonView = GetComponent<GarrisonView>();
     }
 
-    private void Update()
+    void Update()
     {
-        SpawnArmyFormSelectedUnits();
+        CreateArmyFormSelectedUnits();
     }
 
-    private void SpawnArmyFormSelectedUnits()
+    void CreateArmyFormSelectedUnits()
     {
         if (!Input.GetMouseButtonDown(1)) return;
         if (_garrisonView.AnyCardSelected())
         {
             if (Raycasts.SelectedTargetCanReachPoint(out var targetPoint))
             {
-                var newArmy = Instantiate(_armyPrefab, _garrisonView.settlementPosition, Quaternion.identity);
-                newArmy.unitList = _garrisonView.GetSelectedUnits();
-                _garrisonView.RemoveSelectedUnitsFromOwner();
-                SelectionController.SetTarget(newArmy);
-                newArmy.MoveTo(targetPoint);
+                SpawnArmy(targetPoint);
             }
         }
     }
 
-
-
+    private void SpawnArmy(Vector3 targetPoint)
+    {
+        var newArmy = Instantiate(_armyPrefab, _garrisonView.settlementPosition, Quaternion.identity);
+        newArmy.unitList = _garrisonView.GetSelectedUnits();
+        _garrisonView.RemoveSelectedUnitsFromOwner();
+        SelectionController.SetTarget(newArmy);
+        newArmy.MoveTo(targetPoint);
+    }
 }

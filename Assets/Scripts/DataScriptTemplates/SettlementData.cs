@@ -12,6 +12,8 @@ public class SettlementData : ScriptableObject, IHaveUnits, IBuilder
     [SerializeField] List<Building> _startBuildings = new List<Building>();
     [SerializeField] List<UnitTemplate> _startGarrison = new List<UnitTemplate>();
 
+    static public SettlementData selectedSettlement { get; set; }
+
     List<Unit> _garrison = new List<Unit>();
     List<Building> _constructedBuildings = new List<Building>();
     Vector3 _position = Vector3.zero;
@@ -54,6 +56,17 @@ public class SettlementData : ScriptableObject, IHaveUnits, IBuilder
         OnBuildingConstructed?.Invoke();
     }
 
+    public void AddUnit(UnitTemplate template)
+    {
+        AddUnitToGarrison(template);
+        OnUnitAdded?.Invoke(template);
+    }
+
+    public void Defeat()
+    {
+        
+    }
+
     void SetStartGarrison()
     {
         _garrison.Clear();
@@ -69,13 +82,7 @@ public class SettlementData : ScriptableObject, IHaveUnits, IBuilder
         _constructedBuildings.AddRange(_startBuildings);
     }
 
-    public void AddUnit(UnitTemplate template)
-    {
-        AddUnitToGarrison(template);
-        OnUnitAdded?.Invoke(template);
-    }
-
-    private void AddUnitToGarrison(UnitTemplate template)
+    void AddUnitToGarrison(UnitTemplate template)
     {
         var unit = new Unit(template, this);
         _garrison.Add(unit);

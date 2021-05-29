@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.AI;
 using GlobalMap;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class Army : MonoBehaviour, ISelectable, IHaveUnits
@@ -46,34 +47,6 @@ public class Army : MonoBehaviour, ISelectable, IHaveUnits
 
     }
 
-    private void CheckSpeed()
-    {
-        if(_navmeshAgent.remainingDistance > Mathf.Epsilon)
-        {
-            //Debug.Log("big speed");
-            _animator.SetBool("IsWalk", true);
-        }
-        else
-        {
-            _animator.SetBool("IsWalk", false);
-        }
-    }
-
-    private void MoveToClick()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            if ((object)SelectionController.currentTarget != this) return;
-
-            var ray = CameraController.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Raycasts.SelectedTargetCanReachPoint(out var point))
-            {
-                _navmeshAgent.SetDestination(point);
-            }
-        }
-    }
-
     public void MoveTo(Vector3 targetPoint)
     {
         _navmeshAgent.SetDestination(targetPoint);
@@ -90,4 +63,52 @@ public class Army : MonoBehaviour, ISelectable, IHaveUnits
         unitList.Add(unit);
         OnUnitAdd?.Invoke();
     }
+
+    public void ForceStop()
+    {
+        _navmeshAgent.isStopped = true;
+        _animator.SetBool("IsWalk", false);
+    }
+
+    public void Retreat()
+    {
+        var targetPos = transform.position - transform.forward * 2;
+        _navmeshAgent.SetDestination(targetPos);
+    }
+
+    public void Defeat()
+    {
+        Deselect();
+        Destroy(this);
+    }
+
+    void CheckSpeed()
+    {
+        if (_navmeshAgent.remainingDistance <= Mathf.Epsilon || _navmeshAgent.isStopped)
+        {
+            _animator.SetBool("IsWalk", false);
+        }
+        else
+        {
+            _animator.SetBool("IsWalk", true);
+        }
+    }
+
+    void MoveToClick()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            if ((object)SelectionController.currentTarget != this) return;
+            if (EventSystem.current.IsPointerOverGameObject()) return;
+
+            var ray = CameraController.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Raycasts.SelectedTargetCanReachPoint(out var point))
+            {
+                _navmeshAgent.isStopped = false;
+                _navmeshAgent.SetDestination(point);
+            }
+        }
+    }
+
 }
