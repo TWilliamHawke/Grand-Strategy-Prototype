@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class BuildingSelectorSettlement : BuildingSelectionPanel
 {
-    SettlementData _settlementData;
+    Settlement _settlement;
 
     private void OnEnable() {
-        SettlementData.OnBuildingConstructed += UpdateSelector;
+        Settlement.OnBuildingConstructed += UpdateSelector;
     }
 
     private void OnDisable() {
-        SettlementData.OnBuildingConstructed -= UpdateSelector;
+        Settlement.OnBuildingConstructed -= UpdateSelector;
     }
 
-    public void SetSettlementData(SettlementData data)
+    public void SetSettlementData(Settlement data)
     {
-        _settlementData = data;
-        BuildingSelectionButtonSettlement.settlementData = data;
+        _settlement = data;
+        BuildingSelectionButtonSettlement.settlement = data;
     }
 
     protected override List<Building> GetWasteBuildings()
     {
-        return _settlementData.constructedBuildings;
+        return _settlement.constructedBuildings;
     }
 }

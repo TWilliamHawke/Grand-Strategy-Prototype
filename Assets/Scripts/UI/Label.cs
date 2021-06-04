@@ -12,25 +12,44 @@ public class Label : MonoBehaviour
     [SerializeField] float _positionOffset = 2f;
     float _defaultTransparency;
 
-    public void AddParent(IhaveLabel parent)
+    void OnEnable()
     {
-        _parent = parent;
-        _labelText.text = _parent.GetName();
-    }
-
-    private void OnEnable() {
         SelectionController.OnSelect += TryMakeDimmer;
+        Settlement.OnCapture += ChangeColorAfterConquest;
         _defaultTransparency = _background.color.a;
     }
 
-    private void OnDisable() {
+    void OnDisable()
+    {
         SelectionController.OnSelect -= TryMakeDimmer;
+        Settlement.OnCapture -= ChangeColorAfterConquest;
+
     }
 
     void LateUpdate()
     {
-        if(_parent == null) return;
-        transform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, _parent.transform.position + Vector3.down * _positionOffset);
+        if (_parent == null) return;
+        Vector3 labelPosition = _parent.transform.position + Vector3.down * _positionOffset;
+        transform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, labelPosition);
+    }
+
+    void ChangeColorAfterConquest(Settlement settlement)
+    {
+        if (_parent != (IhaveLabel)settlement) return;
+
+        var color = settlement.baseLabelColor;
+        color.a = _background.color.a;
+        _background.color = color;
+    }
+
+    public void AddParent(IhaveLabel parent)
+    {
+        _parent = parent;
+        var color = parent.baseLabelColor;
+        color.a = _defaultTransparency;
+        _background.color = color;
+
+        _labelText.text = _parent.GetName();
     }
 
     public void MakeBrighter()
@@ -49,7 +68,7 @@ public class Label : MonoBehaviour
 
     void TryMakeDimmer(ISelectable target)
     {
-        if(target != _parent)
+        if (target != _parent)
         {
             MakeDimmer();
         }

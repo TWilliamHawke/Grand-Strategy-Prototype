@@ -38,7 +38,7 @@ namespace Prebattle
             var count = force.unitList
                 .Sum(u => u.unitTemplate.unitClass.unitSize);
 
-            _totalCountText.text = "Total count: " + count;
+            _totalCountText.text = "Total soldiers: " + count;
         }
     }
 }

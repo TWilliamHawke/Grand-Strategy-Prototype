@@ -7,6 +7,9 @@ public class SkirmishController : ScriptableObject
     Army _attackerForce;
     IHaveUnits _defenderForce;
 
+    //temp
+    [SerializeField] Faction _playerFaction;
+
     public event UnityAction<Army, IHaveUnits> OnConfrontationStart;
     public event UnityAction OnConfrontationEnd;
 
@@ -25,7 +28,7 @@ public class SkirmishController : ScriptableObject
 
     public void WinBattle()
     {
-        
+        _defenderForce.Defeat(_playerFaction);
         OnConfrontationEnd?.Invoke();
     }
 

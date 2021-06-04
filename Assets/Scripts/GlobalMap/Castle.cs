@@ -1,8 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 
 public class Castle : Settlement
@@ -15,7 +12,7 @@ public class Castle : Settlement
 
         if (other.TryGetComponent<Army>(out var army))
         {
-            _skirmishController.ShowPrebattleScreen(army, settlementData);
+            _skirmishController.ShowPrebattleScreen(army, this);
         }
     }
 }

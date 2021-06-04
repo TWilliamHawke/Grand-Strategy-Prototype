@@ -35,7 +35,7 @@ namespace UnitEditor
 
         void OnEnable()
         {
-            _itemSlotController.AddItemSlot(this);
+            _itemSlotController.RegisterSlot(this);
             UpdateSlotUI(_templateController.currentTemplate);
             _templateController.OnTemplateChange += UpdateSlotUI;
             _templateController.OnBuildingAdded += UpdateItemCost;
@@ -45,7 +45,6 @@ namespace UnitEditor
         {
             _templateController.OnTemplateChange -= UpdateSlotUI;
             _templateController.OnBuildingAdded -= UpdateItemCost;
-
         }
 
         public override string GetTooltipText()

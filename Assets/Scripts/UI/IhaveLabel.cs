@@ -3,4 +3,5 @@ using UnityEngine;
 public interface IhaveLabel {
     string GetName();
     Transform transform { get; }
+    Color baseLabelColor { get; }
 }

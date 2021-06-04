@@ -16,20 +16,22 @@ namespace UnitEditor
         [SerializeField] List<Equipment> _armor;
         [SerializeField] List<Equipment> _mounts;
 
+        //getters
         public List<Equipment> weapon => _weapon;
         public List<Equipment> shields => _shields;
         public List<Equipment> armor => _armor;
         public List<Equipment> mounts => _mounts;
+        public int classSkill => _templateController.currentTemplate.unitClass.weaponSkill;
 
+        //events
         public event UnityAction<List<Equipment>> OnItemSlotSelection;
         public event UnityAction<int> OnEquipmentCostChange;
 
-        public int classSkill => _templateController.currentTemplate.unitClass.weaponSkill;
-
+        //inner data
         List<AbstractItemSlot> _itemSlots = new List<AbstractItemSlot>();
         AbstractItemSlot _selectedSlot;
 
-        private void OnDisable()
+        void OnDisable()
         {
             _itemSlots.Clear();
         }
@@ -40,7 +42,7 @@ namespace UnitEditor
             OnEquipmentCostChange?.Invoke(cost);
         }
 
-        public void AddItemSlot(AbstractItemSlot slot)
+        public void RegisterSlot(AbstractItemSlot slot)
         {
             _itemSlots.Add(slot);
         }
@@ -56,9 +58,12 @@ namespace UnitEditor
             _selectedSlot.ChangeItemInSlot(item);
         }
 
+        //calculated here because itemCost is dynamic
+        //current cost stored in item slot
         public int CalculateFreeGold()
         {
             var gold = _templateController.realwealth;
+
             foreach (var itemSlot in _itemSlots)
             {
                 if (itemSlot == _selectedSlot) continue;
@@ -90,15 +95,16 @@ namespace UnitEditor
             }
             else
             {
-                ReportWrongItem(equipment);
+                ReportWrongItem<T>(equipment);
                 item = null;
                 return false;
             }
         }
 
-        void ReportWrongItem(Equipment equipment)
+        void ReportWrongItem<T>(Equipment equipment)
         {
-            throw new System.Exception("Wrong item in list: " + equipment.Name);
+            string message = $"Wrong item ({ equipment.Name }) in list: { typeof(T) }";
+            throw new System.Exception(message);
         }
 
 

@@ -21,8 +21,6 @@ public class Army : MonoBehaviour, ISelectable, IHaveUnits
 
     public List<Unit> unitList { get; set; } = new List<Unit>();
 
-    public Vector3 position => transform.position;
-
     public void Deselect()
     {
         _selector.gameObject.SetActive(false);
@@ -42,14 +40,14 @@ public class Army : MonoBehaviour, ISelectable, IHaveUnits
 
     void Update()
     {
+        CheckDistance();
         MoveToClick();
-        CheckSpeed();
-
     }
 
     public void MoveTo(Vector3 targetPoint)
     {
         _navmeshAgent.SetDestination(targetPoint);
+        _navmeshAgent.isStopped = false;
     }
 
     public void RemoveUnit(Unit unit)
@@ -67,33 +65,38 @@ public class Army : MonoBehaviour, ISelectable, IHaveUnits
     public void ForceStop()
     {
         _navmeshAgent.isStopped = true;
-        _animator.SetBool("IsWalk", false);
+        StopWalkAnimation();
     }
 
     public void Retreat()
     {
         var targetPos = transform.position - transform.forward * 2;
-        _navmeshAgent.SetDestination(targetPos);
+        MoveTo(targetPos);
     }
 
-    public void Defeat()
+    public void Defeat(Faction _)
     {
-        Deselect();
-        Destroy(this);
+        Retreat();
     }
 
-    void CheckSpeed()
+    void StopWalkAnimation()
     {
-        if (_navmeshAgent.remainingDistance <= Mathf.Epsilon || _navmeshAgent.isStopped)
-        {
-            _animator.SetBool("IsWalk", false);
-        }
-        else
+        _animator.SetBool("IsWalk", false);
+    }
+
+    void CheckDistance()
+    {
+        if (_navmeshAgent.remainingDistance > Mathf.Epsilon)
         {
             _animator.SetBool("IsWalk", true);
         }
+        else
+        {
+            StopWalkAnimation();
+        }
     }
 
+    //TODO move this into special controller
     void MoveToClick()
     {
         if (Input.GetMouseButtonDown(1))
@@ -105,8 +108,7 @@ public class Army : MonoBehaviour, ISelectable, IHaveUnits
 
             if (Raycasts.SelectedTargetCanReachPoint(out var point))
             {
-                _navmeshAgent.isStopped = false;
-                _navmeshAgent.SetDestination(point);
+                MoveTo(point);
             }
         }
     }

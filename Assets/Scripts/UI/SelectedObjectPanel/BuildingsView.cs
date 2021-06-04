@@ -10,29 +10,29 @@ public class BuildingsView : UIPanelWithGridPlus<Building>
     protected override List<Building> _layoutElementsData => _constructedBuildings;
 
     List<Building> _constructedBuildings = new List<Building>();
-    SettlementData _settlementData;
+    Settlement _settlement;
 
     private void OnEnable()
     {
-        SettlementData.OnBuildingConstructed += UpdateGrid;
+        Settlement.OnBuildingConstructed += UpdateGrid;
     }
 
     private void OnDisable()
     {
-        SettlementData.OnBuildingConstructed -= UpdateGrid;
+        Settlement.OnBuildingConstructed -= UpdateGrid;
         _buildingSelector.Close();
     }
 
     protected override void PlusButtonListener()
     {
-        _buildingSelector.SetSettlementData(_settlementData);
+        _buildingSelector.SetSettlementData(_settlement);
         _buildingSelector.Show();
     }
 
     protected override bool ShouldHidePlusButton()
     {
         //cannot build in ai settlemrnt
-        if(!_settlementData.isPlayerSettlement) return true;
+        if (!_settlement.isPlayerSettlement) return true;
 
         var possibleBuildings = _buildingsListController.FilterBuildings(BuildingSlots.castleAny);
         int possibleBuildinsCount = possibleBuildings.Count;
@@ -48,9 +48,9 @@ public class BuildingsView : UIPanelWithGridPlus<Building>
         return possibleBuildinsCount <= 0;
     }
 
-    public void UpdateConstructedBuildings(SettlementData settlement)
+    public void UpdateConstructedBuildings(Settlement settlement)
     {
-        _settlementData = settlement;
+        _settlement = settlement;
         _constructedBuildings = settlement.constructedBuildings;
         UpdateGrid();
     }

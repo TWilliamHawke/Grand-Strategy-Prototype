@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GarrisonView : UnitListPanel
 {
-    public Vector3 settlementPosition => _unitsOwner.position;
+    public Vector3 settlementPosition => _unitsOwner.transform.position;
     public bool AnyCardSelected() => selectedCards.Count != 0;
 
     [SerializeField] Button _addUnitButton;
@@ -19,12 +19,12 @@ public class GarrisonView : UnitListPanel
 
     private void OnEnable()
     {
-        SettlementData.OnUnitAdded += UpdateUnitsCards;
+        Settlement.OnUnitAdded += UpdateUnitsCards;
     }
 
     private void OnDisable()
     {
-        SettlementData.OnUnitAdded -= UpdateUnitsCards;
+        Settlement.OnUnitAdded -= UpdateUnitsCards;
         _unitSelector.Close();
     }
 

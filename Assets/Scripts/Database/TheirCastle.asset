@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TheirCastle
   m_EditorClassIdentifier: 
   _name: Their Castle
-  _owner: {fileID: 11400000, guid: f5968718cc3bc4e4383108da719878a6, type: 2}
+  _originalOwner: {fileID: 11400000, guid: f5968718cc3bc4e4383108da719878a6, type: 2}
   _startBuildings:
   - {fileID: 11400000, guid: 0721c0275d743c940aed774910d67f60, type: 2}
   - {fileID: 11400000, guid: 6ac0a897a532be44e8f28c3dda54ed6c, type: 2}

@@ -27,12 +27,12 @@ public class UnitSelectionButton : UIDataElement<UnitTemplate>, IPointerClickHan
     private void OnEnable()
     {
         _button = GetComponent<Button>();
-        SettlementData.OnUnitAdded += UpdateUnitCapForRecruitedClass;
+        Settlement.OnUnitAdded += UpdateUnitCapForRecruitedClass;
     }
 
     private void OnDisable()
     {
-        SettlementData.OnUnitAdded -= UpdateUnitCapForRecruitedClass;
+        Settlement.OnUnitAdded -= UpdateUnitCapForRecruitedClass;
     }
 
     public override string GetTooltipText()
@@ -42,7 +42,7 @@ public class UnitSelectionButton : UIDataElement<UnitTemplate>, IPointerClickHan
 
     public override void UpdateData(UnitTemplate data)
     {
-        if (SettlementData.selectedSettlement == null) return;
+        if (Settlement.selectedSettlement == null) return;
 
         _currentTemplate = data;
         _unitIcon.sprite = data.unitClass.defaultIcon;
@@ -56,13 +56,13 @@ public class UnitSelectionButton : UIDataElement<UnitTemplate>, IPointerClickHan
     {
         if (_isDisable) return;
         HideTooltip();
-        SettlementData.selectedSettlement.AddUnit(_currentTemplate);
+        Settlement.selectedSettlement.AddUnit(_currentTemplate);
     }
 
     void CheckRequirementBuildings()
     {
         var missingBuildings = _currentTemplate.requiredBuildings
-            .Except(SettlementData.selectedSettlement.constructedBuildings);
+            .Except(Settlement.selectedSettlement.constructedBuildings);
 
         if (missingBuildings.Count() > 0)
         {
@@ -85,7 +85,7 @@ public class UnitSelectionButton : UIDataElement<UnitTemplate>, IPointerClickHan
 
         //update method called for all buttons in list
         //but tooltip should be updated only for hovered
-        if(template == _currentTemplate)
+        if (template == _currentTemplate)
         {
             ShowTooltip();
         }
@@ -93,7 +93,7 @@ public class UnitSelectionButton : UIDataElement<UnitTemplate>, IPointerClickHan
 
     void CheckUnitCap()
     {
-        var maxCount = SettlementData.selectedSettlement.constructedBuildings
+        var maxCount = Settlement.selectedSettlement.constructedBuildings
             .SelectMany(b => b.effects)
             .OfType<IncreaseCapForUnitClass>()
             .Where(e => e.unitClass == _currentTemplate.unitClass)
@@ -105,7 +105,7 @@ public class UnitSelectionButton : UIDataElement<UnitTemplate>, IPointerClickHan
             return;
         }
 
-        int count = SettlementData.selectedSettlement.unitsFromThisSettelment
+        int count = Settlement.selectedSettlement.unitsFromThisSettelment
             .Where(u => u.unitTemplate.unitClass == _currentTemplate.unitClass)
             .Count();
 

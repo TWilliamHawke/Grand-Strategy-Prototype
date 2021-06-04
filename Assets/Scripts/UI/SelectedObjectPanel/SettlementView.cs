@@ -24,7 +24,7 @@ public class SettlementView : UIScreen, INeedInit
         SelectionController.OnSelect += CheckSelectedTarget;
     }
 
-    void UpdateSettlementInfo(SettlementData settlementData)
+    void UpdateSettlementInfo(Settlement settlementData)
     {
         _settlementName.text = settlementData.localizedName;
         _garrisonView.UpdateUnitsCards(settlementData);

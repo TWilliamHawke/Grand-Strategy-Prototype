@@ -68,6 +68,7 @@ namespace UnitEditor
         void GetNames()
         {
             //TODO replace this shit
+            //look at NameSelectorPart.cs
             _typeNames = _templateController.currentTemplate.GetPossibleNamesByType();
             _equipmentNames = _templateController.currentTemplate.GetPossibleNamesByEquipment();
 

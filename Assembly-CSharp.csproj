@@ -53,6 +53,7 @@
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\ArmourInfo.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\UnlockClass.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitStat.cs" />
+     <Compile Include="Assets\Scripts\ThrottleLog.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\ItemList.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\MeleeWeapon.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitList.cs" />
@@ -61,6 +62,7 @@
      <Compile Include="Assets\Scripts\Battlefield\Square.cs" />
      <Compile Include="Assets\Scripts\UI\TechnologyScreen\TechnologyScreen.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\EmptyEffect.cs" />
+     <Compile Include="Assets\Scripts\UI\PrebatleScreen\PrebattleUnitList.cs" />
      <Compile Include="Assets\Scripts\UI\BuildingsView\BuildingSelectionPanel.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Defeat.cs" />
      <Compile Include="Assets\Scripts\UI\BuildingsView\BuildingSelectorSettlement.cs" />
@@ -111,6 +113,7 @@
      <Compile Include="Assets\Scripts\UI\SelectedObjectPanel\UnitCard.cs" />
      <Compile Include="Assets\Scripts\UI\Lib\UIScreen.cs" />
      <Compile Include="Assets\Scripts\UI\SelectedObjectPanel\ArmyView.cs" />
+     <Compile Include="Assets\Scripts\UI\PrebatleScreen\PreBattleScreen.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\Technology.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\Effect.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitEditorScreen.cs" />
@@ -120,6 +123,7 @@
      <Compile Include="Assets\Scripts\UI\UIScreensManager.cs" />
      <Compile Include="Assets\Scripts\UI\SelectedObjectPanel\RecruitmentPanel.cs" />
      <Compile Include="Assets\Scripts\UI\SelectedObjectPanel\BuildingsView.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\SkirmishController.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\UnitClass.cs" />
      <Compile Include="Assets\Scripts\UI\BuildingsView\BuildingSelectionButtonEditor.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Dead.cs" />
@@ -153,6 +157,7 @@
      <Compile Include="Assets\Scripts\UI\UnitEditor\NameSelectorPart.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitName.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\IncreaseClassWealth.cs" />
+     <Compile Include="Assets\Scripts\UI\PrebatleScreen\PrebattleUnitCard.cs" />
      <Compile Include="Assets\Scripts\UI\Tabs\TabsController.cs" />
      <Compile Include="Assets\Scripts\UI\BattleField\TroopStateIndicator.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\ItemSlotController.cs" />
@@ -170,10 +175,7 @@
      <Compile Include="Assets\Scripts\GlobalMap\Unit.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TimeManager.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\EditButton.cs" />
-     <Compile Include="Assets\Scripts\GlobalMap\SkirmishController.cs" />
-     <Compile Include="Assets\Scripts\UI\PrebatleScreen\PreBattleScreen.cs" />
-     <Compile Include="Assets\Scripts\UI\PrebatleScreen\PrebattleUnitList.cs" />
-     <Compile Include="Assets\Scripts\UI\PrebatleScreen\PrebattleUnitCard.cs" />
+     <Compile Include="Assets\Scripts\UI\FactionScreen.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Programs/unity/2020.3.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

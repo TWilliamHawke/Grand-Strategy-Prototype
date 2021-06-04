@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9068413bf3b37c04bb7cbbe53fe688e5, type: 3}
   m_Name: SkirmishController
   m_EditorClassIdentifier: 
+  _playerFaction: {fileID: 11400000, guid: 77f15cdd6f4e8f64385762390652a6ce, type: 2}
