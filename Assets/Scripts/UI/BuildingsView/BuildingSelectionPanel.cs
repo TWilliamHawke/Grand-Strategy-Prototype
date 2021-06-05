@@ -16,7 +16,7 @@ public abstract class BuildingSelectionPanel : UIPanelWithGrid<Building>
     {
         FillLayoutElementsList();
         if (_layoutElementsData.Count == 0) return;
-        UpdateGrid();
+        UpdateLayout();
 
         gameObject.SetActive(true);
     }
@@ -30,7 +30,7 @@ public abstract class BuildingSelectionPanel : UIPanelWithGrid<Building>
     {
         FillLayoutElementsList();
         if (_layoutElementsData.Count == 0) return;
-        UpdateGrid();
+        UpdateLayout();
         Canvas.ForceUpdateCanvases();
     }
 

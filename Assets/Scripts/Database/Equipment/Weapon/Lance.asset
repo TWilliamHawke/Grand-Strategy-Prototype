@@ -16,8 +16,9 @@ MonoBehaviour:
   unitNames: {fileID: 11400000, guid: ef5bebd19dac3c140855ba97a9b5b28c, type: 2}
   sprite: {fileID: 21300000, guid: c6377ff474a80ad4c825e87a528105ca, type: 3}
   goldCost: 200
+  _requiredTechnology: {fileID: 0}
   requiredSkill: 25
-  damage: 20
+  damage: 5
   armorPiercing: 10
   twoHanded: 0
   charge: 100

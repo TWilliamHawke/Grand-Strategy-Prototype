@@ -9,6 +9,11 @@ abstract public class EffectsContainer : ScriptableObject
 
     public string GetEffectsDescription()
     {
+        if(effects.Count == 0)
+        {
+            return "No effects";
+        }
+
         var stringBuilder = new StringBuilder();
         int i = 0;
 

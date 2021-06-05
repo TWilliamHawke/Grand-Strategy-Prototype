@@ -12,7 +12,7 @@ public class MeleeWeapon : Weapon
     public override string GetToolTipText()
     {
         var stringBuilder = new StringBuilder();
-        stringBuilder.Append(base.GetToolTipText());
+        stringBuilder.AppendLine(base.GetToolTipText());
         stringBuilder.Append("Charge: ").Append(charge);
 
         return stringBuilder.ToString();

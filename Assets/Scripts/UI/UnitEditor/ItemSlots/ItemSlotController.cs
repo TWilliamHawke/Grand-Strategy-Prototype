@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using Effects;
+using System.Linq;
 
 namespace UnitEditor
 {
@@ -44,13 +44,17 @@ namespace UnitEditor
 
         public void RegisterSlot(AbstractItemSlot slot)
         {
+            if(_itemSlots.Contains(slot)) return;
+
             _itemSlots.Add(slot);
         }
 
         public void SelectItemSlot(AbstractItemSlot itemSlot)
         {
             _selectedSlot = itemSlot;
-            OnItemSlotSelection?.Invoke(_selectedSlot.itemsForSlot);
+            var unlockedItems = _selectedSlot.itemsForSlot.Where(i => i.isUnlocked).ToList();
+
+            OnItemSlotSelection?.Invoke(unlockedItems);
         }
 
         public void ChangeItemInSelectedSlot(Equipment item)

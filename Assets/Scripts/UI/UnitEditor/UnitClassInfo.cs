@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Effects;
 
 namespace UnitEditor
 {
-    public class UnitClassInfo : MonoBehaviour
+    public class UnitClassInfo : MonoBehaviour, INeedInit
     {
         [SerializeField] TemplateController _templateController;
         [SerializeField] ItemSlotController _itemSlotController;
@@ -18,19 +17,18 @@ namespace UnitEditor
         int _equipmentCost;
         int _classWealth;
 
-        private void OnEnable()
-        {
-            _templateController.OnTemplateChange += UpdateClassInfo;
-            _templateController.OnBuildingAdded += SetWealth;
-            _itemSlotController.OnEquipmentCostChange += SetEquipmentCost;
-            UpdateClassInfo(_templateController.currentTemplate);
-        }
-
-        private void OnDisable()
+        private void OnDestroy()
         {
             _templateController.OnTemplateChange -= UpdateClassInfo;
             _templateController.OnBuildingAdded -= SetWealth;
             _itemSlotController.OnEquipmentCostChange -= SetEquipmentCost;
+        }
+
+        public void Init()
+        {
+            _templateController.OnTemplateChange += UpdateClassInfo;
+            _templateController.OnBuildingAdded += SetWealth;
+            _itemSlotController.OnEquipmentCostChange += SetEquipmentCost;
         }
 
         public void UpdateClassInfo(UnitTemplate template)
@@ -58,7 +56,7 @@ namespace UnitEditor
             UpdateText();
         }
 
-        private void UpdateText()
+        void UpdateText()
         {
             _wealthText.text = $"{_equipmentCost}/{_classWealth}";
         }

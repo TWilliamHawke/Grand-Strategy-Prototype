@@ -11,6 +11,9 @@ using Effects;
         public UnitNamePart unitNames;
         public Sprite sprite;
         public int goldCost;
+        [SerializeField] Technology _requiredTechnology;
+
+        public bool isUnlocked => _requiredTechnology?.isResearched ?? true;
 
         void OnEnable()
         {

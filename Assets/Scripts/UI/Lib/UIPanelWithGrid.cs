@@ -13,10 +13,10 @@ public abstract class UIPanelWithGrid<T> : MonoBehaviour
 
     void Awake()
     {
-        UpdateGrid();
+        UpdateLayout();
     }
 
-    protected virtual void UpdateGrid()
+    protected virtual void UpdateLayout()
     {
         foreach (Transform children in _layout.transform)
         {

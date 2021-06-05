@@ -30,7 +30,7 @@ namespace UnitEditor
         void FillAndUpdate()
         {
             _requiredBuildings = _templateController.currentTemplate.requiredBuildings;
-            UpdateGrid();
+            UpdateLayout();
         }
 
     }

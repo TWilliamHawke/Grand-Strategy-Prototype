@@ -6,6 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Shield", menuName = "Unit Editor/Shield", order = 53)]
 public class Shield : RequireSkillEquipment
 {
+    [Header("Shield data")]
     [Range(0, 1)] public float missileBlockChance;
     public int defence;
     public bool isPavese;

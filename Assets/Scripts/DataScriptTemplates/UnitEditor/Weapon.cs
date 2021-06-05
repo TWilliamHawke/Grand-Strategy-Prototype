@@ -16,7 +16,7 @@ public class Weapon : RequireSkillEquipment
         string weaponType = twoHanded ? "<i>Two handed weapon</i>" : "<i>One handed weapon</i>";
         stringBuilder.AppendLine(Name);
         stringBuilder.AppendLine(weaponType);
-        stringBuilder.Append("Damage: ").AppendLine(damage.ToString());
+        stringBuilder.Append("Damage: ").Append(damage.ToString());
 
         return stringBuilder.ToString();
     }

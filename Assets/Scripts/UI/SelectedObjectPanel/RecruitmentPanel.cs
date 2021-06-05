@@ -11,7 +11,7 @@ public class RecruitmentPanel : UIPanelWithGrid<UnitTemplate>
 
     private void OnEnable()
     {
-        UpdateGrid();
+        UpdateLayout();
         Canvas.ForceUpdateCanvases();
     }
 

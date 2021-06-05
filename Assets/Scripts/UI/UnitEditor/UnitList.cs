@@ -16,7 +16,7 @@ namespace UnitEditor
 
         void OnEnable()
         {
-            UpdateGrid();
+            UpdateLayout();
         }
 
         protected override void PlusButtonListener()

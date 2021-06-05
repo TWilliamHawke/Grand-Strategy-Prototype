@@ -11,4 +11,17 @@ public class Technology : EffectsContainer
 
     public override List<Effect> effects => _effects;
 
+    bool _isResearched = false;
+    public bool isResearched => _isResearched;
+
+    void OnEnable()
+    {
+        _isResearched = false;
+    }
+
+    public void Research()
+    {
+        _isResearched = true;
+    }
+
 }

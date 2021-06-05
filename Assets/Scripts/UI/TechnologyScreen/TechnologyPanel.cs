@@ -12,7 +12,7 @@ public class TechnologyPanel : UIPanelWithGrid<Technology>
     private void Awake()
     {
         _technologyList.AddRange(_controller.allTechnologies);
-        UpdateGrid();
+        UpdateLayout();
     }
 
 }

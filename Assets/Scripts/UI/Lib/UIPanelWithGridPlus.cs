@@ -12,9 +12,9 @@ public abstract class UIPanelWithGridPlus<T> : UIPanelWithGrid<T>
     abstract protected bool ShouldHidePlusButton();
 
 
-    protected override void UpdateGrid()
+    protected override void UpdateLayout()
     {
-        base.UpdateGrid();
+        base.UpdateLayout();
 
         if(ShouldHidePlusButton()) return;
 

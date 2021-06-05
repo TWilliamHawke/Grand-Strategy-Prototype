@@ -14,12 +14,12 @@ public class BuildingsView : UIPanelWithGridPlus<Building>
 
     private void OnEnable()
     {
-        Settlement.OnBuildingConstructed += UpdateGrid;
+        Settlement.OnBuildingConstructed += UpdateLayout;
     }
 
     private void OnDisable()
     {
-        Settlement.OnBuildingConstructed -= UpdateGrid;
+        Settlement.OnBuildingConstructed -= UpdateLayout;
         _buildingSelector.Close();
     }
 
@@ -52,6 +52,6 @@ public class BuildingsView : UIPanelWithGridPlus<Building>
     {
         _settlement = settlement;
         _constructedBuildings = settlement.constructedBuildings;
-        UpdateGrid();
+        UpdateLayout();
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace UnitEditor
 {
-    public abstract class AbstractItemSlot : UIElementWithTooltip, IPointerClickHandler
+    public abstract class AbstractItemSlot : UIElementWithTooltip, IPointerClickHandler, INeedInit
     {
         [SerializeField] ItemSlotController _itemSlotController;
         [SerializeField] TemplateController _templateController;
@@ -33,18 +33,17 @@ namespace UnitEditor
         protected abstract void AddItemToTemplate(Equipment item);
         protected abstract Equipment SelectItemFromTemplate(UnitTemplate template);
 
-        void OnEnable()
-        {
-            _itemSlotController.RegisterSlot(this);
-            UpdateSlotUI(_templateController.currentTemplate);
-            _templateController.OnTemplateChange += UpdateSlotUI;
-            _templateController.OnBuildingAdded += UpdateItemCost;
-        }
-
-        void OnDisable()
+        void OnDestroy()
         {
             _templateController.OnTemplateChange -= UpdateSlotUI;
             _templateController.OnBuildingAdded -= UpdateItemCost;
+        }
+
+        public void Init()
+        {
+            _templateController.OnTemplateChange += UpdateSlotUI;
+            _templateController.OnBuildingAdded += UpdateItemCost;
+            _itemSlotController.RegisterSlot(this);
         }
 
         public override string GetTooltipText()

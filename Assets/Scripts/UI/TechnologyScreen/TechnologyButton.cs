@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Button))]
 public class TechnologyButton : UIDataElement<Technology>
@@ -22,8 +21,8 @@ public class TechnologyButton : UIDataElement<Technology>
     Button _button;
 
     //data
-    public Technology technologyData { get; private set; }
-    bool _isResearched = false;
+    public Technology technologyData => _technologyData;
+    Technology _technologyData;
 
 
     void Awake()
@@ -35,7 +34,7 @@ public class TechnologyButton : UIDataElement<Technology>
 
     void SelectTechnology()
     {
-        if(_isResearched) return;
+        if(technologyData.isResearched) return;
 
         _frame.color = _selectedColor;
         _techController.Select(this);
@@ -44,9 +43,9 @@ public class TechnologyButton : UIDataElement<Technology>
     public override void UpdateData(Technology data)
     {
         _textField.text = data.localizedName;
-        technologyData = data;
+        _technologyData = data;
 
-        if(_techController.researchedTechnologies.Contains(technologyData))
+        if(technologyData.isResearched)
         {
             MarkAsResearched();
         }
@@ -62,6 +61,5 @@ public class TechnologyButton : UIDataElement<Technology>
     {
         _tick.gameObject.SetActive(true);
         _frame.color = _researchedColor;
-        _isResearched = true;
     }
 }

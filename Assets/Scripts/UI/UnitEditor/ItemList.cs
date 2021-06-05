@@ -19,19 +19,19 @@ namespace UnitEditor
         private void OnEnable()
         {
             _itemSlotController.OnItemSlotSelection += UpdateItemList;
-            _templateController.OnBuildingAdded += UpdateGrid;
+            _templateController.OnBuildingAdded += UpdateLayout;
         }
 
         private void OnDisable()
         {
             _itemSlotController.OnItemSlotSelection -= UpdateItemList;
-            _templateController.OnBuildingAdded -= UpdateGrid;
+            _templateController.OnBuildingAdded -= UpdateLayout;
         }
 
         void UpdateItemList(List<Equipment> equipmentList)
         {
             _itemList = equipmentList;
-            UpdateGrid();
+            UpdateLayout();
         }
 
     }

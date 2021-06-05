@@ -16,5 +16,6 @@ MonoBehaviour:
   unitNames: {fileID: 11400000, guid: b05eba76110c9be4fb123def8af4e6ee, type: 2}
   sprite: {fileID: 21300000, guid: 69536eb9f38f60a4aad9ec765d3054df, type: 3}
   goldCost: 1000
+  _requiredTechnology: {fileID: 11400000, guid: fc105ae9fd5581946b268b3a843d34b3, type: 2}
   defence: 10
   speedMult: 1

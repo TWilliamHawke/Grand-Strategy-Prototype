@@ -15,3 +15,5 @@ MonoBehaviour:
   _allTechnologies:
   - {fileID: 11400000, guid: 28758b041e6822542b9b2dd76bba502c, type: 2}
   - {fileID: 11400000, guid: 1977d5bed6eff5a46bd514db498cf7f3, type: 2}
+  - {fileID: 11400000, guid: fc105ae9fd5581946b268b3a843d34b3, type: 2}
+  - {fileID: 11400000, guid: 9aad989dd9f0c0345899740cdd628bf0, type: 2}

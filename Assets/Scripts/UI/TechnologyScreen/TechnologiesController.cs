@@ -28,6 +28,7 @@ public class TechnologiesController : ScriptableObject
     {
         if(_selectedTechnologyButton == null) return;
 
+        _selectedTechnologyButton.technologyData.Research();
         _researchedTechnologies.Add(_selectedTechnologyButton.technologyData);
         _selectedTechnologyButton.MarkAsResearched();
         _selectedTechnologyButton = null;
