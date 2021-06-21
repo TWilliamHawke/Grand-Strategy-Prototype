@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 5235530193604169722}
   - component: {fileID: 5235530193604169717}
   - component: {fileID: 5235530193604169716}
+  - component: {fileID: -5844875733838398012}
   m_Layer: 0
   m_Name: AddBuildingButtonSmall
   m_TagString: Untagged
@@ -200,3 +201,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-5844875733838398012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5235530193604169718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 047c15427f69a0f4fa7e95166f9e17d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipController: {fileID: 11400000, guid: c29eeb31eaa786747816d0e7ef376b1d, type: 2}
+  _tooltipText: Add building
+  _hideTooltipOnClick: 1

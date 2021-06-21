@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -26,9 +25,10 @@ namespace UnitEditor
         //events
         public event UnityAction<List<Equipment>> OnItemSlotSelection;
         public event UnityAction<int> OnEquipmentCostChange;
+        public event UnityAction OnItemReset;
 
         //inner data
-        List<AbstractItemSlot> _itemSlots = new List<AbstractItemSlot>();
+        Dictionary<string, AbstractItemSlot> _itemSlots = new Dictionary<string, AbstractItemSlot>();
         AbstractItemSlot _selectedSlot;
 
         void OnDisable()
@@ -38,15 +38,13 @@ namespace UnitEditor
 
         public void UpdateEquipmentCost()
         {
-            int cost = CalculateEquipmentCost();
+            int cost = _itemSlots.Sum(slot => slot.Value.itemCost);
             OnEquipmentCostChange?.Invoke(cost);
         }
 
         public void RegisterSlot(AbstractItemSlot slot)
         {
-            if(_itemSlots.Contains(slot)) return;
-
-            _itemSlots.Add(slot);
+            _itemSlots.Add(slot.GetType().FullName, slot);
         }
 
         public void SelectItemSlot(AbstractItemSlot itemSlot)
@@ -66,11 +64,16 @@ namespace UnitEditor
         //current cost stored in item slot
         public int CalculateFreeGold()
         {
+            return CalculateFreeGoldWithoutSlot(_selectedSlot);
+        }
+
+        public int CalculateFreeGoldWithoutSlot(AbstractItemSlot currentSlot)
+        {
             var gold = _templateController.realwealth;
 
-            foreach (var itemSlot in _itemSlots)
+            foreach (var itemSlot in _itemSlots.Values)
             {
-                if (itemSlot == _selectedSlot) continue;
+                if (itemSlot == currentSlot) continue;
 
                 gold -= itemSlot.itemCost;
             }
@@ -78,41 +81,11 @@ namespace UnitEditor
             return gold;
         }
 
-        int CalculateEquipmentCost()
+        public void ResetItem()
         {
-            int gold = 0;
-
-            foreach (var itemSlot in _itemSlots)
-            {
-                gold += itemSlot.itemCost;
-            }
-
-            return gold;
+            OnItemReset?.Invoke();
         }
-
-        public bool ConvertEquipment<T>(Equipment equipment, out T item) where T : Equipment
-        {
-            if (equipment is T)
-            {
-                item = (T)equipment;
-                return true;
-            }
-            else
-            {
-                ReportWrongItem<T>(equipment);
-                item = null;
-                return false;
-            }
-        }
-
-        void ReportWrongItem<T>(Equipment equipment)
-        {
-            string message = $"Wrong item ({ equipment.Name }) in list: { typeof(T) }";
-            throw new System.Exception(message);
-        }
-
 
     }
-
 
 }

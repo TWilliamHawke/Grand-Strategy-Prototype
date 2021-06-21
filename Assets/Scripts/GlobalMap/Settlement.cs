@@ -5,35 +5,33 @@ using UnityEngine.Events;
 
 public class Settlement : MonoBehaviour, IhaveLabel, ISelectable, IHaveUnits, IBuilder
 {
+    //TODO replace this by selectionController
     static public Settlement selectedSettlement => _selectedSettlement;
-    static public Settlement _selectedSettlement;
+    static Settlement _selectedSettlement;
 
     [SerializeField] SettlementData _settlementData;
     [SerializeField] MeshRenderer _selector;
 
-    public bool isPlayerSettlement => _owner.isPlayerFaction;
-    protected SettlementData settlementData => _settlementData;
-
+    //dynamic data
     List<Building> _constructedBuildings = new List<Building>();
+    List<Unit> _unitsFromThisSettelment = new List<Unit>();
     List<Unit> _garrison = new List<Unit>();
-    public List<Unit> _unitsFromThisSettelment = new List<Unit>();
     Faction _owner;
 
-
+    //getters
     public List<Building> constructedBuildings => _constructedBuildings;
     public List<Unit> unitsFromThisSettelment => _unitsFromThisSettelment;
     public string localizedName => _settlementData.localizedName;
     public List<Unit> unitList => _garrison;
-    public Vector3 position => transform.position;
-
     public Color baseLabelColor => _owner.factionColor;
+    public bool isPlayerSettlement => _owner.isPlayerFaction;
 
     //event
     public static event UnityAction<Settlement> OnSettlementInit;
     public static event UnityAction<Settlement> OnSettlementSelect;
-    public static event UnityAction<Settlement> OnCapture;
-    public static event UnityAction OnBuildingConstructed;
+    public static event UnityAction<Settlement> OnConquest;
     public static event UnityAction<UnitTemplate> OnUnitAdded;
+    public static event UnityAction OnBuildingConstructed;
 
     void Awake()
     {
@@ -44,6 +42,7 @@ public class Settlement : MonoBehaviour, IhaveLabel, ISelectable, IHaveUnits, IB
 
     void Start()
     {
+        //called after all event subscription
         OnSettlementInit?.Invoke(this);
     }
 
@@ -84,7 +83,7 @@ public class Settlement : MonoBehaviour, IhaveLabel, ISelectable, IHaveUnits, IB
     {
         _garrison.Clear();
         _owner = winnerFaction;
-        OnCapture?.Invoke(this);
+        OnConquest?.Invoke(this);
     }
 
     void AddUnitToGarrison(UnitTemplate template)

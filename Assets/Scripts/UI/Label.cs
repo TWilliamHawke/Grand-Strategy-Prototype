@@ -6,24 +6,24 @@ using UnityEngine.UI;
 
 public class Label : MonoBehaviour
 {
-    IhaveLabel _parent;
     [SerializeField] Text _labelText;
     [SerializeField] Image _background;
     [SerializeField] float _positionOffset = 2f;
+
+    IhaveLabel _parent;
     float _defaultTransparency;
 
     void OnEnable()
     {
         SelectionController.OnSelect += TryMakeDimmer;
-        Settlement.OnCapture += ChangeColorAfterConquest;
+        Settlement.OnConquest += ChangeColorAfterConquest;
         _defaultTransparency = _background.color.a;
     }
 
     void OnDisable()
     {
         SelectionController.OnSelect -= TryMakeDimmer;
-        Settlement.OnCapture -= ChangeColorAfterConquest;
-
+        Settlement.OnConquest -= ChangeColorAfterConquest;
     }
 
     void LateUpdate()
@@ -31,15 +31,6 @@ public class Label : MonoBehaviour
         if (_parent == null) return;
         Vector3 labelPosition = _parent.transform.position + Vector3.down * _positionOffset;
         transform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, labelPosition);
-    }
-
-    void ChangeColorAfterConquest(Settlement settlement)
-    {
-        if (_parent != (IhaveLabel)settlement) return;
-
-        var color = settlement.baseLabelColor;
-        color.a = _background.color.a;
-        _background.color = color;
     }
 
     public void AddParent(IhaveLabel parent)
@@ -52,17 +43,12 @@ public class Label : MonoBehaviour
         _labelText.text = _parent.GetName();
     }
 
-    public void MakeBrighter()
+    void ChangeColorAfterConquest(Settlement settlement)
     {
-        var color = _background.color;
-        color.a = 1;
-        _background.color = color;
-    }
+        if (_parent != (IhaveLabel)settlement) return;
 
-    public void MakeDimmer()
-    {
-        var color = _background.color;
-        color.a = _defaultTransparency;
+        var color = settlement.baseLabelColor;
+        color.a = _background.color.a;
         _background.color = color;
     }
 
@@ -77,4 +63,19 @@ public class Label : MonoBehaviour
             MakeBrighter();
         }
     }
+
+    void MakeBrighter()
+    {
+        var color = _background.color;
+        color.a = 1;
+        _background.color = color;
+    }
+
+    void MakeDimmer()
+    {
+        var color = _background.color;
+        color.a = _defaultTransparency;
+        _background.color = color;
+    }
+
 }

@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace UnitEditor
 {
@@ -16,16 +13,18 @@ namespace UnitEditor
 
         List<Equipment> _itemList = new List<Equipment>();
 
-        private void OnEnable()
+        void OnEnable()
         {
             _itemSlotController.OnItemSlotSelection += UpdateItemList;
-            _templateController.OnBuildingAdded += UpdateLayout;
+            _templateController.OnBuildingsChange += UpdateLayout;
+            _itemSlotController.OnItemReset += UpdateLayout;
         }
 
-        private void OnDisable()
+        void OnDisable()
         {
             _itemSlotController.OnItemSlotSelection -= UpdateItemList;
-            _templateController.OnBuildingAdded -= UpdateLayout;
+            _templateController.OnBuildingsChange -= UpdateLayout;
+            _itemSlotController.OnItemReset -= UpdateLayout;
         }
 
         void UpdateItemList(List<Equipment> equipmentList)

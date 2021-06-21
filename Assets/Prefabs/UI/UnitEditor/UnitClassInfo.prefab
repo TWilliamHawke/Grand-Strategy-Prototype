@@ -464,6 +464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _templateController: {fileID: 11400000, guid: 1d3e4825f51cfb24aa948edcef859202, type: 2}
+  _itemSlotController: {fileID: 11400000, guid: 57aecc2247440ae4b91fca008085453a, type: 2}
   _classNameText: {fileID: 3737567486001517319}
   _weaponSkillText: {fileID: 3737567484491311657}
   _wealthText: {fileID: 3737567485166551091}

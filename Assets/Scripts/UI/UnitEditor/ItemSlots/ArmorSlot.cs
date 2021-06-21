@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace UnitEditor
 {
@@ -10,7 +8,7 @@ namespace UnitEditor
 
         protected override void AddItemToTemplate(Equipment item)
         {
-            if (itemSlotController.ConvertEquipment<ArmourInfo>(item, out var armor))
+            if (item.ConvertTo<ArmourInfo>(out var armor))
             {
                 templateController.currentTemplate.armour = armor;
             }

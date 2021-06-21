@@ -27,7 +27,6 @@ namespace UnitEditor
             if (_itemData == null || _isInactive) return;
 
             _itemSlotController?.ChangeItemInSelectedSlot(_itemData);
-
         }
 
         public override void UpdateData(Equipment data)
@@ -40,18 +39,6 @@ namespace UnitEditor
             SetItemCost();
             SetWeaponSkill();
 
-        }
-
-        private void SetItemCost()
-        {
-            var realCost = _itemData.CalculateCurrentCost(_templateController);
-            _itemCost.text = realCost.ToString();
-            var freeGold = _itemSlotController.CalculateFreeGold();
-
-            if (freeGold < realCost)
-            {
-                SetInactiveDueGold();
-            }
         }
 
         public override string GetTooltipText()
@@ -85,9 +72,21 @@ namespace UnitEditor
             }
         }
 
+        void SetItemCost()
+        {
+            var realCost = _templateController.FindRealItemCost(_itemData);
+            _itemCost.text = realCost.ToString();
+            var freeGold = _itemSlotController.CalculateFreeGold();
+
+            if (freeGold < realCost)
+            {
+                SetInactiveDueGold();
+            }
+        }
+
         void CheckWeaponSkill()
         {
-            int realSkill = (_itemData as RequireSkillEquipment)?.CalculateRealSkill(_templateController) ?? 0;
+            int realSkill = _templateController.FindRealSkillForItem(_itemData);
 
             _weaponSkillText.text = realSkill.ToString();
 

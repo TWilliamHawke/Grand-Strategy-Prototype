@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Effects;
 using UnityEngine;
 using UnityEngine.Events;
-using System.Linq;
 
 namespace UnitEditor
 {
@@ -11,66 +7,80 @@ namespace UnitEditor
     [CreateAssetMenu(fileName = "TemplateController", menuName = "Unit Editor/TemplateController", order = 100)]
     public class TemplateController : ScriptableObject, IBuilder
     {
+        //events
         public event UnityAction<UnitTemplate> OnTemplateChange;
         public event UnityAction<UnitTemplate> OnTemplateSave;
         public event UnityAction OnTemplateSelection;
-        public event UnityAction OnBuildingAdded;
+        public event UnityAction OnBuildingsChange;
 
         [SerializeField] UnitTemplate _emptyTemplate;
         [SerializeField] TechnologiesController _techController;
 
-        public UnitTemplate defaultTemplate { get; private set; }
-        public UnitTemplate currentTemplate { get; private set; }
-        public int realwealth => currentTemplate.unitClass.CalculateRealWealth(this);
+        UnitTemplate _defaultTemplate;
+        UnitTemplate _currentTemplate;
+        TemplateEffectsCalculator _effectsCalculator;
+
+        //getters
+        public UnitTemplate defaultTemplate => _defaultTemplate;
+        public UnitTemplate currentTemplate => _currentTemplate;
+        public int realwealth => _effectsCalculator.CalculateRealWealth(_currentTemplate);
 
         void OnEnable()
         {
-            currentTemplate = _emptyTemplate.Clone();
+            _effectsCalculator = new TemplateEffectsCalculator(_techController, this);
+            _currentTemplate = _emptyTemplate.Clone();
             UpdateTemplate();
         }
 
         public void SaveTemplate()
         {
-            OnTemplateSave?.Invoke(currentTemplate);
+            OnTemplateSave?.Invoke(_currentTemplate);
         }
 
         public void SelectTemplate(UnitTemplate template)
         {
-            defaultTemplate = template;
-            currentTemplate = defaultTemplate.Clone();
+            _defaultTemplate = template;
+            _currentTemplate = _defaultTemplate.Clone();
             OnTemplateSelection?.Invoke();
             UpdateTemplate();
         }
 
         public void ResetTemplate()
         {
-            currentTemplate = defaultTemplate.Clone();
+            _currentTemplate = _defaultTemplate.Clone();
             UpdateTemplate();
         }
 
         public void UpdateTemplate()
         {
-            OnTemplateChange?.Invoke(currentTemplate);
+            OnTemplateChange?.Invoke(_currentTemplate);
         }
 
         public void AddBuilding(Building building)
         {
-            currentTemplate.AddRequiredBuildings(building);
-            OnBuildingAdded?.Invoke();
+            _currentTemplate.AddRequiredBuildings(building);
+            OnBuildingsChange?.Invoke();
         }
 
-        public List<T> FindAllEffects<T>()
+        public void RemoveBuilding(Building building)
         {
-            var effects = currentTemplate.FindBuildingsEffects();
+            bool isSuccess = _currentTemplate.TryRemoveRequiredBuiding(building);
 
-            foreach (var tech in _techController.researchedTechnologies)
+            if(isSuccess)
             {
-                effects.AddRange(tech.effects);
+                OnBuildingsChange?.Invoke();
             }
-
-            return effects.OfType<T>().ToList<T>();
         }
 
+        public int FindRealItemCost(Equipment item)
+        {
+            return _effectsCalculator.CalculateItemCost(item);
+        }
+
+        public int FindRealSkillForItem(Equipment item)
+        {
+            return _effectsCalculator.CalculateRealSkill(item);
+        }
 
     }
 

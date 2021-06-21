@@ -26,12 +26,12 @@ namespace UnitEditor
 
         void Awake()
         {
-            _templateController.OnBuildingAdded += FillAndUpdate;
+            _templateController.OnBuildingsChange += FillAndUpdate;
         }
 
         void OnDestroy()
         {
-            _templateController.OnBuildingAdded -= FillAndUpdate;
+            _templateController.OnBuildingsChange -= FillAndUpdate;
         }
 
         protected override void PlusButtonListener()

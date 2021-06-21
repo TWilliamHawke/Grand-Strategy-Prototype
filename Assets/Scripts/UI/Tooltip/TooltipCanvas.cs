@@ -31,6 +31,15 @@ public class TooltipCanvas : MonoBehaviour
         _tooltipController.OnHideTooltip -= HideTooltip;
     }
 
+    void Update()
+    {
+        //TODO fix tooltip position near screen borders
+        if (_tooltipIsActive)
+        {
+            SetTooltipPosition();
+        }
+    }
+
     void ShowTooltip(string text)
     {
         _tooltipText.text = text;
@@ -55,18 +64,9 @@ public class TooltipCanvas : MonoBehaviour
         _tooltip.gameObject.SetActive(false);
     }
 
-    private void Update()
+    void SetTooltipPosition()
     {
-        //TODO fix tooltip position near screen borders
-        if (_tooltipIsActive)
-        {
-            SetTooltipPosition();
-        }
-    }
-
-    private void SetTooltipPosition()
-    {
-        var offset = _tooltip.sizeDelta / 2;
+        Vector2 offset = _tooltip.sizeDelta / 2;
         _tooltip.position = Input.mousePosition + (Vector3)offset;
     }
 }

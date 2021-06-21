@@ -1,10 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using UnitEditor;
 using Effects;
-using System;
 using System.Text.RegularExpressions;
 
 [CreateAssetMenu(fileName = "UnitTemplate", menuName = "Unit Editor/Unit Template", order = 3)]
@@ -26,16 +23,18 @@ public class UnitTemplate : ScriptableObject
     public Mount mount;
     public bool canNotEdit;
 
+    List<Building> _requiredBuildings = new List<Building>();
+
+    //getters
     public int health => mount?.health != 0 ? mount.health : unitClass.health;
     public int speed => GetSpeed();
     public int damage => primaryWeapon.damage;
     public int defence => armour.defence;
     public int attack => unitClass.weaponSkill;
-    public bool isRange => primaryWeapon is RangeWeapon || secondaryWeapon is RangeWeapon;
     public int charge => (primaryWeapon as MeleeWeapon)?.charge ?? 0;
+    public bool isRange => primaryWeapon is RangeWeapon || secondaryWeapon is RangeWeapon;
 
-    public List<Building> requiredBuildings => GetRequiredBuildings();
-    List<Building> _requiredBuildings = new List<Building>();
+    public List<Building> requiredBuildings => unitClass.requiredBuildings.Concat(_requiredBuildings).ToList();
 
     public List<UnitNamePart> GetPossibleNamesByType()
     {
@@ -84,18 +83,14 @@ public class UnitTemplate : ScriptableObject
         _requiredBuildings.Add(building);
     }
 
+    public bool TryRemoveRequiredBuiding(Building building)
+    {
+        return _requiredBuildings.Remove(building);
+    }
+
     public List<Effect> FindBuildingsEffects()
     {
         return requiredBuildings.SelectMany(t => t.effects).ToList();;
-    }
-
-    List<Building> GetRequiredBuildings()
-    {
-        var list = new List<Building>();
-
-        list.AddRange(unitClass.requiredBuildings);
-        list.AddRange(_requiredBuildings);
-        return list;
     }
 
     int GetSpeed()

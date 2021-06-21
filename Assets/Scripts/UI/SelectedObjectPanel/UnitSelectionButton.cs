@@ -15,10 +15,13 @@ public class UnitSelectionButton : UIDataElement<UnitTemplate>, IPointerClickHan
 
     const string INFINITY_SYMBOL = "\u221E";
 
+    //HACK replace this by selectionController scriptableObject
+    static Settlement _selectedSetlement => Settlement.selectedSettlement;
+
     Button _button;
 
     //dynamic data
-    UnitTemplate _currentTemplate;
+    UnitTemplate _thisButtonTemplate;
     string _tooltipText;
 
     //config
@@ -42,9 +45,9 @@ public class UnitSelectionButton : UIDataElement<UnitTemplate>, IPointerClickHan
 
     public override void UpdateData(UnitTemplate data)
     {
-        if (Settlement.selectedSettlement == null) return;
+        if (_selectedSetlement == null) return;
 
-        _currentTemplate = data;
+        _thisButtonTemplate = data;
         _unitIcon.sprite = data.unitClass.defaultIcon;
         _unitName.text = data.templateName;
         SetDefaultTooltip();
@@ -56,13 +59,13 @@ public class UnitSelectionButton : UIDataElement<UnitTemplate>, IPointerClickHan
     {
         if (_isDisable) return;
         HideTooltip();
-        Settlement.selectedSettlement.AddUnit(_currentTemplate);
+        _selectedSetlement.AddUnit(_thisButtonTemplate);
     }
 
     void CheckRequirementBuildings()
     {
-        var missingBuildings = _currentTemplate.requiredBuildings
-            .Except(Settlement.selectedSettlement.constructedBuildings);
+        var missingBuildings = _thisButtonTemplate.requiredBuildings
+            .Except(_selectedSetlement.constructedBuildings);
 
         if (missingBuildings.Count() > 0)
         {
@@ -78,14 +81,14 @@ public class UnitSelectionButton : UIDataElement<UnitTemplate>, IPointerClickHan
 
     void UpdateUnitCapForRecruitedClass(UnitTemplate template)
     {
-        if (template.unitClass == _currentTemplate.unitClass)
+        if (template.unitClass == _thisButtonTemplate.unitClass)
         {
             CheckUnitCap();
         }
 
-        //update method called for all buttons in list
+        //updateBlaBlaBla method called for all buttons in list
         //but tooltip should be updated only for hovered
-        if (template == _currentTemplate)
+        if (template == _thisButtonTemplate)
         {
             ShowTooltip();
         }
@@ -93,25 +96,24 @@ public class UnitSelectionButton : UIDataElement<UnitTemplate>, IPointerClickHan
 
     void CheckUnitCap()
     {
-        var maxCount = Settlement.selectedSettlement.constructedBuildings
-            .SelectMany(b => b.effects)
+        int unitCap = _selectedSetlement.constructedBuildings
+            .SelectMany(building => building.effects)
             .OfType<IncreaseCapForUnitClass>()
-            .Where(e => e.unitClass == _currentTemplate.unitClass)
-            .Sum(e => e.unitCap);
+            .Where(effect => effect.unitClass == _thisButtonTemplate.unitClass)
+            .Sum(effect => effect.unitCap);
 
-        if (maxCount > 99)
+        if (unitCap > 99)
         {
             _unitCount.text = INFINITY_SYMBOL;
             return;
         }
 
-        int count = Settlement.selectedSettlement.unitsFromThisSettelment
-            .Where(u => u.unitTemplate.unitClass == _currentTemplate.unitClass)
-            .Count();
+        int unitCount = _selectedSetlement.unitsFromThisSettelment
+            .Count(unit => unit.unitTemplate.unitClass == _thisButtonTemplate.unitClass);
 
-        _unitCount.text = $"{count}/{maxCount}";
+        _unitCount.text = $"{unitCount}/{unitCap}";
 
-        if (count >= maxCount)
+        if (unitCount >= unitCap)
         {
             MakeDisable();
             _tooltipText = "You reached max capacity for units of this type";

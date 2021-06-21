@@ -2,7 +2,7 @@ namespace Effects
 {
     public interface IEffectChangeEquipment
     {
-        EquipmentList equipmentList { get; }
         string GetText();
+        bool AffectsItem(Equipment item);
     }
 }

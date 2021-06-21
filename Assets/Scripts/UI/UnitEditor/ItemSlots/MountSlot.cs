@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace UnitEditor
 {
@@ -11,7 +9,7 @@ namespace UnitEditor
 
         protected override void AddItemToTemplate(Equipment item)
         {
-            if (itemSlotController.ConvertEquipment<Mount>(item, out var mount))
+            if (item.ConvertTo<Mount>(out var mount))
             {
                 templateController.currentTemplate.mount = mount;
             }
@@ -21,7 +19,5 @@ namespace UnitEditor
         {
             return template.mount;
         }
-
-
     }
 }

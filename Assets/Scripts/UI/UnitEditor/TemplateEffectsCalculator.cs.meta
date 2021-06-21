@@ -1,10 +1,9 @@
 fileFormatVersion: 2
-guid: 6340bc06b9cb4164f966acbde460d1ac
+guid: 83b0d9212076f7943b718ba5a95b4e65
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - _tooltipController: {fileID: 11400000, guid: c29eeb31eaa786747816d0e7ef376b1d, type: 2}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

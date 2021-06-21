@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -36,19 +35,20 @@ namespace UnitEditor
         void OnDestroy()
         {
             _templateController.OnTemplateChange -= UpdateSlotUI;
-            _templateController.OnBuildingAdded -= UpdateItemCost;
+            _templateController.OnBuildingsChange -= CheckItemRequirement;
         }
 
         public void Init()
         {
             _templateController.OnTemplateChange += UpdateSlotUI;
-            _templateController.OnBuildingAdded += UpdateItemCost;
+            _templateController.OnBuildingsChange += CheckItemRequirement;
             _itemSlotController.RegisterSlot(this);
         }
 
         public override string GetTooltipText()
         {
-            return _itemInSlot.GetToolTipText();
+            string helpText = "\n\nRight click for clear slot";
+            return _itemInSlot.GetToolTipText() + helpText;
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -59,23 +59,51 @@ namespace UnitEditor
             }
             if ((int)eventData.button == 1)
             {
-                HideTooltip();
-                itemCost = 0;
-                AddItemToTemplate(itemsForSlot[0]);
-                _templateController.UpdateTemplate();
+                ResetItemInSlot();
             }
         }
 
         public void ChangeItemInSlot(Equipment item)
         {
-            itemCost = item.CalculateCurrentCost(_templateController);
+            itemCost = _templateController.FindRealItemCost(item);
             AddItemToTemplate(item);
             _templateController.UpdateTemplate();
         }
 
-        void UpdateItemCost()
+        void ResetItemInSlot()
         {
-            itemCost = _itemInSlot.CalculateCurrentCost(_templateController);
+            HideTooltip();
+            itemCost = 0;
+            AddItemToTemplate(itemsForSlot[0]);
+            _templateController.UpdateTemplate();
+            _itemSlotController.ResetItem();
+            ShowTooltip();
+        }
+
+        void CheckItemRequirement()
+        {
+            int updatedItemCost = _templateController.FindRealItemCost(_itemInSlot);
+            if (itemCost != updatedItemCost)
+            {
+                bool itemIsTooExpensive = updatedItemCost > _itemSlotController.CalculateFreeGoldWithoutSlot(this);
+
+                if (itemIsTooExpensive)
+                {
+                    ResetItemInSlot();
+                    return;
+                }
+                else
+                {
+                    itemCost = updatedItemCost;
+                }
+            }
+
+            int requiredSkill = _templateController.FindRealSkillForItem(_itemInSlot);
+            
+            if (requiredSkill > _itemSlotController.classSkill)
+            {
+                ResetItemInSlot();
+            }
         }
 
         void SetItemCost(int value)
@@ -87,7 +115,7 @@ namespace UnitEditor
         void UpdateSlotUI(UnitTemplate template)
         {
             var item = SelectItemFromTemplate(template);
-            itemCost = item.CalculateCurrentCost(_templateController);
+            itemCost = _templateController.FindRealItemCost(item);
 
             _itemInSlot = item;
             _itemName.text = item.Name;

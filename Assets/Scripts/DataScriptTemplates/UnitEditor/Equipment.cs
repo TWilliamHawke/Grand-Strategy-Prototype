@@ -1,9 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnitEditor;
-using Effects;
 
     public abstract class Equipment : ScriptableObject
     {
@@ -13,6 +8,8 @@ using Effects;
         public int goldCost;
         [SerializeField] Technology _requiredTechnology;
 
+        public abstract string GetToolTipText();
+
         public bool isUnlocked => _requiredTechnology?.isResearched ?? true;
 
         void OnEnable()
@@ -21,25 +18,6 @@ using Effects;
             {
                 Debug.LogError($"Equipment {name} doesn't have any unit names!");
             }
-        }
-
-        public abstract string GetToolTipText();
-
-        public int CalculateCurrentCost(TemplateController templateController)
-        {
-            var effects = templateController.FindAllEffects<ChangeCostForEquipment>();
-            var realCost = goldCost;
-
-            foreach(var effect in effects)
-            {
-                if(effect.equipmentList.equipmentList.Contains(this))
-                {
-                    realCost *= effect.costDecresePct;
-                    realCost /= 100;
-                }
-            }
-
-            return realCost;
         }
 
         public bool ConvertTo<T>(out T item) where T : Equipment

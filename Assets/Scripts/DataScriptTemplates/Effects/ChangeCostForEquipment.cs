@@ -10,12 +10,17 @@ namespace Effects
         [SerializeField] EquipmentList _equipmentList;
         [SerializeField] int _costDecresePct;
 
-        public EquipmentList equipmentList => _equipmentList;
         public int costDecresePct => _costDecresePct;
 
         public override string GetText()
         {
             return $"Decrease cost for {_equipmentList.listName.ToLower()} by {_costDecresePct}%";
         }
+
+        public bool AffectsItem(Equipment item)
+        {
+            return _equipmentList.equipmentList.Contains(item);
+        }
+
     }
 }

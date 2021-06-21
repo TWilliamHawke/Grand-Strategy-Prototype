@@ -18,5 +18,10 @@ namespace Effects
             var weaponGroup = _equipmentList.listName.ToLower();
             return $"Decrease required skill for {weaponGroup} by {_requiredSkillDecrease}";
         }
+
+        public bool AffectsItem(Equipment item)
+        {
+            return _equipmentList.equipmentList.Contains(item);
+        }
     }
 }

@@ -31,19 +31,4 @@ public class UnitClass : ScriptableObject
 
     }
 
-    public int CalculateRealWealth(TemplateController templateController)
-    {
-        int realwealth = wealth;
-
-        var effects = templateController.FindAllEffects<IncreaseClassWealth>();
-
-        foreach (var effect in effects)
-        {
-            if(effect.unitClass != this) continue;
-
-            realwealth += effect.addWealth;
-        }
-
-        return realwealth;
-    }
 }

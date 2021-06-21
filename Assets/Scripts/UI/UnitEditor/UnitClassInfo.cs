@@ -20,14 +20,14 @@ namespace UnitEditor
         private void OnDestroy()
         {
             _templateController.OnTemplateChange -= UpdateClassInfo;
-            _templateController.OnBuildingAdded -= SetWealth;
+            _templateController.OnBuildingsChange -= SetWealth;
             _itemSlotController.OnEquipmentCostChange -= SetEquipmentCost;
         }
 
         public void Init()
         {
             _templateController.OnTemplateChange += UpdateClassInfo;
-            _templateController.OnBuildingAdded += SetWealth;
+            _templateController.OnBuildingsChange += SetWealth;
             _itemSlotController.OnEquipmentCostChange += SetEquipmentCost;
         }
 

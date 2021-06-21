@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnitEditor;
 using UnityEngine;
@@ -14,14 +13,12 @@ public class BuildingSelectorEditor : BuildingSelectionPanel
 
     void Awake()
     {
-        _templateController.OnBuildingAdded += UpdateSelector;
+        _templateController.OnBuildingsChange += UpdateSelector;
     }
 
     void OnDestroy()
     {
-        _templateController.OnBuildingAdded -= UpdateSelector;
+        _templateController.OnBuildingsChange -= UpdateSelector;
     }
-
-
 
 }
