@@ -2,27 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using GlobalMap;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Label : MonoBehaviour
+public class Label : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] Text _labelText;
     [SerializeField] Image _background;
     [SerializeField] float _positionOffset = 2f;
+    [SerializeField] GlobalMapSelectable _selector;
 
     IhaveLabel _parent;
     float _defaultTransparency;
 
     void OnEnable()
     {
-        SelectionController.OnSelect += TryMakeDimmer;
+        _selector.OnSelect += TryMakeDimmer;
         Settlement.OnConquest += ChangeColorAfterConquest;
         _defaultTransparency = _background.color.a;
     }
 
     void OnDisable()
     {
-        SelectionController.OnSelect -= TryMakeDimmer;
+        _selector.OnSelect -= TryMakeDimmer;
         Settlement.OnConquest -= ChangeColorAfterConquest;
     }
 
@@ -78,4 +80,8 @@ public class Label : MonoBehaviour
         _background.color = color;
     }
 
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        _selector.Select(_parent);
+    }
 }

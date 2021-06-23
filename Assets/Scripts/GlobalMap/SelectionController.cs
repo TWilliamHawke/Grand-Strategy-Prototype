@@ -7,19 +7,8 @@ namespace GlobalMap
 {
     public class SelectionController : MonoBehaviour
     {
-        public static event System.Action<ISelectable> OnSelect;
-        public static event System.Action OnSelectionCancel;
-
-        static ISelectable _currentTarget;
-        static public ISelectable currentTarget => _currentTarget;
-
-        public static void SetTarget(ISelectable nextTarget)
-        {
-            _currentTarget?.Deselect();
-            _currentTarget = nextTarget;
-            nextTarget.Select();
-            OnSelect?.Invoke(_currentTarget);
-        }
+        [SerializeField] LayerMask _selectableObjects;
+        [SerializeField] GlobalMapSelectable _selector;
 
         void Update()
         {
@@ -31,26 +20,15 @@ namespace GlobalMap
             if (!Input.GetMouseButtonDown(0)) return;
             if (EventSystem.current.IsPointerOverGameObject()) return;
 
-
-            var ray = CameraController.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out var hitInfo))
+            if (Raycasts.HitTarget<ISelectable>(out var nextTarget, _selectableObjects))
             {
-                if (hitInfo.collider.TryGetComponent<ISelectable>(out var nextTarget))
-                {
-                    _currentTarget?.Deselect();
-                    _currentTarget = nextTarget;
-                    nextTarget.Select();
-                    OnSelect?.Invoke(nextTarget);
-                }
-                else
-                {
-                    if (_currentTarget == null) return;
-
-                    _currentTarget.Deselect();
-                    _currentTarget = null;
-                    OnSelectionCancel?.Invoke();
-                }
+                _selector.Select(nextTarget);
             }
+            else
+            {
+                _selector.CancelSelection();
+            }
+
         }
     }
 }

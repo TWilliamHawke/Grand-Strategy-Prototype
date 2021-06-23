@@ -14,19 +14,21 @@ public class MousePounterController : MonoBehaviour
     [SerializeField] float offsetX = 8;
     [SerializeField] float offsetY = 10;
 
+    [SerializeField] GlobalMapSelectable _selector;
+
     CursorIconType _currentIcon = CursorIconType.noAction;
     CursorState _cursorState = CursorState.selection;
 
     void Awake()
     {
-        SelectionController.OnSelectionCancel += GotoSelectionState;
+        _selector.OnSelectionCancel += GotoSelectionState;
         UnitListPanel.OnUnitCardSelection += GotoMovementState;
         Army.OnArmySelected += GotoMovementState;
     }
 
     void OnDestroy()
     {
-        SelectionController.OnSelectionCancel -= GotoSelectionState;
+        _selector.OnSelectionCancel -= GotoSelectionState;
         UnitListPanel.OnUnitCardSelection -= GotoMovementState;
         Army.OnArmySelected -= GotoMovementState;
     }
@@ -65,7 +67,7 @@ public class MousePounterController : MonoBehaviour
 
     bool TerrainIsWalkable()
     {
-        return Raycasts.SelectedTargetCanReachPoint(out var _);
+        return Raycasts.SelectedTargetCanReachPoint(_selector.selectedObject, out var _);
     }
 
     bool CursorHoverEnemy()

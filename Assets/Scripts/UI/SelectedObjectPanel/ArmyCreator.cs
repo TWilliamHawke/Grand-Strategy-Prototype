@@ -7,6 +7,7 @@ using UnityEngine;
 public class ArmyCreator : MonoBehaviour
 {
     [SerializeField] Army _armyPrefab;
+    [SerializeField] GlobalMapSelectable _selector;
 
     GarrisonView _garrisonView;
 
@@ -24,7 +25,7 @@ public class ArmyCreator : MonoBehaviour
         if (!Input.GetMouseButtonDown(1)) return;
         if (_garrisonView.AnyCardSelected())
         {
-            if (Raycasts.SelectedTargetCanReachPoint(out var targetPoint))
+            if (Raycasts.SelectedTargetCanReachPoint(_selector.selectedObject, out var targetPoint))
             {
                 SpawnArmy(targetPoint);
             }
@@ -36,7 +37,7 @@ public class ArmyCreator : MonoBehaviour
         var newArmy = Instantiate(_armyPrefab, _garrisonView.settlementPosition, Quaternion.identity);
         newArmy.unitList = _garrisonView.GetSelectedUnits();
         _garrisonView.RemoveSelectedUnitsFromOwner();
-        SelectionController.SetTarget(newArmy);
+        _selector.Select(newArmy);
         newArmy.MoveTo(targetPoint);
     }
 }

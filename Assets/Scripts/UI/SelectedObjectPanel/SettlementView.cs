@@ -9,19 +9,20 @@ public class SettlementView : UIScreen, INeedInit
     [SerializeField] Text _settlementName;
     [SerializeField] GarrisonView _garrisonView;
     [SerializeField] BuildingsView _buildingsView;
+    [SerializeField] GlobalMapSelectable _selector;
 
     void OnDestroy()
     {
         Settlement.OnSettlementSelect -= UpdateSettlementInfo;
-        SelectionController.OnSelectionCancel -= Close;
-        SelectionController.OnSelect -= CheckSelectedTarget;
+        _selector.OnSelectionCancel -= Close;
+        _selector.OnSelect -= CheckSelectedTarget;
     }
 
     public void Init()
     {
         Settlement.OnSettlementSelect += UpdateSettlementInfo;
-        SelectionController.OnSelectionCancel += Close;
-        SelectionController.OnSelect += CheckSelectedTarget;
+        _selector.OnSelectionCancel += Close;
+        _selector.OnSelect += CheckSelectedTarget;
     }
 
     void UpdateSettlementInfo(Settlement settlementData)

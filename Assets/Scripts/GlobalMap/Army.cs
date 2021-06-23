@@ -13,7 +13,8 @@ public class Army : MonoBehaviour, ISelectable, IHaveUnits
     public static event UnityAction OnArmyDeselected;
     public event UnityAction OnUnitAdd;
 
-    [SerializeField] MeshRenderer _selector;
+    [SerializeField] GlobalMapSelectable _selector;
+    [SerializeField] MeshRenderer _selectionIndicator;
     [SerializeField] Animator _animator;
     [SerializeField] UnitsListController _unitListController;
 
@@ -23,13 +24,13 @@ public class Army : MonoBehaviour, ISelectable, IHaveUnits
 
     public void Deselect()
     {
-        _selector.gameObject.SetActive(false);
+        _selectionIndicator.gameObject.SetActive(false);
         OnArmyDeselected?.Invoke();
     }
 
     public void Select()
     {
-        _selector.gameObject.SetActive(true);
+        _selectionIndicator.gameObject.SetActive(true);
         OnArmySelected?.Invoke(this);
     }
 
@@ -101,12 +102,12 @@ public class Army : MonoBehaviour, ISelectable, IHaveUnits
     {
         if (Input.GetMouseButtonDown(1))
         {
-            if ((object)SelectionController.currentTarget != this) return;
+            if (_selector.selectedObject != (ISelectable)this) return;
             if (EventSystem.current.IsPointerOverGameObject()) return;
 
             var ray = CameraController.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Raycasts.SelectedTargetCanReachPoint(out var point))
+            if (Raycasts.SelectedTargetCanReachPoint(_selector.selectedObject, out var point))
             {
                 MoveTo(point);
             }

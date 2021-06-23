@@ -6,10 +6,10 @@ using UnityEngine.AI;
 
 public static class Raycasts
 {
-    public static bool SelectedTargetCanReachPoint(out Vector3 endPoint)
+    public static bool SelectedTargetCanReachPoint(ISelectable selectedObject, out Vector3 endPoint)
     {
         endPoint = new Vector3();
-        var startPos = SelectionController.currentTarget?.transform;
+        var startPos = selectedObject?.transform;
         if (startPos == null) return false;
 
         var ray = CameraController.main.ScreenPointToRay(Input.mousePosition);

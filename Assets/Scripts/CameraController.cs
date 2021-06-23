@@ -20,20 +20,21 @@ public class CameraController : MonoBehaviour
     [SerializeField] int minY = 4;
     [SerializeField] int maxY = 20;
 
-    void Awake() {
+    void Awake()
+    {
         main = _mainCamera;
     }
 
     void Update()
     {
-        if(_screensManager.isAnyScreenOpen) return;
-        
-        transform.Translate(Movement());
-        _mainCamera.transform.eulerAngles += Rotation(out var y);
-        transform.Rotate(0, y, 0);
+        if (_screensManager.isAnyScreenOpen) return;
+
+        MoveCamera();
+        RotateCameraX();
+        RotateCameraY();
     }
 
-    Vector3 Movement()
+    void MoveCamera()
     {
         float x = 0;
         float z = 0;
@@ -50,54 +51,62 @@ public class CameraController : MonoBehaviour
 
         if (ShouldMoveBack())
         {
-            z -=_moveSpeed * Time.deltaTime;
+            z -= _moveSpeed * Time.deltaTime;
         }
         else if (ShouldMoveForward())
         {
             z += _moveSpeed * Time.deltaTime;
         }
 
-        return new Vector3(x, y, z);
-    }
+        transform.Translate(new Vector3(x, y, z));
 
+    }
 
     float Scroll()
     {
         float deltaY = -Input.GetAxis("Mouse ScrollWheel") * _scrollSpeed;
         float updatedY = transform.position.y + deltaY;
-        
-        if(updatedY < minY || updatedY > maxY) {
+
+        if (updatedY < minY || updatedY > maxY)
+        {
             return 0f;
         }
-        else {
+        else
+        {
             return deltaY;
         }
     }
 
-    Vector3 Rotation(out float y)
+    void RotateCameraX()
     {
         float x = 0;
-        y = 0;
 
-        if(Input.GetKey(KeyCode.F))
+        if (Input.GetKey(KeyCode.F))
         {
             x += _rotationX * Time.deltaTime;
         }
-        if(Input.GetKey(KeyCode.R))
+        if (Input.GetKey(KeyCode.R))
         {
             x -= _rotationX * Time.deltaTime;
         }
-        if(Input.GetKey(KeyCode.Q))
+
+        _mainCamera.transform.eulerAngles += new Vector3(x, 0, 0);
+    }
+
+    void RotateCameraY()
+    {
+        float y = 0f;
+
+        if (Input.GetKey(KeyCode.Q))
         {
             y -= _rotationY * Time.deltaTime;
         }
-        if(Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.E))
         {
             y += _rotationY * Time.deltaTime;
         }
-        
-        return new Vector3(x, 0, 0);
-
+        transform.eulerAngles += new Vector3(0, y, 0);
+        //transform.Rotate(0, y, 0);
     }
 
     bool ShouldMoveForward()

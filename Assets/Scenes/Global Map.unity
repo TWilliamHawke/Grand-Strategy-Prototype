@@ -3164,7 +3164,7 @@ GameObject:
   - component: {fileID: 298410646}
   - component: {fileID: 298410645}
   m_Layer: 0
-  m_Name: CursorController
+  m_Name: CursorIconController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3188,6 +3188,7 @@ MonoBehaviour:
   _attackCursor: {fileID: 2800000, guid: 3985914a10f2fd84487ae6bbf6f6bd4f, type: 3}
   offsetX: 8
   offsetY: 10
+  _selector: {fileID: 11400000, guid: 04bfe5dd64d7f0d4db414263519d864c, type: 2}
 --- !u!4 &298410646
 Transform:
   m_ObjectHideFlags: 0
@@ -7038,6 +7039,7 @@ MonoBehaviour:
   _settlementName: {fileID: 1150049924}
   _garrisonView: {fileID: 866727944}
   _buildingsView: {fileID: 1894799796}
+  _selector: {fileID: 11400000, guid: 04bfe5dd64d7f0d4db414263519d864c, type: 2}
 --- !u!1 &790321783
 GameObject:
   m_ObjectHideFlags: 0
@@ -7638,6 +7640,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _armyPrefab: {fileID: 461273505364245872, guid: e2be6e16b1114b54088be607548baaec, type: 3}
+  _selector: {fileID: 11400000, guid: 04bfe5dd64d7f0d4db414263519d864c, type: 2}
 --- !u!114 &866727943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10317,6 +10320,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce1a45f52a861e54792dfc3be5ea6785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _selectableObjects:
+    serializedVersion: 2
+    m_Bits: 8
+  _selector: {fileID: 11400000, guid: 04bfe5dd64d7f0d4db414263519d864c, type: 2}
 --- !u!4 &1077111461
 Transform:
   m_ObjectHideFlags: 0

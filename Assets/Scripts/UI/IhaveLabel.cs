@@ -1,7 +1,7 @@
 using UnityEngine;
 
-public interface IhaveLabel {
+public interface IhaveLabel : ISelectable
+{
     string GetName();
-    Transform transform { get; }
     Color baseLabelColor { get; }
 }
