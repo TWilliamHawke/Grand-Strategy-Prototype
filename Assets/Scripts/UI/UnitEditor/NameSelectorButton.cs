@@ -55,6 +55,7 @@ public class NameSelectorButton : MonoBehaviour
         SetMaxIndex(names.Count);
     }
 
+    //button listener
     public void SetTextFromList()
     {
         if(nameIndex == maxIndex)

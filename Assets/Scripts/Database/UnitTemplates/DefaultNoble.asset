@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e57ce8b9bde88474789fdd5489b1e30f, type: 3}
   m_Name: DefaultNoble
   m_EditorClassIdentifier: 
-  namePrefix: 
-  nameCore: Knights
-  nameSuffix: 
+  _nameParts:
+    namePrefix: 
+    nameCore: Knights
+    nameSuffix: 
   unitClass: {fileID: 11400000, guid: 04fb349651a584445a59bc642f0a2253, type: 2}
   primaryWeapon: {fileID: 11400000, guid: 4557c909bd941ed4f92b264dc021d9a8, type: 2}
   secondaryWeapon: {fileID: 11400000, guid: 0194ea39561969549af0a3e86e45c62d, type: 2}
   armour: {fileID: 11400000, guid: bc5223d5e2ef29c4587d0da1debc1036, type: 2}
   shield: {fileID: 11400000, guid: d2a494a2317a66d40bf1895681701875, type: 2}
   mount: {fileID: 11400000, guid: fdb7ee7cc74c82f49848b4a3cf4749dc, type: 2}
-  canNotEdit: 1
+  _canNotEdit: 1

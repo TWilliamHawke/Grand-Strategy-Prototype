@@ -49,7 +49,7 @@ public class UnitSelectionButton : UIDataElement<UnitTemplate>, IPointerClickHan
 
         _thisButtonTemplate = data;
         _unitIcon.sprite = data.unitClass.defaultIcon;
-        _unitName.text = data.templateName;
+        _unitName.text = data.fullName;
         SetDefaultTooltip();
         CheckRequirementBuildings();
         CheckUnitCap();

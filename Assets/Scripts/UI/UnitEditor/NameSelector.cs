@@ -1,10 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 namespace UnitEditor
 {
@@ -25,7 +22,7 @@ namespace UnitEditor
         List<UnitNamePart> _typeNames;
         List<UnitNamePart> _equipmentNames;
 
-        private void OnEnable()
+        void OnEnable()
         {
             GetNames();
         }
@@ -36,15 +33,18 @@ namespace UnitEditor
             var main = _mainSelector.GetText();
             var suffix = _sufffixSelector.GetText();
 
-            if(main.Length < 3)
+            if (main.Length < 3)
             {
                 ShowWarningMessage();
                 return;
             }
 
-            _templateController.currentTemplate.namePrefix = prefix;
-            _templateController.currentTemplate.nameCore = main;
-            _templateController.currentTemplate.nameSuffix = suffix;
+            var names = new PartialName(prefix, main, suffix);
+            _templateController.currentTemplate.SetNames(names);
+
+            // _templateController.currentTemplate.namePrefix = prefix;
+            // _templateController.currentTemplate.nameCore = main;
+            // _templateController.currentTemplate.nameSuffix = suffix;
 
             _templateController.SaveTemplate();
 
@@ -67,7 +67,7 @@ namespace UnitEditor
 
         void GetNames()
         {
-            //TODO replace this shit
+            //HACK replace this shit
             //look at NameSelectorPart.cs
             _typeNames = _templateController.currentTemplate.GetPossibleNamesByType();
             _equipmentNames = _templateController.currentTemplate.GetPossibleNamesByEquipment();
@@ -75,45 +75,24 @@ namespace UnitEditor
             _prefixSelector.SetNames(GetPrefixes(_typeNames), GetPrefixes(_equipmentNames));
             _mainSelector.SetNames(GetMain(_typeNames), GetMain(_equipmentNames));
             _sufffixSelector.SetNames(GetSuffixes(_typeNames), GetSuffixes(_equipmentNames));
-            _prefixSelector.SetDefaultName(_templateController.currentTemplate.namePrefix);
-            _mainSelector.SetDefaultName(_templateController.currentTemplate.nameCore);
-            _sufffixSelector.SetDefaultName(_templateController.currentTemplate.nameSuffix);
+            _prefixSelector.SetDefaultName(_templateController.currentTemplate.nameParts.prefix);
+            _mainSelector.SetDefaultName(_templateController.currentTemplate.nameParts.main);
+            _sufffixSelector.SetDefaultName(_templateController.currentTemplate.nameParts.suffix);
         }
 
         List<string> GetPrefixes(List<UnitNamePart> namePartlist)
         {
-            var nameList = new List<string>();
-
-            foreach (var namePart in namePartlist)
-            {
-                nameList.AddRange(namePart.prefix);
-            }
-
-            return nameList;
+            return namePartlist.SelectMany(namepart => namepart.prefix).ToList();
         }
 
         List<string> GetMain(List<UnitNamePart> namePartlist)
         {
-            var nameList = new List<string>();
-
-            foreach (var namePart in namePartlist)
-            {
-                nameList.AddRange(namePart.main);
-            }
-
-            return nameList;
+            return namePartlist.SelectMany(namepart => namepart.main).ToList();
         }
 
         List<string> GetSuffixes(List<UnitNamePart> namePartlist)
         {
-            var nameList = new List<string>();
-
-            foreach (var namePart in namePartlist)
-            {
-                nameList.AddRange(namePart.suffix);
-            }
-
-            return nameList;
+            return namePartlist.SelectMany(namepart => namepart.suffix).ToList();
         }
     }
 

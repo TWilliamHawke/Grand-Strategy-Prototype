@@ -13,7 +13,7 @@ namespace Prebattle
 
         public override string GetTooltipText()
         {
-            return _template.templateName;
+            return _template.fullName;
         }
 
         public override void UpdateData(UnitTemplate data)

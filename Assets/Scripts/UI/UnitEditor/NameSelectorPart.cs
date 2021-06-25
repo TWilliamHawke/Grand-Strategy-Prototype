@@ -10,7 +10,6 @@ namespace UnitEditor
     //TODO make this class abstract and create 3 new for prefix, suffix and main
     public class NameSelectorPart : MonoBehaviour
     {
-
         [SerializeField] NameSelectorButton _typeButton;
         [SerializeField] NameSelectorButton _equipmentButton;
         [SerializeField] InputField _input;
@@ -21,7 +20,6 @@ namespace UnitEditor
         {
             _defaultName = name;
             SetInputText(_defaultName);
-            //_typeButton.SetNameIndex(1);
         }
 
         public void ClearInput()
@@ -33,6 +31,16 @@ namespace UnitEditor
         {
             _typeButton.SetNames(typeNames);
             _equipmentButton.SetNames(equipmentNames);
+        }
+
+        //UNDONE this method will replace upper "setnames"
+        public void SetNames(ITemplate template)
+        {
+            var typeNames = template.GetPossibleNamesByType();
+            var equipmentNames = template.GetPossibleNamesByEquipment();
+
+            var types = typeNames.SelectMany(t => t.suffix);
+
         }
 
         public string GetText()

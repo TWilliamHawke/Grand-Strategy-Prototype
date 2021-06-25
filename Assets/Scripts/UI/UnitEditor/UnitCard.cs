@@ -20,12 +20,12 @@ namespace UnitEditor
         {
             _unitTemplate = template;
             _imageForIcon.sprite = _unitTemplate.unitClass.defaultIcon;
-            _templateName.text = _unitTemplate.templateName;
+            _templateName.text = _unitTemplate.fullName;
         }
 
         public override string GetTooltipText()
         {
-            return _unitTemplate.templateName;
+            return _unitTemplate.fullName;
         }
 
         public void OnPointerClick(PointerEventData eventData)

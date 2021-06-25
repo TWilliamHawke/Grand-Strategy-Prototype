@@ -9,12 +9,12 @@ namespace UnitEditor
     {
         //events
         public event UnityAction<UnitTemplate> OnTemplateChange;
-        public event UnityAction<UnitTemplate> OnTemplateSave;
         public event UnityAction OnTemplateSelection;
         public event UnityAction OnBuildingsChange;
 
         [SerializeField] UnitTemplate _emptyTemplate;
         [SerializeField] TechnologiesController _techController;
+        [SerializeField] UnitsListController _unitList;
 
         UnitTemplate _defaultTemplate;
         UnitTemplate _currentTemplate;
@@ -34,7 +34,7 @@ namespace UnitEditor
 
         public void SaveTemplate()
         {
-            OnTemplateSave?.Invoke(_currentTemplate);
+            _currentTemplate.Save(_unitList);
         }
 
         public void SelectTemplate(UnitTemplate template)

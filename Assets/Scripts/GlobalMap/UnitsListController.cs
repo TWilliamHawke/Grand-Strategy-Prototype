@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnitEditor;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "UnitListController", menuName = "Core Game/Unit List Controller")]
+[CreateAssetMenu(fileName = "UnitListController", menuName = "Core Game/Unit List")]
 public class UnitsListController : ScriptableObject
 {
     [SerializeField] List<UnitTemplate> _defaultUnits;
     [SerializeField] List<UnitTemplate> _mecrcenaryUnits;
     [SerializeField] TemplateController _templateController;
+    //HACK this value should store in special config class
     [SerializeField] int _maxUnitsPerArmy = 7;
 
     List<UnitTemplate> _currentTemplates = new List<UnitTemplate>();
@@ -19,22 +20,17 @@ public class UnitsListController : ScriptableObject
 
     void OnEnable()
     {
-        _templateController.OnTemplateSave += SaveTemplate;
         _currentTemplates.Clear();
         _currentTemplates.AddRange(_defaultUnits);
     }
 
-    void OnDisable()
-    {
-        _templateController.OnTemplateSave += SaveTemplate;
-    }
-
+    //HACK move this somewhere
     public bool ForceIsFull(IHaveUnits unitsOwner)
     {
         return unitsOwner.unitList.Count >= _maxUnitsPerArmy;
     }
 
-    void SaveTemplate(UnitTemplate savedTemplate)
+    public void SaveUnitTemplate(UnitTemplate savedTemplate)
     {
         var template = savedTemplate.Clone();
 
@@ -44,17 +40,17 @@ public class UnitsListController : ScriptableObject
         }
         else
         {
-            ReplaceTemplate(template);
+            ReplaceExistingTemplate(template);
         }
     }
 
     void AddTemplateAsNew(UnitTemplate template)
     {
-        template.canNotEdit = false;
+        template.AllowEdit();
         _currentTemplates.Add(template);
     }
 
-    void ReplaceTemplate(UnitTemplate template)
+    void ReplaceExistingTemplate(UnitTemplate template)
     {
         for (int i = 0; i < _currentTemplates.Count; i++)
         {

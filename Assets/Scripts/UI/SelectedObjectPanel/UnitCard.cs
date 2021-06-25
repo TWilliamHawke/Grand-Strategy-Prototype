@@ -27,7 +27,7 @@ public class UnitCard : UIDataElement<Unit>, IPointerClickHandler
 
     public override string GetTooltipText()
     {
-        return _unittemplate.templateName;
+        return _unittemplate.fullName;
     }
 
     public void Select()

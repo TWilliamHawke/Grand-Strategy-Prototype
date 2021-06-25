@@ -12,14 +12,6 @@ using UnityEngine;
 
         public bool isUnlocked => _requiredTechnology?.isResearched ?? true;
 
-        void OnEnable()
-        {
-            if (unitNames == null)
-            {
-                Debug.LogError($"Equipment {name} doesn't have any unit names!");
-            }
-        }
-
         public bool ConvertTo<T>(out T item) where T : Equipment
         {
             if (this is T)

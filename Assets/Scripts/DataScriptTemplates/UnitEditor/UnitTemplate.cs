@@ -4,15 +4,35 @@ using System.Linq;
 using Effects;
 using System.Text.RegularExpressions;
 
-[CreateAssetMenu(fileName = "UnitTemplate", menuName = "Unit Editor/Unit Template", order = 3)]
-public class UnitTemplate : ScriptableObject
+public interface ITemplate : IRequireBuildings
 {
-    public string templateName => GetFullName();
+    string fullName { get; }
+    bool canNotEdit { get; }
+    List<UnitNamePart> GetPossibleNamesByEquipment();
+    List<UnitNamePart> GetPossibleNamesByType();
+    void Save(UnitsListController unitsListController);
+}
 
-    [Header("Name Parts")]
-    public string namePrefix;
-    public string nameCore;
-    public string nameSuffix;
+public interface IPrototype<T> where T : class
+{
+    T Clone();
+}
+
+public interface IRequireBuildings
+{
+    List<Building> requiredBuildings { get; }
+
+    void AddRequiredBuildings(Building building);
+    bool TryRemoveRequiredBuiding(Building building);
+    List<Effect> FindBuildingsEffects();
+}
+
+[CreateAssetMenu(fileName = "UnitTemplate", menuName = "Unit Editor/Unit Template", order = 3)]
+public class UnitTemplate : ScriptableObject, ITemplate
+{
+    public string fullName => _nameParts.GetFullName();
+
+    [SerializeField] PartialName _nameParts;
     [Space(10)]
     public UnitClass unitClass;
     [Header("Equipment")]
@@ -21,11 +41,12 @@ public class UnitTemplate : ScriptableObject
     public ArmourInfo armour;
     public Shield shield;
     public Mount mount;
-    public bool canNotEdit;
+    [SerializeField] bool _canNotEdit;
 
     List<Building> _requiredBuildings = new List<Building>();
 
     //getters
+    public PartialName nameParts => _nameParts;
     public int health => mount?.health != 0 ? mount.health : unitClass.health;
     public int speed => GetSpeed();
     public int damage => primaryWeapon.damage;
@@ -33,6 +54,7 @@ public class UnitTemplate : ScriptableObject
     public int attack => unitClass.weaponSkill;
     public int charge => (primaryWeapon as MeleeWeapon)?.charge ?? 0;
     public bool isRange => primaryWeapon is RangeWeapon || secondaryWeapon is RangeWeapon;
+    public bool canNotEdit => _canNotEdit;
 
     public List<Building> requiredBuildings => unitClass.requiredBuildings.Concat(_requiredBuildings).ToList();
 
@@ -64,18 +86,9 @@ public class UnitTemplate : ScriptableObject
         var instance = Instantiate(this);
         //after Instantiation object loses all required buldings
         //so they should be copy from current object
-        instance.ReplaceReqRequiredBuildings(_requiredBuildings);
+        instance.ReplaceRequiredBuildings(_requiredBuildings);
 
         return instance;
-    }
-
-    public void ReplaceReqRequiredBuildings(List<Building> buildings)
-    {
-        _requiredBuildings.Clear();
-        foreach(var building in buildings)
-        {
-            _requiredBuildings.Add(building);
-        }
     }
 
     public void AddRequiredBuildings(Building building)
@@ -90,7 +103,22 @@ public class UnitTemplate : ScriptableObject
 
     public List<Effect> FindBuildingsEffects()
     {
-        return requiredBuildings.SelectMany(t => t.effects).ToList();;
+        return requiredBuildings.SelectMany(t => t.effects).ToList();
+    }
+
+    public void SetNames(PartialName names)
+    {
+        _nameParts = names;
+    }
+
+    public void AllowEdit()
+    {
+        _canNotEdit = false;
+    }
+
+    public void Save(UnitsListController unitsListController)
+    {
+        unitsListController.SaveUnitTemplate(this);
     }
 
     int GetSpeed()
@@ -101,13 +129,10 @@ public class UnitTemplate : ScriptableObject
         return Mathf.CeilToInt(dismountedSpeed);
     }
 
-    string GetFullName()
+    void ReplaceRequiredBuildings(List<Building> buildings)
     {
-        var name = $"{namePrefix} {nameCore} {nameSuffix}".Trim();
-        var capitalizedName = name.First().ToString().ToUpper() + name.Substring(1);
-
-        var regex = new Regex(@" -");
-
-        return regex.Replace(capitalizedName, "-");
+        _requiredBuildings.Clear();
+        _requiredBuildings.AddRange(buildings);
     }
+
 }

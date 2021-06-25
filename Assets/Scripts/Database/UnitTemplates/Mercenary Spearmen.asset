@@ -12,13 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e57ce8b9bde88474789fdd5489b1e30f, type: 3}
   m_Name: Mercenary Spearmen
   m_EditorClassIdentifier: 
-  namePrefix: Mercenary
-  nameCore: Spearmen
-  nameSuffix: 
+  _nameParts:
+    namePrefix: Mercenary
+    nameCore: Spearmen
+    nameSuffix: 
   unitClass: {fileID: 11400000, guid: 26bee94de4d2f964f8bcaeeaee8b7c65, type: 2}
   primaryWeapon: {fileID: 11400000, guid: f3bea56c5b27f4b46927057d0fed34aa, type: 2}
   secondaryWeapon: {fileID: 11400000, guid: 098530b35241a8a48bca35bcc5c739d1, type: 2}
   armour: {fileID: 11400000, guid: 99c95bdd95a816a41b51825d2c4694b6, type: 2}
   shield: {fileID: 11400000, guid: 2441ab32927d5c04996863dd1f63dd54, type: 2}
   mount: {fileID: 11400000, guid: 270a156b27e97784588c1f856abfaa5f, type: 2}
-  canNotEdit: 1
+  _canNotEdit: 1

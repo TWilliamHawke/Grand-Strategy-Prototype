@@ -46,20 +46,6 @@ namespace UnitEditor
             return _tooltipText;
         }
 
-        public void SetInactiveDueGold()
-        {
-            SetInactive();
-            _tooltipText = "<color=red>Not enough gold</color>";
-            _itemCost.color = Color.red;
-        }
-
-        public void SetInactiveDueSkill()
-        {
-            SetInactive();
-            _tooltipText = "<color=red>Weapon skill is too low</color>";
-            _weaponSkillText.color = Color.red;
-        }
-
         void SetWeaponSkill()
         {
             if (_itemData is RequireSkillEquipment)
@@ -94,6 +80,20 @@ namespace UnitEditor
             {
                 SetInactiveDueSkill();
             }
+        }
+
+        void SetInactiveDueGold()
+        {
+            SetInactive();
+            _tooltipText = "<color=red>Not enough gold</color>";
+            _itemCost.color = Color.red;
+        }
+
+        void SetInactiveDueSkill()
+        {
+            SetInactive();
+            _tooltipText = "<color=red>Weapon skill is too low</color>";
+            _weaponSkillText.color = Color.red;
         }
 
         void SetInactive()

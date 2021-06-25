@@ -82,6 +82,7 @@
      <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSelectionButton.cs" />
      <Compile Include="Assets\Scripts\UI\FactionScreen.cs" />
      <Compile Include="Assets\Scripts\UI\BattleField\TimerPanel.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\GlobalMapSelectable.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\ArmorSlot.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\TemplateController.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitTemplateViewer.cs" />
@@ -178,7 +179,7 @@
      <Compile Include="Assets\Scripts\DataScriptTemplates\EffectsContainer.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Unit.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TimeManager.cs" />
-     <Compile Include="Assets\Scripts\GlobalMap\GlobalMapSelectable.cs" />
+     <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\PartialName.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Programs/unity/2020.3.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

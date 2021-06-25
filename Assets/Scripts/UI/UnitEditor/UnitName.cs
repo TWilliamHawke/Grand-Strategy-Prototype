@@ -20,7 +20,7 @@ public class UnitName : MonoBehaviour
 
     void UpdateUnitName(UnitTemplate template)
     {
-        _unitName.text = template.templateName;
+        _unitName.text = template.fullName;
     }
 }
 
