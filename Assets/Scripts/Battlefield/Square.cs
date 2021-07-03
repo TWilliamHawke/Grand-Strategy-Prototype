@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Battlefield
 {
     public class Square : MonoBehaviour
     {
+        static public event UnityAction<Square> OnPointerHide;
+        
         [SerializeField] List<MeshRenderer> _frame;
         [SerializeField] BattleRules _rules;
         [SerializeField] Transform _pointer;
@@ -17,6 +20,8 @@ namespace Battlefield
         public bool EnemyOnSquare { get; set; } = false;
 
         Directions _currentDirection = 0;
+        public Directions currentDirection => _currentDirection;
+
 
         void Awake()
         {
@@ -76,7 +81,8 @@ namespace Battlefield
             if (_currentDirection != newDirection)
             {
                 float angleY = directionIndex * 45;
-                _pointer.transform.eulerAngles = new Vector3(0, angleY, 0);
+                //_pointer.transform.eulerAngles = new Vector3(0, angleY, 0);
+                _pointer.transform.rotation = Quaternion.Euler(0, angleY, 0);
                 UpdateFrameColors(directionIndex);
                 _currentDirection = newDirection;
             }
@@ -97,6 +103,7 @@ namespace Battlefield
         public void HidePointer()
         {
             _pointer.gameObject.SetActive(false);
+            OnPointerHide?.Invoke(this);
         }
 
         public void ShowPointer()
@@ -108,7 +115,8 @@ namespace Battlefield
         {
             _pathArrow.gameObject.SetActive(true);
             float angleY = (int)direction * 45;
-            _pathArrow.transform.eulerAngles = new Vector3(0, angleY, 0);
+            //_pathArrow.transform.eulerAngles = new Vector3(0, angleY, 0);
+            _pathArrow.transform.rotation = Quaternion.Euler(0, angleY, 0);
         }
 
         public void RotatePathArrow(Square square)

@@ -20,7 +20,6 @@ namespace Battlefield
         {
             _unitsController.KillRandomUnit();
             _progress = 1f - (float)_unitsController.numOfUnits / 60;
-            Debug.Log(_unitsController.numOfUnits);
         }
 
         public override void OnExit()

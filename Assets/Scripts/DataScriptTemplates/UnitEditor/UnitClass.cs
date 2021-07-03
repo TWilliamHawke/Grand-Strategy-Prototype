@@ -11,6 +11,8 @@ public class UnitClass : ScriptableObject
     public string className;
     public UnitNamePart possibleNames;
     public int wealth;
+    [TextArea]
+    [SerializeField] string _description;
     [Header("Battle Stats")]
     public int weaponSkill;
     public int unitSize;
@@ -21,6 +23,8 @@ public class UnitClass : ScriptableObject
     public Sprite defaultIcon;
     public Sprite unitPreview;
     public List<Building> requiredBuildings;
+
+    public string description => _description;
 
     private void OnEnable()
     {

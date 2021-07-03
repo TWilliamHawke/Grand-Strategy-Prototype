@@ -16,6 +16,7 @@ MonoBehaviour:
   unitNames: {fileID: 11400000, guid: c3398f372821fe4429c2cd50cdaab849, type: 2}
   sprite: {fileID: 21300000, guid: 27be90d0e3a50734d94ccdddcb45cd8f, type: 3}
   goldCost: 50
+  _requiredTechnology: {fileID: 0}
   requiredSkill: 10
   damage: 10
   armorPiercing: 0

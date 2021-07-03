@@ -9,57 +9,88 @@ namespace UnitEditor
     {
         [SerializeField] TemplateController _templateController;
         [SerializeField] ItemSlotController _itemSlotController;
+        [SerializeField] WeaponSkillSlider _slider;
+        
+        [Header("UI Elements")]
         [SerializeField] Text _classNameText;
-        [SerializeField] Text _weaponSkillText;
+        [SerializeField] Text _meleeSkillText;
+        [SerializeField] Text _rangeSkillText;
         [SerializeField] Text _wealthText;
+        [SerializeField] Button _weaponSkillsButton;
 
-        UnitClass _unitClass;
         int _equipmentCost;
         int _classWealth;
+        int _meleeSkill;
+        int _rangeSkill;
+
+        void OnDisable()
+        {
+            _slider.Hide();
+        }
 
         private void OnDestroy()
         {
             _templateController.OnTemplateChange -= UpdateClassInfo;
-            _templateController.OnBuildingsChange -= SetWealth;
+            _templateController.OnBuildingsChange -= SetWealthAndSkills;
             _itemSlotController.OnEquipmentCostChange -= SetEquipmentCost;
         }
 
         public void Init()
         {
+            _weaponSkillsButton.onClick.AddListener(_slider.Show);
             _templateController.OnTemplateChange += UpdateClassInfo;
-            _templateController.OnBuildingsChange += SetWealth;
+            _templateController.OnBuildingsChange += SetWealthAndSkills;
             _itemSlotController.OnEquipmentCostChange += SetEquipmentCost;
         }
 
         public void UpdateClassInfo(UnitTemplate template)
         {
-            _unitClass = template.unitClass;
-
-            var weaponSkill = template.unitClass.weaponSkill;
-            _weaponSkillText.text = weaponSkill.ToString();
-
-            SetWealth();
+            SetWealthAndSkills();
 
             string unitClass = template.unitClass.className;
             _classNameText.text = $"Class:{unitClass}";
         }
 
-        void SetWealth()
+        public void UpdateWeaponSkill(float sliderValue)
         {
+            //0 means melleeSkill = max, rangeSkill = 0
+            _rangeSkill = Mathf.RoundToInt(_itemSlotController.classSkill * sliderValue);
+            _meleeSkill = _itemSlotController.classSkill - _rangeSkill;
+
+            _meleeSkillText.text = _meleeSkill.ToString();
+            _rangeSkillText.text = _rangeSkill.ToString();
+
+        }
+
+        public void FinaliizeWeaponSkills()
+        {
+            _templateController.UpdateWeaponSkills(_meleeSkill);
+        }
+
+        void SetWealthAndSkills()
+        {
+            var _meleeSkill = _templateController.currentTemplate.meleeSkill;
+            var _rangeSkill = _templateController.currentTemplate.rangeSkill;
+            _meleeSkillText.text = _meleeSkill.ToString();
+            _rangeSkillText.text = _rangeSkill.ToString();
+
+            _slider.UpdateSliderValue(_meleeSkill, _rangeSkill);
+
             _classWealth = _templateController.realwealth;
-            UpdateText();
+            UpdateWealthText();
         }
 
         void SetEquipmentCost(int cost)
         {
             _equipmentCost = cost;
-            UpdateText();
+            UpdateWealthText();
         }
 
-        void UpdateText()
+        void UpdateWealthText()
         {
             _wealthText.text = $"{_equipmentCost}/{_classWealth}";
         }
+
     }
 
 }

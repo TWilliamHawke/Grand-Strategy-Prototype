@@ -15,6 +15,7 @@ MonoBehaviour:
   _templateController: {fileID: 11400000, guid: 1d3e4825f51cfb24aa948edcef859202, type: 2}
   _weapon:
   - {fileID: 11400000, guid: 098530b35241a8a48bca35bcc5c739d1, type: 2}
+  - {fileID: 11400000, guid: e91ed3445ff3fee4e8e78f7b6dcd188c, type: 2}
   - {fileID: 11400000, guid: ee4111bb6b09feb4e969734874638327, type: 2}
   - {fileID: 11400000, guid: 1c1b609bec31b3e4a8fe4ee1d0b0baff, type: 2}
   - {fileID: 11400000, guid: c90203e137988c1429f05608c83e21ee, type: 2}

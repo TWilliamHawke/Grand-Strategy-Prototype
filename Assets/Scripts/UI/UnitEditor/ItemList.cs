@@ -15,9 +15,11 @@ namespace UnitEditor
 
         void OnEnable()
         {
+            ClearLayout();
             _itemSlotController.OnItemSlotSelection += UpdateItemList;
             _templateController.OnBuildingsChange += UpdateLayout;
             _itemSlotController.OnItemReset += UpdateLayout;
+            _templateController.OnWeaponSkillChange += UpdateLayout;
         }
 
         void OnDisable()
@@ -25,6 +27,7 @@ namespace UnitEditor
             _itemSlotController.OnItemSlotSelection -= UpdateItemList;
             _templateController.OnBuildingsChange -= UpdateLayout;
             _itemSlotController.OnItemReset -= UpdateLayout;
+            _templateController.OnWeaponSkillChange -= UpdateLayout;
         }
 
         void UpdateItemList(List<Equipment> equipmentList)

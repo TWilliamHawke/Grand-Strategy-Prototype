@@ -38,7 +38,7 @@ namespace Battlefield
             }
         }
 
-        private void ChangeTroopsTargetPosition(Vector3 nextSquarePosition)
+        void ChangeTroopsTargetPosition(Vector3 nextSquarePosition)
         {
             Vector3 currentSquarePosition = _troopInfo.square.transform.position;
 
@@ -48,12 +48,12 @@ namespace Battlefield
             _troopInfo.targetPosition = targetPosition;
         }
 
-        private void ChangeTargetNode()
+        void ChangeTargetNode()
         {
             var targetNode = _troopInfo.path.Pop();
             targetNode.EnterTroop(_troopInfo);
             _troopInfo.square.HidePathArrow();
-            _troopInfo.square = targetNode.square;
+            _troopInfo.SetSquare(targetNode.square);
             ResetProgress();
         }
     }

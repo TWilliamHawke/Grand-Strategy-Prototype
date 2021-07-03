@@ -90,7 +90,7 @@ public class CameraController : MonoBehaviour
             x -= _rotationX * Time.deltaTime;
         }
 
-        _mainCamera.transform.eulerAngles += new Vector3(x, 0, 0);
+        _mainCamera.transform.Rotate(Vector3.right, x);
     }
 
     void RotateCameraY()
@@ -105,8 +105,8 @@ public class CameraController : MonoBehaviour
         {
             y += _rotationY * Time.deltaTime;
         }
-        transform.eulerAngles += new Vector3(0, y, 0);
-        //transform.Rotate(0, y, 0);
+        
+        transform.Rotate(Vector3.up, y);
     }
 
     bool ShouldMoveForward()

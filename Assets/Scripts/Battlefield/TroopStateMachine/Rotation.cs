@@ -22,16 +22,7 @@ namespace Battlefield
         {
             ResetProgress();
             _unitsController.SetIsWalkValue(true);
-            int deltaDirection = FindTargetDirection() - _troopInfo.direction;
-
-            if (deltaDirection > 4)
-            {
-                deltaDirection -= 8;
-            }
-            if (deltaDirection < -4)
-            {
-                deltaDirection += 8;
-            }
+            int deltaDirection = FindDelta();
 
             _troopInfo.rotationDirection = Mathf.Sign(deltaDirection);
             _currentProgress = 0;
@@ -40,6 +31,10 @@ namespace Battlefield
 
         public override void OnExit()
         {
+            if(_troopInfo.isSelected)
+            {
+                _troopInfo.UpdateSquareBorders();
+            }
             _unitsController.SetIsWalkValue(false);
         }
 
@@ -58,9 +53,27 @@ namespace Battlefield
             }
         }
 
+        //overrided in RotationToThread
         protected virtual Directions FindTargetDirection()
         {
             return _troopInfo.FindNextTargetDirection();
         }
+
+        int FindDelta()
+        {
+            int deltaDirection = FindTargetDirection() - _troopInfo.direction;
+
+            if (deltaDirection > 4)
+            {
+                deltaDirection -= 8;
+            }
+            if (deltaDirection < -4)
+            {
+                deltaDirection += 8;
+            }
+
+            return deltaDirection;
+        }
+
     }
 }

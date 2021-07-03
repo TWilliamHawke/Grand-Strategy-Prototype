@@ -27,7 +27,7 @@ namespace UnitEditor
             {
                 if (effect.AffectsItem(item))
                 {
-                    //both values is int, dont use "effect.costDecresePct/100" !!
+                    //all values are int, dont use "effect.costDecresePct/100" !!
                     currentCost *= effect.costDecresePct;
                     currentCost /= 100;
                 }

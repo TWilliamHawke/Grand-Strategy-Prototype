@@ -15,6 +15,7 @@ namespace UnitEditor
         [Header("UI Elements")]
         [SerializeField] Image _imageForIcon;
         [SerializeField] Text _templateName;
+        [SerializeField] Text _templateDescription;
 
         UnitEditorScreen _unitEditor;
 
@@ -34,6 +35,7 @@ namespace UnitEditor
         {
             _imageForIcon.sprite = _unitTemplate.unitClass.defaultIcon;
             _templateName.text = _unitTemplate.unitClass.className;
+            _templateDescription.text = _unitTemplate.unitClass.description;
         }
 
     }

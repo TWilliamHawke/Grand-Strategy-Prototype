@@ -34,7 +34,7 @@ namespace UnitEditor
         }
 
         //UNDONE this method will replace upper "setnames"
-        public void SetNames(ITemplate template)
+        public void SetNames(UnitTemplate template)
         {
             var typeNames = template.GetPossibleNamesByType();
             var equipmentNames = template.GetPossibleNamesByEquipment();

@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 namespace UnitEditor
 {
-    public abstract class AbstractItemSlot : UIElementWithTooltip, IPointerClickHandler, INeedInit
+    [RequireComponent(typeof(TooltipFromComponent))]
+    public abstract class AbstractItemSlot : MonoBehaviour,
+                IPointerClickHandler, INeedInit, ITooltipComponent
     {
         [SerializeField] ItemSlotController _itemSlotController;
         [SerializeField] TemplateController _templateController;
@@ -14,38 +16,45 @@ namespace UnitEditor
         [SerializeField] Text _itemName;
         [SerializeField] Image _itemIcon;
 
+        //getters
         protected ItemSlotController itemSlotController => _itemSlotController;
         protected TemplateController templateController => _templateController;
+
+        TooltipFromComponent _tooltip;
 
         int _itemCost = 0;
 
         public int itemCost
         {
             get => _itemCost;
+            //HACK require normal logic
             private set => SetItemCost(value);
         }
 
         Equipment _itemInSlot;
 
+        //abstract
         public virtual List<Equipment> itemsForSlot => _itemSlotController.weapon;
-
         protected abstract void AddItemToTemplate(Equipment item);
         protected abstract Equipment SelectItemFromTemplate(UnitTemplate template);
 
         void OnDestroy()
         {
             _templateController.OnTemplateChange -= UpdateSlotUI;
+            _templateController.OnWeaponSkillChange -= CheckItemRequirement;
             _templateController.OnBuildingsChange -= CheckItemRequirement;
         }
 
         public void Init()
         {
+            _tooltip = GetComponent<TooltipFromComponent>();
             _templateController.OnTemplateChange += UpdateSlotUI;
+            _templateController.OnWeaponSkillChange += CheckItemRequirement;
             _templateController.OnBuildingsChange += CheckItemRequirement;
             _itemSlotController.RegisterSlot(this);
         }
 
-        public override string GetTooltipText()
+        public string GetTooltipText()
         {
             string helpText = "\n\nRight click for clear slot";
             return _itemInSlot.GetToolTipText() + helpText;
@@ -72,12 +81,12 @@ namespace UnitEditor
 
         void ResetItemInSlot()
         {
-            HideTooltip();
+            _tooltip.HideTooltip();
             itemCost = 0;
             AddItemToTemplate(itemsForSlot[0]);
             _templateController.UpdateTemplate();
             _itemSlotController.ResetItem();
-            ShowTooltip();
+            _tooltip.ShowTooltip();
         }
 
         void CheckItemRequirement()
@@ -99,13 +108,19 @@ namespace UnitEditor
             }
 
             int requiredSkill = _templateController.FindRealSkillForItem(_itemInSlot);
-            
-            if (requiredSkill > _itemSlotController.classSkill)
+            if (requiredSkill == 0) return;
+
+            int classSkill = _itemInSlot is RangeWeapon ?
+                _templateController.currentTemplate.rangeSkill :
+                _templateController.currentTemplate.meleeSkill;
+
+            if (requiredSkill > classSkill)
             {
                 ResetItemInSlot();
             }
         }
 
+        // 
         void SetItemCost(int value)
         {
             _itemCost = value;

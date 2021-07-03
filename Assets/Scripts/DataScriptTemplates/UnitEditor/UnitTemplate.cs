@@ -2,33 +2,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Effects;
-using System.Text.RegularExpressions;
-
-public interface ITemplate : IRequireBuildings
-{
-    string fullName { get; }
-    bool canNotEdit { get; }
-    List<UnitNamePart> GetPossibleNamesByEquipment();
-    List<UnitNamePart> GetPossibleNamesByType();
-    void Save(UnitsListController unitsListController);
-}
-
-public interface IPrototype<T> where T : class
-{
-    T Clone();
-}
-
-public interface IRequireBuildings
-{
-    List<Building> requiredBuildings { get; }
-
-    void AddRequiredBuildings(Building building);
-    bool TryRemoveRequiredBuiding(Building building);
-    List<Effect> FindBuildingsEffects();
-}
+using UnitEditor;
 
 [CreateAssetMenu(fileName = "UnitTemplate", menuName = "Unit Editor/Unit Template", order = 3)]
-public class UnitTemplate : ScriptableObject, ITemplate
+public class UnitTemplate : ScriptableObject
 {
     public string fullName => _nameParts.GetFullName();
 
@@ -42,6 +19,7 @@ public class UnitTemplate : ScriptableObject, ITemplate
     public Shield shield;
     public Mount mount;
     [SerializeField] bool _canNotEdit;
+    [SerializeField] int _meleeSkill;
 
     List<Building> _requiredBuildings = new List<Building>();
 
@@ -50,13 +28,21 @@ public class UnitTemplate : ScriptableObject, ITemplate
     public int health => mount?.health != 0 ? mount.health : unitClass.health;
     public int speed => GetSpeed();
     public int damage => primaryWeapon.damage;
-    public int defence => armour.defence;
-    public int attack => unitClass.weaponSkill;
+    public int defence => 5 + _meleeSkill + armour.defence;
+    public int attack => 5 + _meleeSkill;
     public int charge => (primaryWeapon as MeleeWeapon)?.charge ?? 0;
     public bool isRange => primaryWeapon is RangeWeapon || secondaryWeapon is RangeWeapon;
     public bool canNotEdit => _canNotEdit;
 
     public List<Building> requiredBuildings => unitClass.requiredBuildings.Concat(_requiredBuildings).ToList();
+    
+    public int rangeSkill => unitClass.weaponSkill - _meleeSkill;
+    public int meleeSkill
+    {
+        get => _meleeSkill;
+        set => _meleeSkill = value;
+    }
+
 
     public List<UnitNamePart> GetPossibleNamesByType()
     {

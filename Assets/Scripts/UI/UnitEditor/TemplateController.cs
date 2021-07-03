@@ -11,6 +11,7 @@ namespace UnitEditor
         public event UnityAction<UnitTemplate> OnTemplateChange;
         public event UnityAction OnTemplateSelection;
         public event UnityAction OnBuildingsChange;
+        public event UnityAction OnWeaponSkillChange;
 
         [SerializeField] UnitTemplate _emptyTemplate;
         [SerializeField] TechnologiesController _techController;
@@ -41,6 +42,7 @@ namespace UnitEditor
         {
             _defaultTemplate = template;
             _currentTemplate = _defaultTemplate.Clone();
+
             OnTemplateSelection?.Invoke();
             UpdateTemplate();
         }
@@ -54,6 +56,12 @@ namespace UnitEditor
         public void UpdateTemplate()
         {
             OnTemplateChange?.Invoke(_currentTemplate);
+        }
+
+        public void UpdateWeaponSkills(int meleeSkill)
+        {
+            _currentTemplate.meleeSkill = meleeSkill;
+            OnWeaponSkillChange?.Invoke();
         }
 
         public void AddBuilding(Building building)

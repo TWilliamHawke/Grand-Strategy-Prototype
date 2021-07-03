@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class TextAreaTooltip : MonoBehaviour, IHaveTooltip, IPointerClickHandler
+public class TooltipFromTextArea : MonoBehaviour, IHaveTooltip, IPointerClickHandler
 {
     [SerializeField] TooltipController _tooltipController;
     [TextArea]

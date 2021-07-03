@@ -54,7 +54,7 @@ namespace Battlefield
         {
             while (_unsortedNodes.Count > 0)
             {
-                var nearestNode = FindNearestNode();
+                var nearestNode = FindNearestNodeFromUnsorted();
                 var neightborNodes = _battlefieldData.FindNeightborNodes(nearestNode);
 
                 foreach (var node in neightborNodes)
@@ -79,7 +79,7 @@ namespace Battlefield
             }
         }
 
-        Node FindNearestNode()
+        Node FindNearestNodeFromUnsorted()
         {
             Node nearestNode = _unsortedNodes[0];
 

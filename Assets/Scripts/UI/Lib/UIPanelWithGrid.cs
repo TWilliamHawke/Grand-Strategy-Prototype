@@ -18,10 +18,7 @@ public abstract class UIPanelWithGrid<T> : MonoBehaviour
 
     protected virtual void UpdateLayout()
     {
-        foreach (Transform children in _layout.transform)
-        {
-            Destroy(children.gameObject);
-        }
+        ClearLayout();
 
         foreach (var template in _layoutElementsData)
         {
@@ -32,6 +29,14 @@ public abstract class UIPanelWithGrid<T> : MonoBehaviour
 
     }
 
+    protected void ClearLayout()
+    {
+        foreach (Transform children in _layout.transform)
+        {
+            Destroy(children.gameObject);
+        }
+
+    }
 
 
 

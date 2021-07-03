@@ -8,9 +8,12 @@ namespace UnitEditor
     {
         [SerializeField] ItemSlotController _itemSlotController;
         [SerializeField] TemplateController _templateController;
+        [SerializeField] Sprite _meleeSkillSprite;
+        [SerializeField] Sprite _rangeSkillSprite;
 
         [Header("UI Elements")]
         [SerializeField] Image _itemIcon;
+        [SerializeField] Image _weaponSkillImage;
         [SerializeField] Text _itemName;
         [SerializeField] Text _itemCost;
         [SerializeField] Text _weaponSkillText;
@@ -38,7 +41,6 @@ namespace UnitEditor
 
             SetItemCost();
             SetWeaponSkill();
-
         }
 
         public override string GetTooltipText()
@@ -50,6 +52,7 @@ namespace UnitEditor
         {
             if (_itemData is RequireSkillEquipment)
             {
+                SetSkillSprite();
                 CheckWeaponSkill();
             }
             else
@@ -70,13 +73,29 @@ namespace UnitEditor
             }
         }
 
+        void SetSkillSprite()
+        {
+            if (_itemData is RangeWeapon)
+            {
+                _weaponSkillImage.sprite = _rangeSkillSprite;
+            }
+            else
+            {
+                _weaponSkillImage.sprite = _meleeSkillSprite;
+            }
+        }
+
         void CheckWeaponSkill()
         {
             int realSkill = _templateController.FindRealSkillForItem(_itemData);
 
             _weaponSkillText.text = realSkill.ToString();
+            
+            int classSkill = _itemData is RangeWeapon ?
+                _templateController.currentTemplate.rangeSkill:
+                _templateController.currentTemplate.meleeSkill;
 
-            if (realSkill > _itemSlotController.classSkill)
+            if (realSkill > classSkill)
             {
                 SetInactiveDueSkill();
             }

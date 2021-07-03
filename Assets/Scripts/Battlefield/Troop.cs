@@ -11,20 +11,27 @@ namespace Battlefield
         [SerializeField] MeshRenderer _selector;
         [SerializeField] BattlefieldData _battlefieldData;
         [SerializeField] bool _ownedByPlayer;
-        public bool ownedByPlayer => _ownedByPlayer;
-        [SerializeField] float _baseVisualSpeed = 1;
-        [SerializeField] float _rotationSpeed = 15;
+        [SerializeField] float _baseVisualSpeed = 1f;
+        [SerializeField] float _rotationSpeed = 15f;
 
+        //dynamic data
         float _visualSpeed = 1;
+        bool _isSelected = false;
+        Square _square;
+        Stack<Node> _path = new Stack<Node>();
+        Directions _targetSquareDirection;
+
+        public bool ownedByPlayer => _ownedByPlayer;
+        public bool isSelected => _isSelected;
 
         //position data
-        public Square square { get; set; }
         public Directions direction { get; set; }
-        public Stack<Node> path { get; private set; } = new Stack<Node>();
         public Vector3 targetPosition { get; set; }
+        public float rotationAngle { get; set; } = 0f;
+        public float rotationDirection { get; set; } = 0f;
         public Directions nextTargetDirection => FindNextTargetDirection();
-        public float rotationAngle { get; set; } = 0;
-        public float rotationDirection { get; set; } = 0;
+        public Stack<Node> path => _path;
+        public Square square => _square;
         public Node currentNode => _battlefieldData.FindNode(square);
 
         public UnitsController enemy { get; set; }
@@ -32,18 +39,24 @@ namespace Battlefield
         //cache
         UnitsController _unitsController;
 
-        private void Awake()
+        void Awake()
         {
+            Square.OnPointerHide += SetFinalTargetDirection;
             _unitsController = GetComponent<UnitsController>();
             SetRotation(direction);
 
             targetPosition = transform.position;
         }
 
+        void OnDestroy()
+        {
+            Square.OnPointerHide -= SetFinalTargetDirection;    
+        }
+
         void Start()
         {
-            square = _battlefieldData.FindSquare(this.gameObject);
-            if(!_ownedByPlayer)
+            _square = _battlefieldData.FindSquare(this.gameObject);
+            if (!_ownedByPlayer)
             {
                 SetRotation(Directions.south);
                 square.EnemyOnSquare = true;
@@ -59,18 +72,9 @@ namespace Battlefield
                 MoveToTarget();
             }
 
-            if(rotationAngle > Mathf.Epsilon)
+            if (rotationAngle > Mathf.Epsilon)
             {
-                float deltaAngle = _rotationSpeed * Time.deltaTime * _visualSpeed;
-                if(rotationAngle < 1f)
-                {
-                    deltaAngle = rotationAngle;
-                }
-
-                rotationAngle -= deltaAngle;
-                float newAngle = transform.rotation.eulerAngles.y + (deltaAngle * rotationDirection);
-
-                transform.eulerAngles = new Vector3(0, newAngle, 0);
+                RotateSquare();
             }
         }
 
@@ -80,27 +84,27 @@ namespace Battlefield
             SetRotation((int)direction);
         }
 
+        public void SetRotation(int direction)
+        {
+            transform.eulerAngles = new Vector3(0, direction * 45, 0);
+        }
+
         public Directions FindNextTargetDirection()
         {
-            if(path.Count == 0) return direction;
+            if (path.Count == 0) return _targetSquareDirection;
 
-            if(_battlefieldData.FindDirection(square, path.Peek()?.square, out var pathDirection))
+            if (_battlefieldData.FindDirection(square, path.Peek()?.square, out var pathDirection))
             {
                 return pathDirection;
             }
             return direction;
         }
 
-        public void SetRotation(int direction)
-        {
-            transform.eulerAngles = new Vector3(0, direction * 45, 0);
-        }
-
         public void TeleportTo(Square targetSquare)
         {
             targetPosition = square.transform.position;
             transform.position = square.transform.position;
-            square = targetSquare;
+            SetSquare(targetSquare);
         }
 
         public void ChangeVisualSpeed(Timer timer)
@@ -113,8 +117,9 @@ namespace Battlefield
         public void Select()
         {
             _indicator.SetSelectedBackground();
-            square.UpdateFrameColors(direction);
+            UpdateSquareBorders();
             ShowPath();
+            _isSelected = true;
         }
 
         public void Deselect()
@@ -122,6 +127,7 @@ namespace Battlefield
             _indicator.SetDefaultBackground();
             square.SetDefaultFrameColor();
             _battlefieldData.HideAllInfo();
+            _isSelected = false;
         }
 
         public void CreatePathTo(Square targetSquare)
@@ -135,16 +141,50 @@ namespace Battlefield
             else
             {
                 var pathFinder = new PathFinder(square, targetSquare, _battlefieldData);
-                path = pathFinder.GetPath();
+                _path = pathFinder.GetPath();
                 _unitsController.SetIsWalkValue(true);
             }
 
             _battlefieldData.HideAllInfo();
             ShowPath();
-
         }
 
-        private void MoveToTarget()
+        public void SetSquare(Square nextSquare)
+        {
+            square.SetDefaultFrameColor();
+            _square = nextSquare;
+            if(_isSelected)
+            {
+                UpdateSquareBorders();
+            }
+        }
+
+        public void UpdateSquareBorders()
+        {
+            _square.UpdateFrameColors(direction);
+        }
+
+        void SetFinalTargetDirection(Square square)
+        {
+            if(_isSelected == false) return;
+            _targetSquareDirection = square.currentDirection;
+        }
+
+        void RotateSquare()
+        {
+            float deltaAngle = _rotationSpeed * Time.deltaTime * _visualSpeed;
+            if (rotationAngle < 1f)
+            {
+                deltaAngle = rotationAngle;
+            }
+
+            rotationAngle -= deltaAngle;
+            float newAngle = transform.rotation.eulerAngles.y + (deltaAngle * rotationDirection);
+
+            transform.eulerAngles = new Vector3(0, newAngle, 0);
+        }
+
+        void MoveToTarget()
         {
             float speed = _visualSpeed * Time.deltaTime;
             var nextPosition = Vector3.MoveTowards(transform.position, targetPosition, speed);

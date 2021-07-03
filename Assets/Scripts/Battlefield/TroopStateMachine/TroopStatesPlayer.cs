@@ -23,6 +23,7 @@ namespace Battlefield
             At(ready, movement, ReachTarget);
             At(rotation, ready, HasNewDirection);
             At(movement, ready, HasNewTarget);
+            At(movement, rotation, ReachDirectionAndHasTarget);
             At(ready, rotation, ReachDirection);
             At(charge, movement, EnemyOnTargetSquare);
             At(fight, charge, ReachTarget);
@@ -34,6 +35,7 @@ namespace Battlefield
             bool EnemyOnTargetSquare() => _troopInfo.path.Peek()?.square.EnemyOnSquare == true && ReachDirection();
             bool HasNewTarget() => _troopInfo.path.Count > 0;
             bool ReachTarget() => _troopInfo.path.Count == 0;
+            bool ReachDirectionAndHasTarget() => ReachDirection() && HasNewTarget();
             //bool AttackEnemy() => _troopInfo.enemy != null && _troopInfo.enemy.numOfUnits > 0;
             bool WinFight() => _troopInfo.enemy?.numOfUnits == 0;
             bool UnitsOnPosition() => _unitsController.unitsOnPosition;

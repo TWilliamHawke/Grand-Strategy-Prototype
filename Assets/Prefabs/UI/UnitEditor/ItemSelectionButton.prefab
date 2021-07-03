@@ -275,7 +275,10 @@ MonoBehaviour:
   _tooltipController: {fileID: 11400000, guid: c29eeb31eaa786747816d0e7ef376b1d, type: 2}
   _itemSlotController: {fileID: 11400000, guid: 57aecc2247440ae4b91fca008085453a, type: 2}
   _templateController: {fileID: 11400000, guid: 1d3e4825f51cfb24aa948edcef859202, type: 2}
+  _meleeSkillSprite: {fileID: 21300000, guid: 2c23b363708ae22469e810f3b694a85b, type: 3}
+  _rangeSkillSprite: {fileID: 21300000, guid: 207212dc9aaa4dd4f98e3fc2938b3db6, type: 3}
   _itemIcon: {fileID: 872826098282234858}
+  _weaponSkillImage: {fileID: 9070710002775024765}
   _itemName: {fileID: 872826097714146373}
   _itemCost: {fileID: 872826098388811870}
   _weaponSkillText: {fileID: 6319116389715928809}
@@ -504,7 +507,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a0928a0ff38ad9742b10dea9cb0b93b9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 207212dc9aaa4dd4f98e3fc2938b3db6, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

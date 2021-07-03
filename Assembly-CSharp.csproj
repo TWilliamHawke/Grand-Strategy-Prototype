@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitList.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\MountSlot.cs" />
      <Compile Include="Assets\Scripts\UI\BuildingsView\BuildingPreviewEditor.cs" />
+     <Compile Include="Assets\Scripts\UI\Tooltip\ITooltipComponent.cs" />
      <Compile Include="Assets\Scripts\UI\TechnologyScreen\TechnologyButton.cs" />
      <Compile Include="Assets\Scripts\Battlefield\Square.cs" />
      <Compile Include="Assets\Scripts\UI\TechnologyScreen\TechnologyScreen.cs" />
@@ -126,6 +127,7 @@
      <Compile Include="Assets\Scripts\UI\INeedInit.cs" />
      <Compile Include="Assets\Scripts\UI\UIScreensManager.cs" />
      <Compile Include="Assets\Scripts\UI\SelectedObjectPanel\RecruitmentPanel.cs" />
+     <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\PartialName.cs" />
      <Compile Include="Assets\Scripts\UI\SelectedObjectPanel\BuildingsView.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\SkirmishController.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\UnitClass.cs" />
@@ -151,6 +153,7 @@
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Rotation.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\StateMachine.cs" />
      <Compile Include="Assets\Scripts\UI\SelectedObjectPanel\UnitListPanel.cs" />
+     <Compile Include="Assets\Scripts\UI\Tooltip\TooltipFromComponent.cs" />
      <Compile Include="Assets\Scripts\UI\SelectedObjectPanel\GarrisonView.cs" />
      <Compile Include="Assets\Scripts\UI\BattleField\FightProgress.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Fight.cs" />
@@ -169,7 +172,7 @@
      <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\Interfaces\IEffectChangeUnitClass.cs" />
      <Compile Include="Assets\Scripts\UI\BuildingsView\BuildingPreview.cs" />
      <Compile Include="Assets\Scripts\Battlefield\PathFinder.cs" />
-     <Compile Include="Assets\Scripts\UI\Tooltip\TextAreaTooltip.cs" />
+     <Compile Include="Assets\Scripts\UI\Tooltip\TooltipFromTextArea.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\TroopStatesPlayer.cs" />
      <Compile Include="Assets\Scripts\UI\LabelController.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\TroopStatesAI.cs" />
@@ -179,7 +182,7 @@
      <Compile Include="Assets\Scripts\DataScriptTemplates\EffectsContainer.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Unit.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TimeManager.cs" />
-     <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\PartialName.cs" />
+     <Compile Include="Assets\Scripts\UI\UnitEditor\WeaponSkillSlider.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Programs/unity/2020.3.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

@@ -49,7 +49,5 @@ public class Node
     public void EnterTroop(Troop troop)
     {
         OnTroopEnter?.Invoke(troop, this);
-                    Debug.Log("enter");
-
     }
 }
