@@ -39,8 +39,8 @@ namespace Battlefield
             _timer.OnSpeedChange -= _troopInfo.ChangeVisualSpeed;
         }
 
-        protected void At(IState to, IState from, Func<bool> condition) =>
-            _stateMachine.AddTransition(from, to, condition);
+        protected void Go(IState from, Func<bool> reason, IState to) =>
+            _stateMachine.AddTransition(from, to, reason);
 
 
         public void ToggleDisplay(bool state)

@@ -36,6 +36,8 @@ public class ArmyCreator : MonoBehaviour
     {
         var newArmy = Instantiate(_armyPrefab, _garrisonView.settlementPosition, Quaternion.identity);
         newArmy.unitList = _garrisonView.GetSelectedUnits();
+        newArmy.SetName(_garrisonView.settlementName);
+        
         _garrisonView.RemoveSelectedUnitsFromOwner();
         _selector.Select(newArmy);
         newArmy.MoveTo(targetPoint);

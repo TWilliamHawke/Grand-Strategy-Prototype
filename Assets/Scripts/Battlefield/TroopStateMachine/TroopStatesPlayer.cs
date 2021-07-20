@@ -19,16 +19,16 @@ namespace Battlefield
             var fight = new Fight(_unitsController, this);
             var victory = new Victory(_unitsController);
 
-            At(rotation, movement, HasNewDirection);
-            At(ready, movement, ReachTarget);
-            At(rotation, ready, HasNewDirection);
-            At(movement, ready, HasNewTarget);
-            At(movement, rotation, ReachDirectionAndHasTarget);
-            At(ready, rotation, ReachDirection);
-            At(charge, movement, EnemyOnTargetSquare);
-            At(fight, charge, ReachTarget);
-            At(victory, fight, WinFight);
-            At(ready, victory, UnitsOnPosition);
+            Go(movement, HasNewDirection, rotation);
+            Go(movement, ReachTarget, ready);
+            Go(ready, HasNewDirection, rotation);
+            Go(ready, HasNewTarget, movement);
+            Go(rotation, ReachDirectionAndHasTarget, movement);
+            Go(rotation, ReachDirection, ready);
+            Go(movement, EnemyOnTargetSquare, charge);
+            Go(charge, ReachTarget, fight);
+            Go(fight, WinFight, victory);
+            Go(victory, UnitsOnPosition, ready);
 
             bool HasNewDirection() => _troopInfo.nextTargetDirection != _troopInfo.direction;
             bool ReachDirection() => _troopInfo.nextTargetDirection == _troopInfo.direction;

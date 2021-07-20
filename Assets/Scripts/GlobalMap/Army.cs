@@ -22,6 +22,9 @@ public class Army : MonoBehaviour, ISelectable, IHaveUnits
 
     public List<Unit> unitList { get; set; } = new List<Unit>();
 
+    public string localizedName => _armyName;
+    string _armyName = "EmptyName";
+
     public void Deselect()
     {
         _selectionIndicator.gameObject.SetActive(false);
@@ -43,6 +46,11 @@ public class Army : MonoBehaviour, ISelectable, IHaveUnits
     {
         CheckDistance();
         MoveToClick();
+    }
+
+    public void SetName(string settlementName)
+    {
+        _armyName = $"Army from {settlementName}";
     }
 
     public void MoveTo(Vector3 targetPoint)

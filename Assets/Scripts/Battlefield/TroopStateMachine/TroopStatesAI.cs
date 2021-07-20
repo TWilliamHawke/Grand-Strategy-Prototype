@@ -24,10 +24,10 @@ namespace Battlefield
             var defeat = new Defeat(_unitsController, this);
             var dead = new Dead();
 
-            At(defeat, ready, IsUnderAttack());
-            At(dead, defeat, TroopIsDefeated());
-            At(rotation, ready, ThreadToFlank());
-            At(ready, rotation, FlanksIsDefended());
+            Go(ready, IsUnderAttack(), defeat);
+            Go(defeat, TroopIsDefeated(), dead);
+            Go(ready, ThreadToFlank(), rotation);
+            Go(rotation, FlanksIsDefended(), ready);
 
             Func<bool> IsUnderAttack() => () => _enemyDetector.IsAttacked;
             Func<bool> ThreadToFlank() => () => _enemyDetector.threadDirection != _troopInfo.direction;

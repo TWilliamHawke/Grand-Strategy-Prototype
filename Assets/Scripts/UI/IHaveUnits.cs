@@ -4,6 +4,7 @@ using UnityEngine.Events;
 
 public interface IHaveUnits
 {
+    string localizedName { get; }
     List<Unit> unitList { get; }
     void AddUnit(UnitTemplate template);
     void RemoveUnit(Unit unit);

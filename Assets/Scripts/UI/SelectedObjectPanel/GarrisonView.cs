@@ -7,6 +7,7 @@ public class GarrisonView : UnitListPanel
 {
     public Vector3 settlementPosition => _unitsOwner.transform.position;
     public bool AnyCardSelected() => selectedCards.Count != 0;
+    public string settlementName => _unitsOwner.localizedName;
 
     [SerializeField] Button _addUnitButton;
     [SerializeField] RecruitmentPanel _unitSelector;
