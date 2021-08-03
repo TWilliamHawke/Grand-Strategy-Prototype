@@ -29,7 +29,7 @@ namespace Battlefield
             _timer.OnTick += _stateMachine.Tick;
             _timer.OnSpeedChange += _troopInfo.ChangeVisualSpeed;
 
-            _stateMachine.OnStateIconChange += _display.ChangeStateIcon;
+            _stateMachine.OnStateChange += _display.ChangeStateIcon;
             _stateMachine.OnStateProgressChange += _display.UpdateProgress;
         }
 

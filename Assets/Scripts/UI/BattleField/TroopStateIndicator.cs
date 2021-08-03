@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Battlefield;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,9 +42,9 @@ public class TroopStateIndicator : MonoBehaviour
         _progressBar.fillAmount = progress;
     }
 
-    public void ChangeStateIcon(Sprite sprite)
+    public void ChangeStateIcon(IState state)
     {
-        _stateIcon.sprite = sprite;
+        _stateIcon.sprite = state.stateIcon;
     }
 
     IEnumerator ChangeToPct(float pct)

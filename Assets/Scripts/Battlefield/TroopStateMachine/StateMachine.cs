@@ -9,12 +9,14 @@ namespace Battlefield
     public class StateMachine
     {
         IState _currentState;
+
+
         Dictionary<Type, List<Transition>> _transitions = new Dictionary<Type, List<Transition>>();
         List<Transition> _currentTransitions = new List<Transition>();
         List<Transition> _anyTransitions = new List<Transition>();
         static List<Transition> _emptyTransitions = new List<Transition>();
 
-        public event UnityAction<Sprite> OnStateIconChange;
+        public event UnityAction<IState> OnStateChange;
         public event UnityAction<float> OnStateProgressChange;
 
         public void Tick()
@@ -44,7 +46,7 @@ namespace Battlefield
             }
 
             _currentState.OnEnter();
-            OnStateIconChange?.Invoke(_currentState.stateIcon);
+            OnStateChange?.Invoke(_currentState);
             OnStateProgressChange?.Invoke(0f);
         }
 
@@ -56,7 +58,8 @@ namespace Battlefield
                 _transitions[from.GetType()] = transitions;
             }
 
-            transitions.Add(new Transition(to, predicate));
+            var newTransition = new Transition(to, predicate);
+            transitions.Add(newTransition);
         }
 
         public void AddAnyTransition(IState state, Func<bool> predicate)
@@ -80,13 +83,18 @@ namespace Battlefield
         {
             foreach (var transition in _anyTransitions)
             {
-                if (transition.Condition()) return transition;
+                if (transition.Condition())
+                {
+                    return transition;
+                };
             }
 
             foreach (var transition in _currentTransitions)
             {
                 if (transition.Condition())
+                {
                     return transition;
+                }
             }
 
             return null;
