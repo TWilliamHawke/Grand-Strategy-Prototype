@@ -13,13 +13,19 @@
 
 
 #### Скриншоты
-<i>(Я не художник, поэтому интерфейс выполнен в стиле "50  оттенков серого")</i>
 
 Сражения:
+
 <img src="screens/battle_screen.png" width="600">
+
 Конструктор отрядов:
+
 <img src="screens/unit_editor_1.png" width="600">
+
 Конструктор названий для отрядов:
+
 <img src="screens/unit_editor_2.png" width="600">
+
 Глобальная карта:
+
 <img src="screens/global_map.png" width="600">

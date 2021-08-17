@@ -5,7 +5,7 @@ using Effects;
 using UnitEditor;
 
 [CreateAssetMenu(fileName = "UnitTemplate", menuName = "Unit Editor/Unit Template", order = 3)]
-public class UnitTemplate : ScriptableObject
+public class UnitTemplate : ScriptableObject, ITemplate
 {
     public string fullName => _nameParts.GetFullName();
 
@@ -21,12 +21,13 @@ public class UnitTemplate : ScriptableObject
     [SerializeField] bool _canNotEdit;
     [SerializeField] int _meleeSkill;
 
+    Dictionary<EquipmentSlots, Equipment> _inventory = new Dictionary<EquipmentSlots, Equipment>();
     List<Building> _requiredBuildings = new List<Building>();
 
     //getters
     public PartialName nameParts => _nameParts;
     public int health => mount?.health != 0 ? mount.health : unitClass.health;
-    public int speed => GetSpeed();
+    public int speed => throw new System.Exception();
     public int damage => primaryWeapon.damage;
     public int defence => 5 + _meleeSkill + armour.defence;
     public int attack => 5 + _meleeSkill;
@@ -107,18 +108,25 @@ public class UnitTemplate : ScriptableObject
         unitsListController.SaveUnitTemplate(this);
     }
 
-    int GetSpeed()
-    {
-        if (mount?.speed != 0) return mount.speed;
-
-        float dismountedSpeed = unitClass.speed * armour.speedMult;
-        return Mathf.CeilToInt(dismountedSpeed);
-    }
-
     void ReplaceRequiredBuildings(List<Building> buildings)
     {
         _requiredBuildings.Clear();
         _requiredBuildings.AddRange(buildings);
     }
 
+    public bool FindEquipment<T>(EquipmentSlots slot, out T equipment) where T : Equipment
+    {
+        equipment = null;
+        if(_inventory.TryGetValue(slot, out var item))
+        {
+            equipment = item as T;
+        }
+
+        return equipment == null ? false : true;
+    }
+
+    public void AddEquipment(EquipmentSlots slot, Equipment equipment)
+    {
+        _inventory[slot] = equipment;
+    }
 }

@@ -21,12 +21,12 @@ MonoBehaviour:
     \u043D\u0438 \u0445\u043E\u0440\u043E\u0448\u0438\u043C \u0441\u043D\u0430\u0440\u044F\u0436\u0435\u043D\u0438\u0435\u043C,
     \u043D\u043E \u0438\u0445 \u043C\u043E\u0436\u043D\u043E \u043E\u0442\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C
     \u0432 \u0431\u043E\u0439 \u0446\u0435\u043B\u044B\u043C\u0438 \u0442\u043E\u043B\u043F\u0430\u043C\u0438"
+  defaultIcon: {fileID: 21300000, guid: 935387d170a5518428b086001f676594, type: 3}
+  unitPreview: {fileID: 21300000, guid: f5ee33a5afa99134cbf8baf558478094, type: 3}
   weaponSkill: 5
   unitSize: 120
   health: 60
   speed: 40
   morale: 40
-  defaultIcon: {fileID: 21300000, guid: 935387d170a5518428b086001f676594, type: 3}
-  unitPreview: {fileID: 21300000, guid: f5ee33a5afa99134cbf8baf558478094, type: 3}
   requiredBuildings:
   - {fileID: 11400000, guid: 0721c0275d743c940aed774910d67f60, type: 2}

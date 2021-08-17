@@ -11,17 +11,23 @@ public class UnitClass : ScriptableObject
     public string className;
     public UnitNamePart possibleNames;
     public int wealth;
-    [TextArea]
+    [TextArea(4, 5)]
     [SerializeField] string _description;
+
+    [Header("Visualization")]
+    [SpritePreview(64, 64)]
+    public Sprite defaultIcon;
+    [SpritePreview(64, 64)]
+    public Sprite unitPreview;
+
     [Header("Battle Stats")]
     public int weaponSkill;
     public int unitSize;
     public int health;
     public int speed = 40;
     public int morale;
-    [Header("Visualization")]
-    public Sprite defaultIcon;
-    public Sprite unitPreview;
+
+    [Space(5)]
     public List<Building> requiredBuildings;
 
     public string description => _description;
@@ -32,7 +38,6 @@ public class UnitClass : ScriptableObject
         {
             Debug.LogError($"Unit class {name} doesn't have any unit names!", this);
         }
-
     }
 
 }

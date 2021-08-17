@@ -7,8 +7,9 @@ using UnityEngine;
 public class Building : EffectsContainer
 {
     public string localizedName;
-    public int goldCost;
+    [SpritePreview()]
     public Sprite icon;
+    public int goldCost;
     public BuildingSlots BuildingSlot;
 
     [Space(5)]
