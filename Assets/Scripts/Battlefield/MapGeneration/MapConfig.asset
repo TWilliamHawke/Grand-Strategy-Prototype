@@ -15,5 +15,29 @@ MonoBehaviour:
   _mapSize: 20
   _heightPerLevel: 2
   _chunkSize: 10
-  _hillPercentage: 15
-  _seed: 99
+  _hillPercentage: 20
+  _seed: 455062851
+  _slopeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

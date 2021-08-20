@@ -13,6 +13,7 @@ namespace Battlefield.Generator
         [Range(0, 50)]
         [SerializeField] float _hillPercentage;
         [SerializeField] int _seed;
+        [SerializeField] AnimationCurve _slopeCurve;
 
         IGenerationAlgorithm _generationAlgorithm;
 
@@ -20,9 +21,11 @@ namespace Battlefield.Generator
         public int linesCount => _mapSize + 1;
         public int heightPerLevel => _heightPerLevel;
         public int chunkSize => _chunkSize;
+        public int chunkLines => _chunkSize + 1;
         public float hillPercentage => _hillPercentage;
         public int seed => _seed;
         public IGenerationAlgorithm generationAlgorithm => _generationAlgorithm;
+        public AnimationCurve slopeCurve => _slopeCurve;
 
 
         private void OnEnable()
@@ -30,10 +33,10 @@ namespace Battlefield.Generator
             _generationAlgorithm = new DefaultAlgorithm(this);
         }
 
-		public void SetAlgorithm(IGenerationAlgorithm algorithm)
-		{
-			_generationAlgorithm = algorithm;
-		}
+        public void SetAlgorithm(IGenerationAlgorithm algorithm)
+        {
+            _generationAlgorithm = algorithm;
+        }
 
         public void GenerateNewSeed()
         {
@@ -41,4 +44,5 @@ namespace Battlefield.Generator
             _seed = rng.Next();
         }
     }
+
 }

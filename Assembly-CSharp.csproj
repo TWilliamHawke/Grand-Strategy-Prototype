@@ -58,6 +58,7 @@
      <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\AbstractItemSlot.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\TemplateController.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitTemplateViewer.cs" />
+     <Compile Include="Assets\Scripts\Battlefield\MapGeneration\MeshGenerators\InnerSlopeGenerator.cs" />
      <Compile Include="Assets\Scripts\UI\IHaveUnits.cs" />
      <Compile Include="Assets\Scripts\Battlefield\Directions.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitClassInfo.cs" />
@@ -72,11 +73,14 @@
      <Compile Include="Assets\Scripts\UI\UnitEditor\NameSelector.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\TemplateEffectsCalculator.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Charge.cs" />
+     <Compile Include="Assets\Scripts\Battlefield\MapGeneration\MeshGenerators\IMeshGenerator.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\TroopStates.cs" />
      <Compile Include="Assets\Scripts\UI\SelectedObjectPanel\UnitCard.cs" />
      <Compile Include="Assets\Scripts\UI\SelectedObjectPanel\ArmyView.cs" />
      <Compile Include="Assets\Scripts\UI\PrebatleScreen\PreBattleScreen.cs" />
+     <Compile Include="Assets\Scripts\Battlefield\MapGeneration\MeshGenerators\OuterSlopeGenerator.cs" />
      <Compile Include="Assets\Scripts\UI\SelectedObjectPanel\RecruitmentPanel.cs" />
+     <Compile Include="Assets\Scripts\Battlefield\MapGeneration\MeshGenerators\SlopeGenerator.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\PartialName.cs" />
      <Compile Include="Assets\Scripts\UI\SelectedObjectPanel\BuildingsView.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\SkirmishController.cs" />
@@ -145,12 +149,14 @@
      <Compile Include="Assets\Scripts\GlobalMap\Army.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\AbstractState.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\WeaponSkillSlider.cs" />
+     <Compile Include="Assets\Scripts\Battlefield\MapGeneration\MeshGenerators\FlatMeshGenerator.cs" />
      <Compile Include="Assets\Scripts\Battlefield\Timer.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\StateConfig.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSelectionButton.cs" />
      <Compile Include="Assets\Scripts\UI\FactionScreen.cs" />
      <Compile Include="Assets\Scripts\UI\BattleField\TimerPanel.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\GlobalMapSelectable.cs" />
+     <Compile Include="Assets\Scripts\Battlefield\MapGeneration\MeshGenerators\CornerGenerator.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\ArmorSlot.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\Equipment.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\UnitsListController.cs" />
@@ -182,6 +188,7 @@
      <Compile Include="Assets\Scripts\UnitData\EquipmentSlots.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\IncreaseCapForUnitClass.cs" />
      <Compile Include="Assets\Scripts\Battlefield\BattlefieldData.cs" />
+     <Compile Include="Assets\Scripts\Battlefield\MapGeneration\MeshGenerators\HollowGenerator.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\StateMachine.cs" />
      <Compile Include="Assets\Scripts\UI\SelectedObjectPanel\UnitListPanel.cs" />
      <Compile Include="Assets\Scripts\UI\SelectedObjectPanel\GarrisonView.cs" />
@@ -193,6 +200,7 @@
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\TroopStatesPlayer.cs" />
      <Compile Include="Assets\Scripts\UI\LabelController.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Unit.cs" />
+     <Compile Include="Assets\Scripts\Battlefield\MapGeneration\FrameGenerator.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Programs/unity/2020.3.13f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
