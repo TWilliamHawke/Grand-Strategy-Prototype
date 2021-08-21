@@ -51,7 +51,7 @@ namespace Battlefield.Generator
                     float distance = (Mathf.Abs(x1 * z2) + Mathf.Abs(z1 * x2)) / Mathf.Pow(_mapConfig.chunkSize, 2);
 
                     float height = (1 + _mapConfig.slopeCurve.Evaluate(distance)) * _mapConfig.heightPerLevel;
-                    vertices[i] = new Vector3(x, height, z);
+                    vertices[i] = new Vector3(x, height, z) + ChunkGenerator.meshOffset;
                     i++;
 
                 }

@@ -74,8 +74,8 @@ namespace Battlefield.Generator
 
         private void OnDrawGizmos()
         {
-            StartGeneration();
-            DrawHeigtMapGizmos();
+            // StartGeneration();
+            // DrawHeigtMapGizmos();
 
         }
 

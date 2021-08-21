@@ -62,7 +62,7 @@ namespace Battlefield.Generator
                     float y = GetHeight(distance);
 
 
-                    vertices[i] = new Vector3(x, y, z);
+                    vertices[i] = new Vector3(x, y, z) + ChunkGenerator.meshOffset;
                     i++;
                 }
             }

@@ -49,7 +49,7 @@ namespace Battlefield.Generator
             {
                 for (int z = 0; z <= _mapConfig.chunkSize; z++)
                 {
-                    vertices[i] = new Vector3(x, y, z);
+                    vertices[i] = new Vector3(x, y, z) + ChunkGenerator.meshOffset;
                     i++;
                 }
             }

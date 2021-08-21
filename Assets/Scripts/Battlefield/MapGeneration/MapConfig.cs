@@ -8,24 +8,26 @@ namespace Battlefield.Generator
     public class MapConfig : ScriptableObject
     {
         [SerializeField] int _mapSize;
-        [SerializeField] int _heightPerLevel;
+        [SerializeField] float _heightPerLevel;
         [SerializeField] int _chunkSize;
         [Range(0, 50)]
         [SerializeField] float _hillPercentage;
         [SerializeField] int _seed;
         [SerializeField] AnimationCurve _slopeCurve;
+        [SerializeField] BattleRules _battleRules;
 
         IGenerationAlgorithm _generationAlgorithm;
 
         public int mapSize => _mapSize;
         public int linesCount => _mapSize + 1;
-        public int heightPerLevel => _heightPerLevel;
+        public float heightPerLevel => _heightPerLevel;
         public int chunkSize => _chunkSize;
         public int chunkLines => _chunkSize + 1;
         public float hillPercentage => _hillPercentage;
         public int seed => _seed;
         public IGenerationAlgorithm generationAlgorithm => _generationAlgorithm;
         public AnimationCurve slopeCurve => _slopeCurve;
+        public BattleRules battleRules => _battleRules;
 
 
         private void OnEnable()

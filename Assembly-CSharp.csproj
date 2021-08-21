@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\UI\BuildingsView\BuildingSelectionButton.cs" />
      <Compile Include="Assets\Scripts\UI\Tooltip\IHaveTooltip.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\AbstractItemSlot.cs" />
+     <Compile Include="Assets\Scripts\Battlefield\MapGeneration\FramePartGenerator.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\TemplateController.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitTemplateViewer.cs" />
      <Compile Include="Assets\Scripts\Battlefield\MapGeneration\MeshGenerators\InnerSlopeGenerator.cs" />
@@ -75,6 +76,7 @@
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Charge.cs" />
      <Compile Include="Assets\Scripts\Battlefield\MapGeneration\MeshGenerators\IMeshGenerator.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\TroopStates.cs" />
+     <Compile Include="Assets\Scripts\Battlefield\MapGeneration\FrameGenerator.cs" />
      <Compile Include="Assets\Scripts\UI\SelectedObjectPanel\UnitCard.cs" />
      <Compile Include="Assets\Scripts\UI\SelectedObjectPanel\ArmyView.cs" />
      <Compile Include="Assets\Scripts\UI\PrebatleScreen\PreBattleScreen.cs" />
@@ -200,7 +202,6 @@
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\TroopStatesPlayer.cs" />
      <Compile Include="Assets\Scripts\UI\LabelController.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Unit.cs" />
-     <Compile Include="Assets\Scripts\Battlefield\MapGeneration\FrameGenerator.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Programs/unity/2020.3.13f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

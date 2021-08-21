@@ -4,29 +4,30 @@ using UnityEngine;
 
 namespace Battlefield.Generator
 {
-	public class FrameGenerator : MonoBehaviour
-	{
-		[SerializeField] MapConfig _mapConfig;
+    public class FrameGenerator : MonoBehaviour
+    {
+        [SerializeField] MapConfig _mapConfig;
+        [SerializeField] int _framePadding;
+        [SerializeField] int _frameWidth;
+        [SerializeField] FramePartGenerator[] _frame;
 
         Mesh _mesh;
         Vector3[] _vertices;
         int[] _triangles;
 
+        //components
+        MeshFilter _meshFilter;
+        MeshRenderer _meshRenderer;
 
 
-		private void OnValidate() {
-			GenerateLine(Vector3.zero, new Vector3(0, 0, 10));
-		}
 
-		public void GenerateLine(Vector3 start, Vector3 end)
-		{
-			Debug.Log("generate");
+        private void OnValidate()
+        {
+            _meshFilter = GetComponent<MeshFilter>();
+            _meshRenderer = GetComponent<MeshRenderer>();
+        }
 
-			for (int i = 0; i < _mapConfig.chunkLines; i++)
-			{
-				var point = Vector3.Lerp(start, end, i / (float)_mapConfig.chunkSize);
-				print(point);
-			}
-		}
-	}
+
+
+    }
 }

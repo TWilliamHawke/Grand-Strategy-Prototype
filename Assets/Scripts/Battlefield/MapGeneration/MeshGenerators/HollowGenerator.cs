@@ -59,7 +59,7 @@ namespace Battlefield.Generator
                         y = (1 + height) * _mapConfig.heightPerLevel;
                     }
 
-                    vertices[i] = new Vector3(x, y, z);
+                    vertices[i] = new Vector3(x, y, z) + ChunkGenerator.meshOffset;
                     i++;
                 }
             }

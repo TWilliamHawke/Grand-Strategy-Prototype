@@ -10,6 +10,10 @@ namespace Battlefield.Generator
     //[RequireComponent(typeof(MeshFilter))]
     public class ChunkGenerator : MonoBehaviour
     {
+        static Vector3 _meshOffset = Vector3.zero;
+        public static Vector3 meshOffset => _meshOffset;
+        static bool _meshOffsetDone = false;
+
         Vector3[] _corners;
         Mesh _mesh;
         Vector3[] _vertices;
@@ -17,6 +21,12 @@ namespace Battlefield.Generator
 
 
         [SerializeField] MapConfig _mapConfig;
+        [Range(0, 20)]
+        [SerializeField] int _framePadding;
+        [Range(0, 20)]
+        [SerializeField] int _frameWidth;
+        [SerializeField] FramePartGenerator[] _frame;
+
 
         //components
         MeshFilter _meshFilter;
@@ -24,6 +34,8 @@ namespace Battlefield.Generator
         MeshCollider _meshCollider;
 
         public Vector3[] corners => _corners;
+        public int framePadding => _framePadding;
+        public int frameWidth => _frameWidth;
 
 
         void Awake()
@@ -35,19 +47,13 @@ namespace Battlefield.Generator
         public void SetCorners(Vector3[] cornersHeight)
         {
             _corners = cornersHeight;
-        }
 
-        public void SetCorners()
-        {
-            float sz = _mapConfig.chunkSize;
-
-            _corners = new Vector3[4] {
-                        new Vector3(0, 1, 0),
-                        new Vector3(sz, 2, 0),
-                        new Vector3(sz, 2, sz),
-                        new Vector3(0, 1, sz)
-                        };
-
+            if (!_meshOffsetDone)
+            {
+                float meshOffsetX = _mapConfig.chunkSize / -2f;
+                _meshOffset = new Vector3(meshOffsetX, 0, meshOffsetX);
+                _meshOffsetDone = true;
+            }
         }
 
         public void CreateMesh()
@@ -56,6 +62,7 @@ namespace Battlefield.Generator
             _meshFilter.sharedMesh = _mesh;
             CreateShape();
             FinalizeShape();
+            GenerateFrame();
         }
 
         public void SetVertices(Vector3[] vertices)
@@ -101,10 +108,17 @@ namespace Battlefield.Generator
             {
                 uvs[i] = new Vector2(_vertices[i].x, _vertices[i].z);
             }
-
-
             _mesh.uv = uvs;
 
+        
+        }
+
+        void GenerateFrame()
+        {
+            foreach(var framePart in _frame)
+            {
+                framePart.GenerateMesh(this);
+            }
         }
 
     }
