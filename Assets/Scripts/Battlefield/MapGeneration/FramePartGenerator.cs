@@ -25,14 +25,16 @@ namespace Battlefield.Generator
         };
 
         [SerializeField] MapConfig _mapConfig;
+        [Header("Components")]
+        [SerializeField] MeshFilter _meshFilter;
+        [SerializeField] MeshRenderer _meshRenderer;
+        [Header("Config")]
         [SerializeField] Vectors _directionFromCorner;
         [SerializeField] Vectors _widthShift;
         [SerializeField] [Range(0, 3)] int _startCornerIndex;
-        [SerializeField] bool _startFromCenter;
+        [SerializeField] bool _mirrorTriangles;
 
         //components
-        MeshFilter _meshFilter;
-        MeshRenderer _meshRenderer;
 
         Mesh _mesh;
         Vector3[] _vertices;
@@ -42,10 +44,13 @@ namespace Battlefield.Generator
         //1 - up, -1 = down, 0 = flat
         float _slopeType = 0;
 
+        public void UpdateColor(Color color)
+        {
+            _meshRenderer.materials[0].color = color;
+        }
+
         public void GenerateMesh(ChunkGenerator chunkGenerator)
         {
-            _meshFilter = GetComponent<MeshFilter>();
-            _meshRenderer = GetComponent<MeshRenderer>();
             _chunkGenerator = chunkGenerator;
 
             Vector3 start = FindStartPosition(chunkGenerator);
@@ -116,10 +121,10 @@ namespace Battlefield.Generator
             for (int j = 0; j < _mapConfig.chunkSize; j++)
             {
                 _triangles[ti++] = j * 2 + 0;
-                _triangles[ti++] = _startFromCenter ? j * 2 + 2 : j * 2 + 1;
-                _triangles[ti++] = _startFromCenter ? j * 2 + 1 : j * 2 + 2;
-                _triangles[ti++] = _startFromCenter ? j * 2 + 1 : j * 2 + 2;
-                _triangles[ti++] = _startFromCenter ? j * 2 + 2 : j * 2 + 1;
+                _triangles[ti++] = _mirrorTriangles ? j * 2 + 2 : j * 2 + 1;
+                _triangles[ti++] = _mirrorTriangles ? j * 2 + 1 : j * 2 + 2;
+                _triangles[ti++] = _mirrorTriangles ? j * 2 + 1 : j * 2 + 2;
+                _triangles[ti++] = _mirrorTriangles ? j * 2 + 2 : j * 2 + 1;
                 _triangles[ti++] = j * 2 + 3;
             }
 

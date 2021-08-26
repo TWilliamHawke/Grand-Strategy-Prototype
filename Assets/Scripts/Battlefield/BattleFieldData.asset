@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dedb3a95c0d32554dac7855bc7e0df8e, type: 3}
   m_Name: BattleFieldData
   m_EditorClassIdentifier: 
+  _mapConfig: {fileID: 11400000, guid: 5e594fcffd921c140833969361300889, type: 2}

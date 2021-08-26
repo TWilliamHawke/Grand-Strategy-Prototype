@@ -14,10 +14,10 @@ namespace Battlefield
         List<Node> _sortedNodes = new List<Node>();
         List<Node> _unsortedNodes = new List<Node>();
 
-        public PathFinder(Square startSquare, Square targetSquare, BattlefieldData battlefieldData)
+        public PathFinder(Node startNode, Node targetNode, BattlefieldData battlefieldData)
         {
-            _startNode = battlefieldData.FindNode(startSquare);
-            _targetNode = battlefieldData.FindNode(targetSquare);
+            _startNode = startNode;
+            _targetNode = targetNode;
 
             _battlefieldData = battlefieldData;
         }

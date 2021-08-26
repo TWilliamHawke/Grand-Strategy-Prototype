@@ -32,7 +32,7 @@ namespace Battlefield
 
             bool HasNewDirection() => _troopInfo.nextTargetDirection != _troopInfo.direction;
             bool ReachDirection() => _troopInfo.nextTargetDirection == _troopInfo.direction;
-            bool EnemyOnTargetSquare() => _troopInfo.path.Peek()?.square.EnemyOnSquare == true && ReachDirection();
+            bool EnemyOnTargetSquare() => _troopInfo.path.Peek().enemyInNode == true && ReachDirection();
             bool HasNewTarget() => _troopInfo.path.Count > 0;
             bool ReachTarget() => _troopInfo.path.Count == 0;
             bool ReachDirectionAndHasTarget() => ReachDirection() && HasNewTarget();

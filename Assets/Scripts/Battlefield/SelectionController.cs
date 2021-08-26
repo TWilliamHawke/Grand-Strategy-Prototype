@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Battlefield.Chunks;
 using UnityEngine;
 
 namespace Battlefield
@@ -24,9 +25,9 @@ public class SelectionController : MonoBehaviour
     {
         if (Input.GetMouseButton(1)) return;
 
-        if (Raycasts.HitTarget<Square>(out var square, _gridLayer))
+        if (Raycasts.HitTarget<Chunk>(out var chunk, _gridLayer))
         {
-            _selectedObjects.SetHoveredSquare(square);
+            _selectedObjects.SetHoveredChunk(chunk);
         }
     }
 
@@ -52,9 +53,10 @@ public class SelectionController : MonoBehaviour
         if (!Input.GetMouseButtonUp(1)) return;
         if (!_selectedObjects.troop) return;
 
-        if (Raycasts.HitTarget<Square>(out var square, _gridLayer))
+        if (Raycasts.HitTarget<Chunk>(out var square, _gridLayer))
         {
-            _selectedObjects.troop.CreatePathTo(square);
+            var node = _battlefieldData.FindNode(square);
+            _selectedObjects.troop.CreatePathTo(node);
         }
     }
 }

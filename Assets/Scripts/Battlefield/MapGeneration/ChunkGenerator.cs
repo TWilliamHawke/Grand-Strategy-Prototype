@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Battlefield.Chunks;
 
 namespace Battlefield.Generator
 {
     [RequireComponent(typeof(MeshCollider))]
     [RequireComponent(typeof(MeshRenderer))]
-    //[RequireComponent(typeof(MeshFilter))]
+    [RequireComponent(typeof(MeshFilter))]
     public class ChunkGenerator : MonoBehaviour
     {
         static Vector3 _meshOffset = Vector3.zero;
@@ -19,20 +20,21 @@ namespace Battlefield.Generator
         Vector3[] _vertices;
         int[] _triangles;
 
-
         [SerializeField] MapConfig _mapConfig;
+        [Header("Frame Config")]
         [Range(0, 20)]
         [SerializeField] int _framePadding;
         [Range(0, 20)]
         [SerializeField] int _frameWidth;
-        [SerializeField] FramePartGenerator[] _frame;
 
 
         //components
         MeshFilter _meshFilter;
         MeshRenderer _meshRenderer;
         MeshCollider _meshCollider;
+        Chunk _chunkData;
 
+        //getters
         public Vector3[] corners => _corners;
         public int framePadding => _framePadding;
         public int frameWidth => _frameWidth;
@@ -42,6 +44,8 @@ namespace Battlefield.Generator
         {
             _meshFilter = GetComponent<MeshFilter>();
             _meshRenderer = GetComponent<MeshRenderer>();
+            _meshCollider = GetComponent<MeshCollider>();
+            _chunkData = GetComponent<Chunk>();
         }
 
         public void SetCorners(Vector3[] cornersHeight)
@@ -50,30 +54,30 @@ namespace Battlefield.Generator
 
             if (!_meshOffsetDone)
             {
-                float meshOffsetX = _mapConfig.chunkSize / -2f;
-                _meshOffset = new Vector3(meshOffsetX, 0, meshOffsetX);
+                float meshOffset = _mapConfig.chunkSize / -2f;
+                _meshOffset = new Vector3(meshOffset, 0, meshOffset);
                 _meshOffsetDone = true;
             }
         }
 
-        public void CreateMesh()
+        public void CreateFrame()
         {
-            _mesh = new Mesh();
-            _meshFilter.sharedMesh = _mesh;
-            CreateShape();
-            FinalizeShape();
-            GenerateFrame();
+            _chunkData.GenerateFrame(this);
         }
 
         public void SetVertices(Vector3[] vertices)
         {
+            _mesh = new Mesh();
             _vertices = vertices;
+
+            CreateTriangles();
+            FinalizeShape();
+            _meshFilter.sharedMesh = _mesh;
+            _meshCollider.sharedMesh = _mesh;
         }
 
-        void CreateShape()
+        void CreateTriangles()
         {
-
-
             int ti = 0;
             int paddingY = 0;
             _triangles = new int[6 * _mapConfig.chunkSize * _mapConfig.chunkSize];
@@ -92,7 +96,6 @@ namespace Battlefield.Generator
                 }
                 paddingY++;
             }
-
         }
 
         void FinalizeShape()
@@ -102,6 +105,11 @@ namespace Battlefield.Generator
             _mesh.triangles = _triangles;
             _mesh.RecalculateNormals();
 
+            SetTexturesMap();
+        }
+
+        private void SetTexturesMap()
+        {
             Vector2[] uvs = new Vector2[_vertices.Length];
 
             for (int i = 0; i < uvs.Length; i++)
@@ -109,17 +117,6 @@ namespace Battlefield.Generator
                 uvs[i] = new Vector2(_vertices[i].x, _vertices[i].z);
             }
             _mesh.uv = uvs;
-
-        
         }
-
-        void GenerateFrame()
-        {
-            foreach(var framePart in _frame)
-            {
-                framePart.GenerateMesh(this);
-            }
-        }
-
     }
 }

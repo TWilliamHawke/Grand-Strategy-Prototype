@@ -38,8 +38,8 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Editor\SpritePreviewDrawer.cs" />
      <Compile Include="Assets\Scripts\UnitData\Editor\UnitTemplateEditor.cs" />
-     <Compile Include="Assets\Editor\ResetTransform.cs" />
      <Compile Include="Assets\Scripts\Battlefield\MapGeneration\Editor\BattlefieldGeneratorEditor.cs" />
+     <Compile Include="Assets\Editor\ResetTransform.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Programs/unity/2020.3.13f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

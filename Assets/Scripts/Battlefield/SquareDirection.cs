@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Battlefield.Chunks;
 using UnityEngine;
 
 namespace Battlefield
@@ -10,15 +11,14 @@ namespace Battlefield
         [Range(0, 0.5f)]
         [SerializeField] float _showDelay = 0.1f;
 
-        Square _currentSquare;
+        Chunk _currentSquare;
         Coroutine _delayCoroutine;
-        Directions _direction;
 
         bool _isShow;
 
         void Update()
         {
-            if (_selectedObjects.hoveredSquare)
+            if (_selectedObjects.hoveredChunk)
             {
                 TogglePointer();
                 RotatePointer();
@@ -32,7 +32,7 @@ namespace Battlefield
 
             if (Raycasts.GetPosition(out var position))
             {
-                _direction = _selectedObjects.hoveredSquare.RotatePointer(position);
+                _selectedObjects.hoveredChunk.RotatePointer(position);
             }
         }
 
@@ -42,14 +42,14 @@ namespace Battlefield
 
             if (Input.GetMouseButtonDown(1))
             {
-                _currentSquare = _selectedObjects.hoveredSquare;
+                _currentSquare = _selectedObjects.hoveredChunk;
                 _delayCoroutine = StartCoroutine(ShowAfterDelay());
             }
 
             if (Input.GetMouseButtonUp(1))
             {
                 _currentSquare.HidePointer();
-                if (_currentSquare == _selectedObjects.hoveredSquare)
+                if (_currentSquare == _selectedObjects.hoveredChunk)
                 {
                     _currentSquare.SetHoverColor();
                 }
@@ -60,8 +60,8 @@ namespace Battlefield
 
                 StopCoroutine(_delayCoroutine);
                 _isShow = false;
-                _selectedObjects.troop.square.UpdateFrameColors(
-                    _selectedObjects.troop.direction);
+
+                _selectedObjects.troop.RestoreChunkFrame();
             }
         }
 
@@ -71,7 +71,7 @@ namespace Battlefield
             _isShow = true;
             _currentSquare.ShowPointer();
             RotatePointer();
-            _selectedObjects.troop.square.SetHoverColor();
+            _selectedObjects.troop.chunk.SetHoverColor();
         }
     }
 }

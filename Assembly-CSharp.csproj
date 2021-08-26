@@ -41,6 +41,7 @@
      <Compile Include="Assets\Scripts\UnitData\IStats.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\PrimaryWeaponSlot.cs" />
      <Compile Include="Assets\Scripts\Battlefield\MapGeneration\ChunkGenerator.cs" />
+     <Compile Include="Assets\Scripts\Battlefield\Chunks\PathArrowController.cs" />
      <Compile Include="Assets\Scripts\Battlefield\MapGeneration\MapConfig.cs" />
      <Compile Include="Assets\Scripts\UI\UIInitiator.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\SettlementData.cs" />
@@ -57,8 +58,10 @@
      <Compile Include="Assets\Scripts\UI\Tooltip\IHaveTooltip.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\AbstractItemSlot.cs" />
      <Compile Include="Assets\Scripts\Battlefield\MapGeneration\FramePartGenerator.cs" />
+     <Compile Include="Assets\Scripts\Battlefield\Chunks\FrameController.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\TemplateController.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitTemplateViewer.cs" />
+     <Compile Include="Assets\Scripts\Battlefield\Chunks\IPounterController.cs" />
      <Compile Include="Assets\Scripts\Battlefield\MapGeneration\MeshGenerators\InnerSlopeGenerator.cs" />
      <Compile Include="Assets\Scripts\UI\IHaveUnits.cs" />
      <Compile Include="Assets\Scripts\Battlefield\Directions.cs" />
@@ -70,7 +73,8 @@
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Movement.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\UnitTemplate.cs" />
      <Compile Include="Assets\Scripts\UI\SelectedObjectPanel\SettlementView.cs" />
-     <Compile Include="Assets\Scripts\Battlefield\Node.cs" />
+     <Compile Include="Assets\Scripts\Battlefield\Chunks\Node.cs" />
+     <Compile Include="Assets\Scripts\Battlefield\Chunks\InnerArrowController.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\NameSelector.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\TemplateEffectsCalculator.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Charge.cs" />
@@ -107,6 +111,7 @@
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Fight.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\Mount.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitClassSelectionButton.cs" />
+     <Compile Include="Assets\Scripts\Battlefield\DemoMapSetup.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitName.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\IncreaseClassWealth.cs" />
      <Compile Include="Assets\Scripts\UI\PrebatleScreen\PrebattleUnitCard.cs" />
@@ -136,9 +141,11 @@
      <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\ChangeCostForEquipment.cs" />
      <Compile Include="Assets\Scripts\ThrottleLog.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\MeleeWeapon.cs" />
+     <Compile Include="Assets\Scripts\Battlefield\Chunks\IPathArrowController.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\MountSlot.cs" />
      <Compile Include="Assets\Scripts\UI\Tooltip\ITooltipComponent.cs" />
      <Compile Include="Assets\Scripts\UI\TechnologyScreen\TechnologyButton.cs" />
+     <Compile Include="Assets\Scripts\Battlefield\UnitSpawner.cs" />
      <Compile Include="Assets\Scripts\Battlefield\Square.cs" />
      <Compile Include="Assets\Scripts\UI\PrebatleScreen\PrebattleUnitList.cs" />
      <Compile Include="Assets\Scripts\UI\BuildingsView\BuildingSelectionPanel.cs" />
@@ -165,6 +172,7 @@
      <Compile Include="Assets\Scripts\Battlefield\UnitsController.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\ShieldSlot.cs" />
      <Compile Include="Assets\Scripts\UI\Lib\UIPanelWithGrid.cs" />
+     <Compile Include="Assets\Scripts\Battlefield\Chunks\ChunkRotation.cs" />
      <Compile Include="Assets\Scripts\Battlefield\SquareDirection.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitPreview.cs" />
      <Compile Include="Assets\Scripts\UI\BuildingsView\BuildingsListController.cs" />
@@ -174,6 +182,7 @@
      <Compile Include="Assets\Scripts\Battlefield\MapGeneration\IGenerationAlgorithm.cs" />
      <Compile Include="Assets\Scripts\Raycasts.cs" />
      <Compile Include="Assets\Scripts\UI\Label.cs" />
+     <Compile Include="Assets\Scripts\Battlefield\Chunks\IFrameController.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\EquipmentList.cs" />
      <Compile Include="Assets\Scripts\UI\Lib\UIScreen.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\Effect.cs" />
@@ -187,6 +196,7 @@
      <Compile Include="Assets\Scripts\Battlefield\MapGeneration\DefaultAlgorithm.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Ready.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\Faction.cs" />
+     <Compile Include="Assets\Scripts\Battlefield\MapGeneration\ArrowMeshTransformation.cs" />
      <Compile Include="Assets\Scripts\UnitData\EquipmentSlots.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\IncreaseCapForUnitClass.cs" />
      <Compile Include="Assets\Scripts\Battlefield\BattlefieldData.cs" />
@@ -194,9 +204,11 @@
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\StateMachine.cs" />
      <Compile Include="Assets\Scripts\UI\SelectedObjectPanel\UnitListPanel.cs" />
      <Compile Include="Assets\Scripts\UI\SelectedObjectPanel\GarrisonView.cs" />
+     <Compile Include="Assets\Scripts\Battlefield\Chunks\ChunkArrow.cs" />
      <Compile Include="Assets\Scripts\UI\Tabs\TabButton.cs" />
      <Compile Include="Assets\Scripts\UI\Tooltip\TooltipController.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\NameSelectorPart.cs" />
+     <Compile Include="Assets\Scripts\Battlefield\Chunks\Chunk.cs" />
      <Compile Include="Assets\Scripts\SpritePreviewAttribute.cs" />
      <Compile Include="Assets\Scripts\UI\BuildingsView\BuildingPreview.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\TroopStatesPlayer.cs" />

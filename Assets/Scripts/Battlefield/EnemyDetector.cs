@@ -32,11 +32,6 @@ namespace Battlefield
             FillNeightborSquares();
         }
 
-        void SelectThreadDirection()
-        {
-
-        }
-
         void FillNeightborSquares()
         {
             _currentNode = _battlefieldData.FindNode(this.gameObject);
@@ -60,7 +55,7 @@ namespace Battlefield
             }
             else
             {
-                if(_battlefieldData.FindDirection(_currentNode.square, node.square, out var direction))
+                if(_battlefieldData.FindDirection(_currentNode, node, out var direction))
                 {
                     threadDirection = direction;
                 }
@@ -71,7 +66,7 @@ namespace Battlefield
         {
             if(node == _currentNode)
             {
-                if (_battlefieldData.FindDirection(node.square, _currentNode.square, out var direction))
+                if (_battlefieldData.FindDirection(node, _currentNode, out var direction))
                 {
                     threadDirection = direction;
                 }

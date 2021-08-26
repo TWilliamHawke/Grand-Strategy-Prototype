@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Battlefield.Chunks;
 using UnityEngine;
 
 namespace Battlefield
@@ -17,7 +18,7 @@ namespace Battlefield
         //dynamic data
         float _visualSpeed = 1;
         bool _isSelected = false;
-        Square _square;
+        Node _currentNode;
         Stack<Node> _path = new Stack<Node>();
         Directions _targetSquareDirection;
 
@@ -31,8 +32,8 @@ namespace Battlefield
         public float rotationDirection { get; set; } = 0f;
         public Directions nextTargetDirection => FindNextTargetDirection();
         public Stack<Node> path => _path;
-        public Square square => _square;
-        public Node currentNode => _battlefieldData.FindNode(square);
+        public Node currentNode => _currentNode;
+        public Chunk chunk => _currentNode.chunk;
 
         public UnitsController enemy { get; set; }
 
@@ -41,7 +42,7 @@ namespace Battlefield
 
         void Awake()
         {
-            Square.OnPointerHide += SetFinalTargetDirection;
+            Chunk.OnPointerHide += SetFinalTargetDirection;
             _unitsController = GetComponent<UnitsController>();
             SetRotation(direction);
 
@@ -50,17 +51,14 @@ namespace Battlefield
 
         void OnDestroy()
         {
-            Square.OnPointerHide -= SetFinalTargetDirection;    
+            Chunk.OnPointerHide -= SetFinalTargetDirection;
         }
 
-        void Start()
+        void SpawnTroop()
         {
-            _square = _battlefieldData.FindSquare(this.gameObject);
-            if (!_ownedByPlayer)
-            {
-                SetRotation(Directions.south);
-                square.EnemyOnSquare = true;
-            }
+            //UNDONE
+            //Find node!
+            //_currentNode = 
         }
 
         void Update()
@@ -78,6 +76,12 @@ namespace Battlefield
             }
         }
 
+        public Node FindCurrentNode()
+        {
+            _currentNode = _battlefieldData.FindNode(gameObject);
+            return _currentNode;
+        }
+
         public void SetRotation(Directions targetDirection)
         {
             direction = targetDirection;
@@ -93,25 +97,25 @@ namespace Battlefield
         {
             if (path.Count == 0) return _targetSquareDirection;
 
-            if (_battlefieldData.FindDirection(square, path.Peek()?.square, out var pathDirection))
+            if (_battlefieldData.FindDirection(_currentNode, path.Peek(), out var pathDirection))
             {
                 return pathDirection;
             }
             return direction;
         }
 
-        public void TeleportTo(Square targetSquare)
+        public void TeleportTo(Node targetNode)
         {
-            targetPosition = square.transform.position;
-            transform.position = square.transform.position;
-            SetSquare(targetSquare);
+            targetPosition = targetNode.chunk.transform.position;
+            transform.position = targetNode.chunk.transform.position;
+            SetNode(targetNode);
         }
 
         public void ChangeVisualSpeed(Timer timer)
         {
             float mult = timer.ticksPerSecond;
             _visualSpeed = _baseVisualSpeed * mult;
-            _unitsController.ChangeAnimationSpeed(mult);
+            _unitsController?.ChangeAnimationSpeed(mult);
         }
 
         public void Select()
@@ -125,22 +129,22 @@ namespace Battlefield
         public void Deselect()
         {
             _indicator.SetDefaultBackground();
-            square.SetDefaultFrameColor();
+            _currentNode.chunk.SetDefaultFrameColor();
             _battlefieldData.HideAllInfo();
             _isSelected = false;
         }
 
-        public void CreatePathTo(Square targetSquare)
+        public void CreatePathTo(Node targetNode)
         {
-            if (square == targetSquare)
+            if (_currentNode == targetNode)
             {
                 path.Clear();
                 _unitsController.SetIsWalkValue(false);
-                TeleportTo(square);
+                TeleportTo(targetNode);
             }
             else
             {
-                var pathFinder = new PathFinder(square, targetSquare, _battlefieldData);
+                var pathFinder = new PathFinder(_currentNode, targetNode, _battlefieldData);
                 _path = pathFinder.GetPath();
                 _unitsController.SetIsWalkValue(true);
             }
@@ -149,11 +153,11 @@ namespace Battlefield
             ShowPath();
         }
 
-        public void SetSquare(Square nextSquare)
+        public void SetNode(Node nextNode)
         {
-            square.SetDefaultFrameColor();
-            _square = nextSquare;
-            if(_isSelected)
+            _currentNode.chunk.SetDefaultFrameColor();
+            _currentNode = nextNode;
+            if (_isSelected)
             {
                 UpdateSquareBorders();
             }
@@ -161,13 +165,18 @@ namespace Battlefield
 
         public void UpdateSquareBorders()
         {
-            _square.UpdateFrameColors(direction);
+            _currentNode.chunk.UpdateFrameColors((int)direction);
         }
 
-        void SetFinalTargetDirection(Square square)
+        public void RestoreChunkFrame()
         {
-            if(_isSelected == false) return;
-            _targetSquareDirection = square.currentDirection;
+            chunk.UpdateFrameColors((int)direction);
+        }
+
+        void SetFinalTargetDirection(IPounterController chunk)
+        {
+            if (_isSelected == false) return;
+            _targetSquareDirection = chunk.currentDirection;
         }
 
         void RotateSquare()
@@ -193,11 +202,16 @@ namespace Battlefield
 
         void ShowPath()
         {
-            Square prevSquare = square;
+            Node currentNode = _currentNode;
+
+
             foreach (var node in path)
             {
-                prevSquare.RotatePathArrow(node.square);
-                prevSquare = node.square;
+                if (_battlefieldData.FindDirection(currentNode, node, out var direction))
+                {
+                    currentNode.chunk.RotatePathArrow(direction);
+                }
+                currentNode = node;
             }
         }
     }

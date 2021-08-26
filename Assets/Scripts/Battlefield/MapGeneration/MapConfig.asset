@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8d5b6ac8a3515547bd536b3b6cf231e, type: 3}
   m_Name: MapConfig
   m_EditorClassIdentifier: 
-  _mapSize: 15
-  _heightPerLevel: 2.5
+  _gridSize: 8
+  _chunksBehindGrid: 2
+  _heightPerLevel: 2
   _chunkSize: 10
-  _hillPercentage: 20
+  _hillPercentage: 10
   _seed: 455062851
   _slopeCurve:
     serializedVersion: 2

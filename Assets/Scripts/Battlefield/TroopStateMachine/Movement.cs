@@ -29,7 +29,7 @@ namespace Battlefield
         public override void Tick()
         {
             _progress += _progressPerTick;
-            Vector3 nextSquarePosition = _troopInfo.path.Peek().square.transform.position;
+            Vector3 nextSquarePosition = _troopInfo.path.Peek().chunk.transform.position;
             ChangeTroopsTargetPosition(nextSquarePosition);
 
             if (_troopInfo.transform.position == nextSquarePosition)
@@ -40,7 +40,7 @@ namespace Battlefield
 
         void ChangeTroopsTargetPosition(Vector3 nextSquarePosition)
         {
-            Vector3 currentSquarePosition = _troopInfo.square.transform.position;
+            Vector3 currentSquarePosition = _troopInfo.chunk.transform.position;
 
             var targetPosition = Vector3.Lerp(
                 currentSquarePosition, nextSquarePosition, clampedProgress);
@@ -52,8 +52,8 @@ namespace Battlefield
         {
             var targetNode = _troopInfo.path.Pop();
             targetNode.EnterTroop(_troopInfo);
-            _troopInfo.square.HidePathArrow();
-            _troopInfo.SetSquare(targetNode.square);
+            _troopInfo.chunk.HidePathArrow();
+            _troopInfo.SetNode(targetNode);
             ResetProgress();
         }
     }

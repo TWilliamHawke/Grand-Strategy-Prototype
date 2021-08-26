@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4121992500530298996}
   - component: {fileID: 4121992500530298997}
   - component: {fileID: 4121992500530298986}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: frame1 (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 4121992501388229309}
   - component: {fileID: 4121992501388229298}
   - component: {fileID: 4121992501388229299}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: frame1 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ GameObject:
   - component: {fileID: 4121992501725337946}
   - component: {fileID: 4121992501725337947}
   - component: {fileID: 4121992501725337944}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: frame1 (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 4121992501748789999}
   - component: {fileID: 4121992501748789996}
   - component: {fileID: 4121992501748789997}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: frame1 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -409,7 +409,8 @@ GameObject:
   - component: {fileID: 4121992502084146973}
   - component: {fileID: 4121992502084146962}
   - component: {fileID: 4121992501524454693}
-  m_Layer: 0
+  - component: {fileID: 3655008709143369041}
+  m_Layer: 7
   m_Name: Chunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -516,15 +517,26 @@ MonoBehaviour:
   _mapConfig: {fileID: 11400000, guid: 5e594fcffd921c140833969361300889, type: 2}
   _framePadding: 1
   _frameWidth: 3
-  _frame:
-  - {fileID: 4121992502240175131}
-  - {fileID: 4121992502283114998}
-  - {fileID: 4121992501748789997}
-  - {fileID: 4121992502480986355}
-  - {fileID: 4121992502150408863}
-  - {fileID: 4121992501388229299}
-  - {fileID: 4121992501725337944}
-  - {fileID: 4121992500530298986}
+--- !u!114 &3655008709143369041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4121992502084146963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c95ad6fa6c2700149b5bc56ba141487b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _battlefieldData: {fileID: 11400000, guid: f7f1e7c61f40bd94cae5d88f745b3b96, type: 2}
+  _mapConfig: {fileID: 11400000, guid: 5e594fcffd921c140833969361300889, type: 2}
+  _rules: {fileID: 11400000, guid: e2a1fcbdf7bb7054ca8142919b610f30, type: 2}
+  _selectedObjects: {fileID: 11400000, guid: 6f35d0e8ea21cd84082a72567cc7e2d9, type: 2}
+  _pointer: {fileID: 0}
+  _centerPosition: {fileID: 0}
+  _pathArrow: {fileID: 0}
+  _frame: []
 --- !u!1 &4121992502150408860
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,7 +549,7 @@ GameObject:
   - component: {fileID: 4121992502150408857}
   - component: {fileID: 4121992502150408862}
   - component: {fileID: 4121992502150408863}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: frame1 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -636,7 +648,7 @@ GameObject:
   - component: {fileID: 4121992502240175141}
   - component: {fileID: 4121992502240175130}
   - component: {fileID: 4121992502240175131}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: frame1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -735,7 +747,7 @@ GameObject:
   - component: {fileID: 4121992502283114992}
   - component: {fileID: 4121992502283114993}
   - component: {fileID: 4121992502283114998}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: frame1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -834,7 +846,7 @@ GameObject:
   - component: {fileID: 4121992502480986365}
   - component: {fileID: 4121992502480986354}
   - component: {fileID: 4121992502480986355}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: frame1 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

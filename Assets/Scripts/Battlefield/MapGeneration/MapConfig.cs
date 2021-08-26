@@ -7,7 +7,8 @@ namespace Battlefield.Generator
     [CreateAssetMenu(fileName = "MapConfig", menuName = "Battlefield/Map Config")]
     public class MapConfig : ScriptableObject
     {
-        [SerializeField] int _mapSize;
+        [SerializeField] int _gridSize;
+        [SerializeField] int _chunksBehindGrid;
         [SerializeField] float _heightPerLevel;
         [SerializeField] int _chunkSize;
         [Range(0, 50)]
@@ -18,8 +19,8 @@ namespace Battlefield.Generator
 
         IGenerationAlgorithm _generationAlgorithm;
 
-        public int mapSize => _mapSize;
-        public int linesCount => _mapSize + 1;
+        public int gridSize => _gridSize;
+        public int linesCount => _gridSize + _chunksBehindGrid * 2 + 1;
         public float heightPerLevel => _heightPerLevel;
         public int chunkSize => _chunkSize;
         public int chunkLines => _chunkSize + 1;
@@ -28,6 +29,7 @@ namespace Battlefield.Generator
         public IGenerationAlgorithm generationAlgorithm => _generationAlgorithm;
         public AnimationCurve slopeCurve => _slopeCurve;
         public BattleRules battleRules => _battleRules;
+        public int chunksBehindGrid => _chunksBehindGrid;
 
 
         private void OnEnable()

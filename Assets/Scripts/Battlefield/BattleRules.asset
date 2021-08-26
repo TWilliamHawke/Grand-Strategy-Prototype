@@ -15,5 +15,5 @@ MonoBehaviour:
   frontColor: {r: 0.019223915, g: 0.4528302, b: 0.036567114, a: 1}
   flankColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   rearColor: {r: 1, g: 0, b: 0, a: 1}
-  defaultColor: {r: 0, g: 0.5257568, b: 0.99215686, a: 0.49803922}
+  defaultColor: {r: 0, g: 0.28235295, b: 1, a: 0.43137255}
   hoverColor: {r: 0.6886792, g: 0.6350986, b: 0.016242431, a: 0.4392157}

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Battlefield.Chunks;
 using UnityEngine;
 
 namespace Battlefield
@@ -7,29 +8,32 @@ namespace Battlefield
     [CreateAssetMenu(fileName = "SelectedObjects", menuName = "Battlefield/Selected Objects")]
     public class SelectedObjects : ScriptableObject
     {
-        public Square hoveredSquare { get; set; }
+        public Chunk hoveredChunk { get; set; }
         public Troop troop { get; set; }
         public ISelectable selectable { get; set; }
 
         private void OnEnable()
         {
-            hoveredSquare = null;
+            hoveredChunk = null;
             troop = null;
         }
 
-        public void SetHoveredSquare(Square square)
+        public void SetHoveredChunk(Chunk chunk)
         {
-            if (hoveredSquare == square) return;
-            if(troop?.square != hoveredSquare)
+            if (hoveredChunk == chunk) return;
+            if (troop?.chunk != hoveredChunk)
             {
-                hoveredSquare?.SetDefaultFrameColor();
+                hoveredChunk?.SetDefaultFrameColor();
             }
-            hoveredSquare = square;
+            hoveredChunk = chunk;
 
-            if(troop?.square == square) {
-                square.UpdateFrameColors(troop.direction);
-            } else {
-                square.SetHoverColor();
+            if (troop?.chunk == chunk)
+            {
+                chunk.UpdateFrameColors((int)troop.direction);
+            }
+            else
+            {
+                chunk.SetHoverColor();
             }
         }
 
@@ -55,11 +59,11 @@ namespace Battlefield
             selectable = obj;
         }
 
-        public bool GetSelectedObject<T>(out T selectable) where T: class, ISelectable
+        public bool GetSelectedObject<T>(out T selectable) where T : class, ISelectable
         {
             selectable = default(T);
 
-            if(this.selectable is T)
+            if (this.selectable is T)
             {
                 selectable = this.selectable as T;
                 return true;
