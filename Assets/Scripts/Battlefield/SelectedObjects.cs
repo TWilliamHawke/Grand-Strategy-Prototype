@@ -29,7 +29,7 @@ namespace Battlefield
 
             if (troop?.chunk == chunk)
             {
-                chunk.UpdateFrameColors((int)troop.direction);
+                chunk.UpdateFrameColors(troop.direction);
             }
             else
             {

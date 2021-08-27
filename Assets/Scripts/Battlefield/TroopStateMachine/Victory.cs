@@ -18,7 +18,7 @@ namespace Battlefield
         public override void OnEnter()
         {
             _unitsController.SetIsWalkValue(true);
-            _unitsController.ChangeUnitsPosition(UnitsPosition.center);
+            _unitsController.MoveUnitsToChunkCenter();
         }
 
         public override void OnExit()

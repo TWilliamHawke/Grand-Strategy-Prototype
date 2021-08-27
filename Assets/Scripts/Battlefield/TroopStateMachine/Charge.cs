@@ -14,7 +14,7 @@ namespace Battlefield
         public override void OnEnter()
         {
             _unitsController.SetAnimatorValue("IsRun", true);
-            _unitsController.ChangeUnitsPosition(UnitsPosition.back);
+            _unitsController.MoveUnitsToChunkBack();
         }
 
         public override void OnExit()

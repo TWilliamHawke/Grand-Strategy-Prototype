@@ -11,17 +11,10 @@ namespace Battlefield.Chunks
         List<FramePartGenerator> _frame;
         BattleRules _rules;
 
-
-
         public FrameController(List<FramePartGenerator> frame, BattleRules battleRules)
         {
             _frame = frame;
             _rules = battleRules;
-        }
-
-        public void UpdateFrameColors(Directions direction)
-        {
-            UpdateFrameColors((int)direction);
         }
 
         public void UpdateFrameColors(int direction)
@@ -61,8 +54,6 @@ namespace Battlefield.Chunks
                 framePart.UpdateColor(color);
             }
         }
-
-
 
     }
 }

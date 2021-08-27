@@ -6,9 +6,8 @@ using UnityEngine.Events;
 
 namespace Battlefield.Chunks
 {
-    public class Chunk : MonoBehaviour, IFrameController, IPounterController, IPathArrowController
+    public class Chunk : MonoBehaviour
     {
-        static public event UnityAction<Chunk> OnPointerHide;
 
         [SerializeField] BattlefieldData _battlefieldData;
         [SerializeField] MapConfig _mapConfig;
@@ -25,57 +24,49 @@ namespace Battlefield.Chunks
         FrameController _frameController;
         InnerArrowController _innerArrowController;
         PathArrowController _pathArrowController;
-        ChunkRotation _chunkRotation;
 
         public Directions currentDirection => _innerArrowController.direction;
 
         void Awake()
         {
             _frameController = new FrameController(_frame, _rules);
-            _innerArrowController = new InnerArrowController(_pointer, _centerPosition);
+            _innerArrowController = new InnerArrowController(_pointer, _centerPosition, this);
             _pathArrowController = new PathArrowController(_pathArrow);
-            _chunkRotation = new ChunkRotation(_frameController, _selectedObjects, _innerArrowController);
 
             _battlefieldData.AddNode(this);
         }
 
-        void Start()
-        {
-
-        }
-
         void Update()
         {
-
+            if (_selectedObjects.hoveredChunk == this && _selectedObjects.troop)
+            {
+                _innerArrowController.TryShowPointer(_selectedObjects.troop);
+            }
         }
 
         public void GenerateFrame(ChunkGenerator generator)
         {
-            foreach(var framePart in _frame)
+            foreach (var framePart in _frame)
             {
                 framePart.GenerateMesh(generator);
             }
         }
 
-        public void UpdateFrameColors(int direction)
+        public void UpdateFrameColors(Directions direction)
         {
-            _frameController.UpdateFrameColors(direction);
+            _frameController.UpdateFrameColors((int)direction);
         }
 
-        public void HidePathArrow()
+        public void RestoreFrameColor()
         {
-            _pathArrowController.HidePathArrow();
-        }
-
-        public void RotatePathArrow(Directions direction)
-        {
-            _pathArrowController.RotatePathArrow(direction);
-        }
-
-        public void RotatePointer(Vector3 position)
-        {
-            int directionIndex = _innerArrowController.RotatePointer(position);
-            _frameController.UpdateFrameColors(directionIndex);
+            if (_selectedObjects.hoveredChunk == this)
+            {
+                _frameController.SetHoverColor();
+            }
+            else
+            {
+                _frameController.SetDefaultFrameColor();
+            }
         }
 
         public void SetDefaultFrameColor()
@@ -88,17 +79,15 @@ namespace Battlefield.Chunks
             _frameController.SetHoverColor();
         }
 
-        public void HidePointer()
+        public void HidePathArrow()
         {
-            _innerArrowController.HidePointer();
-            OnPointerHide?.Invoke(this);
+            _pathArrowController.HidePathArrow();
         }
 
-        public void ShowPointer()
+        public void RotatePathArrow(Directions direction)
         {
-            _innerArrowController.ShowPointer();
+            _pathArrowController.RotatePathArrow(direction);
         }
-
 
     }
 }

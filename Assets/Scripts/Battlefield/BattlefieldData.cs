@@ -53,7 +53,7 @@ namespace Battlefield
 
         public List<Node> FindNeightborNodes(Node node)
         {
-            var neightborSquares = new List<Node>();
+            var neightborNodes = new List<Node>();
             var gridPos = node.position;
 
             foreach (var pair in _neightbors)
@@ -62,10 +62,10 @@ namespace Battlefield
 
                 if (_nodes.TryGetValue(newPos.ToString(), out var neightbor))
                 {
-                    neightborSquares.Add(neightbor);
+                    neightborNodes.Add(neightbor);
                 }
             }
-            return neightborSquares;
+            return neightborNodes;
         }
 
         public bool FindDirection(Node from, Node to, out Directions direction)
@@ -106,7 +106,7 @@ namespace Battlefield
             }
             else
             {
-                Debug.LogError("Square is not found on battlefield");
+                Debug.LogError("Node is not found on battlefield");
                 return null;
             }
         }

@@ -29,21 +29,21 @@ namespace Battlefield
         public override void Tick()
         {
             _progress += _progressPerTick;
-            Vector3 nextSquarePosition = _troopInfo.path.Peek().chunk.transform.position;
-            ChangeTroopsTargetPosition(nextSquarePosition);
+            Vector3 nextChunkPosition = _troopInfo.path.Peek().chunk.transform.position;
+            ChangeTroopsTargetPosition(nextChunkPosition);
 
-            if (_troopInfo.transform.position == nextSquarePosition)
+            if (_troopInfo.transform.position == nextChunkPosition)
             {
                 ChangeTargetNode();
             }
         }
 
-        void ChangeTroopsTargetPosition(Vector3 nextSquarePosition)
+        void ChangeTroopsTargetPosition(Vector3 nextChunkPosition)
         {
-            Vector3 currentSquarePosition = _troopInfo.chunk.transform.position;
+            Vector3 currentChunkPosition = _troopInfo.chunk.transform.position;
 
             var targetPosition = Vector3.Lerp(
-                currentSquarePosition, nextSquarePosition, clampedProgress);
+                currentChunkPosition, nextChunkPosition, clampedProgress);
 
             _troopInfo.targetPosition = targetPosition;
         }

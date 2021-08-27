@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2973960598523398648}
   - component: {fileID: 2973960598523398647}
-  - component: {fileID: 2973960598523398649}
   m_Layer: 0
   m_Name: SelectionController
   m_TagString: Untagged
@@ -52,20 +51,6 @@ MonoBehaviour:
   _gridLayer:
     serializedVersion: 2
     m_Bits: 128
---- !u!114 &2973960598523398649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2973960598523398646}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9951595d41f3eb4e9c76cc149f78f06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _selectedObjects: {fileID: 11400000, guid: 6f35d0e8ea21cd84082a72567cc7e2d9, type: 2}
-  _showDelay: 0.2
 --- !u!1 &2973960598900935729
 GameObject:
   m_ObjectHideFlags: 0

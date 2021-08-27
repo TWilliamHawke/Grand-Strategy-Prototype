@@ -61,7 +61,6 @@
      <Compile Include="Assets\Scripts\Battlefield\Chunks\FrameController.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\TemplateController.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitTemplateViewer.cs" />
-     <Compile Include="Assets\Scripts\Battlefield\Chunks\IPounterController.cs" />
      <Compile Include="Assets\Scripts\Battlefield\MapGeneration\MeshGenerators\InnerSlopeGenerator.cs" />
      <Compile Include="Assets\Scripts\UI\IHaveUnits.cs" />
      <Compile Include="Assets\Scripts\Battlefield\Directions.cs" />
@@ -141,12 +140,10 @@
      <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\ChangeCostForEquipment.cs" />
      <Compile Include="Assets\Scripts\ThrottleLog.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\MeleeWeapon.cs" />
-     <Compile Include="Assets\Scripts\Battlefield\Chunks\IPathArrowController.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\MountSlot.cs" />
      <Compile Include="Assets\Scripts\UI\Tooltip\ITooltipComponent.cs" />
      <Compile Include="Assets\Scripts\UI\TechnologyScreen\TechnologyButton.cs" />
      <Compile Include="Assets\Scripts\Battlefield\UnitSpawner.cs" />
-     <Compile Include="Assets\Scripts\Battlefield\Square.cs" />
      <Compile Include="Assets\Scripts\UI\PrebatleScreen\PrebattleUnitList.cs" />
      <Compile Include="Assets\Scripts\UI\BuildingsView\BuildingSelectionPanel.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Defeat.cs" />
@@ -172,8 +169,6 @@
      <Compile Include="Assets\Scripts\Battlefield\UnitsController.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\ShieldSlot.cs" />
      <Compile Include="Assets\Scripts\UI\Lib\UIPanelWithGrid.cs" />
-     <Compile Include="Assets\Scripts\Battlefield\Chunks\ChunkRotation.cs" />
-     <Compile Include="Assets\Scripts\Battlefield\SquareDirection.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitPreview.cs" />
      <Compile Include="Assets\Scripts\UI\BuildingsView\BuildingsListController.cs" />
      <Compile Include="Assets\Scripts\UI\IhaveLabel.cs" />
@@ -182,7 +177,6 @@
      <Compile Include="Assets\Scripts\Battlefield\MapGeneration\IGenerationAlgorithm.cs" />
      <Compile Include="Assets\Scripts\Raycasts.cs" />
      <Compile Include="Assets\Scripts\UI\Label.cs" />
-     <Compile Include="Assets\Scripts\Battlefield\Chunks\IFrameController.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\EquipmentList.cs" />
      <Compile Include="Assets\Scripts\UI\Lib\UIScreen.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\Effect.cs" />

@@ -25,14 +25,14 @@ namespace Battlefield
             Go(ready, HasNewTarget, movement);
             Go(rotation, ReachDirectionAndHasTarget, movement);
             Go(rotation, ReachDirection, ready);
-            Go(movement, EnemyOnTargetSquare, charge);
+            Go(movement, EnemyInTargetNode, charge);
             Go(charge, ReachTarget, fight);
             Go(fight, WinFight, victory);
             Go(victory, UnitsOnPosition, ready);
 
             bool HasNewDirection() => _troopInfo.nextTargetDirection != _troopInfo.direction;
             bool ReachDirection() => _troopInfo.nextTargetDirection == _troopInfo.direction;
-            bool EnemyOnTargetSquare() => _troopInfo.path.Peek().enemyInNode == true && ReachDirection();
+            bool EnemyInTargetNode() => _troopInfo.path.Peek().enemyInNode == true && ReachDirection();
             bool HasNewTarget() => _troopInfo.path.Count > 0;
             bool ReachTarget() => _troopInfo.path.Count == 0;
             bool ReachDirectionAndHasTarget() => ReachDirection() && HasNewTarget();

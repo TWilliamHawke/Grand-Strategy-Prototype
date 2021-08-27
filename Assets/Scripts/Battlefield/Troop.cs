@@ -20,7 +20,7 @@ namespace Battlefield
         bool _isSelected = false;
         Node _currentNode;
         Stack<Node> _path = new Stack<Node>();
-        Directions _targetSquareDirection;
+        Directions _targetChunkDirection;
 
         public bool ownedByPlayer => _ownedByPlayer;
         public bool isSelected => _isSelected;
@@ -42,7 +42,7 @@ namespace Battlefield
 
         void Awake()
         {
-            Chunk.OnPointerHide += SetFinalTargetDirection;
+            InnerArrowController.OnPointerHide += SetFinalTargetDirection;
             _unitsController = GetComponent<UnitsController>();
             SetRotation(direction);
 
@@ -51,7 +51,7 @@ namespace Battlefield
 
         void OnDestroy()
         {
-            Chunk.OnPointerHide -= SetFinalTargetDirection;
+            InnerArrowController.OnPointerHide -= SetFinalTargetDirection;
         }
 
         void SpawnTroop()
@@ -72,7 +72,7 @@ namespace Battlefield
 
             if (rotationAngle > Mathf.Epsilon)
             {
-                RotateSquare();
+                RotateTroop();
             }
         }
 
@@ -95,7 +95,7 @@ namespace Battlefield
 
         public Directions FindNextTargetDirection()
         {
-            if (path.Count == 0) return _targetSquareDirection;
+            if (path.Count == 0) return _targetChunkDirection;
 
             if (_battlefieldData.FindDirection(_currentNode, path.Peek(), out var pathDirection))
             {
@@ -121,7 +121,7 @@ namespace Battlefield
         public void Select()
         {
             _indicator.SetSelectedBackground();
-            UpdateSquareBorders();
+            UpdateChunkBorders();
             ShowPath();
             _isSelected = true;
         }
@@ -159,27 +159,22 @@ namespace Battlefield
             _currentNode = nextNode;
             if (_isSelected)
             {
-                UpdateSquareBorders();
+                UpdateChunkBorders();
             }
         }
 
-        public void UpdateSquareBorders()
+        public void UpdateChunkBorders()
         {
-            _currentNode.chunk.UpdateFrameColors((int)direction);
+            _currentNode.chunk.UpdateFrameColors(direction);
         }
 
-        public void RestoreChunkFrame()
-        {
-            chunk.UpdateFrameColors((int)direction);
-        }
-
-        void SetFinalTargetDirection(IPounterController chunk)
+        void SetFinalTargetDirection(Chunk chunk)
         {
             if (_isSelected == false) return;
-            _targetSquareDirection = chunk.currentDirection;
+            _targetChunkDirection = chunk.currentDirection;
         }
 
-        void RotateSquare()
+        void RotateTroop()
         {
             float deltaAngle = _rotationSpeed * Time.deltaTime * _visualSpeed;
             if (rotationAngle < 1f)

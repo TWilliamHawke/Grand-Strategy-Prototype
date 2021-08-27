@@ -1360,54 +1360,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 655104075972576377, guid: 15fcd69a987422c4392e18ac10dbc39a, type: 3}
   m_PrefabInstance: {fileID: 944500076}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &947272085
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 947272086}
-  - component: {fileID: 947272087}
-  m_Layer: 0
-  m_Name: DemoMapSetup
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &947272086
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 947272085}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 813557078}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &947272087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 947272085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fb78001bcc7edc4c878532e809500d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerTroop: {fileID: 981255789}
-  _enemyTroops:
-  - {fileID: 618741838}
-  - {fileID: 1141301127}
-  - {fileID: 297481102}
 --- !u!1001 &959521854
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2275,6 +2227,54 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 655104075972576377, guid: 15fcd69a987422c4392e18ac10dbc39a, type: 3}
   m_PrefabInstance: {fileID: 1322139563}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1399385469
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1399385470}
+  - component: {fileID: 1399385471}
+  m_Layer: 0
+  m_Name: DemoMapSetup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1399385470
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399385469}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 813557078}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1399385471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399385469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fb78001bcc7edc4c878532e809500d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerTroop: {fileID: 981255789}
+  _enemyTroops:
+  - {fileID: 618741838}
+  - {fileID: 1141301127}
+  - {fileID: 297481102}
 --- !u!1001 &1490924380
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3226,6 +3226,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 947272087, guid: b43d150a3888dea488dd8e824aad2f6c, type: 3}
+      propertyPath: _playerTroop
+      value: 
+      objectReference: {fileID: 981255789}
+    - target: {fileID: 947272087, guid: b43d150a3888dea488dd8e824aad2f6c, type: 3}
+      propertyPath: _enemyTroops.Array.data[0]
+      value: 
+      objectReference: {fileID: 618741838}
+    - target: {fileID: 947272087, guid: b43d150a3888dea488dd8e824aad2f6c, type: 3}
+      propertyPath: _enemyTroops.Array.data[1]
+      value: 
+      objectReference: {fileID: 1141301127}
+    - target: {fileID: 947272087, guid: b43d150a3888dea488dd8e824aad2f6c, type: 3}
+      propertyPath: _enemyTroops.Array.data[2]
+      value: 
+      objectReference: {fileID: 297481102}
     - target: {fileID: 2973960598900935729, guid: b43d150a3888dea488dd8e824aad2f6c, type: 3}
       propertyPath: m_Name
       value: '[CONTROLLERS]'

@@ -33,7 +33,7 @@ namespace Battlefield
         {
             if(_troopInfo.isSelected)
             {
-                _troopInfo.UpdateSquareBorders();
+                _troopInfo.UpdateChunkBorders();
             }
             _unitsController.SetIsWalkValue(false);
         }

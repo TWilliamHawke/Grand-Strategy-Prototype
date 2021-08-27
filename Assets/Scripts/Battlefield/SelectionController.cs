@@ -16,12 +16,12 @@ public class SelectionController : MonoBehaviour
 
     void Update()
     {
-        HoverSquare();
+        HoverChunk();
         SelectUnit();
-        SelectTargetSquare();
+        SelectTargetChunk();
     }
 
-    void HoverSquare()
+    void HoverChunk()
     {
         if (Input.GetMouseButton(1)) return;
 
@@ -48,14 +48,14 @@ public class SelectionController : MonoBehaviour
     }
 
     //unit movement target
-    void SelectTargetSquare()
+    void SelectTargetChunk()
     {
         if (!Input.GetMouseButtonUp(1)) return;
         if (!_selectedObjects.troop) return;
 
-        if (Raycasts.HitTarget<Chunk>(out var square, _gridLayer))
+        if (Raycasts.HitTarget<Chunk>(out var chunk, _gridLayer))
         {
-            var node = _battlefieldData.FindNode(square);
+            var node = _battlefieldData.FindNode(chunk);
             _selectedObjects.troop.CreatePathTo(node);
         }
     }

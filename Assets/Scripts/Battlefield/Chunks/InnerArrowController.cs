@@ -2,24 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using Battlefield.Generator;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Battlefield.Chunks
 {
     public class InnerArrowController
     {
-        [SerializeField] ChunkArrow _pointer;
-        [SerializeField] Transform _centerPosition;
-        private Directions _currentDirection;
+        static public event UnityAction<Chunk> OnPointerHide;
 
-		public Directions direction => _currentDirection;
+        float _showDelay = 0.3f;
+        bool _isShow;
 
-        public InnerArrowController(ChunkArrow pointer, Transform centerPosition)
+        ChunkArrow _pointer;
+        Transform _centerPosition;
+        Directions _currentDirection;
+        Chunk _chunk;
+        Coroutine _delayCoroutine;
+
+        public Directions direction => _currentDirection;
+
+        public InnerArrowController(ChunkArrow pointer, Transform centerPosition, Chunk chunk)
         {
             _pointer = pointer;
             _centerPosition = centerPosition;
+            _chunk = chunk;
         }
 
-        public int RotatePointer(Vector3 position)
+        public void TryShowPointer(Troop troop)
+        {
+            TogglePointer(troop);
+            TryRotatePointer();
+        }
+
+        void TryRotatePointer()
+        {
+            if (!Input.GetMouseButton(1)) return;
+            if (!_isShow) return;
+
+            if (Raycasts.GetPosition(out var position))
+            {
+                var direction = RotatePointer(position);
+                _chunk.UpdateFrameColors(direction);
+            }
+        }
+
+        Directions RotatePointer(Vector3 position)
         {
             _centerPosition.LookAt(position);
             int directionIndex = Mathf.RoundToInt(_centerPosition.eulerAngles.y / 45);
@@ -33,21 +60,42 @@ namespace Battlefield.Chunks
                 _currentDirection = newDirection;
             }
 
-            return directionIndex;
+            return newDirection;
         }
 
-        public void HidePointer()
+        void TogglePointer(Troop troop)
+        {
+            if (Input.GetMouseButtonDown(1))
+            {
+                _delayCoroutine = _chunk.StartCoroutine(ShowAfterDelay(troop));
+            }
+
+            if (Input.GetMouseButtonUp(1))
+            {
+                HidePointer();
+                _chunk.RestoreFrameColor();
+
+                _chunk.StopCoroutine(_delayCoroutine);
+                _isShow = false;
+
+                troop.UpdateChunkBorders();
+            }
+        }
+
+        void HidePointer()
         {
             _pointer.gameObject.SetActive(false);
+            OnPointerHide?.Invoke(_chunk);
         }
 
-        public void ShowPointer()
+        IEnumerator ShowAfterDelay(Troop troop)
         {
+            yield return new WaitForSeconds(_showDelay);
+            _isShow = true;
             _pointer.gameObject.SetActive(true);
+            TryRotatePointer();
+            troop.chunk.SetHoverColor();
         }
-
-
-
 
     }
 }

@@ -9,7 +9,6 @@ namespace Battlefield
     {
         [SerializeField] List<Animator> _unitList;
         [SerializeField] BoxCollider _units;
-        [SerializeField] UnitsPosition _unitsPosition;
 
         [SerializeField] Transform _frontPosition;
         [SerializeField] Transform _centerPosition;
@@ -20,15 +19,10 @@ namespace Battlefield
 
         Vector3 _targetUnitsPosition;
 
-        Dictionary<UnitsPosition, Vector3> _possiblePositions = new Dictionary<UnitsPosition, Vector3>();
 
         void Awake()
         {
-            _possiblePositions.Add(UnitsPosition.front, _frontPosition.localPosition);
-            _possiblePositions.Add(UnitsPosition.center, _centerPosition.localPosition);
-            _possiblePositions.Add(UnitsPosition.back, _backPosition.localPosition);
-
-            ChangeUnitsPosition(_unitsPosition);
+            MoveUnitsToChunkCenter();
             _units.transform.localPosition = _targetUnitsPosition;
         }
 
@@ -69,13 +63,14 @@ namespace Battlefield
             }
         }
 
-        public void ChangeUnitsPosition(UnitsPosition position)
+        public void MoveUnitsToChunkCenter()
         {
-            if (_possiblePositions.TryGetValue(position, out var result))
-            {
-                _targetUnitsPosition = result;
-                _unitsPosition = position;
-            }
+            _targetUnitsPosition = _centerPosition.localPosition;
+        }
+
+        public void MoveUnitsToChunkBack()
+        {
+            _targetUnitsPosition = _backPosition.localPosition;
         }
 
         private void MoveToTarget()
@@ -85,13 +80,6 @@ namespace Battlefield
             _units.transform.localPosition = nextPosition;
         }
 
-    }
-
-    public enum UnitsPosition
-    {
-        front,
-        center,
-        back
     }
 
 }

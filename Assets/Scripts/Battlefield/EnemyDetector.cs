@@ -29,10 +29,10 @@ namespace Battlefield
 
         void Start()
         {
-            FillNeightborSquares();
+            FillNeightborNodes();
         }
 
-        void FillNeightborSquares()
+        void FillNeightborNodes()
         {
             _currentNode = _battlefieldData.FindNode(this.gameObject);
             _neightborNodes = _battlefieldData.FindNeightborNodes(_currentNode);
