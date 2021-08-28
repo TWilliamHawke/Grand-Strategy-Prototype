@@ -15,8 +15,11 @@ namespace Battlefield.Generator
         [SerializeField] MapConfig _mapConfig;
         [SerializeField] BattlefieldData _battlefieldData;
         [SerializeField] ChunkGenerator _chunkPrefab;
+        [SerializeField] MeshRenderer[] _trees;
 
         UnitSpawner _unitSpawner;
+        System.Random _generator;
+
 
         private void Awake()
         {
@@ -25,6 +28,7 @@ namespace Battlefield.Generator
 
         void Start()
         {
+            _generator = new System.Random(_mapConfig.seed);
             GenerateHeightMap();
             GenerateChunks();
 
@@ -42,7 +46,7 @@ namespace Battlefield.Generator
 
         void GenerateHeightMap()
         {
-            _heightMap = _mapConfig.generationAlgorithm.GenerateHeightMap();
+            _heightMap = _mapConfig.generationAlgorithm.GenerateHeightMap(_generator);
         }
 
         void GenerateChunks()
@@ -52,6 +56,8 @@ namespace Battlefield.Generator
             var outerGenerator = new OuterSlopeGenerator(_mapConfig);
             var hollowGenerator = new HollowGenerator(_mapConfig);
             var slopeGenerator = new SlopeGenerator(_mapConfig);
+
+            var forestGenerator = new ForestGenerator(_trees, _mapConfig);
 
             flatGenerator.SetNext(innerGenerator);
             innerGenerator.SetNext(outerGenerator);
@@ -71,6 +77,7 @@ namespace Battlefield.Generator
                     chunk.SetCorners(corners);
                     flatGenerator.CreateVertices(chunk);
                     chunk.transform.SetParent(transform);
+                    forestGenerator.CreateForest(chunk);
 
                     if (ChunkInsideGrid(x, y))
                     {

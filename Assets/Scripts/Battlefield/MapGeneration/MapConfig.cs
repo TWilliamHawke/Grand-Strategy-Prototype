@@ -17,6 +17,8 @@ namespace Battlefield.Generator
         [SerializeField] AnimationCurve _slopeCurve;
         [SerializeField] BattleRules _battleRules;
         [SerializeField] LayerMask _gridLayer;
+        [Range(0, 100)] [SerializeField] int _forestChance;
+        [Range(0, 100)] [SerializeField] int _forestDensity;
 
         IGenerationAlgorithm _generationAlgorithm;
 
@@ -32,6 +34,8 @@ namespace Battlefield.Generator
         public BattleRules battleRules => _battleRules;
         public int chunksBehindGrid => _chunksBehindGrid;
         public LayerMask gridLayer => _gridLayer;
+        public int forestChance => _forestChance;
+        public int forestDensity => _forestDensity;
 
 
         private void OnEnable()

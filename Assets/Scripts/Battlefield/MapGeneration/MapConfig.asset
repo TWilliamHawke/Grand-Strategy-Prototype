@@ -46,3 +46,5 @@ MonoBehaviour:
   _gridLayer:
     serializedVersion: 2
     m_Bits: 128
+  _forestChance: 11
+  _forestDensity: 69

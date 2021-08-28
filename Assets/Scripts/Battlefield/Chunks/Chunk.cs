@@ -90,4 +90,11 @@ namespace Battlefield.Chunks
         }
 
     }
+
+    public enum ChunkTypes
+    {
+        unwalkable,
+        plane,
+        slope
+    }
 }

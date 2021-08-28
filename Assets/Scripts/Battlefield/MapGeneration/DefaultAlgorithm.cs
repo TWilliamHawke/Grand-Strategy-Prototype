@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using System;
 
 namespace Battlefield.Generator
 {
@@ -8,7 +8,7 @@ namespace Battlefield.Generator
     {
         byte[,] _heightMap;
         int _linesCount;
-        System.Random _generator;
+        Random _generator;
 
         MapConfig _mapConfig;
 
@@ -17,10 +17,10 @@ namespace Battlefield.Generator
             _mapConfig = mapConfig;
         }
 
-        public byte[,] GenerateHeightMap()
+        public byte[,] GenerateHeightMap(Random generator)
         {
             _linesCount = _mapConfig.linesCount;
-            _generator = new System.Random(_mapConfig.seed);
+            _generator = generator;
             _heightMap = new byte[_linesCount, _linesCount];
 
             for (int x = 0; x < _linesCount; x++)
