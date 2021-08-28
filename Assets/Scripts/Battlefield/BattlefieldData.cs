@@ -35,13 +35,21 @@ namespace Battlefield
 
         public Node FindNode(Chunk chunk)
         {
-            return FindNode(chunk.gameObject);
+            return FindNode(chunk.gameObject.transform.position);
         }
 
         public Node FindNode(GameObject gameobject)
         {
             var x = gameobject.transform.position.x;
             var z = gameobject.transform.position.z;
+            return FindNode(new Vector2(x, z).ToString());
+        }
+
+        public Node FindNode(Vector3 position)
+        {
+            var x = position.x;
+            var z = position.z;
+            // Debug.Log(new Vector2(x, z).ToString());
             return FindNode(new Vector2(x, z).ToString());
         }
 

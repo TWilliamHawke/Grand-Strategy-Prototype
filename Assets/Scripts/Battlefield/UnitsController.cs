@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Battlefield.Generator;
 using UnityEngine;
 
 namespace Battlefield
@@ -7,6 +8,7 @@ namespace Battlefield
 
     public class UnitsController : MonoBehaviour
     {
+        [SerializeField] MapConfig _mapConfig;
         [SerializeField] List<Animator> _unitList;
         [SerializeField] BoxCollider _units;
 
@@ -34,11 +36,32 @@ namespace Battlefield
             }
         }
 
+        public void RotateToSouth()
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+
         public void SetAnimatorValue(string name, bool value)
         {
             foreach (var unit in _unitList)
             {
                 unit.SetBool(name, value);
+            }
+        }
+
+        public void NormalizeUnitsPosition()
+        {
+            StartCoroutine(NormalizeCoroutine());
+        }
+
+        IEnumerator NormalizeCoroutine()
+        {
+            yield return null;
+            foreach (var unit in _unitList)
+            {
+
+                var newPosition = Raycasts.VerticalDown(unit.gameObject.transform.position, _mapConfig.gridLayer);
+                unit.transform.position = newPosition;
             }
         }
 

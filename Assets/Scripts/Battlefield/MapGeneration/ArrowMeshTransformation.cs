@@ -6,8 +6,19 @@ namespace Battlefield.Generator
 {
     public class ArrowMeshTransformation : MonoBehaviour
     {
-        //layer for raycasts
-        [SerializeField] LayerMask _layerMask;
+        static Dictionary<int, (float, float)> _sinCos = new Dictionary<int, (float, float)>() {
+            { 0, (0, 1) },
+            { 1, (.7f, .7f) },
+            { 2, (1, 0) },
+            { 3, (.7f, -.7f) },
+            { 4, (0, -1) },
+            { 5, (-.7f, -.7f) },
+            { 6, (-1, 0) },
+            { 7, (-.7f, .7f) },
+        };
+
+
+        [SerializeField] MapConfig _mapConfig;
         [SerializeField] float _verticalOffset = 0.2f;
 
         MeshFilter _meshFilter;
@@ -17,32 +28,41 @@ namespace Battlefield.Generator
             _meshFilter = GetComponent<MeshFilter>();
         }
 
-        public void ChangeShape()
+        public void ChangeShape(float angle)
+        {
+            int key = Mathf.RoundToInt(angle / 45);
+            if (_sinCos.TryGetValue(key, out var pair))
+            {
+                ChangeShape(pair.Item1, pair.Item2);
+            }
+            else
+            {
+                Debug.Log($"Not found! {angle}");
+            }
+        }
+
+        void ChangeShape(float sin, float cos)
         {
             Mesh mesh = CloneMesh();
             var vertices = mesh.vertices;
 
             for (int i = 0; i < vertices.Length; i++)
             {
-                var startPoint = transform.position + vertices[i];
-                startPoint.y = 100;
-                var direction = Vector3.down;
+                var scaleX = transform.localScale.x;
+                var scaleZ = transform.localScale.z;
+                //координаты после поворота
+                float x = vertices[i].x * scaleX * cos + vertices[i].z * scaleZ * sin;
+                float z = vertices[i].z * scaleZ * cos - vertices[i].x * scaleX * sin;
 
-                var ray = new Ray(startPoint, direction);
+                var startPoint = transform.position + new Vector3(x, 0, z);
 
-                if (Physics.Raycast(ray, out var hitInfo, _layerMask))
-                {
-                    Debug.Log(hitInfo.point.y);
-                    float y = hitInfo.point.y - transform.position.y + _verticalOffset;
-                    vertices[i].y = y;
-
-                }
+                var point = Raycasts.VerticalDown(startPoint, _mapConfig.gridLayer);
+                float y = point.y - transform.position.y + _verticalOffset;
+                vertices[i].y = y;
             }
 
             mesh.vertices = vertices;
-
             _meshFilter.sharedMesh = mesh;
-
         }
 
         Mesh CloneMesh()

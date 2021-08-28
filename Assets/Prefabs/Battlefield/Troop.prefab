@@ -1323,6 +1323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 573a46c3d8c25e848a70fbf2a381828c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mapConfig: {fileID: 11400000, guid: 5e594fcffd921c140833969361300889, type: 2}
   _unitList:
   - {fileID: 5481200860143780794}
   - {fileID: 5481200859399094636}
@@ -1355,7 +1356,6 @@ MonoBehaviour:
   - {fileID: 5481200861056860934}
   - {fileID: 5481200861073901666}
   _units: {fileID: 8995801294086533605}
-  _unitsPosition: 1
   _frontPosition: {fileID: 448067345294101155}
   _centerPosition: {fileID: 3663747132272659056}
   _backPosition: {fileID: 1511603029640324695}

@@ -82,6 +82,11 @@ namespace Battlefield
             return _currentNode;
         }
 
+        public void NormalizeUnitPositions()
+        {
+            _unitsController.NormalizeUnitsPosition();
+        }
+
         public void SetRotation(Directions targetDirection)
         {
             direction = targetDirection;

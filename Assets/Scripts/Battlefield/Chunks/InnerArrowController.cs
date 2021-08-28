@@ -9,6 +9,8 @@ namespace Battlefield.Chunks
     public class InnerArrowController
     {
         static public event UnityAction<Chunk> OnPointerHide;
+        static Coroutine _delayCoroutine;
+        static InnerArrowController _lastController;
 
         float _showDelay = 0.3f;
         bool _isShow;
@@ -17,7 +19,6 @@ namespace Battlefield.Chunks
         Transform _centerPosition;
         Directions _currentDirection;
         Chunk _chunk;
-        Coroutine _delayCoroutine;
 
         public Directions direction => _currentDirection;
 
@@ -57,6 +58,7 @@ namespace Battlefield.Chunks
                 float angleY = directionIndex * 45;
                 //_pointer.transform.eulerAngles = new Vector3(0, angleY, 0);
                 _pointer.transform.rotation = Quaternion.Euler(0, angleY, 0);
+                _pointer.UpdateShape();
                 _currentDirection = newDirection;
             }
 
@@ -67,12 +69,13 @@ namespace Battlefield.Chunks
         {
             if (Input.GetMouseButtonDown(1))
             {
+                _lastController = this;
                 _delayCoroutine = _chunk.StartCoroutine(ShowAfterDelay(troop));
             }
 
             if (Input.GetMouseButtonUp(1))
             {
-                HidePointer();
+                _lastController?.HidePointer();
                 _chunk.RestoreFrameColor();
 
                 _chunk.StopCoroutine(_delayCoroutine);

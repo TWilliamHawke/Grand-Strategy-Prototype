@@ -12,8 +12,8 @@ namespace Battlefield.Chunks
 	
 	    public void UpdateShape()
 		{
-			_part1?.ChangeShape();
-			_part2?.ChangeShape();
+			_part1?.ChangeShape(transform.rotation.eulerAngles.y);
+			_part2?.ChangeShape(transform.rotation.eulerAngles.y);
 		}
 	}
 }

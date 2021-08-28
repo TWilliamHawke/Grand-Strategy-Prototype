@@ -16,6 +16,7 @@ namespace Battlefield.Generator
         [SerializeField] int _seed;
         [SerializeField] AnimationCurve _slopeCurve;
         [SerializeField] BattleRules _battleRules;
+        [SerializeField] LayerMask _gridLayer;
 
         IGenerationAlgorithm _generationAlgorithm;
 
@@ -30,6 +31,7 @@ namespace Battlefield.Generator
         public AnimationCurve slopeCurve => _slopeCurve;
         public BattleRules battleRules => _battleRules;
         public int chunksBehindGrid => _chunksBehindGrid;
+        public LayerMask gridLayer => _gridLayer;
 
 
         private void OnEnable()

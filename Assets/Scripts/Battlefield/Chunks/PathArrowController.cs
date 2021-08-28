@@ -20,6 +20,7 @@ namespace Battlefield.Chunks
             float angleY = (int)direction * 45;
             //_pathArrow.transform.eulerAngles = new Vector3(0, angleY, 0);
             _pathArrow.transform.rotation = Quaternion.Euler(0, angleY, 0);
+            _pathArrow.UpdateShape();
         }
 
 

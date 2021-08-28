@@ -64,7 +64,21 @@ public static class Raycasts
         return false;
     }
 
-    
+    public static Vector3 VerticalDown(Vector3 position, LayerMask layerMask)
+    {
+        var rayStart = position;
+        rayStart.y = 5f;
+
+        var ray = new Ray(rayStart, Vector3.down);
+
+        if (Physics.Raycast(ray, out var hitInfo, 110f, layerMask))
+        {
+            // Debug.Log(hitInfo.point);
+            return hitInfo.point;
+        }
+
+        return position;
+    }
 
     public static bool GetPosition(out Vector3 position)
     {

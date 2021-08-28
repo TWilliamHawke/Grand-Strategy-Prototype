@@ -57,6 +57,10 @@ PrefabInstance:
       value: 4.12
       objectReference: {fileID: 0}
     - target: {fileID: 4361964657261772846, guid: 2371803a8100d8549b275eb0bdca0c4f, type: 3}
+      propertyPath: _mapConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 5e594fcffd921c140833969361300889, type: 2}
+    - target: {fileID: 4361964657261772846, guid: 2371803a8100d8549b275eb0bdca0c4f, type: 3}
       propertyPath: _unitsPosition
       value: 1
       objectReference: {fileID: 0}
