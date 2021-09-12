@@ -29,8 +29,10 @@ public class UnitClass : ScriptableObject
 
     [Space(5)]
     public List<Building> requiredBuildings;
+    [SerializeField] EquipmentSlots _lastItemsSlot;
 
     public string description => _description;
+    public EquipmentSlots lastItemSlot => _lastItemsSlot;
 
     private void OnEnable()
     {

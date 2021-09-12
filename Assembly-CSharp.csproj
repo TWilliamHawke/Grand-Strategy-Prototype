@@ -44,6 +44,7 @@
      <Compile Include="Assets\Scripts\Battlefield\Chunks\PathArrowController.cs" />
      <Compile Include="Assets\Scripts\Battlefield\MapGeneration\MapConfig.cs" />
      <Compile Include="Assets\Scripts\UI\UIInitiator.cs" />
+     <Compile Include="Assets\Scripts\Battlefield\MapGeneration\ForestGenerator.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\SettlementData.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\ArmourInfo.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\UnlockClass.cs" />
@@ -208,7 +209,7 @@
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\TroopStatesPlayer.cs" />
      <Compile Include="Assets\Scripts\UI\LabelController.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Unit.cs" />
-     <Compile Include="Assets\Scripts\Battlefield\MapGeneration\ForestGenerator.cs" />
+     <Compile Include="Assets\Scripts\UnitData\Inventory.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Programs/unity/2020.3.13f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

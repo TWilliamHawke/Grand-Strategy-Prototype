@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.Text;
+using System;
 
 [CustomEditor(typeof(UnitTemplate))]
 public class UnitTemplateEditor : Editor
@@ -23,19 +24,30 @@ public class UnitTemplateEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        base.OnInspectorGUI();
-        // serializedObject.Update();
+        //base.OnInspectorGUI();
+        serializedObject.Update();
 
-        // DrawProperties();
+        DrawProperties();
 
-        // serializedObject.ApplyModifiedProperties();
+        serializedObject.ApplyModifiedProperties();
+        // serializedObject.
+        DrawSaveButton();
+    }
 
+    private void DrawSaveButton()
+    {
+        if (GUILayout.Button("Save"))
+        {
+            Debug.Log("saved");
+            EditorUtility.SetDirty(_template);
+            AssetDatabase.SaveAssets();
+        }
     }
 
     private void DrawProperties()
     {
         _template = target as UnitTemplate;
-        if (_template == null)return;
+        if (_template == null) return;
 
 
         GUIStyle style = new GUIStyle(GUI.skin.label);
@@ -51,13 +63,17 @@ public class UnitTemplateEditor : Editor
         DrawUnitClass();
 
         style.fontSize = 14;
-        GUILayout.Label("Equipment", style);
+        GUILayout.Label("Equpment", style);
         EditorGUILayout.BeginVertical(GUI.skin.window);
 
         DrawEquipment<Weapon>(EquipmentSlots.primaryWeapon);
         DrawEquipment<Weapon>(EquipmentSlots.secondaryWeapon);
         DrawEquipment<Shield>(EquipmentSlots.shield);
         DrawEquipment<ArmourInfo>(EquipmentSlots.armour);
+        if (_template.unitClass.lastItemSlot == EquipmentSlots.mount)
+        {
+            DrawEquipment<Mount>(EquipmentSlots.mount);
+        }
         EditorGUILayout.EndVertical();
 
         EditorGUILayout.Space(10);
@@ -85,7 +101,7 @@ public class UnitTemplateEditor : Editor
 
     void DrawMeleeSkillSlider()
     {
-        if(_template.unitClass == null) return;
+        if (_template.unitClass == null) return;
         _template.meleeSkill = (int)EditorGUILayout.Slider("Melee skill", _template.meleeSkill, 0, _template.unitClass.weaponSkill);
     }
 

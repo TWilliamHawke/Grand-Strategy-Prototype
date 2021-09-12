@@ -24,3 +24,13 @@ MonoBehaviour:
   mount: {fileID: 11400000, guid: 270a156b27e97784588c1f856abfaa5f, type: 2}
   _canNotEdit: 1
   _meleeSkill: 5
+  _inventory:
+    _equipmentList:
+    - equpmentSlot: 1
+      equipment: {fileID: 11400000, guid: ee4111bb6b09feb4e969734874638327, type: 2}
+    - equpmentSlot: 2
+      equipment: {fileID: 11400000, guid: 098530b35241a8a48bca35bcc5c739d1, type: 2}
+    - equpmentSlot: 4
+      equipment: {fileID: 11400000, guid: 12137db14f622424d806ca6c02ffa707, type: 2}
+    - equpmentSlot: 3
+      equipment: {fileID: 11400000, guid: f25ece36098559f42aa485822bcb04d2, type: 2}

@@ -21,7 +21,8 @@ public class UnitTemplate : ScriptableObject, ITemplate
     [SerializeField] bool _canNotEdit;
     [SerializeField] int _meleeSkill;
 
-    Dictionary<EquipmentSlots, Equipment> _inventory = new Dictionary<EquipmentSlots, Equipment>();
+    [SerializeField]
+    Inventory _inventory = new Inventory();
     List<Building> _requiredBuildings = new List<Building>();
 
     //getters
@@ -44,6 +45,7 @@ public class UnitTemplate : ScriptableObject, ITemplate
         set => _meleeSkill = value;
     }
 
+    Inventory ITemplate._inventory => throw new System.NotImplementedException();
 
     public List<UnitNamePart> GetPossibleNamesByType()
     {
@@ -116,11 +118,7 @@ public class UnitTemplate : ScriptableObject, ITemplate
 
     public bool FindEquipment<T>(EquipmentSlots slot, out T equipment) where T : Equipment
     {
-        equipment = null;
-        if(_inventory.TryGetValue(slot, out var item))
-        {
-            equipment = item as T;
-        }
+        equipment = _inventory[slot] as T;
 
         return equipment == null ? false : true;
     }

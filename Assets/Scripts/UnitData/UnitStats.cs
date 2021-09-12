@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnitEditor;
 
-public class UnitStats : MonoBehaviour, IStats
+public class UnitStats : IStats
 {
     UnitTemplate _unitTemplate;
 
