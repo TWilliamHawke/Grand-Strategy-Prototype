@@ -31,7 +31,8 @@ namespace Battlefield
 
         public override void OnExit()
         {
-            if(_troopInfo.isSelected)
+            _troopInfo.NormalizeUnitPositions();
+            if (_troopInfo.isSelected)
             {
                 _troopInfo.UpdateChunkBorders();
             }
@@ -54,6 +55,7 @@ namespace Battlefield
         }
 
         //overrided in RotationToThread
+        //do not remove this!
         protected virtual Directions FindTargetDirection()
         {
             return _troopInfo.FindNextTargetDirection();

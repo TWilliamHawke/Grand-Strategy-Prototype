@@ -46,7 +46,7 @@ namespace Battlefield.Generator
             float z = nodeZ * _mapConfig.chunkSize;
 
             var node = _battlefieldGrid.FindNode(new Vector3(x, 0, z));
-            var spawnPosition = Raycasts.VerticalDown(new Vector3(node.position.x, 0, node.position.y), _mapConfig.gridLayer);
+            var spawnPosition = Raycasts.VerticalDown(new Vector3(node.position2d.x, 0, node.position2d.y), _mapConfig.gridLayer);
 
             var troop = Instantiate(prefab, spawnPosition, Quaternion.identity);
             

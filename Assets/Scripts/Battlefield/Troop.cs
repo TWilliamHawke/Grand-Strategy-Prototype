@@ -109,13 +109,6 @@ namespace Battlefield
             return direction;
         }
 
-        public void TeleportTo(Node targetNode)
-        {
-            targetPosition = targetNode.chunk.transform.position;
-            transform.position = targetNode.chunk.transform.position;
-            SetNode(targetNode);
-        }
-
         public void ChangeVisualSpeed(Timer timer)
         {
             float mult = timer.ticksPerSecond;
@@ -171,6 +164,14 @@ namespace Battlefield
         public void UpdateChunkBorders()
         {
             _currentNode.chunk.UpdateFrameColors(direction);
+        }
+
+        void TeleportTo(Node targetNode)
+        {
+            targetPosition = targetNode.chunk.transform.position;
+            transform.position = targetNode.chunk.transform.position;
+            SetNode(targetNode);
+            NormalizeUnitPositions();
         }
 
         void SetFinalTargetDirection(Chunk chunk)

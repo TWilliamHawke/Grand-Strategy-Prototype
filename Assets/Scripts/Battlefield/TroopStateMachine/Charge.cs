@@ -19,6 +19,7 @@ namespace Battlefield
 
         public override void OnExit()
         {
+            _troopInfo.NormalizeUnitPositions();
             _unitsController.SetAnimatorValue("IsRun", false);
         }
 

@@ -29,8 +29,8 @@ namespace Battlefield
 
         public void AddNode(Chunk chunk)
         {
-            var node = new Node(chunk, _mapConfig.chunkSize);
-            _nodes.Add(node.position.ToString(), node);
+            var node = new Node(chunk, _mapConfig.gridLayer);
+            _nodes.Add(node.position2d.ToString(), node);
         }
 
         public Node FindNode(Chunk chunk)
@@ -62,7 +62,7 @@ namespace Battlefield
         public List<Node> FindNeightborNodes(Node node)
         {
             var neightborNodes = new List<Node>();
-            var gridPos = node.position;
+            var gridPos = node.position2d;
 
             foreach (var pair in _neightbors)
             {
@@ -84,7 +84,7 @@ namespace Battlefield
                 return false;
             }
 
-            var shift = to.position - from.position;
+            var shift = to.position2d - from.position2d;
 
             var pair = _neightbors.FirstOrDefault(pair => pair.Value == shift);
 
