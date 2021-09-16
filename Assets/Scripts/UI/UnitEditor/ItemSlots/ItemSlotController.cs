@@ -28,7 +28,8 @@ namespace UnitEditor
         public event UnityAction OnItemReset;
 
         //inner data
-        Dictionary<string, AbstractItemSlot> _itemSlots = new Dictionary<string, AbstractItemSlot>();
+        Dictionary<EquipmentSlots, AbstractItemSlot> _itemSlots = new Dictionary<EquipmentSlots, AbstractItemSlot>();
+        Dictionary<EquipmentSlots, List<Equipment>> _equpiment;
         AbstractItemSlot _selectedSlot;
 
         void OnDisable()
@@ -44,15 +45,30 @@ namespace UnitEditor
 
         public void RegisterSlot(AbstractItemSlot slot)
         {
-            _itemSlots.Add(slot.GetType().FullName, slot);
+            if (_equpiment == null)
+            {
+                FillEquipmentList();
+            }
+
+            _itemSlots.Add(slot.slotType, slot);
+            if (_equpiment.TryGetValue(slot.slotType, out var itemList))
+            {
+                slot.SetDefaultItem(itemList[0]);
+            }
+            else
+            {
+                slot.SetDefaultItem(_weapon[0]);
+            }
         }
 
         public void SelectItemSlot(AbstractItemSlot itemSlot)
         {
             _selectedSlot = itemSlot;
-            var unlockedItems = _selectedSlot.itemsForSlot.Where(i => i.isUnlocked).ToList();
-
-            OnItemSlotSelection?.Invoke(unlockedItems);
+            if (_equpiment.TryGetValue(itemSlot.slotType, out var items))
+            {
+                var unlockedItems = items.Where(i => i.isUnlocked).ToList();
+                OnItemSlotSelection?.Invoke(unlockedItems);
+            }
         }
 
         public void ChangeItemInSelectedSlot(Equipment item)
@@ -85,6 +101,20 @@ namespace UnitEditor
         {
             OnItemReset?.Invoke();
         }
+
+        void FillEquipmentList()
+        {
+            _equpiment = new Dictionary<EquipmentSlots, List<Equipment>>()
+            {
+                { EquipmentSlots.primaryWeapon, _weapon },
+                { EquipmentSlots.secondaryWeapon, _weapon },
+                { EquipmentSlots.armour, _armor },
+                { EquipmentSlots.shield, _shields },
+                { EquipmentSlots.mount, _mounts },
+            };
+        }
+
+
 
     }
 

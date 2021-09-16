@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using System.Text;
 using System;
+using Helpers;
 
 [CustomEditor(typeof(UnitTemplate))]
 public class UnitTemplateEditor : Editor
@@ -24,13 +25,9 @@ public class UnitTemplateEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        //base.OnInspectorGUI();
         serializedObject.Update();
-
         DrawProperties();
-
         serializedObject.ApplyModifiedProperties();
-        // serializedObject.
         DrawSaveButton();
     }
 
@@ -38,7 +35,6 @@ public class UnitTemplateEditor : Editor
     {
         if (GUILayout.Button("Save"))
         {
-            Debug.Log("saved");
             EditorUtility.SetDirty(_template);
             AssetDatabase.SaveAssets();
         }
@@ -70,6 +66,8 @@ public class UnitTemplateEditor : Editor
         DrawEquipment<Weapon>(EquipmentSlots.secondaryWeapon);
         DrawEquipment<Shield>(EquipmentSlots.shield);
         DrawEquipment<ArmourInfo>(EquipmentSlots.armour);
+
+        //HACK item type should choose automaticly
         if (_template.unitClass.lastItemSlot == EquipmentSlots.mount)
         {
             DrawEquipment<Mount>(EquipmentSlots.mount);
@@ -110,8 +108,7 @@ public class UnitTemplateEditor : Editor
         EditorGUILayout.BeginHorizontal();
         EditorGUILayout.BeginVertical();
 
-        string label = slot.ToString();
-        label = SplitLabel(label);
+        string label = slot.ToString().InsertSpaces();
         GUILayout.Label(label);
 
         _template.FindEquipment<T>(slot, out var equipment);
@@ -132,20 +129,5 @@ public class UnitTemplateEditor : Editor
 
         EditorGUILayout.EndHorizontal();
 
-    }
-
-    private static string SplitLabel(string label)
-    {
-        StringBuilder builder = new StringBuilder();
-        builder.Append(System.Char.ToUpper(label[0]));
-
-        foreach (char c in label.Substring(1))
-        {
-            if (System.Char.IsUpper(c) && builder.Length > 0) builder.Append(' ');
-            builder.Append(c);
-        }
-
-        label = builder.ToString();
-        return label;
     }
 }

@@ -7,7 +7,7 @@ namespace UnitEditor
     {
         PartialName nameParts { get; }
         bool canNotEdit { get; }
-        Inventory _inventory { get; }
+        Inventory inventory { get; }
         bool FindEquipment<T>(EquipmentSlots slot, out T equipment) where T : Equipment;
         void AddEquipment(EquipmentSlots slot, Equipment equipment);
     }

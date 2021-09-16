@@ -29,12 +29,14 @@ namespace UnitEditor
 
         void UpdateStat(UnitTemplate template)
         {
-            _attackValue.text = template.attack.ToString();
-            _defenceValue.text = template.defence.ToString();
-            _damageValue.text = template.damage.ToString();
-            _healthValue.text = template.health.ToString();
-            _speedValue.text = template.speed.ToString();
-            _chargeValue.text = template.charge.ToString();
+            var stats = new UnitStats(template);
+
+            _attackValue.text = stats.attack.ToString();
+            _defenceValue.text = stats.defence.ToString();
+            _damageValue.text = stats.damage.ToString();
+            _healthValue.text = stats.health.ToString();
+            _speedValue.text = stats.speed.ToString();
+            _chargeValue.text = stats.charge.ToString();
         }
     }
 

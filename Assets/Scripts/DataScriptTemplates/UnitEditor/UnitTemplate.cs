@@ -12,28 +12,14 @@ public class UnitTemplate : ScriptableObject, ITemplate
     [SerializeField] PartialName _nameParts;
     [Space(10)]
     public UnitClass unitClass;
-    [Header("Equipment")]
-    public Weapon primaryWeapon;
-    public Weapon secondaryWeapon;
-    public ArmourInfo armour;
-    public Shield shield;
-    public Mount mount;
     [SerializeField] bool _canNotEdit;
     [SerializeField] int _meleeSkill;
 
-    [SerializeField]
-    Inventory _inventory = new Inventory();
+    [SerializeField] Inventory _inventory = new Inventory();
     List<Building> _requiredBuildings = new List<Building>();
 
     //getters
     public PartialName nameParts => _nameParts;
-    public int health => mount?.health != 0 ? mount.health : unitClass.health;
-    public int speed => throw new System.Exception();
-    public int damage => primaryWeapon.damage;
-    public int defence => 5 + _meleeSkill + armour.defence;
-    public int attack => 5 + _meleeSkill;
-    public int charge => (primaryWeapon as MeleeWeapon)?.charge ?? 0;
-    public bool isRange => primaryWeapon is RangeWeapon || secondaryWeapon is RangeWeapon;
     public bool canNotEdit => _canNotEdit;
 
     public List<Building> requiredBuildings => unitClass.requiredBuildings.Concat(_requiredBuildings).ToList();
@@ -45,13 +31,13 @@ public class UnitTemplate : ScriptableObject, ITemplate
         set => _meleeSkill = value;
     }
 
-    Inventory ITemplate._inventory => throw new System.NotImplementedException();
+    public Inventory inventory => _inventory;
 
     public List<UnitNamePart> GetPossibleNamesByType()
     {
         var names = new List<UnitNamePart>();
         names.Add(unitClass.possibleNames);
-        names.Add(mount.unitNames);
+        names.Add(_inventory[EquipmentSlots.mount]?.unitNames);
 
         return names;
     }
@@ -59,12 +45,16 @@ public class UnitTemplate : ScriptableObject, ITemplate
     public List<UnitNamePart> GetPossibleNamesByEquipment()
     {
         var names = new List<UnitNamePart>();
-        names.Add(armour.unitNames);
-        names.Add(shield.unitNames);
-        names.Add(primaryWeapon.unitNames);
-        if (primaryWeapon.unitNames != secondaryWeapon.unitNames)
+        names.Add(_inventory[EquipmentSlots.armour]?.unitNames);
+        names.Add(_inventory[EquipmentSlots.shield]?.unitNames);
+
+        var primaryWeaponNames = _inventory[EquipmentSlots.primaryWeapon]?.unitNames;
+        var secondaryWeaponNames = _inventory[EquipmentSlots.secondaryWeapon]?.unitNames;
+
+        names.Add(primaryWeaponNames);
+        if (primaryWeaponNames != secondaryWeaponNames)
         {
-            names.Add(secondaryWeapon.unitNames);
+            names.Add(secondaryWeaponNames);
         }
 
         return names;

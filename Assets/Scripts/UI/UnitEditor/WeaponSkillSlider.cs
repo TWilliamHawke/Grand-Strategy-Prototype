@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace UnitEditor
@@ -20,13 +19,14 @@ namespace UnitEditor
         {
             if (!_isPressed) return;
 
-            if(Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(0))
             {
                 _isPressed = false;
-                if(_oldSliderValue == _slider.value) return;
+                if (_oldSliderValue == _slider.value) return;
 
 
                 _unitClassInfo.FinaliizeWeaponSkills();
+                _oldSliderValue = _slider.value;
             }
         }
 
@@ -46,11 +46,12 @@ namespace UnitEditor
         public void Show()
         {
             gameObject.SetActive(true);
+            _slider.value = _oldSliderValue;
         }
 
         public void Init()
         {
-            _slider.onValueChanged.AddListener(ReadSliderValue);
+            _slider.onValueChanged.AddListener(UpdateWeaponSkill);
             _closeButton.onClick.AddListener(Hide);
         }
 
@@ -61,7 +62,7 @@ namespace UnitEditor
             _oldSliderValue = _slider.value;
         }
 
-        void ReadSliderValue(float value)
+        void UpdateWeaponSkill(float value)
         {
             float percentValue = value / _slider.maxValue;
             _unitClassInfo.UpdateWeaponSkill(percentValue);

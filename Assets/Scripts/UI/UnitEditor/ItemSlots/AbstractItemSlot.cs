@@ -6,21 +6,21 @@ using UnityEngine.UI;
 namespace UnitEditor
 {
     [RequireComponent(typeof(TooltipFromComponent))]
-    public abstract class AbstractItemSlot : MonoBehaviour,
-                IPointerClickHandler, INeedInit, ITooltipComponent
+    public class AbstractItemSlot : MonoBehaviour, IPointerClickHandler, INeedInit, ITooltipComponent
     {
         [SerializeField] ItemSlotController _itemSlotController;
         [SerializeField] TemplateController _templateController;
+        [SerializeField] EquipmentSlots _slotType;
 
         [Header("UI Elements")]
         [SerializeField] Text _itemName;
         [SerializeField] Image _itemIcon;
 
         //getters
-        protected ItemSlotController itemSlotController => _itemSlotController;
-        protected TemplateController templateController => _templateController;
+        public EquipmentSlots slotType => _slotType;
 
         TooltipFromComponent _tooltip;
+        Equipment _defaultEquipment;
 
         int _itemCost = 0;
 
@@ -31,12 +31,7 @@ namespace UnitEditor
             private set => SetItemCost(value);
         }
 
-        Equipment _itemInSlot;
-
-        //abstract
-        public virtual List<Equipment> itemsForSlot => _itemSlotController.weapon;
-        protected abstract void AddItemToTemplate(Equipment item);
-        protected abstract Equipment SelectItemFromTemplate(UnitTemplate template);
+        protected Equipment _itemInSlot;
 
         void OnDestroy()
         {
@@ -56,6 +51,8 @@ namespace UnitEditor
 
         public string GetTooltipText()
         {
+            if (_itemInSlot == null) return "Item not found!!";
+
             string helpText = "\n\nRight click for clear slot";
             return _itemInSlot.GetToolTipText() + helpText;
         }
@@ -68,29 +65,50 @@ namespace UnitEditor
             }
             if ((int)eventData.button == 1)
             {
+                _tooltip.HideTooltip();
                 ResetItemInSlot();
+                _tooltip.ShowTooltip();
             }
         }
 
         public void ChangeItemInSlot(Equipment item)
         {
             itemCost = _templateController.FindRealItemCost(item);
-            AddItemToTemplate(item);
+            _templateController.currentTemplate.inventory[_slotType] = item;
+
             _templateController.UpdateTemplate();
         }
 
+        public void SetDefaultItem(Equipment item)
+        {
+            _defaultEquipment = item;
+        }
+
+        protected virtual void UpdateSlotUI(UnitTemplate template)
+        {
+            var item = template.inventory[_slotType];
+            itemCost = _templateController.FindRealItemCost(item);
+
+            _itemInSlot = item;
+            _itemName.text = item.Name;
+            _itemIcon.sprite = item.sprite;
+        }
+
+
         void ResetItemInSlot()
         {
-            _tooltip.HideTooltip();
             itemCost = 0;
-            AddItemToTemplate(itemsForSlot[0]);
+
+            _templateController.currentTemplate.inventory[_slotType] = _defaultEquipment;
             _templateController.UpdateTemplate();
             _itemSlotController.ResetItem();
-            _tooltip.ShowTooltip();
         }
 
         void CheckItemRequirement()
         {
+            //it possible in dynamic item slot
+            if (_itemInSlot == null) return;
+
             int updatedItemCost = _templateController.FindRealItemCost(_itemInSlot);
             if (itemCost != updatedItemCost)
             {
@@ -127,14 +145,5 @@ namespace UnitEditor
             _itemSlotController.UpdateEquipmentCost();
         }
 
-        void UpdateSlotUI(UnitTemplate template)
-        {
-            var item = SelectItemFromTemplate(template);
-            itemCost = _templateController.FindRealItemCost(item);
-
-            _itemInSlot = item;
-            _itemName.text = item.Name;
-            _itemIcon.sprite = item.sprite;
-        }
     }
 }

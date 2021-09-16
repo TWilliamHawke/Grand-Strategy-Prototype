@@ -17,13 +17,8 @@ MonoBehaviour:
     nameCore: Crossbowmen
     nameSuffix: 
   unitClass: {fileID: 11400000, guid: a177499829bfcef47b4da10bffa18abf, type: 2}
-  primaryWeapon: {fileID: 11400000, guid: 1b3745359d2652548bbe060e01aa3f42, type: 2}
-  secondaryWeapon: {fileID: 11400000, guid: 0194ea39561969549af0a3e86e45c62d, type: 2}
-  armour: {fileID: 11400000, guid: 4c62289ab53b4b84996c16088bf61191, type: 2}
-  shield: {fileID: 11400000, guid: 12137db14f622424d806ca6c02ffa707, type: 2}
-  mount: {fileID: 11400000, guid: 270a156b27e97784588c1f856abfaa5f, type: 2}
   _canNotEdit: 1
-  _meleeSkill: 10
+  _meleeSkill: 5
   _inventory:
     _equipmentList:
     - equpmentSlot: 1
