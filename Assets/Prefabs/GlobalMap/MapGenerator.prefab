@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1103712127323861572
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1103712127323861574}
+  - component: {fileID: 1103712127323861573}
+  m_Layer: 0
+  m_Name: MapGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1103712127323861574
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103712127323861572}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1103712127323861573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103712127323861572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ee71a19ae6bc604797c5121fb56e5d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _config:
+    heightMult: 10
+    seaLevel: 0.365
+    startPixelX: 800
+    startPixelZ: 800
+    mapWidth: 200
+    mapHeight: 200
+    heightMap: {fileID: 2800000, guid: 6df15adfc7448da43a7b7da46cc7c4ea, type: 3}
+    colorMap: {fileID: 2800000, guid: 32c5295a8ac559c4ba512883a9d27ff1, type: 3}
+    provinceMap: {fileID: 2800000, guid: 3465f6ff609a1df4986d3424456a88fc, type: 3}
+    chunkPrefab: {fileID: 3144872393122138525, guid: e5ab2b38f197d8e4dbf69febc41feb73, type: 3}
+    sea: {fileID: 0}
+    castlePrefab: {fileID: 39243631, guid: 6b3ed56c15209d24e9ecd8d56cc32628, type: 3}

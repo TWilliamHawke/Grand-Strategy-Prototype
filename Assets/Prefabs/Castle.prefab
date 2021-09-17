@@ -46,9 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e5e781c0d992b845815fc6e9a272496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _settlementData: {fileID: 0}
+  _settlementData: {fileID: 11400000, guid: 059d7f4edbd0a9e499468528cd33dcc6, type: 2}
   _selector: {fileID: 9062301560242888180}
-  _skirmishController: {fileID: 0}
+  _skirmishController: {fileID: 11400000, guid: b4226bcfd9dc508499b151659875e914, type: 2}
 --- !u!136 &528512712
 CapsuleCollider:
   m_ObjectHideFlags: 0

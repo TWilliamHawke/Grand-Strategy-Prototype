@@ -17,8 +17,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] bool _enableMouseMovement = true;
 
     [Range(1, 5)]
-    [SerializeField] int minY = 4;
-    [SerializeField] int maxY = 20;
+    [SerializeField] int _minHeight = 4;
+    [SerializeField] int _maxHeight = 20;
 
     void Awake()
     {
@@ -67,7 +67,7 @@ public class CameraController : MonoBehaviour
         float deltaY = -Input.GetAxis("Mouse ScrollWheel") * _scrollSpeed;
         float updatedY = transform.position.y + deltaY;
 
-        if (updatedY < minY || updatedY > maxY)
+        if (updatedY < _minHeight || updatedY > _maxHeight)
         {
             return 0f;
         }
