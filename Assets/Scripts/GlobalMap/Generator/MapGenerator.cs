@@ -9,7 +9,6 @@ namespace GlobalMap.Generator
     public class MapGenerator : MonoBehaviour
     {
         [SerializeField] GeneratorConfig _config;
-        [SerializeField] MeshFilter _borders;
         [Header("Map Parts")]
         [SerializeField] ChunkGenerator _chunkPrefab;
         [SerializeField] MeshFilter _sea;
@@ -38,11 +37,7 @@ namespace GlobalMap.Generator
         {
             _startPixelX = _config.startPixelX;
             _startPixelZ = _config.startPixelZ;
-            
-            _bordersMesh = new Mesh();
             _offset = new Vector3(_startPixelX, -0.5f, _startPixelZ);
-            _borders.transform.position = -_offset - Vector3.up * 0.5f;
-
 
             CreateLandscape();
             CreateProvinces();
@@ -117,31 +112,31 @@ namespace GlobalMap.Generator
                 }
             }
 
-
-            StartCoroutine(FindProvincesCenter());
+            FindProvincesCenter();
 
         }
 
-        private IEnumerator FindProvincesCenter()
+        void FindProvincesCenter()
         {
-            yield return null;
+            var counter = 0;
 
             foreach (var pair in _provinceList)
             {
-                var centerPos = pair.Value.GetCenterPosition() - _offset;
-                if (pair.Value.centerPosition.y >= 0)
-                {
-                    var castle = Instantiate(_castlePrefab, centerPos, Quaternion.identity);
-                    castle.transform.SetParent(transform);
-                }
+                counter++;
+                var province = pair.Value;
+                pair.Value.SetCenterPosition();
+                
+                if(province.isSeaRegion || province.isUnwalkable) continue;
+
+                var centerPos = province.centerPosition - _offset;
+                var castle = Instantiate(_castlePrefab, centerPos, Quaternion.identity);
+                castle.transform.SetParent(transform);
             }
+
         }
 
         void CheckNeightBors()
         {
-            var thicknessOffsetHorizontal = new Vector3(-_config.bordersThickness, 0, 0);
-            var thicknessOffsetVertical = new Vector3(0, 0, _config.bordersThickness);
-
             for (int z = _startPixelZ; z < _endPixelZ; z++)
             {
                 Color thisPixelColor = _config.provinceMap.GetPixel(_startPixelX, z);
@@ -150,73 +145,12 @@ namespace GlobalMap.Generator
                     Color nextPixelHorizontal = _config.provinceMap.GetPixel(x + 1, z);
                     Color nextPixelVertical = _config.provinceMap.GetPixel(x, z + 1);
 
-                    if (thisPixelColor != nextPixelHorizontal)
-                    {
-                        AddNeighbors(thisPixelColor, nextPixelHorizontal);
-                        AddBorders(x, z, Vector3.back, thicknessOffsetHorizontal);
-                    }
-
-                    if (thisPixelColor != nextPixelVertical)
-                    {
-                        AddBorders(x, z, Vector3.left, thicknessOffsetVertical);
-                    }
-
-                    thisPixelColor = nextPixelHorizontal;
+                    if (thisPixelColor == nextPixelHorizontal) continue;
+                    
+                    AddNeighbors(thisPixelColor, nextPixelHorizontal);
                 }
-
             }
-
-            // Debug.Log(_indicies.Last());
-            // Debug.Log(_verticies.Count);
-
-            _bordersMesh.vertices = _verticies.ToArray();
-            // _bordersMesh.SetIndices(_indicies, MeshTopology.Lines, 0);
-            // _bordersMesh.RecalculateBounds();
-            _bordersMesh.triangles = _triangles.ToArray();
-            _bordersMesh.RecalculateNormals();
-            _borders.sharedMesh = _bordersMesh;
-
         }
-
-        private void AddBorders(int x, int z, Vector3 borderDirection, Vector3 thicknessOffset)
-        {
-            int verticeIndex = _verticies.Count;
-
-            var borderStart = new Vector3(x + 1, 10, z + 1);
-            var borderEnd = borderStart + borderDirection;
-
-            borderStart = VectorHeightToMap(borderStart);
-            borderEnd = VectorHeightToMap(borderEnd);
-
-            _verticies.Add(borderStart + thicknessOffset);
-            _verticies.Add(borderStart - thicknessOffset);
-            _verticies.Add(borderEnd - thicknessOffset);
-            _verticies.Add(borderEnd + thicknessOffset);
-
-            _triangles.Add(verticeIndex);
-            _triangles.Add(verticeIndex + 1);
-            _triangles.Add(verticeIndex + 2);
-            _triangles.Add(verticeIndex);
-            _triangles.Add(verticeIndex + 2);
-            _triangles.Add(verticeIndex + 3);
-
-
-            // _indicies.Add(_verticies.Count);
-            // _verticies.Add(borderStart);
-            // _indicies.Add(_verticies.Count);
-            // _verticies.Add(borderEnd);
-
-        }
-
-        public Vector3 VectorHeightToMap(Vector3 vector)
-        {
-            var height = _config.FindHeight(vector.x, vector.z);
-
-            vector.y = Mathf.Max(height, 0) + .05f;
-            return vector;
-        }
-
-
 
         void AddNeighbors(Color c1, Color c2)
         {

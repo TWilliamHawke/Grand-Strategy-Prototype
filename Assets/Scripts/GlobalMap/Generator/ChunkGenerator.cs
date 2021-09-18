@@ -9,22 +9,25 @@ namespace GlobalMap.Generator
     [RequireComponent(typeof(MeshCollider))]
     public class ChunkGenerator : MonoBehaviour
     {
-        [SerializeField] MeshRenderer _bordersRenderer;
-        [SerializeField] MeshFilter _bordersFilter;
+        [SerializeField] BordersGenerator _bordersGenerator;
 
         GeneratorConfig _config;
 
         //components
-        [SerializeField] MeshFilter _chunkFilter;
-        [SerializeField] MeshRenderer _chunkRenderer;
-        [SerializeField] MeshCollider _chunkCollider;
+        [SerializeField] MeshFilter _filter;
+        [SerializeField] MeshRenderer _renderer;
+        [SerializeField] MeshCollider _collider;
 
-        int _startX, _startZ, _endX, _endZ;
+        int _startX, _endX, _startZ, _endZ;
 
-        int _sizeX => _endX - _startX;
-        int _sizeZ => _endZ - _startZ;
-
-
+        //getters
+        public int startX => _startX;
+        public int startZ => _startZ;
+        public int endX => _endX;
+        public int endZ => _endZ;
+        int _sizeX => endX - startX;
+        int _sizeZ => endZ - startZ;
+        
         //meshData
         Mesh _mesh;
         Vector3[] _vertices;
@@ -39,27 +42,24 @@ namespace GlobalMap.Generator
             _config = config;
 
             _mesh = new Mesh();
-            _chunkFilter = GetComponent<MeshFilter>();
-            _chunkRenderer = GetComponent<MeshRenderer>();
-            _chunkCollider = GetComponent<MeshCollider>();
-            _chunkFilter.sharedMesh = _mesh;
+            _filter.sharedMesh = _mesh;
 
             CreateShape(startX, startZ);
             FinalizeMesh();
-            CreateTextures(startX, startZ);
+            CreateTextures();
             SetTerrainTexture();
-
+            _bordersGenerator.Generate(_config, this);
         }
 
         public void SetTerrainTexture()
         {
-            _chunkRenderer.material.mainTexture = _terrainTexture;
+            _renderer.material.mainTexture = _terrainTexture;
 
         }
 
         public void SetRegionsTexture()
         {
-            _chunkRenderer.material.mainTexture = _regionsTexture;
+            _renderer.material.mainTexture = _regionsTexture;
         }
 
         void CreateShape(int startX, int startZ)
@@ -124,18 +124,19 @@ namespace GlobalMap.Generator
                 uvs[i] = new Vector2(_vertices[i].x, _vertices[i].z);
             }
 
-            _chunkCollider.sharedMesh = _mesh;
+            _collider.sharedMesh = _mesh;
 
             _mesh.uv = uvs;
         }
 
-        void CreateTextures(int startX, int startZ)
+        void CreateTextures()
         {
             _regionsTexture = new Texture2D(_sizeX, _sizeZ);
-            _regionsTexture.SetPixels(_config.provinceMap.GetPixels(startX, startZ, _sizeX, _sizeZ));
+            _regionsTexture.SetPixels(_config.provinceMap.GetPixels(_startX, _startZ, _sizeX, _sizeZ));
             _regionsTexture.Apply();
+
             _terrainTexture = new Texture2D(_sizeX, _sizeZ);
-            _terrainTexture.SetPixels(_config.colorMap.GetPixels(startX, startZ, _sizeX, _sizeZ));
+            _terrainTexture.SetPixels(_config.colorMap.GetPixels(_startX, _startZ, _sizeX, _sizeZ));
             _terrainTexture.Apply();
         }
 

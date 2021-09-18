@@ -8,25 +8,38 @@ namespace GlobalMap
 {
     public class ProvincePosition
     {
+
+        GeneratorConfig _config;
+
         List<Vector2Int> _points = new List<Vector2Int>();
         Vector3 _centerOfMass;
-
-        HashSet<ProvincePosition> _neightbors = new HashSet<ProvincePosition>();
-        delegate int SelectVectorPart(Vector2Int vector);
-
+        HashSet<ProvincePosition> _landNeightbors = new HashSet<ProvincePosition>();
+        HashSet<ProvincePosition> _seaNeightbors = new HashSet<ProvincePosition>();
         Color _color;
-        GeneratorConfig _config;
+        bool _isSeaRegion = false;
+        bool _isUnWalkable = false;
 
         public Color color => _color;
         public Vector3 centerPosition => _centerOfMass;
+        public bool isSeaRegion => _isSeaRegion;
+        public bool isUnwalkable => _isUnWalkable;
+
+        delegate int SelectVectorPart(Vector2Int vector);
+        int _minX, _minZ, _maxX, _maxZ;
 
         public ProvincePosition(Color color, GeneratorConfig config)
         {
             _color = color;
             _config = config;
-        }
 
-        int _minX, _minZ, _maxX, _maxZ;
+            _isUnWalkable = color == Color.black || color == Color.white;
+            _isSeaRegion = color == Color.white;
+
+            if(color == Color.black || color == Color.white)
+            {
+                _isUnWalkable = true;
+            }
+        }
 
         public void AddPoint(int x, int z)
         {
@@ -47,36 +60,56 @@ namespace GlobalMap
             _points.Add(new Vector2Int(x, z));
         }
 
-        public Vector3 GetCenterPosition()
+        public void SetCenterPosition()
         {
+            if(_isUnWalkable)
+            {
+                _centerOfMass = Vector3.zero;
+                return;
+            }
+            
             int middleZ = FindMiddleLine(_minZ, _maxZ, point => point.y);
             int middleX = FindMiddleLine(_minX, _maxX, point => point.x);
 
             var height = _config.FindHeight(middleX, middleZ);
 
+            if(height < 0)
+            {
+                _isSeaRegion = true;
+            }
+            else
+            {
+            }
+
             _centerOfMass = new Vector3(middleX, height, middleZ);
-            return _centerOfMass;
         }
 
         public void AddNeighbor(ProvincePosition province)
         {
-            if (province == this) return;
+            if (province == this || province.isUnwalkable) return;
 
+            if(province.isSeaRegion)
+            {
+                _seaNeightbors.Add(province);
+            }
+            else
+            {
+                _landNeightbors.Add(province);
+            }
 
-            _neightbors.Add(province);
         }
 
         public void PrintProvinceData()
         {
             var provinceData = String.Format("minX is {0}, maxX is {1}, minZ is {2}, maxZ is {3}", _minX, _maxX, _minZ, _maxZ);
-            var provinceSize = String.Format("Province size is {0}, neightBors count is {1}", _points.Count, _neightbors.Count);
+            var provinceSize = String.Format("Province size is {0}, neightBors count is {1}", _points.Count, _landNeightbors.Count);
             Debug.Log(provinceData);
             Debug.Log(provinceSize);
         }
 
 
 
-        private int FindMiddleLine(int min, int max, SelectVectorPart callback)
+        private int FindMiddleLine(int min, int max, SelectVectorPart selector)
         {
             int halfOfPoints = _points.Count / 2;
 
@@ -87,7 +120,7 @@ namespace GlobalMap
             {
                 foreach (var point in _points)
                 {
-                    if (callback(point) == middleLine) pointsBellowMiddle++;
+                    if (selector(point) == middleLine) pointsBellowMiddle++;
 
                     if (pointsBellowMiddle >= halfOfPoints) break;
                 }
@@ -101,30 +134,5 @@ namespace GlobalMap
             return middleLine;
         }
 
-        private int FindMiddleZ()
-        {
-            int halfpoints = _points.Count / 2;
-
-            int middleLine = _minZ;
-            int pointsBellowMiddle = 0;
-
-            while (true)
-            {
-                foreach (var point in _points)
-                {
-                    if (point.y == middleLine) pointsBellowMiddle++;
-
-                    if (pointsBellowMiddle > halfpoints) break;
-                }
-
-                middleLine++;
-
-                if (middleLine >= _maxZ) break;
-                if (pointsBellowMiddle > halfpoints) break;
-
-            }
-
-            return middleLine - 1;
-        }
     }
 }
