@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 461273505364245872}
   - component: {fileID: 461273505364245885}
   - component: {fileID: -8951231143549691280}
+  - component: {fileID: 2396720986318778133}
   m_Layer: 3
   m_Name: Army
   m_TagString: Untagged
@@ -73,7 +74,6 @@ MonoBehaviour:
   _selector: {fileID: 11400000, guid: 04bfe5dd64d7f0d4db414263519d864c, type: 2}
   _selectionIndicator: {fileID: 4405422568271993383}
   _animator: {fileID: 7470299556376706635}
-  _unitListController: {fileID: 0}
 --- !u!136 &461273505364245885
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -104,6 +104,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2396720986318778133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 461273505364245873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd6dae579ddc69f4ab9eddac599430ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _navmeshAgent: {fileID: 461273505364245875}
+  _selector: {fileID: 11400000, guid: 04bfe5dd64d7f0d4db414263519d864c, type: 2}
 --- !u!1 &2847394205204950405
 GameObject:
   m_ObjectHideFlags: 0

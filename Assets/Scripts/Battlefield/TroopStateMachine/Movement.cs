@@ -30,7 +30,7 @@ namespace Battlefield
         public override void Tick()
         {
             _progress += _progressPerTick;
-            Vector3 nextChunkPosition = _troopInfo.path.Peek().chunkCenter;
+            Vector3 nextChunkPosition = _troopInfo.path.Peek().nodeCenter;
             ChangeTroopsTargetPosition(nextChunkPosition);
             //UNDONE
             _unitsController.NormalizeUnitsPosition();
@@ -43,7 +43,7 @@ namespace Battlefield
 
         void ChangeTroopsTargetPosition(Vector3 nextChunkPosition)
         {
-            Vector3 currentChunkPosition = _troopInfo.currentNode.chunkCenter;
+            Vector3 currentChunkPosition = _troopInfo.currentNode.nodeCenter;
 
             var targetPosition = Vector3.Lerp(
                 currentChunkPosition, nextChunkPosition, clampedProgress);

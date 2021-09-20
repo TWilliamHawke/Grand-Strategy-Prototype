@@ -22,7 +22,7 @@ public class SkirmishController : ScriptableObject
 
     public void Retreat()
     {
-        _attackerForce.Retreat();
+        _attackerForce.Defeat(_playerFaction);
         OnConfrontationEnd?.Invoke();
     }
 

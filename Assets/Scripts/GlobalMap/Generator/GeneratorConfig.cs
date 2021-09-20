@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace GlobalMap.Generator
 {
-    [System.Serializable]
-    public class GeneratorConfig
+    [CreateAssetMenu(menuName = "Global map/generator config", fileName ="GeneratorConfig")]
+    public class GeneratorConfig : ScriptableObject
     {
         public float heightMult = 3f;
         [Range(0, 1)]

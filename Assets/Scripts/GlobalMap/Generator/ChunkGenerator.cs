@@ -11,7 +11,7 @@ namespace GlobalMap.Generator
     {
         [SerializeField] BordersGenerator _bordersGenerator;
 
-        GeneratorConfig _config;
+        [SerializeField] GeneratorConfig _config;
 
         //components
         [SerializeField] MeshFilter _filter;
@@ -48,7 +48,7 @@ namespace GlobalMap.Generator
             FinalizeMesh();
             CreateTextures();
             SetTerrainTexture();
-            _bordersGenerator.Generate(_config, this);
+            _bordersGenerator.Generate(this);
         }
 
         public void SetTerrainTexture()
@@ -117,6 +117,7 @@ namespace GlobalMap.Generator
             _mesh.triangles = _triangles;
             _mesh.RecalculateNormals();
 
+            _collider.sharedMesh = _mesh;
             Vector2[] uvs = new Vector2[_vertices.Length];
 
             for (int i = 0; i < uvs.Length; i++)
@@ -124,7 +125,6 @@ namespace GlobalMap.Generator
                 uvs[i] = new Vector2(_vertices[i].x, _vertices[i].z);
             }
 
-            _collider.sharedMesh = _mesh;
 
             _mesh.uv = uvs;
         }

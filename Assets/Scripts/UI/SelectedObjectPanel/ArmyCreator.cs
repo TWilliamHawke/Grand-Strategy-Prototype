@@ -6,40 +6,50 @@ using UnityEngine;
 [RequireComponent(typeof(GarrisonView))]
 public class ArmyCreator : MonoBehaviour
 {
-    [SerializeField] Army _armyPrefab;
+    [SerializeField] Army _armyPrefabNavmesh;
+    [SerializeField] Army _armyPrefabGraph;
     [SerializeField] GlobalMapSelectable _selector;
+    [SerializeField] bool _useNavmesh;
 
     GarrisonView _garrisonView;
 
-    void Awake() {
+    void Awake()
+    {
         _garrisonView = GetComponent<GarrisonView>();
     }
 
     void Update()
     {
-        CreateArmyFormSelectedUnits();
+        CreateArmyByRightClick();
     }
 
-    void CreateArmyFormSelectedUnits()
+    //click handler in editor
+    public void CreateArmyByButton()
     {
-        if (!Input.GetMouseButtonDown(1)) return;
-        if (_garrisonView.AnyCardSelected())
+        if (!_garrisonView.AnyCardSelected()) return;
+        SpawnArmy(_armyPrefabGraph);
+    }
+
+    void CreateArmyByRightClick()
+    {
+        if (!_useNavmesh || !Input.GetMouseButtonDown(1)) return;
+        if (!_garrisonView.AnyCardSelected()) return;
+
+        if (Raycasts.SelectedTargetCanReachPoint(_selector.selectedObject, out var targetPoint))
         {
-            if (Raycasts.SelectedTargetCanReachPoint(_selector.selectedObject, out var targetPoint))
-            {
-                SpawnArmy(targetPoint);
-            }
+            var newArmy = SpawnArmy(_armyPrefabNavmesh);
+            newArmy.SetTarget(targetPoint);
         }
     }
 
-    private void SpawnArmy(Vector3 targetPoint)
+    Army SpawnArmy(Army armyPrefab)
     {
-        var newArmy = Instantiate(_armyPrefab, _garrisonView.settlementPosition, Quaternion.identity);
+        var newArmy = Instantiate(armyPrefab, _garrisonView.settlementPosition, Quaternion.identity);
         newArmy.unitList = _garrisonView.GetSelectedUnits();
         newArmy.SetName(_garrisonView.settlementName);
-        
+
         _garrisonView.RemoveSelectedUnitsFromOwner();
         _selector.Select(newArmy);
-        newArmy.MoveTo(targetPoint);
+        return newArmy;
     }
 }

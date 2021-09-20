@@ -96,6 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _filter: {fileID: 1957733935893116630}
   _renderer: {fileID: 7826095993214433386}
+  _config: {fileID: 11400000, guid: 2d8717ec33139a24fbf734742f2d7fa9, type: 2}
 --- !u!1 &6509637710185531688
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,6 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bordersGenerator: {fileID: 7170522908913023325}
+  _config: {fileID: 11400000, guid: 2d8717ec33139a24fbf734742f2d7fa9, type: 2}
   _filter: {fileID: 1156183482080828448}
   _renderer: {fileID: 3687162607071617580}
   _collider: {fileID: 4893803699464386504}

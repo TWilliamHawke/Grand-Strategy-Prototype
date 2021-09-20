@@ -2,17 +2,20 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GlobalMap.Regions;
 
 namespace GlobalMap.Generator
 {
 
     public class MapGenerator : MonoBehaviour
     {
+        [SerializeField] RegionsList _regionsList;
         [SerializeField] GeneratorConfig _config;
         [Header("Map Parts")]
         [SerializeField] ChunkGenerator _chunkPrefab;
         [SerializeField] MeshFilter _sea;
         [SerializeField] Castle _castlePrefab;
+        
 
 
         int _startPixelX;
@@ -20,15 +23,9 @@ namespace GlobalMap.Generator
         int _endPixelX;
         int _endPixelZ;
 
-        List<int> _triangles = new List<int>();
-
-        Mesh _bordersMesh;
-        List<Vector3> _verticies = new List<Vector3>();
-        List<int> _indicies = new List<int>();
         Vector3 _offset;
 
         Dictionary<Color, ProvincePosition> _provinceList = new Dictionary<Color, ProvincePosition>();
-        public Dictionary<Color, ProvincePosition> provinceList => _provinceList;
 
         List<ChunkGenerator> _chunkList = new List<ChunkGenerator>();
 
@@ -103,17 +100,12 @@ namespace GlobalMap.Generator
                 {
                     Color color = _config.provinceMap.GetPixel(x, z);
 
-                    if (!_provinceList.ContainsKey(color))
-                    {
-                        _provinceList.Add(color, new ProvincePosition(color, _config));
-                    }
-                    _provinceList[color].AddPoint(x, z);
-
+                    _regionsList.AddPoint(color, x, z, _offset);
                 }
             }
 
-            FindProvincesCenter();
-
+            //FindProvincesCenter();
+            _regionsList.CreateRegionsMeshes();
         }
 
         void FindProvincesCenter()
@@ -147,20 +139,8 @@ namespace GlobalMap.Generator
 
                     if (thisPixelColor == nextPixelHorizontal) continue;
                     
-                    AddNeighbors(thisPixelColor, nextPixelHorizontal);
+                    _regionsList.AddNeighbors(thisPixelColor, nextPixelHorizontal);
                 }
-            }
-        }
-
-        void AddNeighbors(Color c1, Color c2)
-        {
-            bool success1 = _provinceList.TryGetValue(c1, out var province1);
-            bool success2 = _provinceList.TryGetValue(c2, out var province2);
-
-            if (success1 && success2)
-            {
-                province1.AddNeighbor(province2);
-                province2.AddNeighbor(province1);
             }
         }
     }

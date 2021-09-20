@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.AI;
 using GlobalMap;
+using GlobalMap.ArmyMovement;
 using UnityEngine.EventSystems;
 
-[RequireComponent(typeof(NavMeshAgent))]
 public class Army : MonoBehaviour, ISelectable, IHaveUnits
 {
     public static event UnityAction<Army> OnArmySelected;
@@ -16,9 +16,8 @@ public class Army : MonoBehaviour, ISelectable, IHaveUnits
     [SerializeField] GlobalMapSelectable _selector;
     [SerializeField] MeshRenderer _selectionIndicator;
     [SerializeField] Animator _animator;
-    [SerializeField] UnitsListController _unitListController;
 
-    NavMeshAgent _navmeshAgent;
+    IArmyMovementComponent _movementComponent;
 
     public List<Unit> unitList { get; set; } = new List<Unit>();
 
@@ -39,13 +38,12 @@ public class Army : MonoBehaviour, ISelectable, IHaveUnits
 
     private void Awake()
     {
-        _navmeshAgent = GetComponent<NavMeshAgent>();
+        _movementComponent = GetComponent<IArmyMovementComponent>();
     }
 
     void Update()
     {
         CheckDistance();
-        MoveToClick();
     }
 
     public void SetName(string settlementName)
@@ -53,10 +51,9 @@ public class Army : MonoBehaviour, ISelectable, IHaveUnits
         _armyName = $"Army from {settlementName}";
     }
 
-    public void MoveTo(Vector3 targetPoint)
+    public void SetTarget(Vector3 targetPoint)
     {
-        _navmeshAgent.SetDestination(targetPoint);
-        _navmeshAgent.isStopped = false;
+        _movementComponent.SetTarget(targetPoint);
     }
 
     public void RemoveUnit(Unit unit)
@@ -73,19 +70,13 @@ public class Army : MonoBehaviour, ISelectable, IHaveUnits
 
     public void ForceStop()
     {
-        _navmeshAgent.isStopped = true;
+        _movementComponent.ForceStop();
         StopWalkAnimation();
-    }
-
-    public void Retreat()
-    {
-        var targetPos = transform.position - transform.forward * 2;
-        MoveTo(targetPos);
     }
 
     public void Defeat(Faction _)
     {
-        Retreat();
+        _movementComponent.Retreat();
     }
 
     void StopWalkAnimation()
@@ -95,30 +86,13 @@ public class Army : MonoBehaviour, ISelectable, IHaveUnits
 
     void CheckDistance()
     {
-        if (_navmeshAgent.remainingDistance > Mathf.Epsilon)
+        if (_movementComponent.ShouldPlayWalkAnimation())
         {
             _animator.SetBool("IsWalk", true);
         }
         else
         {
             StopWalkAnimation();
-        }
-    }
-
-    //TODO move this into special controller
-    void MoveToClick()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            if (_selector.selectedObject != (ISelectable)this) return;
-            if (EventSystem.current.IsPointerOverGameObject()) return;
-
-            var ray = CameraController.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Raycasts.SelectedTargetCanReachPoint(_selector.selectedObject, out var point))
-            {
-                MoveTo(point);
-            }
         }
     }
 

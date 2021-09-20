@@ -4,12 +4,11 @@ using UnityEngine;
 using UnityEngine.Events;
 using Battlefield;
 using Battlefield.Chunks;
-using Battlefield.Generator;
 
 public class Node
 {
     Vector2 _position;
-    Vector3 _chunkCenter;
+    Vector3 _nodeCenter;
     Chunk _chunk;
 
     public Node parent { get; set; }
@@ -27,7 +26,7 @@ public class Node
     public float y => _position.y;
     public Chunk chunk => _chunk;
     public Vector2 position2d => _position;
-    public Vector3 chunkCenter => _chunkCenter;
+    public Vector3 nodeCenter => _nodeCenter;
 
 
     public bool enemyInNode { get; set; } = false;
@@ -46,7 +45,7 @@ public class Node
     IEnumerator RaycastToChunkCenter(LayerMask gridLayer)
     {
         yield return null;
-        _chunkCenter = Raycasts.VerticalDown(_chunk.transform.position, gridLayer);
+        _nodeCenter = Raycasts.VerticalDown(_chunk.transform.position, gridLayer);
     }
 
 

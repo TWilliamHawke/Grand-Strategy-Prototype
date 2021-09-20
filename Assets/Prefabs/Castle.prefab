@@ -776,10 +776,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: selector
       objectReference: {fileID: 0}
-    - target: {fileID: 2442424612278297640, guid: f8fb69a45633c7440b3e953dbb3ef62c, type: 3}
-      propertyPath: m_Layer
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 8217704241474954931, guid: f8fb69a45633c7440b3e953dbb3ef62c, type: 3}
       propertyPath: m_RootOrder
       value: 1

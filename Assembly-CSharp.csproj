@@ -36,10 +36,12 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\AbstractMeshGenerator.cs" />
      <Compile Include="Assets\Scripts\Battlefield\EnemyDetector.cs" />
      <Compile Include="Assets\Scripts\UI\Tabs\TabPanel.cs" />
      <Compile Include="Assets\Scripts\UnitData\IStats.cs" />
      <Compile Include="Assets\Scripts\Battlefield\MapGeneration\ChunkGenerator.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Regions\Region.cs" />
      <Compile Include="Assets\Scripts\Battlefield\Chunks\PathArrowController.cs" />
      <Compile Include="Assets\Scripts\Battlefield\MapGeneration\MapConfig.cs" />
      <Compile Include="Assets\Scripts\UI\UIInitiator.cs" />
@@ -105,6 +107,7 @@
      <Compile Include="Assets\Scripts\DataScriptTemplates\Building.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Victory.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\RangeWeapon.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\ArmyMovementGraph.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitCard.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Rotation.cs" />
      <Compile Include="Assets\Scripts\UnitData\Inventory.cs" />
@@ -130,7 +133,9 @@
      <Compile Include="Assets\Scripts\UI\TechnologyScreen\TechnologiesController.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\NameSelectorButton.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\EffectsContainer.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Generator\BordersGenerator.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TimeManager.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Regions\RegionsList.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Settlement.cs" />
      <Compile Include="Assets\Scripts\Battlefield\BattleRules.cs" />
      <Compile Include="Assets\Scripts\Battlefield\MapGeneration\BattlefieldGenerator.cs" />
@@ -172,9 +177,11 @@
      <Compile Include="Assets\Scripts\GlobalMap\UnitsListController.cs" />
      <Compile Include="Assets\Scripts\Battlefield\UnitsController.cs" />
      <Compile Include="Assets\Scripts\UI\Lib\UIPanelWithGrid.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\ArmyMovementNavmesh.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitPreview.cs" />
      <Compile Include="Assets\Scripts\UI\BuildingsView\BuildingsListController.cs" />
      <Compile Include="Assets\Scripts\UI\IhaveLabel.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Regions\RegionMesh.cs" />
      <Compile Include="Assets\Scripts\UnitData\UnitStats.cs" />
      <Compile Include="Assets\Scripts\Battlefield\MapGeneration\IGenerationAlgorithm.cs" />
      <Compile Include="Assets\Scripts\Raycasts.cs" />
@@ -211,7 +218,7 @@
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\TroopStatesPlayer.cs" />
      <Compile Include="Assets\Scripts\UI\LabelController.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Unit.cs" />
-     <Compile Include="Assets\Scripts\GlobalMap\Generator\BordersGenerator.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Regions\RegionPosition.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Programs/unity/2020.3.18f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

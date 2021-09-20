@@ -8,11 +8,10 @@ namespace GlobalMap.Generator
     [RequireComponent(typeof(MeshRenderer))]
     public class BordersGenerator : MonoBehaviour
     {
-        GeneratorConfig _config;
-
         //components
         [SerializeField] MeshFilter _filter;
         [SerializeField] MeshRenderer _renderer;
+        [SerializeField] GeneratorConfig _config;
 
         //meshData
         Mesh _bordersMesh;
@@ -20,9 +19,8 @@ namespace GlobalMap.Generator
         List<int> _triangles = new List<int>();
 
 
-        public void Generate(GeneratorConfig config, ChunkGenerator chunk)
+        public void Generate(ChunkGenerator chunk)
         {
-            _config = config;
             _bordersMesh = new Mesh();
 
 
@@ -67,8 +65,8 @@ namespace GlobalMap.Generator
             var borderStart = new Vector3(x + 1, 10, z + 1);
             var borderEnd = borderStart + borderDirection;
 
-            borderStart = VectorHeightToMap(borderStart);
-            borderEnd = VectorHeightToMap(borderEnd);
+            borderStart = UpdateVectorHeight(borderStart);
+            borderEnd = UpdateVectorHeight(borderEnd);
 
             _verticies.Add(borderStart + thicknessOffset);
             _verticies.Add(borderStart - thicknessOffset);
@@ -84,7 +82,7 @@ namespace GlobalMap.Generator
 
         }
 
-        public Vector3 VectorHeightToMap(Vector3 vector)
+        Vector3 UpdateVectorHeight(Vector3 vector)
         {
             var height = _config.FindHeight(vector.x, vector.z);
 
