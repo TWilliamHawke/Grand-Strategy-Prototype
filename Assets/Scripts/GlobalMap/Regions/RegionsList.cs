@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using GlobalMap.Generator;
+using PathFinding;
 using UnityEngine;
 
 namespace GlobalMap.Regions
 {
-    public class RegionsList : MonoBehaviour
+    public class RegionsList : MonoBehaviour, INodeList<RegionNode>
     {
         [SerializeField] Region _regionPrefab;
+        [SerializeField] GeneratorConfig _config;
 
         Dictionary<Color, Region> _regions = new Dictionary<Color, Region>();
 
@@ -20,12 +23,11 @@ namespace GlobalMap.Regions
             }
         }
 
-        public void AddPoint(Color color, int x, int z, Vector3 offset)
+        public void AddPoint(Color color, int x, int z)
         {
             if (!_regions.ContainsKey(color))
             {
-                var fixedOffset = offset + Vector3.up * 0.5f;
-                var region = Instantiate(_regionPrefab, -fixedOffset, Quaternion.identity);
+                var region = Instantiate(_regionPrefab, _config.positionOffset, Quaternion.identity);
                 region.transform.SetParent(transform);
                 region.color = color;
                 _regions.Add(color, region);
@@ -46,5 +48,9 @@ namespace GlobalMap.Regions
             }
         }
 
+        public List<RegionNode> FindNeightborNodes(RegionNode node)
+        {
+            return node.region.landNeightbors;
+        }
     }
 }

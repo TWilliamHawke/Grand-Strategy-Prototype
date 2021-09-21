@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Battlefield
+namespace PathFinding
 {
-    public class PathFinder
+    public class PathFinder<T> where T : Node
     {
-        BattlefieldData _battlefieldData;
+        INodeList<T> _battlefieldData;
 
-        Node _startNode;
-        Node _targetNode;
+        T _startNode;
+        T _targetNode;
 
-        List<Node> _sortedNodes = new List<Node>();
-        List<Node> _unsortedNodes = new List<Node>();
+        List<T> _sortedNodes = new List<T>();
+        List<T> _unsortedNodes = new List<T>();
 
-        public PathFinder(Node startNode, Node targetNode, BattlefieldData battlefieldData)
+        public PathFinder(T startNode, T targetNode, INodeList<T> battlefieldData)
         {
             _startNode = startNode;
             _targetNode = targetNode;
@@ -22,9 +22,9 @@ namespace Battlefield
             _battlefieldData = battlefieldData;
         }
 
-        public Stack<Node> GetPath()
+        public Stack<T> GetPath()
         {
-            var path = new Stack<Node>();
+            var path = new Stack<T>();
             _targetNode.parent = null;
 
             _unsortedNodes.Add(_startNode);
@@ -37,7 +37,7 @@ namespace Battlefield
                 while (pathPoint != _startNode)
                 {
                     path.Push(pathPoint);
-                    pathPoint = pathPoint.parent;
+                    pathPoint = pathPoint.parent as T;
 
                     if (path.Count > 80)
                     {
@@ -79,9 +79,9 @@ namespace Battlefield
             }
         }
 
-        Node FindNearestNodeFromUnsorted()
+        T FindNearestNodeFromUnsorted()
         {
-            Node nearestNode = _unsortedNodes[0];
+            T nearestNode = _unsortedNodes[0];
 
             foreach (var node in _unsortedNodes)
             {
@@ -93,7 +93,7 @@ namespace Battlefield
             return nearestNode;
         }
 
-        bool IsnodeClose(Node selectedNode, Node candidate)
+        bool IsnodeClose(T selectedNode, T candidate)
         {
             if (selectedNode.totalDist < candidate.totalDist)
             {

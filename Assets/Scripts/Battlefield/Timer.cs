@@ -8,12 +8,12 @@ namespace Battlefield
     [CreateAssetMenu(fileName = "Timer", menuName = "Battlefield/Timer")]
     public class Timer : ScriptableObject
     {
-        int _hours = 6;
-        int _minutes = 0;
         int _battleSpeed = 0;
+        int _ticksFromStart = 0;
         public int battlespeed => _battleSpeed;
 
         [SerializeField] int _startHour = 6;
+        [SerializeField] int _startYear = 650;
 
         [SerializeField] List<float> _tickIntervals = new List<float>();
 
@@ -30,15 +30,12 @@ namespace Battlefield
         public event UnityAction<Timer> OnSpeedChange;
         public event UnityAction OnTimeChange;
 
+        int[] _months = new int[] {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+        
+
         public void Tick()
         {
-            _minutes++;
-            if (_minutes >= 60)
-            {
-                _minutes -= 60;
-                _hours++;
-            }
-
+            _ticksFromStart++;
             OnTimeChange?.Invoke();
             OnTick?.Invoke();
         }
@@ -87,17 +84,38 @@ namespace Battlefield
 
         public string GetTime()
         {
-            var minutes = _minutes > 9 ? _minutes.ToString() : "0" + _minutes.ToString();
-            return $"{_hours}:{minutes}";
+            int hours = _startHour + _ticksFromStart / 60;
+            string minutes = AddZeroToStart(_ticksFromStart % 60);
+            return $"{hours}:{minutes}";
+        }
+
+        public string GetDate()
+        {
+            var year = _startYear + _ticksFromStart / 365;
+            var day = _ticksFromStart % 365;
+            var month = 1;
+
+            for (int i = 1; i < _months.Length; i++)
+            {
+                if(day < _months[i]) break;
+                day -= _months[i];
+                month++;
+            }
+
+            return $"{AddZeroToStart(day + 1)}/{AddZeroToStart(month)}/{year}";
         }
 
         public void ResetTimer()
         {
-            _hours = _startHour;
-            _minutes = 0;
+            _ticksFromStart = 0;
             _battleSpeed = 0;
             OnSpeedChange?.Invoke(this);
             OnTimeChange?.Invoke();
+        }
+
+        string AddZeroToStart(int time)
+        {
+            return time > 9 ? time.ToString() : "0" + time.ToString();
         }
     }
 }

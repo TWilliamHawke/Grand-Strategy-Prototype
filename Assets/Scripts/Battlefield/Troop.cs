@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Battlefield.Chunks;
+using PathFinding;
 using UnityEngine;
 
 namespace Battlefield
@@ -18,8 +19,8 @@ namespace Battlefield
         //dynamic data
         float _visualSpeed = 1;
         bool _isSelected = false;
-        Node _currentNode;
-        Stack<Node> _path = new Stack<Node>();
+        ChunkNode _currentNode;
+        Stack<ChunkNode> _path = new Stack<ChunkNode>();
         Directions _targetChunkDirection;
 
         public bool ownedByPlayer => _ownedByPlayer;
@@ -31,8 +32,8 @@ namespace Battlefield
         public float rotationAngle { get; set; } = 0f;
         public float rotationDirection { get; set; } = 0f;
         public Directions nextTargetDirection => FindNextTargetDirection();
-        public Stack<Node> path => _path;
-        public Node currentNode => _currentNode;
+        public Stack<ChunkNode> path => _path;
+        public ChunkNode currentNode => _currentNode;
         public Chunk chunk => _currentNode.chunk;
 
         public UnitsController enemy { get; set; }
@@ -132,7 +133,7 @@ namespace Battlefield
             _isSelected = false;
         }
 
-        public void CreatePathTo(Node targetNode)
+        public void CreatePathTo(ChunkNode targetNode)
         {
             if (_currentNode == targetNode)
             {
@@ -142,7 +143,7 @@ namespace Battlefield
             }
             else
             {
-                var pathFinder = new PathFinder(_currentNode, targetNode, _battlefieldData);
+                var pathFinder = new PathFinder<ChunkNode>(_currentNode, targetNode, _battlefieldData);
                 _path = pathFinder.GetPath();
                 _unitsController.SetIsWalkValue(true);
             }
@@ -151,7 +152,7 @@ namespace Battlefield
             ShowPath();
         }
 
-        public void SetNode(Node nextNode)
+        public void SetNode(ChunkNode nextNode)
         {
             _currentNode.chunk.SetDefaultFrameColor();
             _currentNode = nextNode;
@@ -166,7 +167,7 @@ namespace Battlefield
             _currentNode.chunk.UpdateFrameColors(direction);
         }
 
-        void TeleportTo(Node targetNode)
+        void TeleportTo(ChunkNode targetNode)
         {
             targetPosition = targetNode.chunk.transform.position;
             transform.position = targetNode.chunk.transform.position;
@@ -203,7 +204,7 @@ namespace Battlefield
 
         void ShowPath()
         {
-            Node currentNode = _currentNode;
+            ChunkNode currentNode = _currentNode;
 
 
             foreach (var node in path)

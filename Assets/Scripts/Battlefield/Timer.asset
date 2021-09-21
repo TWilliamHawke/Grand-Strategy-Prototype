@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Timer
   m_EditorClassIdentifier: 
   _startHour: 6
+  _startYear: 600
   _tickIntervals:
   - 1
   - 0.5

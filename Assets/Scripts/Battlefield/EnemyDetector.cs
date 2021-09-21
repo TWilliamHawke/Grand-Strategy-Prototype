@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using PathFinding;
 using UnityEngine;
 
 namespace Battlefield
@@ -9,8 +10,8 @@ namespace Battlefield
     {
         [SerializeField] BattlefieldData _battlefieldData;
 
-        Node _currentNode;
-        List<Node> _neightborNodes = new List<Node>();
+        ChunkNode _currentNode;
+        List<ChunkNode> _neightborNodes = new List<ChunkNode>();
 
         //data for stateMachine
         public Directions threadDirection { get; private set; } = Directions.south;

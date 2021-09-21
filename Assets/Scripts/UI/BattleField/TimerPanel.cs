@@ -13,8 +13,9 @@ public class TimerPanel : MonoBehaviour
     [SerializeField] Text _timeDisplay;
     [SerializeField] Text _speedDisplay;
     [SerializeField] Image _pauseMessage;
-
+    [Header("Controller")]
     [SerializeField] Timer _timer;
+    [SerializeField] bool _showDate;
 
     void Awake()
     {
@@ -24,6 +25,7 @@ public class TimerPanel : MonoBehaviour
         _timer.OnStart += DisablePauseUI;
         _timer.OnSpeedChange += UpdateSpeed;
         _timer.OnTimeChange += UpdateTimerDisplay;
+        UpdateTimerDisplay();
     }
 
     void OnDestroy()
@@ -50,7 +52,7 @@ public class TimerPanel : MonoBehaviour
 
     void UpdateTimerDisplay()
     {
-        _timeDisplay.text = _timer.GetTime();
+        _timeDisplay.text = _showDate ? _timer.GetDate() : _timer.GetTime();
     }
 
     void UpdateSpeed(Timer _)

@@ -25,6 +25,20 @@ namespace GlobalMap.Generator
         public float bordersThickness;
         public Color bordersColor = Color.red;
 
+        Vector3 _positionOffset;
+
+        public Vector3 positionOffset
+        {
+            get
+            {
+                if(_positionOffset == Vector3.zero)
+                {
+                    _positionOffset = new Vector3(-startPixelX, 0, -startPixelZ);
+                }
+                return _positionOffset;
+            }
+        }
+
         // max size is 255!!!
         const int CHUNK_SIZE = 200;
 

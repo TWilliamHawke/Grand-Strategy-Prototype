@@ -7,9 +7,10 @@ using UnityEngine;
 
 namespace GlobalMap.Regions
 {
-    public class RegionMesh : AbstractMeshGenerator
+    public class RegionMesh : AbstractMeshGenerator, ISelectable
     {
         [SerializeField] GeneratorConfig _config;
+        [SerializeField] Region _region;
 
         List<Vector3> _vertices = new List<Vector3>();
         List<int> _triangles = new List<int>();
@@ -33,6 +34,17 @@ namespace GlobalMap.Regions
             var flatVector = _position.FindCenterPosition();
             return UpdateVectorHeight(flatVector);
         }
+
+        public void Select()
+        {
+            _region.castle.Select();
+        }
+
+        public void Deselect()
+        {
+            _region.castle.Deselect();
+        }
+
 
         public override void GenerateMesh()
         {
@@ -65,7 +77,7 @@ namespace GlobalMap.Regions
         {
             for (int i = 0; i < _vertices.Count; i++)
             {
-                
+
                 _vertices[i] = UpdateVectorHeight(_vertices[i]);
             }
         }
@@ -130,5 +142,6 @@ namespace GlobalMap.Regions
         {
             return _triangles.ToArray();
         }
+
     }
 }

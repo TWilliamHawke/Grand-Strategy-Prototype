@@ -28,6 +28,7 @@ namespace Helpers
 			mesh.uv = UpdateTextureGrid(mesh.vertices);
 
             _filter.sharedMesh = mesh;
+            _collider.sharedMesh = mesh;
         }
 
         Vector2[] UpdateTextureGrid(Vector3[] vertices)

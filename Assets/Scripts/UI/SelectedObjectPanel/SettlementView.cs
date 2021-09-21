@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using GlobalMap;
+using GlobalMap.Regions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,7 +36,7 @@ public class SettlementView : UIScreen, INeedInit
 
     void CheckSelectedTarget(ISelectable target)
     {
-        if (target is Settlement) return;
+        if (target is Settlement || target is RegionMesh) return;
 
         Close();
     }

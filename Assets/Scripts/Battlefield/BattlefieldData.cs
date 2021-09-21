@@ -4,14 +4,15 @@ using UnityEngine;
 using System.Linq;
 using Battlefield.Chunks;
 using Battlefield.Generator;
+using PathFinding;
 
 namespace Battlefield
 {
     [CreateAssetMenu(fileName = "BattleFieldData", menuName = "Battlefield/Battlefield Data")]
 
-    public class BattlefieldData : ScriptableObject
+    public class BattlefieldData : ScriptableObject, INodeList<ChunkNode>
     {
-        Dictionary<string, Node> _nodes = new Dictionary<string, Node>();
+        Dictionary<string, ChunkNode> _nodes = new Dictionary<string, ChunkNode>();
         [SerializeField] MapConfig _mapConfig;
         int size => _mapConfig.chunkSize;
 
@@ -29,23 +30,23 @@ namespace Battlefield
 
         public void AddNode(Chunk chunk)
         {
-            var node = new Node(chunk, _mapConfig.gridLayer);
+            var node = new ChunkNode(chunk, _mapConfig.gridLayer);
             _nodes.Add(node.position2d.ToString(), node);
         }
 
-        public Node FindNode(Chunk chunk)
+        public ChunkNode FindNode(Chunk chunk)
         {
             return FindNode(chunk.gameObject.transform.position);
         }
 
-        public Node FindNode(GameObject gameobject)
+        public ChunkNode FindNode(GameObject gameobject)
         {
             var x = gameobject.transform.position.x;
             var z = gameobject.transform.position.z;
             return FindNode(new Vector2(x, z).ToString());
         }
 
-        public Node FindNode(Vector3 position)
+        public ChunkNode FindNode(Vector3 position)
         {
             var x = position.x;
             var z = position.z;
@@ -53,15 +54,15 @@ namespace Battlefield
             return FindNode(new Vector2(x, z).ToString());
         }
 
-        public List<Node> FindNeightborNodes(Chunk chunk)
+        public List<ChunkNode> FindNeightborNodes(Chunk chunk)
         {
             var node = FindNode(chunk);
             return FindNeightborNodes(node);
         }
 
-        public List<Node> FindNeightborNodes(Node node)
+        public List<ChunkNode> FindNeightborNodes(ChunkNode node)
         {
-            var neightborNodes = new List<Node>();
+            var neightborNodes = new List<ChunkNode>();
             var gridPos = node.position2d;
 
             foreach (var pair in _neightbors)
@@ -106,7 +107,7 @@ namespace Battlefield
             return FindNode(gameobject)?.chunk;
         }
 
-        Node FindNode(string position)
+        ChunkNode FindNode(string position)
         {
             if (_nodes.TryGetValue(position, out var node))
             {

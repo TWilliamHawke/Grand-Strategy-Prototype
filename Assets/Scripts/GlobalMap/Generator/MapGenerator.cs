@@ -100,31 +100,11 @@ namespace GlobalMap.Generator
                 {
                     Color color = _config.provinceMap.GetPixel(x, z);
 
-                    _regionsList.AddPoint(color, x, z, _offset);
+                    _regionsList.AddPoint(color, x, z);
                 }
             }
 
-            //FindProvincesCenter();
             _regionsList.CreateRegionsMeshes();
-        }
-
-        void FindProvincesCenter()
-        {
-            var counter = 0;
-
-            foreach (var pair in _provinceList)
-            {
-                counter++;
-                var province = pair.Value;
-                pair.Value.SetCenterPosition();
-                
-                if(province.isSeaRegion || province.isUnwalkable) continue;
-
-                var centerPos = province.centerPosition - _offset;
-                var castle = Instantiate(_castlePrefab, centerPos, Quaternion.identity);
-                castle.transform.SetParent(transform);
-            }
-
         }
 
         void CheckNeightBors()

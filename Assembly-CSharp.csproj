@@ -76,7 +76,7 @@
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Movement.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\UnitTemplate.cs" />
      <Compile Include="Assets\Scripts\UI\SelectedObjectPanel\SettlementView.cs" />
-     <Compile Include="Assets\Scripts\Battlefield\Chunks\Node.cs" />
+     <Compile Include="Assets\Scripts\PathFinding\Node.cs" />
      <Compile Include="Assets\Scripts\Battlefield\Chunks\InnerArrowController.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\NameSelector.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\TemplateEffectsCalculator.cs" />
@@ -126,7 +126,7 @@
      <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\ItemSlotController.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\Interfaces\IEffectChangeEquipment.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\Interfaces\IEffectChangeUnitClass.cs" />
-     <Compile Include="Assets\Scripts\Battlefield\PathFinder.cs" />
+     <Compile Include="Assets\Scripts\PathFinding\PathFinder.cs" />
      <Compile Include="Assets\Scripts\UI\Tooltip\TooltipFromTextArea.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\TroopStatesAI.cs" />
      <Compile Include="Assets\Scripts\UI\SelectedObjectPanel\UnitSelectionButton.cs" />
@@ -219,6 +219,10 @@
      <Compile Include="Assets\Scripts\UI\LabelController.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Unit.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Regions\RegionPosition.cs" />
+     <Compile Include="Assets\Scripts\PathFinding\INodeList.cs" />
+     <Compile Include="Assets\Scripts\PathFinding\InodeHolder.cs" />
+     <Compile Include="Assets\Scripts\PathFinding\ChunkNode.cs" />
+     <Compile Include="Assets\Scripts\PathFinding\RegionNode.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Programs/unity/2020.3.18f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
