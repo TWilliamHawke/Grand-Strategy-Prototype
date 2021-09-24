@@ -11,7 +11,7 @@ namespace Battlefield
         [SerializeField] BattlefieldData _battlefieldData;
 
         ChunkNode _currentNode;
-        List<ChunkNode> _neightborNodes = new List<ChunkNode>();
+        IEnumerable<ChunkNode> _neightborNodes = new List<ChunkNode>();
 
         //data for stateMachine
         public Directions threadDirection { get; private set; } = Directions.south;

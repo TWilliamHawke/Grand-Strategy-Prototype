@@ -10,6 +10,7 @@ namespace GlobalMap.Generator
     public class MapGenerator : MonoBehaviour
     {
         [SerializeField] RegionsList _regionsList;
+        [SerializeField] RegionsManager _regionManager;
         [SerializeField] GeneratorConfig _config;
         [Header("Map Parts")]
         [SerializeField] ChunkGenerator _chunkPrefab;
@@ -100,7 +101,7 @@ namespace GlobalMap.Generator
                 {
                     Color color = _config.provinceMap.GetPixel(x, z);
 
-                    _regionsList.AddPoint(color, x, z);
+                    _regionManager.AddPoint(color, x, z);
                 }
             }
 
@@ -117,9 +118,10 @@ namespace GlobalMap.Generator
                     Color nextPixelHorizontal = _config.provinceMap.GetPixel(x + 1, z);
                     Color nextPixelVertical = _config.provinceMap.GetPixel(x, z + 1);
 
-                    if (thisPixelColor == nextPixelHorizontal) continue;
+                    if (thisPixelColor == nextPixelHorizontal && thisPixelColor == nextPixelVertical) continue;
                     
                     _regionsList.AddNeighbors(thisPixelColor, nextPixelHorizontal);
+                    thisPixelColor = nextPixelHorizontal;
                 }
             }
         }

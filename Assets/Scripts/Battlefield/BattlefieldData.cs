@@ -54,13 +54,13 @@ namespace Battlefield
             return FindNode(new Vector2(x, z).ToString());
         }
 
-        public List<ChunkNode> FindNeightborNodes(Chunk chunk)
+        public IEnumerable<ChunkNode> FindNeightborNodes(Chunk chunk)
         {
             var node = FindNode(chunk);
             return FindNeightborNodes(node);
         }
 
-        public List<ChunkNode> FindNeightborNodes(ChunkNode node)
+        public IEnumerable<ChunkNode> FindNeightborNodes(ChunkNode node)
         {
             var neightborNodes = new List<ChunkNode>();
             var gridPos = node.position2d;

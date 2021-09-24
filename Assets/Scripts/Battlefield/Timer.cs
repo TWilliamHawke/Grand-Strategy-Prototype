@@ -10,16 +10,16 @@ namespace Battlefield
     {
         int _battleSpeed = 0;
         int _ticksFromStart = 0;
-        public int battlespeed => _battleSpeed;
 
         [SerializeField] int _startHour = 6;
         [SerializeField] int _startYear = 650;
 
         [SerializeField] List<float> _tickIntervals = new List<float>();
 
-        public float ticksPerSecond => 1/_tickIntervals[_battleSpeed];
+        public float ticksPerSecond => 1 / _tickIntervals[_battleSpeed];
         public float tickInterval => _tickIntervals[_battleSpeed];
         public int maxSpeed => _tickIntervals.Count - 1;
+        public int battlespeed => _battleSpeed;
 
         bool _isSuspended = true;
 
@@ -29,20 +29,27 @@ namespace Battlefield
         public event UnityAction OnStart;
         public event UnityAction<Timer> OnSpeedChange;
         public event UnityAction OnTimeChange;
+        public event UnityAction OnMonthChange;
+        public event UnityAction OnYearChange;
 
-        int[] _months = new int[] {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-        
+        int[] _months = new int[] { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
 
         public void Tick()
         {
             _ticksFromStart++;
             OnTimeChange?.Invoke();
             OnTick?.Invoke();
+
+            if (_ticksFromStart % 365 == 0)
+            {
+                OnYearChange?.Invoke();
+            }
         }
 
         public void ToggleTimer()
         {
-            if(_isSuspended)
+            if (_isSuspended)
             {
                 StartTimer();
             }
@@ -97,9 +104,14 @@ namespace Battlefield
 
             for (int i = 1; i < _months.Length; i++)
             {
-                if(day < _months[i]) break;
+                if (day < _months[i]) break;
                 day -= _months[i];
                 month++;
+            }
+
+            if(day == 0)
+            {
+                OnMonthChange?.Invoke();
             }
 
             return $"{AddZeroToStart(day + 1)}/{AddZeroToStart(month)}/{year}";

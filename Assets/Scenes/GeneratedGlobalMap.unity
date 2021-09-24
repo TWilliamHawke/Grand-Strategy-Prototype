@@ -523,9 +523,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 407477330}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e339cea11c65fb046a015349f010bdbf, type: 3}
+  m_Script: {fileID: 11500000, guid: fdc4d24ae4349de458503bf12b17a57c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _regionsList: {fileID: 11400000, guid: 7b9ccb4958a669e4e89c37b0467ad374, type: 2}
   _regionPrefab: {fileID: 847879247528922992, guid: 3ff8477e20142e44ab99b4933ac0fc2b, type: 3}
   _config: {fileID: 11400000, guid: 2d8717ec33139a24fbf734742f2d7fa9, type: 2}
 --- !u!4 &407477332
@@ -2824,11 +2825,15 @@ PrefabInstance:
     - target: {fileID: 1103712127323861573, guid: 195789730c3d91e44a8ee1a412855f32, type: 3}
       propertyPath: _regionsList
       value: 
-      objectReference: {fileID: 407477331}
+      objectReference: {fileID: 11400000, guid: 7b9ccb4958a669e4e89c37b0467ad374, type: 2}
     - target: {fileID: 1103712127323861573, guid: 195789730c3d91e44a8ee1a412855f32, type: 3}
       propertyPath: _castlePrefab
       value: 
       objectReference: {fileID: 8956533874272218744, guid: b10366b9597e9d444889e326a281e45b, type: 3}
+    - target: {fileID: 1103712127323861573, guid: 195789730c3d91e44a8ee1a412855f32, type: 3}
+      propertyPath: _regionManager
+      value: 
+      objectReference: {fileID: 407477331}
     - target: {fileID: 1103712127323861573, guid: 195789730c3d91e44a8ee1a412855f32, type: 3}
       propertyPath: _config.mapWidth
       value: 400

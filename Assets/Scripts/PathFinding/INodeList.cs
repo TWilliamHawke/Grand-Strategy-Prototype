@@ -4,6 +4,6 @@ namespace PathFinding
 {
     public interface INodeList<T> where T : Node
     {
-        List<T> FindNeightborNodes(T node);
+        IEnumerable<T> FindNeightborNodes(T node);
     }
 }

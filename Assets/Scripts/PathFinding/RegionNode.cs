@@ -10,6 +10,12 @@ namespace PathFinding
         Region _region;
         public Region region => _region;
 
+        HashSet<RegionNode> _landNeighbors = new HashSet<RegionNode>();
+        HashSet<RegionNode> _seaNeighbors = new HashSet<RegionNode>();
+
+        public HashSet<RegionNode> neighbors => _landNeighbors;
+        public HashSet<RegionNode> seaNeighbors => _seaNeighbors;
+
         public RegionNode(Region region)
         {
             _region = region;
@@ -17,7 +23,17 @@ namespace PathFinding
             _position = new Vector2(_nodeCenter.x, _nodeCenter.z);
         }
 
-
+        public void AddNeighbor(Region region)
+        {
+            if(region.isSeaRegion)
+            {
+                _seaNeighbors.Add(region.node);
+            }
+            else
+            {
+                _landNeighbors.Add(region.node);
+            }
+        }
 
     }
 }

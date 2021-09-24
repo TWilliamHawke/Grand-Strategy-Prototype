@@ -10,7 +10,7 @@ using UnityEngine.EventSystems;
 public class Army : MonoBehaviour, ISelectable, IHaveUnits
 {
     public static event UnityAction<Army> OnArmySelected;
-    public static event UnityAction OnArmyDeselected;
+    public static event UnityAction<Army> OnArmyDeselected;
     public event UnityAction OnUnitAdd;
 
     [SerializeField] GlobalMapSelectable _selector;
@@ -27,7 +27,7 @@ public class Army : MonoBehaviour, ISelectable, IHaveUnits
     public void Deselect()
     {
         _selectionIndicator.gameObject.SetActive(false);
-        OnArmyDeselected?.Invoke();
+        OnArmyDeselected?.Invoke(this);
     }
 
     public void Select()

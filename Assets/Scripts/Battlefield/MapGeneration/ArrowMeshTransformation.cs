@@ -33,7 +33,7 @@ namespace Battlefield.Generator
             int key = Mathf.RoundToInt(angle / 45);
             if (_sinCos.TryGetValue(key, out var pair))
             {
-                ChangeShape(pair.Item1, pair.Item2);
+                ChangeShape(pair.Item1, pair.Item2, _mapConfig.gridLayer);
             }
             else
             {
@@ -41,7 +41,7 @@ namespace Battlefield.Generator
             }
         }
 
-        void ChangeShape(float sin, float cos)
+        public void ChangeShape(float sin, float cos, LayerMask layerMask)
         {
             Mesh mesh = CloneMesh();
             var vertices = mesh.vertices;
@@ -56,7 +56,7 @@ namespace Battlefield.Generator
 
                 var startPoint = transform.position + new Vector3(x, 0, z);
 
-                var point = Raycasts.VerticalDown(startPoint, _mapConfig.gridLayer);
+                var point = Raycasts.VerticalDown(startPoint, layerMask);
                 float y = point.y - transform.position.y + _verticalOffset;
                 vertices[i].y = y;
             }

@@ -17,6 +17,8 @@ namespace GlobalMap.Regions
 
         RegionPosition _position = new RegionPosition();
 
+        public Region region => _region;
+
 
 
         public void AddPoint(int x, int z)

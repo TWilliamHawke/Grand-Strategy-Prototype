@@ -27,4 +27,9 @@ public class ArmyView : UIScreen, INeedInit
         Show();
     }
 
+    void Close(Army _)
+    {
+        Close();
+    }
+
 }

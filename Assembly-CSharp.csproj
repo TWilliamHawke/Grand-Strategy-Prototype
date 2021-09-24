@@ -104,6 +104,7 @@
      <Compile Include="Assets\Scripts\UI\BuildingsView\BuildingSelectorEditor.cs" />
      <Compile Include="Assets\Scripts\Battlefield\SelectionController.cs" />
      <Compile Include="Assets\Scripts\MousePounterController.cs" />
+     <Compile Include="Assets\Scripts\PathFinding\ChunkNode.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\Building.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Victory.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\RangeWeapon.cs" />
@@ -128,6 +129,7 @@
      <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\Interfaces\IEffectChangeUnitClass.cs" />
      <Compile Include="Assets\Scripts\PathFinding\PathFinder.cs" />
      <Compile Include="Assets\Scripts\UI\Tooltip\TooltipFromTextArea.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Regions\RegionPosition.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\TroopStatesAI.cs" />
      <Compile Include="Assets\Scripts\UI\SelectedObjectPanel\UnitSelectionButton.cs" />
      <Compile Include="Assets\Scripts\UI\TechnologyScreen\TechnologiesController.cs" />
@@ -202,9 +204,11 @@
      <Compile Include="Assets\Scripts\Battlefield\MapGeneration\ArrowMeshTransformation.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Generator\ProvincePosition.cs" />
      <Compile Include="Assets\Scripts\UnitData\EquipmentSlots.cs" />
+     <Compile Include="Assets\Scripts\PathFinding\INodeList.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\IncreaseCapForUnitClass.cs" />
      <Compile Include="Assets\Scripts\Battlefield\BattlefieldData.cs" />
      <Compile Include="Assets\Scripts\Battlefield\MapGeneration\MeshGenerators\HollowGenerator.cs" />
+     <Compile Include="Assets\Scripts\PathFinding\RegionNode.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\StateMachine.cs" />
      <Compile Include="Assets\Scripts\UI\SelectedObjectPanel\UnitListPanel.cs" />
      <Compile Include="Assets\Scripts\UI\SelectedObjectPanel\GarrisonView.cs" />
@@ -214,15 +218,12 @@
      <Compile Include="Assets\Scripts\UI\UnitEditor\NameSelectorPart.cs" />
      <Compile Include="Assets\Scripts\Battlefield\Chunks\Chunk.cs" />
      <Compile Include="Assets\Scripts\SpritePreviewAttribute.cs" />
+     <Compile Include="Assets\Scripts\PathFinding\InodeHolder.cs" />
      <Compile Include="Assets\Scripts\UI\BuildingsView\BuildingPreview.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\TroopStatesPlayer.cs" />
      <Compile Include="Assets\Scripts\UI\LabelController.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Unit.cs" />
-     <Compile Include="Assets\Scripts\GlobalMap\Regions\RegionPosition.cs" />
-     <Compile Include="Assets\Scripts\PathFinding\INodeList.cs" />
-     <Compile Include="Assets\Scripts\PathFinding\InodeHolder.cs" />
-     <Compile Include="Assets\Scripts\PathFinding\ChunkNode.cs" />
-     <Compile Include="Assets\Scripts\PathFinding\RegionNode.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Regions\RegionsManager.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Programs/unity/2020.3.18f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

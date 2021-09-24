@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Battlefield.Chunks;
 using GlobalMap.Generator;
 using PathFinding;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace GlobalMap.Regions
 	{
 		[SerializeField] RegionMesh _meshGenerator;
 		[SerializeField] Castle _castle;
+		[SerializeField] ChunkArrow _arrow;
 		[SerializeField] GeneratorConfig _config;
 		[Range(0, 1)]
 		[SerializeField] float _castleOffsetY;
@@ -19,15 +21,12 @@ namespace GlobalMap.Regions
 		Vector3 _regionCenter;
 		RegionNode _node;
 
-		List<RegionNode> _landNeightbors = new List<RegionNode>();
-		List<RegionNode> _seaNeightbors = new List<RegionNode>();
-
 		//getters
 		public Vector3 centerPosition => _regionCenter;
 		public bool isSeaRegion => _regionCenter.y <= 0;
 		public bool isUnWalkable => color == Color.black || color == Color.white;
-		public List<RegionNode> landNeightbors => _landNeightbors;
 		public Castle castle => _castle;
+		public RegionNode node => _node;
 
 
 		public void AddPoint(int x, int z)
@@ -37,7 +36,7 @@ namespace GlobalMap.Regions
 
 		public void FindCenterPosition()
 		{
-			_regionCenter = _meshGenerator.FindCenterPosition();
+			_regionCenter = _meshGenerator.FindCenterPosition() + _config.positionOffset;
 			_node = new RegionNode(this);
 			if(isUnWalkable || isSeaRegion)
 			{
@@ -45,14 +44,16 @@ namespace GlobalMap.Regions
 			}
 			else
 			{
-				var position = _regionCenter + _config.positionOffset + Vector3.up * _castleOffsetY;
+				var position = _regionCenter + Vector3.up * _castleOffsetY;
 				_castle.transform.position = position;
+				_arrow.transform.position = position;
 			}
 		}
 
-		public void AddNeighbor(Region neightBor)
+		public void AddNeighbor(Region neighBor)
 		{
-			
+			if(neighBor == this || neighBor.isUnWalkable) return;
+			_node.AddNeighbor(neighBor);
 		}
 
 		public void GenerateMesh()
@@ -65,6 +66,18 @@ namespace GlobalMap.Regions
 		public void SetRegionColor()
 		{
 			_meshGenerator.SetColor(color);
+		}
+
+		public void RotatePathArrow(RegionNode node)
+		{
+			_arrow.gameObject.SetActive(true);
+			_arrow.transform.rotation = Quaternion.FromToRotation(Vector3.forward, node.nodeCenter - _node.nodeCenter);
+			_arrow.UpdateShape(_config.terrainLayer);
+		}
+
+		public void HidePathArrow()
+		{
+			_arrow.gameObject.SetActive(false);
 		}
 	}
 }
