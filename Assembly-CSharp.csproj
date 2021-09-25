@@ -40,6 +40,7 @@
      <Compile Include="Assets\Scripts\Battlefield\EnemyDetector.cs" />
      <Compile Include="Assets\Scripts\UI\Tabs\TabPanel.cs" />
      <Compile Include="Assets\Scripts\UnitData\IStats.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Regions\RegionsManager.cs" />
      <Compile Include="Assets\Scripts\Battlefield\MapGeneration\ChunkGenerator.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Regions\Region.cs" />
      <Compile Include="Assets\Scripts\Battlefield\Chunks\PathArrowController.cs" />
@@ -200,7 +201,6 @@
      <Compile Include="Assets\Scripts\UI\BuildingsView\BuildingSelectionButtonEditor.cs" />
      <Compile Include="Assets\Scripts\Battlefield\MapGeneration\DefaultAlgorithm.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Ready.cs" />
-     <Compile Include="Assets\Scripts\DataScriptTemplates\Faction.cs" />
      <Compile Include="Assets\Scripts\Battlefield\MapGeneration\ArrowMeshTransformation.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Generator\ProvincePosition.cs" />
      <Compile Include="Assets\Scripts\UnitData\EquipmentSlots.cs" />
@@ -223,7 +223,15 @@
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\TroopStatesPlayer.cs" />
      <Compile Include="Assets\Scripts\UI\LabelController.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Unit.cs" />
-     <Compile Include="Assets\Scripts\GlobalMap\Regions\RegionsManager.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Diplomacy\DiplomacyState.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Espionage\SpyNetworkData.cs" />
+     <Compile Include="Assets\Scripts\DataScriptTemplates\FactionData.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Faction\Faction.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Faction\FactionRelations.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Faction\FactionManager.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Diplomacy\DiplomacyController.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Diplomacy\UI\FactionInfo.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Diplomacy\UI\DiplomacyScreen.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Programs/unity/2020.3.18f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

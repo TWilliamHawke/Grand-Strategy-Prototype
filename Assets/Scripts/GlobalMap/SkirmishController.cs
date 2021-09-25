@@ -8,7 +8,7 @@ public class SkirmishController : ScriptableObject
     IHaveUnits _defenderForce;
 
     //temp
-    [SerializeField] Faction _playerFaction;
+    [SerializeField] FactionData _playerFaction;
 
     public event UnityAction<Army, IHaveUnits> OnConfrontationStart;
     public event UnityAction OnConfrontationEnd;

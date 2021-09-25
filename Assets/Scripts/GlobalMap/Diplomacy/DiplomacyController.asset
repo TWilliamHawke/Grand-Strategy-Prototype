@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c198c3a5a77d5c4ea4c80ba892b8c4e, type: 3}
+  m_Name: DiplomacyController
+  m_EditorClassIdentifier: 
+  _playerFaction: {fileID: 11400000, guid: 77f15cdd6f4e8f64385762390652a6ce, type: 2}
+  _targetFaction: {fileID: 11400000, guid: f5968718cc3bc4e4383108da719878a6, type: 2}

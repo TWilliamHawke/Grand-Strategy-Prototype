@@ -16,7 +16,7 @@ public class Settlement : MonoBehaviour, IhaveLabel, ISelectable, IHaveUnits, IB
     List<Building> _constructedBuildings = new List<Building>();
     List<Unit> _unitsFromThisSettelment = new List<Unit>();
     List<Unit> _garrison = new List<Unit>();
-    Faction _owner;
+    FactionData _owner;
 
     //getters
     public List<Building> constructedBuildings => _constructedBuildings;
@@ -79,7 +79,7 @@ public class Settlement : MonoBehaviour, IhaveLabel, ISelectable, IHaveUnits, IB
         OnUnitAdded?.Invoke(template);
     }
 
-    public void Defeat(Faction winnerFaction)
+    public void Defeat(FactionData winnerFaction)
     {
         _garrison.Clear();
         _owner = winnerFaction;

@@ -74,7 +74,7 @@ public class Army : MonoBehaviour, ISelectable, IHaveUnits
         StopWalkAnimation();
     }
 
-    public void Defeat(Faction _)
+    public void Defeat(FactionData _)
     {
         _movementComponent.Retreat();
     }

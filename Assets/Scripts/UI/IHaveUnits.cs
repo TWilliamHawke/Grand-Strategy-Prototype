@@ -8,6 +8,6 @@ public interface IHaveUnits
     List<Unit> unitList { get; }
     void AddUnit(UnitTemplate template);
     void RemoveUnit(Unit unit);
-    void Defeat(Faction winner);
+    void Defeat(FactionData winner);
     Transform transform { get; }
 }

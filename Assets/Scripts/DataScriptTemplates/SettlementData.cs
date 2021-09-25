@@ -7,14 +7,14 @@ using UnityEngine.Events;
 public class SettlementData : ScriptableObject
 {
     [SerializeField] string _name = "test";
-    [SerializeField] Faction _originalOwner;
+    [SerializeField] FactionData _originalOwner;
     [SerializeField] List<Building> _startBuildings = new List<Building>();
     [SerializeField] List<UnitTemplate> _startGarrison = new List<UnitTemplate>();
 
     //getters
     public string localizedName => _name;
     public List<Building> startBuildings => _startBuildings;
-    public Faction originalOwner => _originalOwner;
+    public FactionData originalOwner => _originalOwner;
     public List<UnitTemplate> startGarrison => _startGarrison;
 
 }
