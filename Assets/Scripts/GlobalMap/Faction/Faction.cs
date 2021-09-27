@@ -16,5 +16,9 @@ namespace GlobalMap.Factions
             _factionData = factionData;
 			_factionRelation = new FactionRelations(this, factionData);
         }
+
+		public void CreateSpyNetwork(Faction faction) => _factionRelation.CreateSpyNetwork(faction);
+		
+		public void DestroySpyNetWork(Faction faction) => _factionRelation.DestroySpyNetWork(faction);
     }
 }

@@ -7,7 +7,7 @@ namespace GlobalMap.Espionage
 	    public Faction faction;
 		public byte level;
 		public float spyPoints;
-		public float detectionThreat;
+		public float visibility;
 
         public SpyNetworkData(Faction faction) : this()
         {

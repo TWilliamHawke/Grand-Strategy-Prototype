@@ -9,13 +9,13 @@ namespace GlobalMap.Diplomacy.UI
 	    [SerializeField] DiplomacyController diplomacyController;
 
 		//used as  unityAction
-		public void SetPlayerFactionData(FactionInfo infoPanel)
+		public void SetPlayerFactionData(FactionInfoPanel infoPanel)
 		{
 			infoPanel.UpdateFactionInfo(diplomacyController.playerFaction);
 		}
 
 		//used as  unityAction
-		public void SetTargetFactionData(FactionInfo infoPanel)
+		public void SetTargetFactionData(FactionInfoPanel infoPanel)
 		{
 			infoPanel.UpdateFactionInfo(diplomacyController.targetFaction);
 		}

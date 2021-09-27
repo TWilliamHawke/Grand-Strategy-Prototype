@@ -41,7 +41,7 @@ namespace GlobalMap.Factions
             }
         }
 
-        void CreateSpyNetwork(Faction targetFaction)
+        public void CreateSpyNetwork(Faction targetFaction)
         {
             if(targetFaction == _faction) return;
             if(_spyNetworks.ContainsKey(targetFaction)) return;
@@ -49,7 +49,7 @@ namespace GlobalMap.Factions
             _spyNetworks.Add(targetFaction, new SpyNetworkData(targetFaction));
         }
 
-        void DestroySpyNetWork(Faction targetFaction)
+        public void DestroySpyNetWork(Faction targetFaction)
         {
             _spyNetworks.Remove(targetFaction);
         }
