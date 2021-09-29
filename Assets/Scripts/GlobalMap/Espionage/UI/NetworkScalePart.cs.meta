@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6c97de838df42cc4c95edd61fea981e0
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _tooltipController: {fileID: 11400000, guid: c29eeb31eaa786747816d0e7ef376b1d, type: 2}
+  - _background: {instanceID: 0}
+  - _netWorkController: {fileID: 11400000, guid: abb12f89eeae2ef4bb4f5281a166d763, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

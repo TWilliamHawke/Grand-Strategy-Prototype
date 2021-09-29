@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Scripts
+namespace GlobalMap.Espionage
 {
+	[CreateAssetMenu(fileName ="SpyAction", menuName ="Global map/SpyAction")]
 	public class SpyAction : ScriptableObject
 	{
 	    [SerializeField] string _title;

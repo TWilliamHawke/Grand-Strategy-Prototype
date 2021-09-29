@@ -22,9 +22,9 @@ public abstract class UIPanelWithGrid<T> : MonoBehaviour
 
         foreach (var template in _layoutElementsData)
         {
-            var unitCard = Instantiate(_layoutElementPrefab);
-            unitCard.transform.SetParent(_layout.transform);
-            unitCard.UpdateData(template);
+            var uiElement = Instantiate(_layoutElementPrefab);
+            uiElement.transform.SetParent(_layout.transform);
+            uiElement.UpdateData(template);
         }
 
     }

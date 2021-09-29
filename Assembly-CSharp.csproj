@@ -47,6 +47,7 @@
      <Compile Include="Assets\Scripts\Battlefield\MapGeneration\MapConfig.cs" />
      <Compile Include="Assets\Scripts\UI\UIInitiator.cs" />
      <Compile Include="Assets\Scripts\Battlefield\MapGeneration\ForestGenerator.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Espionage\SpyNetworkLevel.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\SettlementData.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\ArmourInfo.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\UnlockClass.cs" />
@@ -61,6 +62,7 @@
      <Compile Include="Assets\Scripts\UI\Tooltip\UIDataElement.cs" />
      <Compile Include="Assets\Scripts\UI\BuildingsView\BuildingSelectionButton.cs" />
      <Compile Include="Assets\Scripts\UI\Tooltip\IHaveTooltip.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Espionage\UI\NetworkScalePart.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\ItemSlots\AbstractItemSlot.cs" />
      <Compile Include="Assets\Scripts\Battlefield\MapGeneration\FramePartGenerator.cs" />
      <Compile Include="Assets\Scripts\Battlefield\Chunks\FrameController.cs" />
@@ -75,6 +77,8 @@
      <Compile Include="Assets\Scripts\UI\TechnologyScreen\TechnologyPanel.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\RequireSkillEquipment.cs" />
      <Compile Include="Assets\Scripts\Battlefield\SelectedObjects.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Espionage\UI\SpyNetworkPanel.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Espionage\SpyNetworkController.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\ChangeRequirementForWeapon.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Movement.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\UnitTemplate.cs" />
@@ -233,6 +237,11 @@
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\TroopStatesPlayer.cs" />
      <Compile Include="Assets\Scripts\UI\LabelController.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Unit.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Espionage\UI\NetworkLevelPanel.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Espionage\UI\VisibilityPanel.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Espionage\UI\SpyPointsPanel.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Espionage\UI\GuardStatePanel.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Espionage\UI\SpyActionsPanel.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Programs/unity/2020.3.18f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
