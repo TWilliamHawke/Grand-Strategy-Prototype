@@ -33,18 +33,10 @@ namespace GlobalMap.Factions
             _diplomacyState[state].Add(faction);
         }
 
-        void AddStartEnemies(FactionData factionData)
-        {
-            foreach (var faction in factionData.startEnemies)
-            {
-                AddDiplomacyStateWithFaction(DiplomacyState.war, faction);
-            }
-        }
-
         public void CreateSpyNetwork(Faction targetFaction)
         {
-            if(targetFaction == _faction) return;
-            if(_spyNetworks.ContainsKey(targetFaction)) return;
+            if (targetFaction == _faction) return;
+            if (_spyNetworks.ContainsKey(targetFaction)) return;
 
             _spyNetworks.Add(targetFaction, new SpyNetworkData(targetFaction));
         }
@@ -52,6 +44,14 @@ namespace GlobalMap.Factions
         public void DestroySpyNetWork(Faction targetFaction)
         {
             _spyNetworks.Remove(targetFaction);
+        }
+
+        void AddStartEnemies(FactionData factionData)
+        {
+            foreach (var faction in factionData.startEnemies)
+            {
+                AddDiplomacyStateWithFaction(DiplomacyState.war, faction);
+            }
         }
 
     }

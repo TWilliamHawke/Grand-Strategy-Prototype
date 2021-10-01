@@ -38,6 +38,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\AbstractMeshGenerator.cs" />
      <Compile Include="Assets\Scripts\Battlefield\EnemyDetector.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Espionage\UI\VisibilityPanel.cs" />
      <Compile Include="Assets\Scripts\UI\Tabs\TabPanel.cs" />
      <Compile Include="Assets\Scripts\UnitData\IStats.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Regions\RegionsManager.cs" />
@@ -57,6 +58,7 @@
      <Compile Include="Assets\Scripts\UI\BuildingsView\BuildingPreviewEditor.cs" />
      <Compile Include="Assets\Scripts\UI\TechnologyScreen\TechnologyScreen.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\EmptyEffect.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Espionage\UI\SpyActionsPanel.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Diplomacy\UI\FactionInfoPanel.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Espionage\SpyAction.cs" />
      <Compile Include="Assets\Scripts\UI\Tooltip\UIDataElement.cs" />
@@ -124,6 +126,7 @@
      <Compile Include="Assets\Scripts\UI\BattleField\FightProgress.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Fight.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\UnitEditor\Mount.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Espionage\UI\GuardStatePanel.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitClassSelectionButton.cs" />
      <Compile Include="Assets\Scripts\StringExtension.cs" />
      <Compile Include="Assets\Scripts\Battlefield\DemoMapSetup.cs" />
@@ -144,7 +147,9 @@
      <Compile Include="Assets\Scripts\UI\UnitEditor\NameSelectorButton.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\EffectsContainer.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Generator\BordersGenerator.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Espionage\UI\SpyPointsPanel.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TimeManager.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Espionage\UI\NetworkUpgradeButton.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Regions\RegionsList.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Settlement.cs" />
      <Compile Include="Assets\Scripts\Battlefield\BattleRules.cs" />
@@ -214,6 +219,7 @@
      <Compile Include="Assets\Scripts\Battlefield\MapGeneration\DefaultAlgorithm.cs" />
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\Ready.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\FactionData.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Espionage\UI\NetworkLevelPanel.cs" />
      <Compile Include="Assets\Scripts\Battlefield\MapGeneration\ArrowMeshTransformation.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Generator\ProvincePosition.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Diplomacy\UI\DiplomacyScreen.cs" />
@@ -237,11 +243,7 @@
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\TroopStatesPlayer.cs" />
      <Compile Include="Assets\Scripts\UI\LabelController.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Unit.cs" />
-     <Compile Include="Assets\Scripts\GlobalMap\Espionage\UI\NetworkLevelPanel.cs" />
-     <Compile Include="Assets\Scripts\GlobalMap\Espionage\UI\VisibilityPanel.cs" />
-     <Compile Include="Assets\Scripts\GlobalMap\Espionage\UI\SpyPointsPanel.cs" />
-     <Compile Include="Assets\Scripts\GlobalMap\Espionage\UI\GuardStatePanel.cs" />
-     <Compile Include="Assets\Scripts\GlobalMap\Espionage\UI\SpyActionsPanel.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Espionage\UI\SpyActionButton.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Programs/unity/2020.3.18f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

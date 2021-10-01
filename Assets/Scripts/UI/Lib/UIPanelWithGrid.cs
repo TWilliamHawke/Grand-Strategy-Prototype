@@ -10,6 +10,7 @@ public abstract class UIPanelWithGrid<T> : MonoBehaviour
 
     protected abstract List<T> _layoutElementsData { get; }
     protected LayoutGroup layout => _layout;
+    protected UIDataElement<T> prefab => _layoutElementPrefab;
 
     void Awake()
     {

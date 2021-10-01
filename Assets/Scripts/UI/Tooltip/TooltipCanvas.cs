@@ -68,5 +68,10 @@ public class TooltipCanvas : MonoBehaviour
     {
         Vector2 offset = _tooltip.sizeDelta / 2;
         _tooltip.position = Input.mousePosition + (Vector3)offset;
+
+        if(Input.mousePosition.x + _tooltip.sizeDelta.x > Screen.width)
+        {
+            _tooltip.position = new Vector3(Screen.width - _tooltip.sizeDelta.x / 2, _tooltip.position.y, 0);
+        }
     }
 }

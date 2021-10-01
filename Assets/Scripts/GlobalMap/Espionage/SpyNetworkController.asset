@@ -12,8 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3913f3920dfa3f84d99c63cf8a20043d, type: 3}
   m_Name: SpyNetworkController
   m_EditorClassIdentifier: 
+  _diplomacyController: {fileID: 11400000, guid: f319a40751d0b5746a659b96cf5a93d7, type: 2}
+  _timer: {fileID: 11400000, guid: 44e2238446df7fb40ae391e2bc5b4263, type: 2}
   _networkLevelsColor: {r: 0.058823533, g: 0.5764706, b: 0.13333334, a: 1}
   _visibilityLevelColor: {r: 0.7843138, g: 0.21176472, b: 0.12941177, a: 1}
   _spyPointsPerMonth: 5
   _visibilityDecreaces: 5
-  _levels: []
+  _levels:
+  - requiredSpyPoints: 20
+    activeActions:
+    - {fileID: 11400000, guid: e1a9db4869c198a448ad5ae7102b354f, type: 2}
+  - requiredSpyPoints: 50
+    activeActions:
+    - {fileID: 11400000, guid: ca36b8b2bdb425b438e7d03e76f2b29b, type: 2}
+  - requiredSpyPoints: 60
+    activeActions:
+    - {fileID: 11400000, guid: fc7c620d1228d1b4280c3d31a8194b6e, type: 2}
+  - requiredSpyPoints: 80
+    activeActions:
+    - {fileID: 11400000, guid: f9f14048b1a6de547864a71f9b16d889, type: 2}
+  - requiredSpyPoints: 80
+    activeActions:
+    - {fileID: 11400000, guid: edeed5dd894b97c4c9c78a4eff477df5, type: 2}
+  - requiredSpyPoints: 80
+    activeActions:
+    - {fileID: 11400000, guid: a6316c34cbf1c5243a2f51ae30dfc7fd, type: 2}

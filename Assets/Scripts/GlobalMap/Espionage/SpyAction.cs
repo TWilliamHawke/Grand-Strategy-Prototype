@@ -14,5 +14,10 @@ namespace GlobalMap.Espionage
 		[SerializeField] float _baseCost;
 		[SerializeField] float _baseChance;
 		[SerializeField] float _baseVisibility;
+
+		public string title => _title;
+		public float successChance => _baseChance;
+		public float visibility => _baseVisibility;
+		public float cost => _baseCost;
 	}
 }

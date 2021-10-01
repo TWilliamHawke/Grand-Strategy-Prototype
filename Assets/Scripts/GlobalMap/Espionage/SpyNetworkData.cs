@@ -2,14 +2,14 @@ using GlobalMap.Factions;
 
 namespace GlobalMap.Espionage
 {
-	public struct SpyNetworkData
+	public class SpyNetworkData
 	{
 	    public Faction faction;
 		public byte level;
 		public float spyPoints;
 		public float visibility;
 
-        public SpyNetworkData(Faction faction) : this()
+        public SpyNetworkData(Faction faction)
         {
             this.faction = faction;
         }
