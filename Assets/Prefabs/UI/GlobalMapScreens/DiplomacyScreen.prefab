@@ -760,6 +760,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afcd9c8f3ca9cd64792811bee6f9b214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _controller: {fileID: 11400000, guid: abb12f89eeae2ef4bb4f5281a166d763, type: 2}
+  _visibilityText: {fileID: 2757126562586836330}
+  _bar: {fileID: 2757126561739391478}
 --- !u!1 &2757126562223924700
 GameObject:
   m_ObjectHideFlags: 0
@@ -1715,6 +1718,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 460e6c8bc4e3bcb47ba7ad7f043b4359, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _layoutElementPrefab: {fileID: 1422007162139811591, guid: 8ea6948d98957c24fb27d84d580c7ed0, type: 3}
+  _layout: {fileID: 2757126561820135939}
+  _controller: {fileID: 11400000, guid: abb12f89eeae2ef4bb4f5281a166d763, type: 2}
 --- !u!1 &2757126562586836324
 GameObject:
   m_ObjectHideFlags: 0
@@ -1965,6 +1971,7 @@ GameObject:
   - component: {fileID: 2757126562943491968}
   - component: {fileID: 2757126562943491974}
   - component: {fileID: 2757126562943491975}
+  - component: {fileID: 539516985}
   m_Layer: 0
   m_Name: NextState
   m_TagString: Untagged
@@ -2029,6 +2036,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &539516985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2757126562943491969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c944d20117937e429e0cc190c780529, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipController: {fileID: 11400000, guid: c29eeb31eaa786747816d0e7ef376b1d, type: 2}
+  _controller: {fileID: 11400000, guid: abb12f89eeae2ef4bb4f5281a166d763, type: 2}
+  _statePointer: 1
+  _icon: {fileID: 2757126562943491975}
 --- !u!1 &2757126562961773079
 GameObject:
   m_ObjectHideFlags: 0
@@ -2308,6 +2331,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e27e94585073b942818d602f54cd95d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _layoutElementPrefab: {fileID: 4207946221114547123, guid: c183e10c48f8d9a41952acd5cca9e2c3, type: 3}
+  _layout: {fileID: 2757126562489936182}
+  _networkController: {fileID: 11400000, guid: abb12f89eeae2ef4bb4f5281a166d763, type: 2}
+  _networkHeader: {fileID: 2757126563856467703}
 --- !u!1 &2757126563103180882
 GameObject:
   m_ObjectHideFlags: 0
@@ -2515,6 +2542,7 @@ GameObject:
   - component: {fileID: 2757126563119343306}
   - component: {fileID: 2757126563119343304}
   - component: {fileID: 2757126563119343305}
+  - component: {fileID: 126144888}
   m_Layer: 0
   m_Name: 4thState
   m_TagString: Untagged
@@ -2579,6 +2607,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &126144888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2757126563119343307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c944d20117937e429e0cc190c780529, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipController: {fileID: 11400000, guid: c29eeb31eaa786747816d0e7ef376b1d, type: 2}
+  _controller: {fileID: 11400000, guid: abb12f89eeae2ef4bb4f5281a166d763, type: 2}
+  _statePointer: 3
+  _icon: {fileID: 2757126563119343305}
 --- !u!1 &2757126563126032169
 GameObject:
   m_ObjectHideFlags: 0
@@ -3169,6 +3213,7 @@ GameObject:
   - component: {fileID: 2757126563376626218}
   - component: {fileID: 2757126563376626219}
   - component: {fileID: 2757126563376626212}
+  - component: {fileID: 1751233524}
   m_Layer: 0
   m_Name: LevelUpButton
   m_TagString: Untagged
@@ -3277,7 +3322,33 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2757126563376626219}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: abb12f89eeae2ef4bb4f5281a166d763, type: 2}
+        m_TargetAssemblyTypeName: GlobalMap.Espionage.SpyNetworkController, Assembly-CSharp
+        m_MethodName: IncreaseNetworkLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1751233524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2757126563376626214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7116f61b1d8dc30459f00d2dd3f42b45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _controller: {fileID: 11400000, guid: abb12f89eeae2ef4bb4f5281a166d763, type: 2}
+  _button: {fileID: 2757126563376626212}
 --- !u!1 &2757126563393323154
 GameObject:
   m_ObjectHideFlags: 0
@@ -3535,6 +3606,7 @@ GameObject:
   - component: {fileID: 2757126563564252427}
   - component: {fileID: 2757126563564252425}
   - component: {fileID: 2757126563564252426}
+  - component: {fileID: 1280154384}
   m_Layer: 0
   m_Name: 3rdState
   m_TagString: Untagged
@@ -3599,6 +3671,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1280154384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2757126563564252420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c944d20117937e429e0cc190c780529, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipController: {fileID: 11400000, guid: c29eeb31eaa786747816d0e7ef376b1d, type: 2}
+  _controller: {fileID: 11400000, guid: abb12f89eeae2ef4bb4f5281a166d763, type: 2}
+  _statePointer: 2
+  _icon: {fileID: 2757126563564252426}
 --- !u!1 &2757126563619484535
 GameObject:
   m_ObjectHideFlags: 0
@@ -4007,6 +4095,7 @@ GameObject:
   - component: {fileID: 2757126563814444582}
   - component: {fileID: 2757126563814444580}
   - component: {fileID: 2757126563814444581}
+  - component: {fileID: 532799915}
   m_Layer: 0
   m_Name: ActiveState
   m_TagString: Untagged
@@ -4071,6 +4160,22 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &532799915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2757126563814444583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c944d20117937e429e0cc190c780529, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipController: {fileID: 11400000, guid: c29eeb31eaa786747816d0e7ef376b1d, type: 2}
+  _controller: {fileID: 11400000, guid: abb12f89eeae2ef4bb4f5281a166d763, type: 2}
+  _statePointer: 0
+  _icon: {fileID: 2757126563814444581}
 --- !u!1 &2757126563856467697
 GameObject:
   m_ObjectHideFlags: 0

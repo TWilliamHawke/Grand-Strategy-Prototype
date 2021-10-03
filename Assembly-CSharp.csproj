@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\UI\UnitEditor\ItemList.cs" />
      <Compile Include="Assets\Scripts\UI\UnitEditor\UnitList.cs" />
      <Compile Include="Assets\Scripts\UI\BuildingsView\BuildingPreviewEditor.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Espionage\GuardState.cs" />
      <Compile Include="Assets\Scripts\UI\TechnologyScreen\TechnologyScreen.cs" />
      <Compile Include="Assets\Scripts\DataScriptTemplates\Effects\EmptyEffect.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Espionage\UI\SpyActionsPanel.cs" />
@@ -243,6 +244,7 @@
      <Compile Include="Assets\Scripts\Battlefield\TroopStateMachine\TroopStatesPlayer.cs" />
      <Compile Include="Assets\Scripts\UI\LabelController.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Unit.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Espionage\UI\GuardStateIcon.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Espionage\UI\SpyActionButton.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Programs/unity/2020.3.18f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

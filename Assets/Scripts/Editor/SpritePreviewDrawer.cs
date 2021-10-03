@@ -10,7 +10,6 @@ public class SpritePreviewDrawer : PropertyDrawer
 {
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-
         if (PropertyIsSprite(property, out var sprite))
         {
             float previewWidth = (attribute as SpritePreviewAttribute)?.width ?? 0f;
@@ -53,10 +52,7 @@ public class SpritePreviewDrawer : PropertyDrawer
 
     static bool PropertyIsSprite(SerializedProperty property, out Sprite sprite)
     {
-        var targetObject = property?.serializedObject?.targetObject;
-        Type parentType = targetObject?.GetType();
-        var fieldInfo = parentType?.GetField(property?.propertyPath);
-        sprite = fieldInfo?.GetValue(targetObject) as Sprite;
+        sprite = property.objectReferenceValue as Sprite;
         return sprite != null;
     }
 

@@ -15,9 +15,10 @@ MonoBehaviour:
   _diplomacyController: {fileID: 11400000, guid: f319a40751d0b5746a659b96cf5a93d7, type: 2}
   _timer: {fileID: 11400000, guid: 44e2238446df7fb40ae391e2bc5b4263, type: 2}
   _networkLevelsColor: {r: 0.058823533, g: 0.5764706, b: 0.13333334, a: 1}
-  _visibilityLevelColor: {r: 0.7843138, g: 0.21176472, b: 0.12941177, a: 1}
   _spyPointsPerMonth: 5
   _visibilityDecreaces: 5
+  _maxVisibility: 100
+  _defaultGuardState: {fileID: 11400000, guid: d7365e1ee0ac31b448840f7cd0511968, type: 2}
   _levels:
   - requiredSpyPoints: 20
     activeActions:

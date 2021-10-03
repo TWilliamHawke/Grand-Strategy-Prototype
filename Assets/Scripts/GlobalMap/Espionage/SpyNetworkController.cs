@@ -15,10 +15,8 @@ namespace GlobalMap.Espionage
         [SerializeField] Timer _timer;
         [Header("Config")]
         [SerializeField] Color _networkLevelsColor = Color.green;
-        [SerializeField] Color _visibilityLevelColor = Color.red;
         [SerializeField] float _spyPointsPerMonth = 5f;
-        [SerializeField] float _visibilityDecreaces = 5f;
-        [SerializeField] int _maxVisibility = 100;
+        [SerializeField] GuardState _defaultGuardState;
 
         [SerializeField] List<SpyNetworkLevel> _levels = new List<SpyNetworkLevel>();
 
@@ -29,9 +27,10 @@ namespace GlobalMap.Espionage
         public List<SpyNetworkLevel> levels => _levels;
         public Color networkLevelsColor => _networkLevelsColor;
         public float spyPointsPerMonth => _spyPointsPerMonth;
-        public float visibilityDecreaces => _visibilityDecreaces;
+        public float visibilityDecreaces => currentGuardState.visibilityPerMonth;
         public SpyNetworkData networkData => _targetFactionNetworkData;
-        public int maxVisibility => _maxVisibility;
+        public int maxVisibility => currentGuardState.visibilityCap;
+        public GuardState currentGuardState => networkData?.GetGuardState(0) ?? _defaultGuardState;
 
         //events
         public event UnityAction OnSpyNetworkUpdate;
@@ -64,13 +63,18 @@ namespace GlobalMap.Espionage
 
         public void OpenWindow(SpyAction action)
         {
-            if(_windows.TryGetValue(action, out var window))
+            if (_windows.TryGetValue(action, out var window))
             {
                 window.Open();
             }
         }
 
-        
+        public GuardState GetGuardState(int pointer)
+        {
+            return _targetFactionNetworkData.GetGuardState(pointer);
+        }
+
+
 
         void SetNetworkData(Faction faction)
         {
@@ -83,11 +87,8 @@ namespace GlobalMap.Espionage
         {
             _targetFactionNetworkData.spyPoints += _spyPointsPerMonth;
 
-            if (_targetFactionNetworkData.visibility > _visibilityDecreaces)
-            {
-                _targetFactionNetworkData.visibility -= _visibilityDecreaces;
-            }
-            else
+            _targetFactionNetworkData.visibility += visibilityDecreaces;
+            if (_targetFactionNetworkData.visibility < 0)
             {
                 _targetFactionNetworkData.visibility = 0;
             }

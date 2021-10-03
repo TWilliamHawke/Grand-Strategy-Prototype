@@ -41,7 +41,7 @@ namespace GlobalMap.Espionage.UI
 
 		void UpdateActionValues()
         {
-            _successChance.text = _action.successChance.ToString() + "%";
+            _successChance.text = Mathf.Min(_action.successChance, 100).ToString() + "%";
             _visibilityText.text = "+" + _action.visibility.ToString();
             _actionCost.text = _action.cost.ToString();
 

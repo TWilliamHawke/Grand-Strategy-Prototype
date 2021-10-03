@@ -4,20 +4,26 @@ using UnityEngine;
 
 namespace GlobalMap.Espionage
 {
-	[CreateAssetMenu(fileName ="SpyAction", menuName ="Global map/SpyAction")]
-	public class SpyAction : ScriptableObject
-	{
-	    [SerializeField] string _title;
-		[Multiline(4)]
-		[SerializeField] string _description;
+    [CreateAssetMenu(fileName = "SpyAction", menuName = "Global map/SpyAction")]
+    public class SpyAction : ScriptableObject
+    {
+        [SerializeField] SpyNetworkController _controller;
+        [SerializeField] string _title;
+        [Multiline(4)]
+        [SerializeField] string _description;
 
-		[SerializeField] float _baseCost;
-		[SerializeField] float _baseChance;
-		[SerializeField] float _baseVisibility;
+        [SerializeField] float _baseCost;
+        [SerializeField] float _baseChance;
+        [SerializeField] float _baseVisibility;
 
-		public string title => _title;
-		public float successChance => _baseChance;
-		public float visibility => _baseVisibility;
-		public float cost => _baseCost;
-	}
+        public string title => _title;
+        public float successChance => _baseChance + _controller.currentGuardState.actionsSuccessChance;
+        public float visibility => _baseVisibility * TransformIntoMult(_controller.currentGuardState.visibilityPerActionPct);
+        public float cost => _baseCost * TransformIntoMult(_controller.currentGuardState.actionCostPct);
+
+        float TransformIntoMult(float pct)
+        {
+            return 1 + pct / 100;
+        }
+    }
 }

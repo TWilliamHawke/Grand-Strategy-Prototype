@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44dbb9ad556ddf1418f13a281fe20b9e, type: 3}
   m_Name: PoisonGarrison
   m_EditorClassIdentifier: 
+  _controller: {fileID: 11400000, guid: abb12f89eeae2ef4bb4f5281a166d763, type: 2}
   _title: Poison Garrison
   _description: 
   _baseCost: 50

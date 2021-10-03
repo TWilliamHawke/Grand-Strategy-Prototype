@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27dd789312b1234458666dd8e4f756ff, type: 3}
+  m_Name: FullPrepared
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 21300000, guid: 1317f65f2f8b6f74aa396fd864fea6ea, type: 3}
+  _title: "\u041F\u043E\u043B\u043D\u0430\u044F \u0433\u043E\u0442\u043E\u0432\u0430\u043D\u043E\u0441\u0442\u044C"
+  _description: 
+  _actionCostPct: 0
+  _actionsSuccessChance: 0
+  _visibilityPerActionPct: 0
+  _visibilityCap: 100
+  _visibilityPerMonth: -5
