@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Battlefield;
 using GlobalMap.Diplomacy;
+using GlobalMap.Espionage.UI;
 using GlobalMap.Factions;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,7 +12,6 @@ namespace GlobalMap.Espionage
     [CreateAssetMenu(fileName = "SpyNetworkLevels", menuName = "Global map/Spy Network Controller")]
     public class SpyNetworkController : ScriptableObject
     {
-        [SerializeField] DiplomacyController _diplomacyController;
         [SerializeField] Timer _timer;
         [Header("Config")]
         [SerializeField] Color _networkLevelsColor = Color.green;
@@ -22,6 +22,7 @@ namespace GlobalMap.Espionage
 
         SpyNetworkData _targetFactionNetworkData;
         Dictionary<SpyAction, ISpyActionWindow> _windows = new Dictionary<SpyAction, ISpyActionWindow>();
+        TestActionWindow _testWindow;
 
         //getters
         public List<SpyNetworkLevel> levels => _levels;
@@ -35,25 +36,62 @@ namespace GlobalMap.Espionage
         //events
         public event UnityAction OnSpyNetworkUpdate;
         public event UnityAction OnSpyNetworkLevelUp;
+        public event UnityAction OnSpyActionSuccess;
+        public event UnityAction OnSpyActionFailure;
 
         void OnEnable()
         {
-            _diplomacyController.OnFactionSelect += SetNetworkData;
             _timer.OnMonthChange += UpdateNetworkData;
         }
 
-        public void SpendSpyPoints(int points)
+        public void ExecuteSpyAction(SpyAction action)
         {
-            if (_targetFactionNetworkData.spyPoints < points) return;
-            _targetFactionNetworkData.spyPoints -= points;
+            var result = Random.Range(0, 100);
+            networkData.spyPoints -= action.cost;
+            networkData.visibility += action.visibility;
+
+            if(result < action.successChance)
+            {
+                OnSpyActionSuccess?.Invoke();
+            }
+            else
+            {
+                OnSpyActionFailure?.Invoke();
+            }
+
+            if (networkData.visibility >= currentGuardState.visibilityCap)
+            {
+                DestroySpyNetwork();
+            }
+
+            _testWindow.ShowResultPanel(result);
+            OnSpyNetworkUpdate?.Invoke();
+        }
+
+        void DestroySpyNetwork()
+        {
+            networkData.level = 1;
+            networkData.spyPoints = 0;
+            networkData.visibility = 0;
         }
 
         public void IncreaseNetworkLevel()
         {
-            if (networkData.level >= levels.Count) return;
+            int level = networkData.level;
+            
+            if (level>= levels.Count) return;
+            if (networkData.spyPoints < _levels[level].requiredSpyPoints) return;
+
             networkData.level++;
+            networkData.spyPoints -= _levels[level].requiredSpyPoints;
+
             OnSpyNetworkUpdate?.Invoke();
             OnSpyNetworkLevelUp?.Invoke();
+        }
+
+        public void AddTestWindow(TestActionWindow window)
+        {
+            _testWindow = window;
         }
 
         public void AddWindow(ISpyActionWindow window)
@@ -67,30 +105,32 @@ namespace GlobalMap.Espionage
             {
                 window.Open();
             }
+
+            _testWindow.Open(action);
         }
 
         public GuardState GetGuardState(int pointer)
         {
-            return _targetFactionNetworkData.GetGuardState(pointer);
+            return networkData.GetGuardState(pointer);
         }
 
-
-
-        void SetNetworkData(Faction faction)
+        public void SetNetworkData(Faction faction)
         {
             _targetFactionNetworkData = new SpyNetworkData(faction);
-            _targetFactionNetworkData.level = 1;
+            networkData.level = 1;
             OnSpyNetworkUpdate?.Invoke();
         }
 
-        void UpdateNetworkData()
+        //execute every month
+        public void UpdateNetworkData()
         {
-            _targetFactionNetworkData.spyPoints += _spyPointsPerMonth;
+            networkData.spyPoints += _spyPointsPerMonth;
+            networkData.ChangeGuardState();
 
-            _targetFactionNetworkData.visibility += visibilityDecreaces;
-            if (_targetFactionNetworkData.visibility < 0)
+            networkData.visibility += visibilityDecreaces;
+            if (networkData.visibility < 0)
             {
-                _targetFactionNetworkData.visibility = 0;
+                networkData.visibility = 0;
             }
 
             OnSpyNetworkUpdate?.Invoke();
@@ -98,12 +138,6 @@ namespace GlobalMap.Espionage
 
 
 
-    }
-
-    public interface ISpyActionWindow
-    {
-        SpyAction spyAction { get; }
-        void Open();
     }
 
 }

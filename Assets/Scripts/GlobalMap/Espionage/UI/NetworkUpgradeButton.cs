@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace GlobalMap.Espionage.UI
 {
-    public class NetworkUpgradeButton : MonoBehaviour, INeedInit
+    public class NetworkUpgradeButton : UIElementWithTooltip, INeedInit
     {
         [SerializeField] SpyNetworkController _controller;
         [SerializeField] Button _button;
@@ -15,11 +15,27 @@ namespace GlobalMap.Espionage.UI
         public void Init()
         {
             _controller.OnSpyNetworkUpdate += CheckState;
+            _controller.OnSpyNetworkLevelUp += ShowTooltip;
         }
 
         void OnDestroy()
         {
             _controller.OnSpyNetworkUpdate -= CheckState;
+            _controller.OnSpyNetworkLevelUp -= ShowTooltip;
+        }
+
+        public override string GetTooltipText()
+        {
+            if (_controller.networkData.level >= _controller.levels.Count)
+            {
+                return "You reach maximum spy level";
+            }
+            else
+            {
+                int idx = _controller.networkData.level;
+                int points = _controller.levels[idx].requiredSpyPoints;
+                return $"You need {points} spy points to unlock next level";
+            }
         }
 
         void CheckState()
@@ -27,16 +43,16 @@ namespace GlobalMap.Espionage.UI
             _button.interactable = CheckConditions();
         }
 
-		bool CheckConditions()
-		{
-			if(_controller.levels.Count >= _controller.networkData.level) return true;
+        bool CheckConditions()
+        {
             int level = _controller.networkData.level;
+            if (_controller.levels.Count <= level) return false;
 
-            if(_controller.networkData.spyPoints
-                >= _controller.levels[level].requiredSpyPoints) return true;
+            if (_controller.networkData.spyPoints
+                < _controller.levels[level].requiredSpyPoints) return false;
 
-			return false;
-		}
+            return true;
+        }
     }
 
 }

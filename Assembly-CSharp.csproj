@@ -246,6 +246,8 @@
      <Compile Include="Assets\Scripts\GlobalMap\Unit.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Espionage\UI\GuardStateIcon.cs" />
      <Compile Include="Assets\Scripts\GlobalMap\Espionage\UI\SpyActionButton.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Espionage\UI\TestActionWindow.cs" />
+     <Compile Include="Assets\Scripts\GlobalMap\Espionage\UI\ISpyActionWindow.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:/Programs/unity/2020.3.18f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

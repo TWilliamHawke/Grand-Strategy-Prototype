@@ -15,6 +15,13 @@ namespace GlobalMap.Espionage.UI
             _controller.OnSpyNetworkUpdate += UpdateLayout;
         }
 
+        void OnEnable()
+        {
+            //if diplomacy screen is active in editor, onEnable calls before controller init
+            if(_controller.networkData == null) return;
+            UpdateLayout();
+        }
+
         void OnDestroy()
         {
             _controller.OnSpyNetworkUpdate -= UpdateLayout;

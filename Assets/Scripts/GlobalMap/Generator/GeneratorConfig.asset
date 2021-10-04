@@ -16,8 +16,8 @@ MonoBehaviour:
   seaLevel: 0.365
   startPixelX: 800
   startPixelZ: 600
-  mapWidth: 400
-  mapHeight: 400
+  mapWidth: 1200
+  mapHeight: 800
   terrainLayer:
     serializedVersion: 2
     m_Bits: 256

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,7 +25,15 @@ namespace GlobalMap.Espionage.UI
 
         public override string GetTooltipText()
         {
-            return _action.title;
+            var sb = new StringBuilder();
+
+            sb.AppendLine(_action.title);
+            if(NotEnoughSpyPoints())
+            {
+                sb.Append("<color=red>Not enough spy points, wait for next month(s)</color>");
+            }
+
+            return sb.ToString();
         }
 
         public override void UpdateData(SpyAction data)
@@ -45,7 +54,7 @@ namespace GlobalMap.Espionage.UI
             _visibilityText.text = "+" + _action.visibility.ToString();
             _actionCost.text = _action.cost.ToString();
 
-            if (NoeEnoughSpyPoints())
+            if (NotEnoughSpyPoints())
             {
                 _button.interactable = false;
                 _actionCost.color = Color.red;
@@ -57,7 +66,7 @@ namespace GlobalMap.Espionage.UI
             }
         }
 
-        private bool NoeEnoughSpyPoints()
+        private bool NotEnoughSpyPoints()
         {
             return _action.cost > _controller.networkData.spyPoints;
         }

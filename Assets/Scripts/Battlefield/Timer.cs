@@ -109,7 +109,7 @@ namespace Battlefield
                 month++;
             }
 
-            if(day == 0)
+            if(day == 0 && _ticksFromStart > 0)
             {
                 OnMonthChange?.Invoke();
             }

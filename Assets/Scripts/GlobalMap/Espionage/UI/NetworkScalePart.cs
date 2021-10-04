@@ -49,10 +49,13 @@ namespace GlobalMap.Espionage.UI
         public void SetLevelNumber(int level)
         {
             _level = level;
+            CheckUnlockState();
         }
 
         void CheckUnlockState()
         {
+            //if diplomacy screen is active in editor, onEnable calls before controller init
+            if(_netWorkController.networkData == null) return; 
             if (_netWorkController.networkData.level < _level) return;
             Unlock();
         }

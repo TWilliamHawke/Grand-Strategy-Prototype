@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c198c3a5a77d5c4ea4c80ba892b8c4e, type: 3}
   m_Name: DiplomacyController
   m_EditorClassIdentifier: 
-  _playerFaction: {fileID: 11400000, guid: 77f15cdd6f4e8f64385762390652a6ce, type: 2}
-  _targetFaction: {fileID: 11400000, guid: f5968718cc3bc4e4383108da719878a6, type: 2}
+  _spyNetworkController: {fileID: 11400000, guid: abb12f89eeae2ef4bb4f5281a166d763, type: 2}

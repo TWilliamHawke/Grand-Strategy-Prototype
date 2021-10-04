@@ -14,7 +14,7 @@ namespace GlobalMap.Espionage.UI
 
         protected override List<SpyNetworkLevel> _layoutElementsData => _networkController.levels;
 
-        private void Awake()
+        private void OnEnable()
         {
             UpdateLayout();
         }

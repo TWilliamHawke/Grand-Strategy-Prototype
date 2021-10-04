@@ -14,25 +14,25 @@ public class UIScreensManager : ScriptableObject
 
     public void ToggleScreen(UIScreen screen)
     {
-        CloseActiveScreen();
+        //if close active screen before condition it always return true
         if(_activeScreen != screen)
         {
+            CloseActiveScreen();
             ShowScreen(screen);
         }
         else
         {
-            _activeScreen = null;
+            CloseActiveScreen();
         }
     }
 
     public void CloseActiveScreen()
     {
-        if(_activeScreen != null)
-        {
-            _activeScreen.Close();
-            OnScreenClose?.Invoke(_activeScreen);
-            _activeScreen = null;
-        }
+        if (_activeScreen == null) return;
+        
+        _activeScreen.Close();
+        OnScreenClose?.Invoke(_activeScreen);
+        _activeScreen = null;
     }
 
     void ShowScreen(UIScreen screen)
