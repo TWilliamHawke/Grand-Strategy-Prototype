@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Battlefield.Generator;
-using UnityEngine.Events;
 
 namespace Battlefield.Chunks
 {
@@ -38,18 +37,14 @@ namespace Battlefield.Chunks
 
         void Update()
         {
-            if (_selectedObjects.hoveredChunk == this && _selectedObjects.troop)
-            {
-                _innerArrowController.TryShowPointer(_selectedObjects.troop);
-            }
+            //bad code - should move into _selectedObjects
+            if (_selectedObjects.hoveredChunk != this || !_selectedObjects.troop) return;
+            _innerArrowController.TryShowPointer(_selectedObjects.troop);
         }
 
         public void GenerateFrame(ChunkGenerator generator)
         {
-            foreach (var framePart in _frame)
-            {
-                framePart.GenerateMesh(generator);
-            }
+            _frameController.GenerateFrame(generator);
         }
 
         public void UpdateFrameColors(Directions direction)
@@ -89,12 +84,5 @@ namespace Battlefield.Chunks
             _pathArrowController.RotatePathArrow(direction);
         }
 
-    }
-
-    public enum ChunkTypes
-    {
-        unwalkable,
-        plane,
-        slope
     }
 }

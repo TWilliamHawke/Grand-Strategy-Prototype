@@ -44,13 +44,18 @@ namespace GlobalMap.Espionage
             _timer.OnMonthChange += UpdateNetworkData;
         }
 
+        void OnDisable()
+        {
+            _timer.OnMonthChange -= UpdateNetworkData;
+        }
+
         public void ExecuteSpyAction(SpyAction action)
         {
             var result = Random.Range(0, 100);
             networkData.spyPoints -= action.cost;
             networkData.visibility += action.visibility;
 
-            if(result < action.successChance)
+            if (result < action.successChance)
             {
                 OnSpyActionSuccess?.Invoke();
             }
@@ -68,6 +73,7 @@ namespace GlobalMap.Espionage
             OnSpyNetworkUpdate?.Invoke();
         }
 
+        //UNDONE now it just reset networkData instead of destroy it
         void DestroySpyNetwork()
         {
             networkData.level = 1;
@@ -78,8 +84,8 @@ namespace GlobalMap.Espionage
         public void IncreaseNetworkLevel()
         {
             int level = networkData.level;
-            
-            if (level>= levels.Count) return;
+
+            if (level >= levels.Count) return;
             if (networkData.spyPoints < _levels[level].requiredSpyPoints) return;
 
             networkData.level++;
@@ -106,6 +112,7 @@ namespace GlobalMap.Espionage
                 window.Open();
             }
 
+            //temporary
             _testWindow.Open(action);
         }
 

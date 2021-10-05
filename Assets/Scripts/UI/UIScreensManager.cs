@@ -14,7 +14,7 @@ public class UIScreensManager : ScriptableObject
 
     public void ToggleScreen(UIScreen screen)
     {
-        //if close active screen before condition it always return true
+        //if call CloseActiveScreen() before condition it always return true
         if(_activeScreen != screen)
         {
             CloseActiveScreen();

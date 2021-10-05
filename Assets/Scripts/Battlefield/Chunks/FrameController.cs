@@ -17,6 +17,14 @@ namespace Battlefield.Chunks
             _rules = battleRules;
         }
 
+        public void GenerateFrame(ChunkGenerator generator)
+        {
+            foreach (var framePart in _frame)
+            {
+                framePart.GenerateMesh(generator);
+            }
+        }
+
         public void UpdateFrameColors(int direction)
         {
             if (_frame.Count != 8)
