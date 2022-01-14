@@ -18,6 +18,8 @@ namespace GlobalMap.Regions
         RegionPosition _position = new RegionPosition();
 
         public Region region => _region;
+        
+        int pointsCount => _position.points.Count;
 
 
 
@@ -51,6 +53,8 @@ namespace GlobalMap.Regions
         public override void GenerateMesh()
         {
             int vi = 0;
+            _vertices = new List<Vector3>(pointsCount * 4);
+            _triangles = new List<int>(pointsCount * 6);
 
             foreach (var point in _position.points)
             {
@@ -96,13 +100,14 @@ namespace GlobalMap.Regions
         private void RemoveDublicates()
         {
             //key - vertice, value - index in new list
-            Dictionary<Vector3, int> uniqueVertices = new Dictionary<Vector3, int>();
+            Dictionary<Vector3, int> uniqueVertices = new Dictionary<Vector3, int>(pointsCount);
 
             //key - index in old list, value - index in new list
-            Dictionary<int, int> updatedIndexes = new Dictionary<int, int>();
+            Dictionary<int, int> updatedIndexes = new Dictionary<int, int>(pointsCount * 4);
+            // updatedIndexes.Keys.
 
             //vertice in this list does not repeat
-            List<Vector3> updatedVerticies = new List<Vector3>();
+            List<Vector3> updatedVerticies = new List<Vector3>(pointsCount * 4);
 
             for (int i = 0; i < _vertices.Count; i++)
             {

@@ -44,24 +44,28 @@ namespace GlobalMap.Regions
         {
             int halfOfPoints = _points.Count / 2;
 
+            int linesCount = 1 + max - min;
+            int[] lines = new int[linesCount];
+
             int middleLine = min;
             int pointsBellowMiddle = 0;
 
-            while (true)
+            foreach (var point in _points)
             {
-                foreach (var point in _points)
-                {
-                    if (selector(point) == middleLine) pointsBellowMiddle++;
-
-                    if (pointsBellowMiddle >= halfOfPoints) break;
-                }
-
-                if (middleLine >= max) break;
-                if (pointsBellowMiddle >= halfOfPoints) break;
-
-                middleLine++;
+                int lineNumber = selector(point) - min;
+                lines[lineNumber]++;
             }
 
+            foreach(var num in lines)
+            {
+                pointsBellowMiddle += num;
+                middleLine++;
+                if(pointsBellowMiddle >= halfOfPoints)
+                {
+                    break;
+                }
+            }
+            
             return middleLine;
         }
     }

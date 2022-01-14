@@ -23,3 +23,13 @@ public class SpritePreviewAttribute : PropertyAttribute
         this.height = height;
     }
 }
+
+public interface ISpriteGetter
+{
+    Sprite sprite { get; }
+}
+
+public interface ISpriteProperty
+{
+    Sprite sprite { get; set; }
+}

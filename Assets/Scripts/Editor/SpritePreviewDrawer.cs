@@ -10,7 +10,7 @@ public class SpritePreviewDrawer : PropertyDrawer
 {
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        if (PropertyIsSprite(property, out var sprite))
+        if (PropertyHasSprite(property, out var sprite))
         {
             float previewWidth = (attribute as SpritePreviewAttribute)?.width ?? 0f;
             float previewHeight = (attribute as SpritePreviewAttribute)?.height ?? 0f;
@@ -33,7 +33,7 @@ public class SpritePreviewDrawer : PropertyDrawer
 
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
     {
-        if(PropertyIsSprite(property))
+        if(PropertyHasSprite(property))
         {
             float height = (attribute as SpritePreviewAttribute)?.height ?? 0f;
             var minHeight = EditorGUIUtility.singleLineHeight * 2 + 5;
@@ -45,14 +45,16 @@ public class SpritePreviewDrawer : PropertyDrawer
         }
     }
 
-    static bool PropertyIsSprite(SerializedProperty property)
+    static bool PropertyHasSprite(SerializedProperty property)
     {
-        return PropertyIsSprite(property, out var _);
+        return PropertyHasSprite(property, out var _);
     }
 
-    static bool PropertyIsSprite(SerializedProperty property, out Sprite sprite)
+    static bool PropertyHasSprite(SerializedProperty property, out Sprite sprite)
     {
-        sprite = property.objectReferenceValue as Sprite;
+        sprite = property.objectReferenceValue as Sprite ??
+            (property.objectReferenceValue as ISpriteGetter).sprite ??
+            (property.objectReferenceValue as ISpriteProperty).sprite;
         return sprite != null;
     }
 

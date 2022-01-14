@@ -31,7 +31,6 @@ namespace Battlefield.Chunks
             _frameController = new FrameController(_frame, _rules);
             _innerArrowController = new InnerArrowController(_pointer, _centerPosition, this);
             _pathArrowController = new PathArrowController(_pathArrow);
-
             _battlefieldData.AddNode(this);
         }
 
