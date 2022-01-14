@@ -18,19 +18,25 @@
 #### Скриншоты
 
 Инспекторы:
+
 <img src="screens/custom_inspector_double.png" width="600">
 
 Пример генерации карты:
+
 <img src="screens/global_map_2.png" width="600">
 
 Прототип боевой системы:
+
 <img src="screens/battle_screen.png" width="600">
 
 Конструктор отрядов:
+
 <img src="screens/unit_editor_1.png" width="600">
 
 Конструктор названий для отрядов:
+
 <img src="screens/unit_editor_2.png" width="600">
 
 Вариант глобальной карты, с которого начался прототип:
+
 <img src="screens/global_map.png" width="600">
